@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "371227152048",
+    "firebase_url": "https://quanlynhasach-6ff3c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "quanlynhasach-6ff3c",
+    "storage_bucket": "quanlynhasach-6ff3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371227152048:android:d637786b720000d281f575",
+        "android_client_info": {
+          "package_name": "com.example.nhasachonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "371227152048-m3c43an7vkbt7p7orv740572pj35alpe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg7xHLafhRPsgQEC5QLZVyoolHee5WihI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "371227152048-m3c43an7vkbt7p7orv740572pj35alpe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
