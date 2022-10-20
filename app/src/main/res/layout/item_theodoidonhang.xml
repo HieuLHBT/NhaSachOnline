@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:orientation="horizontal"
+        android:background="@drawable/border_layout"
+        android:layout_margin="2dp">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.2"
+            android:orientation="vertical"
+            android:paddingLeft="7dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mã đơn hàng:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên NV giao hàng:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thời gian dự kiến giao:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thời gian đặt:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tổng tiền thanh toán:"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đang chờ xác nhận"
+                android:textColor="#EA0B0B"
+                android:textSize="20dp"
+                android:paddingTop="10dp"
+                android:id="@+id/txtTrangThai"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingLeft="7dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DH01"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:id="@+id/txtMaDonHang"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Trương Đình Thọ"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:id="@+id/txtTenNVGiaoHang"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="03/10/2022"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:id="@+id/txtThoiGianDuKienGiao"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="30/09/2022"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:id="@+id/txtThoiGianDat"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="150.000 VNĐ"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:id="@+id/txtTongTienThanhToan"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:text="XEM CHI TIẾT"
+                android:textSize="18dp"
+                android:backgroundTint="#DCD9D9"
+                android:layout_marginRight="19dp"
+                android:id="@+id/btnXemChiTiet"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
