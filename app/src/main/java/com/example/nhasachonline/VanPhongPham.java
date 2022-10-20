@@ -12,12 +12,12 @@ public class VanPhongPham {
     private double khuyenMai;
     private double soLuong;
     private String danhGia;
-    private String anhDanhGia;
+    private String anhDanhGiaSao;
 
     public VanPhongPham() {
     }
 
-    public VanPhongPham(int ID, String anhVanPhongPham, String tenVanPhongPham, String nhaPhanPhoi, String xuatXu, String nhaXuatBan, String donVi, double gia, double khuyenMai, double soLuong, String danhGia, String anhDanhGia) {
+    public VanPhongPham(int ID, String anhVanPhongPham, String tenVanPhongPham, String nhaPhanPhoi, String xuatXu, String nhaXuatBan, String donVi, double gia, double khuyenMai, double soLuong, String danhGia, String anhDanhGiaSao) {
         this.ID = ID;
         this.anhVanPhongPham = anhVanPhongPham;
         this.tenVanPhongPham = tenVanPhongPham;
@@ -29,7 +29,7 @@ public class VanPhongPham {
         this.khuyenMai = khuyenMai;
         this.soLuong = soLuong;
         this.danhGia = danhGia;
-        this.anhDanhGia = anhDanhGia;
+        this.anhDanhGiaSao = anhDanhGiaSao;
     }
 
     public int getID() {
@@ -120,11 +120,11 @@ public class VanPhongPham {
         this.danhGia = danhGia;
     }
 
-    public String getAnhDanhGia() {
-        return anhDanhGia;
+    public String getAnhDanhGiaSao() {
+        return anhDanhGiaSao;
     }
 
-    public void setAnhDanhGia(String anhDanhGia) {
-        this.anhDanhGia = anhDanhGia;
+    public void setAnhDanhGiaSao(String anhDanhGiaSao) {
+        this.anhDanhGiaSao = anhDanhGiaSao;
     }
 }

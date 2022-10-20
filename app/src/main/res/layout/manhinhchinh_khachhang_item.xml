@@ -126,30 +126,35 @@
         android:orientation="horizontal"
         android:layout_marginTop="5dp">
         <ImageButton
+            android:id="@+id/itemMHCKH_btn1Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageButton
+            android:id="@+id/itemMHCKH_btn2Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageButton
+            android:id="@+id/itemMHCKH_btn3Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageButton
+            android:id="@+id/itemMHCKH_btn4Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageButton
+            android:id="@+id/itemMHCKH_btn5Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -157,6 +162,7 @@
             />
 
         <TextView
+            android:id="@+id/itemMHCKH_tvDanhGia"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
