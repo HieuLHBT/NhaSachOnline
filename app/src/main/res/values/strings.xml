@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">NhaSachOnline</string>
+    <string name="app_name">Khach Hang</string>
+    <array name="gioi_tinh">
+        <item>Nam</item>
+        <item>Nữ</item>
+    </array>
+
+    <string name="title_home">Trang Chủ</string>
+    <string name="title_follow">Theo dõi ĐH</string>
+    <string name="title_cart">Giỏ hàng</string>
+    <string name="title_history">Lịch sử MH</string>
+    <string name="title_profile">Thông tin</string>
+
+    <array name="vanchuyen">
+        <item>Giao hàng nhanh 30.000 VNĐ</item>
+        <item>Giao hàng tiêu chuẩn 15.000 VNĐ</item>
+    </array>
+
+    <array name="ptthanhtoan">
+        <item>Trực tiếp</item>
+        <item>Online</item>
+    </array>
+
+    <array name="sanpham">
+        <item>Sách</item>
+        <item>Văn phòng phẩm</item>
+    </array>
 </resources>
