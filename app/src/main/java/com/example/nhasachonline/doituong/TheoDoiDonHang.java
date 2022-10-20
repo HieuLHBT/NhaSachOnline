@@ -1,12 +1,10 @@
 package com.example.nhasachonline.doituong;
 
-import java.sql.Timestamp;
-
 public class TheoDoiDonHang {
     private String maDonHang;
     private String tenNVGiaoHang;
-    private Timestamp thoiGianDuKienGiao;
-    private Timestamp thoiGianDat;
+    private String thoiGianDuKienGiao;
+    private String thoiGianDat;
     private int tongTienThanhToan;
 
     public String getMaDonHang() {
@@ -25,19 +23,19 @@ public class TheoDoiDonHang {
         this.tenNVGiaoHang = tenNVGiaoHang;
     }
 
-    public Timestamp getThoiGianDuKienGiao() {
+    public String getThoiGianDuKienGiao() {
         return thoiGianDuKienGiao;
     }
 
-    public void setThoiGianDuKienGiao(Timestamp thoiGianDuKienGiao) {
+    public void setThoiGianDuKienGiao(String thoiGianDuKienGiao) {
         this.thoiGianDuKienGiao = thoiGianDuKienGiao;
     }
 
-    public Timestamp getThoiGianDat() {
+    public String getThoiGianDat() {
         return thoiGianDat;
     }
 
-    public void setThoiGianDat(Timestamp thoiGianDat) {
+    public void setThoiGianDat(String thoiGianDat) {
         this.thoiGianDat = thoiGianDat;
     }
 
@@ -49,7 +47,7 @@ public class TheoDoiDonHang {
         this.tongTienThanhToan = tongTienThanhToan;
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, Timestamp thoiGianDuKienGiao, Timestamp thoiGianDat, int tongTienThanhToan) {
+    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDuKienGiao, String thoiGianDat, int tongTienThanhToan) {
         this.maDonHang = maDonHang;
         this.tenNVGiaoHang = tenNVGiaoHang;
         this.thoiGianDuKienGiao = thoiGianDuKienGiao;
