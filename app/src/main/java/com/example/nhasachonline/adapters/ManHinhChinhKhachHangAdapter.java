@@ -15,12 +15,12 @@ import com.example.nhasachonline.doituong.Sach;
 import java.util.ArrayList;
 
 
-public class HomeAdapter extends ArrayAdapter<Sach> {
+public class ManHinhChinhKhachHangAdapter extends ArrayAdapter<Sach> {
     private Activity context;
     private int resource;
-    ArrayList<Sach> listSach;
+    final ArrayList<Sach> listSach;
 
-    public HomeAdapter(@NonNull Activity context, int resource, @NonNull ArrayList<Sach> listSach) {
+    public ManHinhChinhKhachHangAdapter(@NonNull Activity context, int resource, @NonNull ArrayList<Sach> listSach) {
         super(context, resource, listSach);
         this.context = context;
         this.resource = resource;
@@ -36,17 +36,7 @@ public class HomeAdapter extends ArrayAdapter<Sach> {
             view =context.getLayoutInflater().inflate(resource, parent,false);
             viewHolder = new MyViewHolder();
             //get view item from view object
-            viewHolder.tvTenSP = view.findViewById(R.id.tv_tensp);
-            viewHolder.tvTacGia = view.findViewById(R.id.tv_tenTacGia);
-            viewHolder.tvGia = view.findViewById(R.id.tv_gia);
-            viewHolder.tvGKM = view.findViewById(R.id.tv_khuyenmai);
-      //      viewHolder.tvSoLuong = view.findViewById(R.id.tv);
-            //get data from data soure (persons)
-            Sach sach = listSach.get(position);
-            viewHolder.tvTenSP.setText(sach.getTenSanPham());
-            viewHolder.tvTacGia.setText(sach.getTacGia());
-            viewHolder.tvGia.setText((int) sach.getGia());
-            viewHolder.tvGKM.setText((int) sach.getKhuyenMai());
+
         }
 
         return view;
