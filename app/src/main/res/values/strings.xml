@@ -25,4 +25,6 @@
         <item>Sách</item>
         <item>Văn phòng phẩm</item>
     </array>
+    <string name="app_name">NhaSachOnline</string>
+
 </resources>
