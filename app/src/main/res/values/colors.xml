@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="darker_gray">#9FA8AF</color>
     <color name="bgBottomNavigation">#1283E6</color>
+    <color name="giamgia">#DD410F</color>
+    <color name="tien">#EF0413</color>
 </resources>
