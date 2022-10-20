@@ -6,6 +6,15 @@ public class TheoDoiDonHang {
     private String thoiGianDuKienGiao;
     private String thoiGianDat;
     private int tongTienThanhToan;
+    private String trangThai;
+
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
 
     public String getMaDonHang() {
         return maDonHang;
@@ -47,12 +56,13 @@ public class TheoDoiDonHang {
         this.tongTienThanhToan = tongTienThanhToan;
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDuKienGiao, String thoiGianDat, int tongTienThanhToan) {
+    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDuKienGiao, String thoiGianDat, int tongTienThanhToan, String trangThai) {
         this.maDonHang = maDonHang;
         this.tenNVGiaoHang = tenNVGiaoHang;
         this.thoiGianDuKienGiao = thoiGianDuKienGiao;
         this.thoiGianDat = thoiGianDat;
         this.tongTienThanhToan = tongTienThanhToan;
+        this.trangThai = trangThai;
     }
 
     public TheoDoiDonHang() {
