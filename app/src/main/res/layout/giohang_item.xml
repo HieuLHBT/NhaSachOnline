@@ -10,6 +10,7 @@
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout
+        android:id="@+id/itemGH_llCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -27,8 +28,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:orientation="vertical"
-            android:paddingLeft="10dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/itemGH_tvTenSanPham"
