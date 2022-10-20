@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="center"
         android:text="Theo Dõi Đơn Hàng"
         android:textColor="#A83434"
-        android:textSize="37dp"
-        android:textStyle="bold"
-        android:gravity="center"/>
-    <ListView
+        android:textSize="35dp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/layoutTDDH_lvTheoDoiDonHang"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
-        android:id="@+id/lvTheoDoiDonHang"/>
+        android:layout_height="wrap_content"
+        android:layout_weight="10">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
