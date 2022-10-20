@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "574995908856",
+    "firebase_url": "https://tdcnhasachonline-e6ce2-default-rtdb.firebaseio.com",
+    "project_id": "tdcnhasachonline-e6ce2",
+    "storage_bucket": "tdcnhasachonline-e6ce2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:574995908856:android:daf7ee920c03bd1ee3d30d",
+        "android_client_info": {
+          "package_name": "com.example.nhasachonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "574995908856-mvsb200rmf2ors9um3lh6q1j0jnapf4a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWjSRYqfXWXLfcTnUdOwlWtdkwaniH2Zo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574995908856-mvsb200rmf2ors9um3lh6q1j0jnapf4a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
