@@ -7,19 +7,23 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        >
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+            android:layout_height="wrap_content"
+            android:text="Phần Mềm Bán Sách Online"
+            android:textColor="@color/red"
+            android:textAlignment="center"
+            android:textSize="38dp"
+            android:layout_marginTop="40dp">
         </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </TextView>
+            android:layout_height="wrap_content"></TextView>
     </LinearLayout>
 
 
