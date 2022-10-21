@@ -1,18 +1,12 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
-import android.app.Person;
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,12 +15,12 @@ import com.example.nhasachonline.doituong.TheoDoiDonHang;
 
 import java.util.ArrayList;
 
-public class TheoDoiDonHangAdapter extends RecyclerView.Adapter<TheoDoiDonHangAdapter.MyViewHolder> {
+public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<TheoDoiDonHangRecyclerViewAdapter.MyViewHolder> {
     private Activity context;
     private int layoutID;
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs;
     private OnItemClickListener onItemClickListener;
-    public TheoDoiDonHangAdapter(Activity context, int layoutID, ArrayList<TheoDoiDonHang> theoDoiDonHangs) {
+    public TheoDoiDonHangRecyclerViewAdapter(Activity context, int layoutID, ArrayList<TheoDoiDonHang> theoDoiDonHangs) {
         this.context = context;
         this.layoutID = layoutID;
         this.theoDoiDonHangs = theoDoiDonHangs;
@@ -48,6 +42,7 @@ public class TheoDoiDonHangAdapter extends RecyclerView.Adapter<TheoDoiDonHangAd
         holder.itemTDDH_txtThoiGianDuKienGiao.setText(theoDoiDonHang.getThoiGianDuKienGiao());
         holder.itemTDDH_txtThoiGianDat.setText(theoDoiDonHang.getThoiGianDat());
         holder.itemTDDH_txtTongTienThanhToan.setText(theoDoiDonHang.getTongTienThanhToan());
+        holder.itemTDDH_txtTrangThai.setText(theoDoiDonHang.getTrangThai());
 
         holder.onClickListener = new View.OnClickListener() {
             @Override
@@ -68,6 +63,7 @@ public class TheoDoiDonHangAdapter extends RecyclerView.Adapter<TheoDoiDonHangAd
     public int getItemViewType(int position) {
         return layoutID;
     }
+
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView itemTDDH_txtMaDonHang;
         TextView itemTDDH_txtTenNVGiaoHang;
@@ -75,8 +71,8 @@ public class TheoDoiDonHangAdapter extends RecyclerView.Adapter<TheoDoiDonHangAd
         TextView itemTDDH_txtThoiGianDat;
         TextView itemTDDH_txtTongTienThanhToan;
         TextView itemTDDH_txtTrangThai;
-        Button itemTDDH_btnXemChiTiet;
         View.OnClickListener onClickListener;
+        RecyclerView layoutTDDH_lvTheoDoiDonHang;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
@@ -85,12 +81,16 @@ public class TheoDoiDonHangAdapter extends RecyclerView.Adapter<TheoDoiDonHangAd
             itemTDDH_txtThoiGianDuKienGiao = itemView.findViewById(R.id.itemTDDH_txtThoiGianDuKienGiao);
             itemTDDH_txtThoiGianDat = itemView.findViewById(R.id.itemTDDH_txtThoiGianDat);
             itemTDDH_txtTongTienThanhToan = itemView.findViewById(R.id.itemTDDH_txtTongTienThanhToan);
+            itemTDDH_txtTrangThai = itemView.findViewById(R.id.itemTDDH_txtTrangThai);
+            layoutTDDH_lvTheoDoiDonHang = itemView.findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
 
             itemTDDH_txtMaDonHang.setOnClickListener(this);
             itemTDDH_txtTenNVGiaoHang.setOnClickListener(this);
             itemTDDH_txtThoiGianDuKienGiao.setOnClickListener(this);
             itemTDDH_txtThoiGianDat.setOnClickListener(this);
             itemTDDH_txtTongTienThanhToan.setOnClickListener(this);
+            itemTDDH_txtTrangThai.setOnClickListener(this);
+            layoutTDDH_lvTheoDoiDonHang.setOnClickListener(this);
 
         }
 
@@ -104,5 +104,9 @@ public class TheoDoiDonHangAdapter extends RecyclerView.Adapter<TheoDoiDonHangAd
 
     public interface OnItemClickListener {
         public void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
     }
 }
