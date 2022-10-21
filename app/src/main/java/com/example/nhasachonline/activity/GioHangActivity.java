@@ -53,7 +53,7 @@ public class GioHangActivity extends AppCompatActivity {
                     // Change the item background color
                     CardView cvItem = view.findViewById(R.id.itemGH);
                     backBackground = cvItem.getBackground();
-                    cvItem.setBackgroundColor(getResources().getColor(R.color.teal_700, getTheme()));
+                    cvItem.setBackgroundColor(getResources().getColor(R.color.clickgiohang, getTheme()));
                     previousItem = cvItem;
                 } else {
                     if (selectedRow == position) {//Tap on the same item
@@ -64,7 +64,7 @@ public class GioHangActivity extends AppCompatActivity {
                         previousItem.setBackground(backBackground);
                         selectedRow = position;
                         CardView cvItem = view.findViewById(R.id.itemGH);
-                        cvItem.setBackgroundColor(getResources().getColor(R.color.teal_700, getTheme()));
+                        cvItem.setBackgroundColor(getResources().getColor(R.color.clickgiohang, getTheme()));
                         previousItem = cvItem;
                     }
                 }
