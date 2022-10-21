@@ -2,21 +2,34 @@ package com.example.nhasachonline.doituong;
 
 public class Sach {
     private int ID;
-    private String tenSanPham;
+    private String anhSach;
+    private String tenSach;
     private String tacGia;
+    private String theLoai;
+    private String namSanXuat;
+    private String nhaXuatBan;
     private double gia;
     private double khuyenMai;
     private double soLuong;
     private String danhGia;
+    private String anhDanhGia;
 
-    public Sach(int ID,String tenSanPham, String tacGia, double gia, double khuyenMai, double soLuong, String danhGia) {
+    public Sach() {
+    }
+
+    public Sach(int ID, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, double gia, double khuyenMai, double soLuong, String danhGia, String anhDanhGia) {
         this.ID = ID;
-        this.tenSanPham = tenSanPham;
+        this.anhSach = anhSach;
+        this.tenSach = tenSach;
         this.tacGia = tacGia;
+        this.theLoai = theLoai;
+        this.namSanXuat = namSanXuat;
+        this.nhaXuatBan = nhaXuatBan;
         this.gia = gia;
         this.khuyenMai = khuyenMai;
         this.soLuong = soLuong;
         this.danhGia = danhGia;
+        this.anhDanhGia = anhDanhGia;
     }
 
     public int getID() {
@@ -27,12 +40,20 @@ public class Sach {
         this.ID = ID;
     }
 
-    public String getTenSanPham() {
-        return tenSanPham;
+    public String getAnhSach() {
+        return anhSach;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public void setAnhSach(String anhSach) {
+        this.anhSach = anhSach;
+    }
+
+    public String getTenSach() {
+        return tenSach;
+    }
+
+    public void setTenSach(String tenSach) {
+        this.tenSach = tenSach;
     }
 
     public String getTacGia() {
@@ -41,6 +62,30 @@ public class Sach {
 
     public void setTacGia(String tacGia) {
         this.tacGia = tacGia;
+    }
+
+    public String getTheLoai() {
+        return theLoai;
+    }
+
+    public void setTheLoai(String theLoai) {
+        this.theLoai = theLoai;
+    }
+
+    public String getNamSanXuat() {
+        return namSanXuat;
+    }
+
+    public void setNamSanXuat(String namSanXuat) {
+        this.namSanXuat = namSanXuat;
+    }
+
+    public String getNhaXuatBan() {
+        return nhaXuatBan;
+    }
+
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
     }
 
     public double getGia() {
@@ -73,5 +118,13 @@ public class Sach {
 
     public void setDanhGia(String danhGia) {
         this.danhGia = danhGia;
+    }
+
+    public String getAnhDanhGia() {
+        return anhDanhGia;
+    }
+
+    public void setAnhDanhGia(String anhDanhGia) {
+        this.anhDanhGia = anhDanhGia;
     }
 }
