@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,12 +18,13 @@ import java.util.ArrayList;
 
 public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<TheoDoiDonHangRecyclerViewAdapter.MyViewHolder> {
     private Activity context;
-    private int layoutID;
+    private int resource;
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs;
     private OnItemClickListener onItemClickListener;
-    public TheoDoiDonHangRecyclerViewAdapter(Activity context, int layoutID, ArrayList<TheoDoiDonHang> theoDoiDonHangs) {
+
+    public TheoDoiDonHangRecyclerViewAdapter(Activity context, int resource, ArrayList<TheoDoiDonHang> theoDoiDonHangs) {
         this.context = context;
-        this.layoutID = layoutID;
+        this.resource = resource;
         this.theoDoiDonHangs = theoDoiDonHangs;
     }
 
@@ -36,7 +38,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final int pos = position;
-        TheoDoiDonHang theoDoiDonHang = theoDoiDonHangs.get(position);
+        TheoDoiDonHang theoDoiDonHang = theoDoiDonHangs.get(pos);
         holder.itemTDDH_txtMaDonHang.setText(theoDoiDonHang.getMaDonHang());
         holder.itemTDDH_txtTenNVGiaoHang.setText(theoDoiDonHang.getTenNVGiaoHang());
         holder.itemTDDH_txtThoiGianDuKienGiao.setText(theoDoiDonHang.getThoiGianDuKienGiao());
@@ -44,6 +46,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         holder.itemTDDH_txtTongTienThanhToan.setText(theoDoiDonHang.getTongTienThanhToan());
         holder.itemTDDH_txtTrangThai.setText(theoDoiDonHang.getTrangThai());
 
+        // Event processing
         holder.onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +64,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
 
     @Override
     public int getItemViewType(int position) {
-        return layoutID;
+        return resource;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -71,8 +74,10 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         TextView itemTDDH_txtThoiGianDat;
         TextView itemTDDH_txtTongTienThanhToan;
         TextView itemTDDH_txtTrangThai;
+        Button itemTDDH_btnXemChiTiet;
         View.OnClickListener onClickListener;
-        RecyclerView layoutTDDH_lvTheoDoiDonHang;
+        LinearLayout itemTDDH_llCardView;
+        CardView itemTDDH;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
@@ -82,16 +87,13 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
             itemTDDH_txtThoiGianDat = itemView.findViewById(R.id.itemTDDH_txtThoiGianDat);
             itemTDDH_txtTongTienThanhToan = itemView.findViewById(R.id.itemTDDH_txtTongTienThanhToan);
             itemTDDH_txtTrangThai = itemView.findViewById(R.id.itemTDDH_txtTrangThai);
-            layoutTDDH_lvTheoDoiDonHang = itemView.findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
+            itemTDDH_btnXemChiTiet = itemView.findViewById(R.id.itemTDDH_btnXemChiTiet);
+            itemTDDH_llCardView = itemView.findViewById(R.id.itemTDDH_llCardView);
+            itemTDDH = itemView.findViewById(R.id.itemTDDH);
 
-            itemTDDH_txtMaDonHang.setOnClickListener(this);
-            itemTDDH_txtTenNVGiaoHang.setOnClickListener(this);
-            itemTDDH_txtThoiGianDuKienGiao.setOnClickListener(this);
-            itemTDDH_txtThoiGianDat.setOnClickListener(this);
-            itemTDDH_txtTongTienThanhToan.setOnClickListener(this);
-            itemTDDH_txtTrangThai.setOnClickListener(this);
-            layoutTDDH_lvTheoDoiDonHang.setOnClickListener(this);
-
+            // Set event processing
+            itemTDDH.setOnClickListener(this);
+            itemTDDH_btnXemChiTiet.setOnClickListener(this);
         }
 
         @Override
@@ -103,7 +105,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
     }
 
     public interface OnItemClickListener {
-        public void onItemClickListener(int position, View view);
+        void onItemClickListener(int position, View view);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
