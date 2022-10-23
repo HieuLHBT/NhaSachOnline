@@ -26,7 +26,15 @@
         <item>Văn phòng phẩm</item>
     </array>
     <string name="app_name">NhaSachOnline</string>
-    <string name="trove"><![CDATA[<]]></string>
+    <string name="tvtrove"><![CDATA[<]]></string>
+    <string name="tvgiohang">Giỏ Hàng</string>
+    <string name="tvtongtienthanhtoan">Tổng tiền thanh toán:</string>
+    <string name="tvvnd">VNĐ</string>
+    <string name="btnmuahang">MUA HÀNG</string>
+    <string name="tvtensanpham">Truyện Conan tập 1</string>
+    <string name="tvgia">Giá:</string>
+    <string name="tvkhuyenmai">Khuyến mãi</string>
+    <string name="tvtongtien">Tổng tiền:</string>
     <array name="sanpham">
         <item>Tất cả</item>
         <item>Sách</item>
