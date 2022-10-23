@@ -2,4 +2,9 @@
 <resources>
     <dimen name="card_view_corner">2dp</dimen>
     <dimen name="card_elvation">2dp</dimen>
+    <dimen name="tieude">40dp</dimen>
+    <dimen name="tieudesize">35sp</dimen>
+    <dimen name="textsize">20sp</dimen>
+    <dimen name="btnmuahang">10dp</dimen>
+    <dimen name="imgbtn">15dp</dimen>
 </resources>

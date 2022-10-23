@@ -21,7 +21,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:padding="5dp"
             android:src="@drawable/anhdemo" />
 
         <LinearLayout
@@ -36,41 +35,41 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="Truyện Conan tập 1"
+                android:text="@string/tvtensanpham"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="@dimen/textsize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center|left"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.6"
-                    android:text="Giá: "
+                    android:text="@string/tvgia"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:id="@+id/itemGH_tvGiaTien"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
+                    android:gravity="top|center"
                     android:text="20.000"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
-                    android:text="VNĐ"
+                    android:text="@string/tvvnd"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
@@ -83,29 +82,29 @@
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="2.4"
                     android:layout_height="match_parent"
-                    android:text="Khuyến mãi"
+                    android:layout_weight="2.4"
+                    android:text="@string/tvkhuyenmai"
                     android:textColor="@color/giamgia"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:id="@+id/itemGH_tvKhuyenMai"
                     android:layout_width="0dp"
-                    android:layout_weight="0.5"
                     android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|top"
                     android:text="10"
                     android:textColor="@color/giamgia"
-                    android:textSize="20dp"
-                    android:gravity="center|top"/>
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_weight="2"
                     android:layout_height="match_parent"
+                    android:layout_weight="2"
                     android:text="%"
                     android:textColor="@color/giamgia"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
@@ -121,37 +120,40 @@
                     android:layout_height="wrap_content"
                     android:text="Số lượng:"
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
-                android:gravity="center|left">
+                android:layout_weight="1.5"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/itemGH_btnTru"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/imgbtn"
+                    android:layout_weight="1"
                     android:src="@drawable/ic_baseline_horizontal_rule_24" />
 
                 <TextView
                     android:id="@+id/itemGH_tvSoLuong"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="1"
                     android:textColor="@color/black"
-                    android:textSize="25dp" />
+                    android:textSize="@dimen/textsize" />
 
                 <ImageButton
                     android:id="@+id/itemGH_btnCong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="15dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/imgbtn"
+                    android:layout_weight="1"
                     android:src="@drawable/ic_baseline_add_24" />
             </LinearLayout>
 
@@ -165,28 +167,30 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:text="Tổng tiền: "
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tvtongtien"
                     android:textColor="@color/tien"
-                    android:textSize="25dp" />
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:id="@+id/itemGH_tvTongTien"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:text="20.000"
                     android:gravity="center"
+                    android:text="20.000"
                     android:textColor="@color/tien"
-                    android:textSize="25dp" />
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:text="VNĐ"
+                    android:gravity="center|left"
+                    android:text="@string/tvvnd"
                     android:textColor="@color/tien"
-                    android:textSize="25dp" />
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
