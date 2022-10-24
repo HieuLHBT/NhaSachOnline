@@ -11,13 +11,13 @@ public class Sach {
     private double gia;
     private double khuyenMai;
     private double soLuong;
-    private String danhGia;
+    private double soLuongdanhGia;
     private String anhDanhGia;
 
     public Sach() {
     }
 
-    public Sach(int ID, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, double gia, double khuyenMai, double soLuong, String danhGia, String anhDanhGia) {
+    public Sach(int ID, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, double gia, double khuyenMai, double soLuong, double soLuongdanhGia, String anhDanhGia) {
         this.ID = ID;
         this.anhSach = anhSach;
         this.tenSach = tenSach;
@@ -28,7 +28,7 @@ public class Sach {
         this.gia = gia;
         this.khuyenMai = khuyenMai;
         this.soLuong = soLuong;
-        this.danhGia = danhGia;
+        this.soLuongdanhGia = soLuongdanhGia;
         this.anhDanhGia = anhDanhGia;
     }
 
@@ -112,12 +112,12 @@ public class Sach {
         this.soLuong = soLuong;
     }
 
-    public String getDanhGia() {
-        return danhGia;
+    public double getsoLuongdanhGia() {
+        return soLuongdanhGia;
     }
 
-    public void setDanhGia(String danhGia) {
-        this.danhGia = danhGia;
+    public void setDanhGia(double soLuongdanhGia) {
+        this.soLuongdanhGia = soLuongdanhGia;
     }
 
     public String getAnhDanhGia() {

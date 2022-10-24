@@ -64,9 +64,9 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecy
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return resource;
-    }
+        public int getItemViewType(int position) {
+            return resource;
+        }
 
     // ViewHolder definition
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
