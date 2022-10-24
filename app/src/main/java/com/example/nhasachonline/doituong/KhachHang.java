@@ -3,6 +3,7 @@ package com.example.nhasachonline.doituong;
 import android.widget.Spinner;
 
 public class KhachHang {
+    private int iD;
     private String hoTen;
     private Spinner gioiTinh;
     private String ngaySinh;
@@ -15,15 +16,24 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String hoTen, Spinner gioiTinh, String ngaySinh, String email, String SDT, String tenNganHang, String sTKNganHang, String diaChi) {
+    public KhachHang(int iD, String hoTen, Spinner gioiTinh, String ngaySinh, String email, String SDT, String tenNganHang, String sTKNganHang, String diaChi) {
+        this.iD = iD;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
-        this.Email = email;
+        Email = email;
         this.SDT = SDT;
         this.tenNganHang = tenNganHang;
         this.sTKNganHang = sTKNganHang;
         this.diaChi = diaChi;
+    }
+
+    public int getiD() {
+        return iD;
+    }
+
+    public void setiD(int iD) {
+        this.iD = iD;
     }
 
     public String getHoTen() {
@@ -93,7 +103,8 @@ public class KhachHang {
     @Override
     public String toString() {
         return "KhachHang{" +
-                "hoTen='" + hoTen + '\'' +
+                "iD=" + iD +
+                ", hoTen='" + hoTen + '\'' +
                 ", gioiTinh=" + gioiTinh +
                 ", ngaySinh='" + ngaySinh + '\'' +
                 ", Email='" + Email + '\'' +

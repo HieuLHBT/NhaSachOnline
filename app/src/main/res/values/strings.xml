@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Khach Hang</string>
     <array name="gioi_tinh">
         <item>Nam</item>
         <item>Nữ</item>
@@ -35,19 +34,6 @@
     <string name="tvgia">Giá:</string>
     <string name="tvkhuyenmai">Khuyến mãi</string>
     <string name="tvtongtien">Tổng tiền:</string>
-    <array name="sanpham">
-        <item>Tất cả</item>
-        <item>Sách</item>
-        <item>Văn phòng phẩm</item>
-    </array>
 
-    <array name="vanchuyen">
-        <item>Giao hàng nhanh 30.000 VNĐ</item>
-        <item>Giao hàng tiêu chuẩn 15.000 VNĐ</item>
-    </array>
-    <array name="ptthanhtoan">
-        <item>Trực tiếp</item>
-        <item>Online</item>
-    </array>
 
 </resources>
