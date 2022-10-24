@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
-import com.google.firebase.auth.FirebaseAuth;
+// import com.google.firebase.auth.FirebaseAuth;
 
 public class DangKyActivity extends AppCompatActivity {
     private EditText taiKhoan , eMail, matKhau,
@@ -23,14 +23,14 @@ public class DangKyActivity extends AppCompatActivity {
     private Button btnTaoTaiKhoan;
     private ImageButton btnBack;
     private ProgressBar progressBar;
-    private FirebaseAuth auth;
+   // private FirebaseAuth auth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dangky_layout);
         //get firebase auth instance
-        auth = FirebaseAuth.getInstance();
+     //   auth = FirebaseAuth.getInstance();
         btnBack = (ImageButton) findViewById(R.id.layoutDK_btnBack);
         btnTaoTaiKhoan = (Button) findViewById(R.id.layoutDK_btnTaoTaiKhoan);
         taiKhoan = (EditText) findViewById(R.id.layoutDK_edtNhapTaiKhoan);
