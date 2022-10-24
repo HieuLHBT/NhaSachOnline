@@ -14,7 +14,7 @@ public class NhaSachOnlineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.giohang_layout);
+        setContentView(R.layout.theodoidonhang_layout);
     }
 
 }
