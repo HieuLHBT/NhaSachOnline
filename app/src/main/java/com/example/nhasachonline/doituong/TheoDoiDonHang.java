@@ -3,8 +3,12 @@ package com.example.nhasachonline.doituong;
 public class TheoDoiDonHang {
     private String maDonHang;
     private String tenNVGiaoHang;
-    private String thoiGianDuKienGiao;
-    private String thoiGianDat;
+    private String ngayDuKienGiao;
+    private String thangDuKienGiao;
+    private String namDuKienGiao;
+    private String ngayDat;
+    private String thangDat;
+    private String namDat;
     private int tongTienThanhToan;
     private String trangThai;
 
@@ -32,22 +36,6 @@ public class TheoDoiDonHang {
         this.tenNVGiaoHang = tenNVGiaoHang;
     }
 
-    public String getThoiGianDuKienGiao() {
-        return thoiGianDuKienGiao;
-    }
-
-    public void setThoiGianDuKienGiao(String thoiGianDuKienGiao) {
-        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
-    }
-
-    public String getThoiGianDat() {
-        return thoiGianDat;
-    }
-
-    public void setThoiGianDat(String thoiGianDat) {
-        this.thoiGianDat = thoiGianDat;
-    }
-
     public int getTongTienThanhToan() {
         return tongTienThanhToan;
     }
@@ -56,15 +44,67 @@ public class TheoDoiDonHang {
         this.tongTienThanhToan = tongTienThanhToan;
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDuKienGiao, String thoiGianDat, int tongTienThanhToan, String trangThai) {
-        this.maDonHang = maDonHang;
-        this.tenNVGiaoHang = tenNVGiaoHang;
-        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
-        this.thoiGianDat = thoiGianDat;
-        this.tongTienThanhToan = tongTienThanhToan;
-        this.trangThai = trangThai;
+    public String getNgayDuKienGiao() {
+        return ngayDuKienGiao;
+    }
+
+    public void setNgayDuKienGiao(String ngayDuKienGiao) {
+        this.ngayDuKienGiao = ngayDuKienGiao;
+    }
+
+    public String getThangDuKienGiao() {
+        return thangDuKienGiao;
+    }
+
+    public void setThangDuKienGiao(String thangDuKienGiao) {
+        this.thangDuKienGiao = thangDuKienGiao;
+    }
+
+    public String getNamDuKienGiao() {
+        return namDuKienGiao;
+    }
+
+    public void setNamDuKienGiao(String namDuKienGiao) {
+        this.namDuKienGiao = namDuKienGiao;
+    }
+
+    public String getNgayDat() {
+        return ngayDat;
+    }
+
+    public void setNgayDat(String ngayDat) {
+        this.ngayDat = ngayDat;
+    }
+
+    public String getThangDat() {
+        return thangDat;
+    }
+
+    public void setThangDat(String thangDat) {
+        this.thangDat = thangDat;
+    }
+
+    public String getNamDat() {
+        return namDat;
+    }
+
+    public void setNamDat(String namDat) {
+        this.namDat = namDat;
     }
 
     public TheoDoiDonHang() {
+    }
+
+    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String ngayDuKienGiao, String thangDuKienGiao, String namDuKienGiao, String ngayDat, String thangDat, String namDat, int tongTienThanhToan, String trangThai) {
+        this.maDonHang = maDonHang;
+        this.tenNVGiaoHang = tenNVGiaoHang;
+        this.ngayDuKienGiao = ngayDuKienGiao;
+        this.thangDuKienGiao = thangDuKienGiao;
+        this.namDuKienGiao = namDuKienGiao;
+        this.ngayDat = ngayDat;
+        this.thangDat = thangDat;
+        this.namDat = namDat;
+        this.tongTienThanhToan = tongTienThanhToan;
+        this.trangThai = trangThai;
     }
 }

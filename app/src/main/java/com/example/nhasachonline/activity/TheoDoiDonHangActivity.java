@@ -17,7 +17,6 @@ import com.example.nhasachonline.doituong.TheoDoiDonHang;
 import java.util.ArrayList;
 
 public class TheoDoiDonHangActivity extends AppCompatActivity {
-
     private int selectedRow = -1;
     private CardView previousItem;
     private Drawable backBackground;
@@ -32,9 +31,10 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
 
-        theoDoiDonHangs.add(new TheoDoiDonHang("DH01", "Nguyen Van Tho", "30/09/2022", "10/10/2022", 150000, "Dang cho xac nhan"));
-        theoDoiDonHangs.add(new TheoDoiDonHang("DH02", "Tran Bao Tin", "30/09/2022", "10/10/2022", 150000, "Dang cho xac nhan"));
-        theoDoiDonHangs.add(new TheoDoiDonHang("DH03", "Nguyen Van Tho", "30/09/2022", "10/10/2022", 150000, "Dang cho xac nhan"));
+        theoDoiDonHangs.add(new TheoDoiDonHang("DH01", "Nguyen Van Tho", "30/", "09/", "2022", "10/", "10/", "2022", 150000, "Đang chờ xác nhận"));
+        theoDoiDonHangs.add(new TheoDoiDonHang("DH02", "Tran Bao Tin", "31/", "09/", "2022", "10/", "10/", "2022", 150000, "Đang chờ xác nhận"));
+        theoDoiDonHangs.add(new TheoDoiDonHang("DH03", "Nguyen Van Tho", "27/", "09/", "2022", "10/", "10/", "2022", 150000, "Đang chờ xác nhận"));
+
 
         adapter = new TheoDoiDonHangRecyclerViewAdapter(this, R.layout.theodoidonhang_item, theoDoiDonHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
