@@ -22,32 +22,32 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chitietsanpham_layout);
-        setControll();
+//        setControll();
         setEvent();
     }
 
     private void setEvent() {
     }
 
-    private void setControll() {
-        anhSanPham = findViewById(R.id.CTSP_imgAnhSanPham);
-        anh1Sao = findViewById(R.id.CTSP_img1Sao);
-        anh2Sao = findViewById(R.id.CTSP_img2Sao);
-        anh3Sao = findViewById(R.id.CTSP_img3Sao);
-        anh4Sao = findViewById(R.id.CTSP_img4Sao);
-        anh5Sao = findViewById(R.id.CTSP_img5Sao);
-        btnThemVaoGH = findViewById(R.id.CTSP_btnThemGioHang);
-        imageButtonThemSL = findViewById(R.id.CTSP_btnCong);
-        imageButtonGiamSL = findViewById(R.id.CTSP_btnTru);
-        tenSP = findViewById(R.id.CTSP_tvTenSanPham);
-        tacGia = findViewById(R.id.CTSP_tvTacGia);
-        theLoai = findViewById(R.id.CTSP_tvTheLoai);
-        namSX = findViewById(R.id.CTSP_tvNamSanXuat);
-        nhaXB = findViewById(R.id.CTSP_tvNhaXuatBan);
-        gia = findViewById(R.id.CTSP_tvGia);
-        giaKM = findViewById(R.id.CTSP_tvGiaKM);
-        khuyenMai = findViewById(R.id.CTSP_tvKhuyenMai);
-        soLuong = findViewById(R.id.CTSP_tvSoLuong);
-        danhGia = findViewById(R.id.CTSP_tvDanhGia);
-    }
+//    private void setControll() {
+//        anhSanPham = findViewById(R.id.CTSP_imgAnhSanPham);
+//        anh1Sao = findViewById(R.id.CTSP_img1Sao);
+//        anh2Sao = findViewById(R.id.CTSP_img2Sao);
+//        anh3Sao = findViewById(R.id.CTSP_img3Sao);
+//        anh4Sao = findViewById(R.id.CTSP_img4Sao);
+//        anh5Sao = findViewById(R.id.CTSP_img5Sao);
+//        btnThemVaoGH = findViewById(R.id.CTSP_btnThemGioHang);
+//        imageButtonThemSL = findViewById(R.id.CTSP_btnCong);
+//        imageButtonGiamSL = findViewById(R.id.CTSP_btnTru);
+//        tenSP = findViewById(R.id.CTSP_tvTenSanPham);
+//        tacGia = findViewById(R.id.CTSP_tvTacGia);
+//        theLoai = findViewById(R.id.CTSP_tvTheLoai);
+//        namSX = findViewById(R.id.CTSP_tvNamSanXuat);
+//        nhaXB = findViewById(R.id.CTSP_tvNhaXuatBan);
+//        gia = findViewById(R.id.CTSP_tvGia);
+//        giaKM = findViewById(R.id.CTSP_tvGiaKM);
+//        khuyenMai = findViewById(R.id.CTSP_tvKhuyenMai);
+//        soLuong = findViewById(R.id.CTSP_tvSoLuong);
+//        danhGia = findViewById(R.id.CTSP_tvDanhGia);
+//    }
 }

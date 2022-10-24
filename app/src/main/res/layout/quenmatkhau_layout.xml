@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quên mật khẩu"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="@color/design_default_color_error"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            />
+        <EditText
+            android:id="@+id/layoutQMK_edtNhapTaiKhoan"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/border"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:drawablePadding="12dp"
+            android:textSize="20dp"
+            android:hint="Nhập tài khoản"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:text="Email"
+            />
+        <EditText
+            android:id="@+id/layoutQMK_edtNhapEmail"
+            android:layout_marginLeft="57dp"
+            android:background="@drawable/border"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:drawablePadding="12dp"
+            android:textSize="20dp"
+            android:hint="Nhập email"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:gravity="center">
+        <Button
+            android:id="@+id/layoutQMK_btnLayLaiMK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="Lấy lại mật khẩu"
+            />
+        <Button
+            android:id="@+id/layoutQMK_btnQuayLai"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:text="Quay lại"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
