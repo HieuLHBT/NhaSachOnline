@@ -46,8 +46,8 @@ public class GioHangActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         adapter.setOnItemClickListener(new GioHangRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClickListener(int position, View view) {
+                @Override
+                public void onItemClickListener(int position, View view) {
                 if (selectedRow == -1) {
                     selectedRow = position;
                     // Change the item background color

@@ -22,7 +22,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
     private Activity context;
     private int resource;
     private ArrayList<Sach> books;
-    private GioHangRecyclerViewAdapter.OnItemClickListener onItemClickListener;
+    private ManHinhChinhKhachHangAdapter.OnItemClickListener onItemClickListener;
 
     public ManHinhChinhKhachHangAdapter(Activity context, int resource, ArrayList<Sach> books) {
         this.context = context;
@@ -68,6 +68,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
     public int getItemViewType(int position) {
         return resource;
     }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemMHCKH_tvTenSanPham;
@@ -116,7 +117,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         void onItemClickListener(int position, View view);
     }
 
-    public void setOnItemClickListener(GioHangRecyclerViewAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 }
