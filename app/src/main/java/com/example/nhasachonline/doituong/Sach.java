@@ -8,16 +8,16 @@ public class Sach {
     private String theLoai;
     private String namSanXuat;
     private String nhaXuatBan;
-    private double gia;
-    private double khuyenMai;
-    private double soLuong;
-    private double soLuongdanhGia;
+    private int gia;
+    private int khuyenMai;
+    private int soLuong;
+    private int soLuongdanhGia;
     private String anhDanhGia;
 
     public Sach() {
     }
 
-    public Sach(int ID, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, double gia, double khuyenMai, double soLuong, double soLuongdanhGia, String anhDanhGia) {
+    public Sach(int ID, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, int gia, int khuyenMai, int soLuong, int soLuongdanhGia, String anhDanhGia) {
         this.ID = ID;
         this.anhSach = anhSach;
         this.tenSach = tenSach;
@@ -88,35 +88,35 @@ public class Sach {
         this.nhaXuatBan = nhaXuatBan;
     }
 
-    public double getGia() {
+    public int getGia() {
         return gia;
     }
 
-    public void setGia(double gia) {
+    public void setGia(int gia) {
         this.gia = gia;
     }
 
-    public double getKhuyenMai() {
+    public int getKhuyenMai() {
         return khuyenMai;
     }
 
-    public void setKhuyenMai(double khuyenMai) {
+    public void setKhuyenMai(int khuyenMai) {
         this.khuyenMai = khuyenMai;
     }
 
-    public double getSoLuong() {
+    public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(double soLuong) {
+    public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
 
-    public double getsoLuongdanhGia() {
+    public int getsoLuongdanhGia() {
         return soLuongdanhGia;
     }
 
-    public void setDanhGia(double soLuongdanhGia) {
+    public void setDanhGia(int soLuongdanhGia) {
         this.soLuongdanhGia = soLuongdanhGia;
     }
 

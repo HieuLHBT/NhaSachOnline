@@ -3,6 +3,7 @@ package com.example.nhasachonline.adapters;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.doituong.Sach;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhChinhKhachHangAdapter.MyViewHolder> {
@@ -30,6 +32,11 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         this.books = books;
     }
 
+    public void setFilteredList(ArrayList<Sach> filteredList){
+        this.books = filteredList;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,14 +46,12 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-
         final int pos = position;
-        Sach book = books.get(pos);
-        holder.itemMHCKH_tvTenSanPham.setText(book.getTenSach());
-        holder.itemMHCKH_tvGia.setText(book.getGia() + "");
-        holder.itemMHCKH_tvSoLuong.setText(book.getSoLuong() + "");
-        holder.itemMHCKH_tvDanhGia.setText(book.getsoLuongdanhGia() + "");
-
+        Sach sach = books.get(pos);
+        holder.itemMHCKH_tvTenSanPham.setText(sach.getTenSach());
+        holder.itemMHCKH_tvGia.setText(sach.getGia() + "");
+        holder.itemMHCKH_tvSoLuong.setText(sach.getSoLuong() + "");
+        holder.itemMHCKH_tvDanhGia.setText(sach.getsoLuongdanhGia() + "");
 
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
@@ -69,7 +74,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         return resource;
     }
 
-
+    // ViewHolder definition
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemMHCKH_tvTenSanPham;
         TextView itemMHCKH_tvGia;
@@ -91,7 +96,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             itemMHCKH_tvTenSanPham = itemView.findViewById(R.id.itemMHCKH_tvTenSanPham);
             itemMHCKH_tvGia = itemView.findViewById(R.id.itemMHCKH_tvGiaTien);
             itemMHCKH_tvDanhGia = itemView.findViewById(R.id.itemMHCKH_tvSLDanhGia);
-            itemMHCKH_tvSoLuong = itemView.findViewById(R.id.itemMHCKH_tvSoLuong);
+            itemMHCKH_tvSoLuong = itemView.findViewById(R.id.itemMHCKH_tvSo);
             itemMHCKH_imgHinhSanPham = itemView.findViewById(R.id.itemMHCKH_imgAnhSanPham);
             itemMHCKH_img1Sao = itemView.findViewById(R.id.itemMHCKH_img1Sao);
             itemMHCKH_img2Sao = itemView.findViewById(R.id.itemMHCKH_img2Sao);
