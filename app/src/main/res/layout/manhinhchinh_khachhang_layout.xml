@@ -11,13 +11,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.15"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/purple_700"
+            android:textColor="#13EA0C"
             android:textStyle="bold"
             android:textSize="30sp"
             android:text="Nhà Sách Online "
@@ -79,7 +79,6 @@
             android:layout_weight="1"
             android:orientation="horizontal"
             android:padding="10dp">
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -97,10 +96,12 @@
                 android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="0.7">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/layoutMHCKH_rvDanhSach"
             android:layout_width="match_parent"

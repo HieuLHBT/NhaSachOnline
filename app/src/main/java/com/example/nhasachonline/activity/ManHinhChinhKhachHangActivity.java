@@ -1,6 +1,7 @@
 package com.example.nhasachonline.activity;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -80,7 +81,8 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                 item_btnTVGH.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent mhct = new Intent(ManHinhChinhKhachHangActivity.this, ChiTietSanPhamActivity.class);
+                        startActivity(mhct);
                         adapter.notifyDataSetChanged();
                     }
                 });
