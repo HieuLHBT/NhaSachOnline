@@ -82,6 +82,7 @@
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:id="@+id/itemTDDH_txtTenNVGiaoHang"/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

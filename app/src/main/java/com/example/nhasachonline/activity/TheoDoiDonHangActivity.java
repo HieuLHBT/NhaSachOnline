@@ -41,43 +41,6 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter.setOnItemClickListener(new TheoDoiDonHangRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClickListener(int position, View view) {
-                if (selectedRow == -1){
-                    selectedRow = position;
-                    CardView cvItem = view.findViewById(R.id.itemTDDH);
-                    backBackground = cvItem.getBackground();
-
-                    cvItem.setBackgroundColor(getResources().getColor(R.color.teal_700,getTheme()));
-                    previousItem = cvItem;
-                }
-                else{
-                    if (selectedRow == position)// Tap on the same item
-                    {
-                        selectedRow = -1;
-                        CardView cvItem = view.findViewById(R.id.itemTDDH);
-                        cvItem.setBackground(backBackground);
-                    }else// Tap on other item
-                    {
-                        previousItem.setBackground(backBackground);
-                        selectedRow = position;
-                        CardView cvItem = view.findViewById(R.id.itemTDDH);
-
-                        cvItem.setBackgroundColor(getResources().getColor(R.color.teal_700,getTheme()));
-                        previousItem = cvItem;
-                    }
-                }
-
-                Button itemTDDH_btnXemChiTiet = view.findViewById(R.id.itemTDDH_btnXemChiTiet);
-                itemTDDH_btnXemChiTiet.setOnClickListener(new View.OnClickListener(){
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-            }
-        });
 
         recyclerView.setAdapter(adapter);
     }
