@@ -17,7 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhasachonline.R;
-import com.google.firebase.auth.FirebaseAuth;
+// import com.google.firebase.auth.FirebaseAuth;
 
 public class DangKyActivity extends AppCompatActivity implements DangKyContract.View {
     private EditText taiKhoan , eMail, matKhau,
@@ -26,14 +26,15 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
     private Button btnTaoTaiKhoan;
     private ImageButton btnBack;
     private ProgressBar progressBar;
+   // private FirebaseAuth auth;
     private FirebaseAuth auth;
     private static final String TAG = "simple_test";
     private DangKyPresenter presenter;
     private ProgressDialog progressDialog;
 
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.dangky_layout);
         init();
     }
@@ -54,6 +55,18 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
     btnTaoTaiKhoan.setOnClickListener(view -> {
         startActivity(new Intent(this, DangNhapActivity.class));
     });
+        //get firebase auth instance
+     //   auth = FirebaseAuth.getInstance();
+        btnBack = (ImageButton) findViewById(R.id.layoutDK_btnBack);
+        btnTaoTaiKhoan = (Button) findViewById(R.id.layoutDK_btnTaoTaiKhoan);
+        taiKhoan = (EditText) findViewById(R.id.layoutDK_edtNhapTaiKhoan);
+        matKhau = (EditText) findViewById(R.id.layoutDK_edtNhapMatKhau);
+        nhapLaiMatKhau = (EditText) findViewById(R.id.layoutDK_edtNhapLaiMatKhau);
+        hoTen = (EditText) findViewById(R.id.layoutDK_edtHoTen);
+        ngaySinh = (EditText) findViewById(R.id.layoutDK_edtNgaySinh);
+        gioiTinh = (Spinner) findViewById(R.id.layoutDK_spGioiTinh);
+        sDT = (EditText) findViewById(R.id.layoutDK_edtSDT);
+        diaChi = (EditText) findViewById(R.id.layoutDK_edtDiaChi);
 
     }
     @Override
