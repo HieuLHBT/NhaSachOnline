@@ -2,7 +2,7 @@ package com.example.nhasachonline.doituong;
 
 public class DanhGiaSanPham {
     private String tenSanPham;
-    private String hinhSanPham;
+    //private String hinhSanPham;
 
     public String getTenSanPham() {
         return tenSanPham;
@@ -12,19 +12,19 @@ public class DanhGiaSanPham {
         this.tenSanPham = tenSanPham;
     }
 
-    public String getHinhSanPham() {
-        return hinhSanPham;
-    }
-
-    public void setHinhSanPham(String hinhSanPham) {
-        this.hinhSanPham = hinhSanPham;
-    }
+//    public String getHinhSanPham() {
+//        return hinhSanPham;
+//    }
+//
+//    public void setHinhSanPham(String hinhSanPham) {
+//        this.hinhSanPham = hinhSanPham;
+//    }
 
     public DanhGiaSanPham() {
     }
 
-    public DanhGiaSanPham(String tenSanPham, String hinhSanPham) {
+    public DanhGiaSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
-        this.hinhSanPham = hinhSanPham;
+//        this.hinhSanPham = hinhSanPham;
     }
 }

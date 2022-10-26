@@ -11,13 +11,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.15"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textColor="@color/purple_700"
+            android:textColor="#13EA0C"
             android:textStyle="bold"
             android:textSize="30sp"
             android:text="Nhà Sách Online "
@@ -57,62 +57,60 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
         android:orientation="vertical">
-        <EditText
-            android:id="@+id/layoutMHCKH_edTimKiem"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/border_layout"
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/layoutMHCKH_swTimKiem"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:drawablePadding="12dp"
-            android:textSize="20dp"
-            android:hint="Nhập từ khóa tìm kiếm"
-            />
+            android:layout_height="wrap_content"
+            android:background="@drawable/search_view_bg"
+            android:layout_margin="8dp"
+            app:queryHint="Nhập tên sản phẩm "
+            app:iconifiedByDefault="false"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:padding="10dp">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:text="Tất cả sản phẩm"
+                android:textColor="@color/red"
                 android:textSize="20dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/layoutMHCKH_spSanPham"
-                android:layout_marginLeft="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="1.3"
-                android:scaleY="1.3"
-                android:entries="@array/sanpham"/>
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1" />
         </LinearLayout>
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="0.7">
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layoutGH_rvDanhSach"
+            android:id="@+id/layoutMHCKH_rvDanhSach"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
     </LinearLayout>
 
     <LinearLayout
