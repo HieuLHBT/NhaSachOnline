@@ -19,6 +19,7 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
     private Activity context;
     private int resource;
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs;
+    private OnItemClickListener onItemClickListener;
 
     public ChiTietGiaoHangRecyclerViewAdapter(Activity context, int resource, ArrayList<ChiTietGiaoHang> chiTietGiaoHangs){
         this.context = context;
@@ -56,20 +57,8 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
         TextView itemCTGH_txtTenSanPham;
         TextView itemCTGH_txtGiaTien;
         TextView itemCTGH_txtSoLuong;
-        /* TextView itemCTGH_imgHinhSanPham;
-        *TextView itemCTGH_txtMaDonHang;
-         TextView itemCTGH_txtTenNhanVienGiaoHang;
-         TextView itemCTGH_txtNgayDuKienGiao;
-         TextView itemCTGH_txtThangDuKienGiao;
-         TextView itemCTGH_txtNamDuKienGiao;
-         TextView itemCTGH_txtNgayDatHang;
-         TextView itemCTGH_txtThangDatHang;
-         TextView itemCTGH_txtNamDatHang;
-         TextView itemCTGH_txtPhuongThucThanhToan;
-         TextView itemCTGH_txtTongTienHang;
-         TextView itemCTGH_txtPhiVanChuyen;
-         TextView itemCTGH_txtGiamGia;
-         TextView itemCTGH_txtTongTienThanhToan;*/
+        /* TextView itemCTGH_imgHinhSanPham;*/
+
         LinearLayout itemCTGH_llCardView;
         CardView itemCTGH;
 
@@ -78,25 +67,19 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
             itemCTGH_txtTenSanPham = itemView.findViewById(R.id.itemCTGH_txtTenSanPham);
             itemCTGH_txtGiaTien = itemView.findViewById(R.id.itemCTGH_txtGiaTien);
             itemCTGH_txtSoLuong = itemView.findViewById(R.id.itemCTGH_txtSoLuong);
-          /*  itemCTGH_imgHinhSanPham = itemView.findViewById(R.id.itemCTGH_imgHinhSanPham);
-            itemCTGH_txtMaDonHang = itemView.findViewById(R.id.itemCTGH_txtMaDonHang);
-            itemCTGH_txtTenNhanVienGiaoHang = itemView.findViewById(R.id.itemCTGH_txtTenNhanVienGiaoHang);
-            itemCTGH_txtNgayDuKienGiao = itemView.findViewById(R.id.itemCTGH_txtNgayDuKienGiao);
-            itemCTGH_txtThangDuKienGiao = itemView.findViewById(R.id.itemCTGH_txtThangDuKienGiao);
-            itemCTGH_txtNamDuKienGiao = itemView.findViewById(R.id.itemCTGH_txtNamDuKienGiao);
-            itemCTGH_txtNgayDatHang = itemView.findViewById(R.id.itemCTGH_txtNgayDatHang);
-            itemCTGH_txtThangDatHang = itemView.findViewById(R.id.itemCTGH_txtThangDatHang);
-            itemCTGH_txtNamDatHang = itemView.findViewById(R.id.itemCTGH_txtNamDatHang);
-            itemCTGH_txtPhuongThucThanhToan = itemView.findViewById(R.id.itemCTGH_txtPhuongThucThanhToan);
-            itemCTGH_txtTongTienHang = itemView.findViewById(R.id.itemCTGH_txtTongTienHang);
-            itemCTGH_txtPhiVanChuyen = itemView.findViewById(R.id.itemCTGH_txtPhiVanChuyen);
-            itemCTGH_txtGiamGia = itemView.findViewById(R.id.itemCTGH_txtGiamGia);
-            itemCTGH_txtTongTienThanhToan = itemView.findViewById(R.id.itemCTGH_txtTongTienThanhToan);
-            itemCTGH_txtPhiVanChuyen = itemView.findViewById(R.id.itemCTGH_txtPhiVanChuyen);
+//            itemCTGH_imgHinhSanPham = itemView.findViewById(R.id.itemCTGH_imgHinhSanPham);
 
-      */
             itemCTGH_llCardView = itemView.findViewById(R.id.itemCTGH_llCardView);
             itemCTGH = itemView.findViewById(R.id.itemCTGH);
         }
+    }
+
+    // Interface for event processing
+    public interface OnItemClickListener {
+        void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

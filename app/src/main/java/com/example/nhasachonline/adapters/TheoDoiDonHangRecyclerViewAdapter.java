@@ -20,6 +20,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
     private Activity context;
     private int resource;
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs;
+    private OnItemClickListener onItemClickListener;
 
     public TheoDoiDonHangRecyclerViewAdapter(Activity context, int resource, ArrayList<TheoDoiDonHang> theoDoiDonHangs) {
         this.context = context;
@@ -95,5 +96,14 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
 
             // Set event processing
         }
+    }
+
+    // Interface for event processing
+    public interface OnItemClickListener {
+        void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

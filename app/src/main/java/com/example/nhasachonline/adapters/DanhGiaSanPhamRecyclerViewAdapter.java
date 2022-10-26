@@ -19,6 +19,7 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
     private Activity context;
     private int resource;
     private ArrayList<DanhGiaSanPham> danhGiaSanPhams;
+    private OnItemClickListener onItemClickListener;
 
     public DanhGiaSanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<DanhGiaSanPham> danhGiaSanPhams){
         this.context = context;
@@ -60,5 +61,13 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
             itemDGSP_llCardView = itemView.findViewById(R.id.layoutDGSP_rvDanhGiaSanPham);
             itemDGSP = itemView.findViewById(R.id.itemDGSP);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

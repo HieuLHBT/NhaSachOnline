@@ -27,7 +27,9 @@ public class MaGiamGiaActivity extends AppCompatActivity {
         maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 100k", "59.000"));
         maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 400k", "89.000"));
         maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 600k", "129.000"));
-        maGiamGias.add(new MaGiamGia("Thành viên mói", "79.000"));
+        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 800k", "189.000"));
+        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 1000k", "259.000"));
+        maGiamGias.add(new MaGiamGia("Thành viên mơis", "79.000"));
 
         adapter = new MaGiamGiaRecyclerViewAdapter(this, R.layout.magiamgia_item, maGiamGias);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
