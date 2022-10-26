@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ChiTietSanPhamActivity"
+    tools:context=".activity.ChiTietVanPPActivity"
     android:orientation="vertical"
     >
 
@@ -45,7 +45,7 @@
         android:layout_weight="2">
 
         <ImageView
-            android:id="@+id/CTSP_imgAnhSanPham"
+            android:id="@+id/CTVPP_imgAnhSanPham"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@drawable/demo1"
@@ -69,12 +69,12 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/CTSP_tvTenSanPham"
+            android:id="@+id/CTVPP_tvTenSanPham"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:paddingRight="20sp"
-            android:text="Sách 1"
+            android:text="Bút bi mực xanh"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -91,17 +91,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="10sp"
-            android:text="Tên tác giả: "
+            android:text="Nhà phân phối: "
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/CTSP_tvTacGia"
+            android:id="@+id/CTVPP_tvNhaPhoi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tác giả 1"
+            android:text="Thiên Long"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -118,17 +118,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="10sp"
-            android:text="Thể loại: "
+            android:text="Xuất xứ: "
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/CTSP_tvTheLoai"
+            android:id="@+id/CTVPP_tvXuatxu"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Tiêu thuyết"
+            android:text="Việt Nam"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -141,48 +141,21 @@
         android:orientation="horizontal">
 
         <TextView
+            android:paddingLeft="10sp"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:paddingLeft="10sp"
-            android:text="Năm sản xuất: "
+            android:text="Đơn vị: "
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/CTSP_tvNamSanXuat"
+            android:id="@+id/CTVPP_tvDonVi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="2020"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.4"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:paddingLeft="10sp"
-            android:text="Nhà xuất bản: "
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/CTSP_tvNhaXuatBan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="NXB Văn Học Việt Nam"
+            android:text="Cây"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -204,7 +177,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/CTSP_tvGia"
+            android:id="@+id/CTVPP_tvGia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="79.000 "
@@ -237,7 +210,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/CTSP_tvGiaKM"
+            android:id="@+id/CTVPP_tvGiaKM"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" 79.000"
@@ -262,10 +235,18 @@
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/CTSP_tvKhuyenMai"
+            android:id="@+id/CTVPP_tvKhuyenMai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" 5%"
+            android:text=" 5"
+            android:background="@color/tien"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%"
             android:background="@color/tien"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -289,7 +270,7 @@
             android:textStyle="bold" />
 
         <ImageButton
-            android:id="@+id/CTSP_btnTru"
+            android:id="@+id/CTVPP_btnTru"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -298,7 +279,7 @@
             android:src="@drawable/ic_baseline_horizontal_rule_24" />
 
         <TextView
-            android:id="@+id/CTSP_tvSoLuong"
+            android:id="@+id/CTVPP_tvSoLuong"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:gravity="center"
@@ -307,7 +288,7 @@
             android:textSize="25dp" />
 
         <ImageButton
-            android:id="@+id/CTSP_btnCong"
+            android:id="@+id/CTVPP_btnCong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -324,39 +305,39 @@
         android:orientation="horizontal"
         >
         <ImageView
-            android:id="@+id/CTSP_img5Sao"
+            android:id="@+id/CTVPP_img5Sao"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageView
-            android:id="@+id/CTSP_img4Sao"
+            android:id="@+id/CTVPP_img4Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageView
-            android:id="@+id/CTSP_img3Sao"
+            android:id="@+id/CTVPP_img3Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageView
-            android:id="@+id/CTSP_img2Sao"
+            android:id="@+id/CTVPP_img2Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
         <ImageView
-            android:id="@+id/CTSP_img1Sao"
+            android:id="@+id/CTVPP_img1Sao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_star_outline_24"
             />
 
         <TextView
-            android:id="@+id/CTSP_tvDanhGia"
+            android:id="@+id/CTVPP_tvDanhGia"
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -382,8 +363,7 @@
         android:orientation="horizontal"
         >
         <Button
-            android:id="@+id/CTSP_btnThemGioHang"
-            android:layout_gravity="center"
+            android:id="@+id/CTVPP_btnThemGioHang"            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:textSize="20dp"
