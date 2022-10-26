@@ -1,4 +1,4 @@
-package com.example.nhasachonline.doituong;
+package com.example.nhasachonline.item;
 
 public class DanhGiaSanPham {
     private String tenSanPham;
