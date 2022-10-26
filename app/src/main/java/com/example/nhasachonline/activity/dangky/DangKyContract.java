@@ -1,4 +1,4 @@
-package com.example.nhasachonline.activity;
+package com.example.nhasachonline.activity.dangky;
 
 import android.widget.Spinner;
 
