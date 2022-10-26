@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.doituong.Sach;
+import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 

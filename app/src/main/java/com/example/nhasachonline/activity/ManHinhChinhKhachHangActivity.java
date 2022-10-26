@@ -16,8 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
-import com.example.nhasachonline.doituong.Sach;
-import com.example.nhasachonline.doituong.VanPhongPham;
+import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,6 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
     private SearchView timkiemSP;
 
     private ArrayList<Sach> books = new ArrayList<>();
-    private ArrayList<VanPhongPham> vpps = new ArrayList<>();
     private ManHinhChinhKhachHangAdapter adapter;
 
     private Spinner spSanPham;
@@ -80,7 +78,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                 item_btnTVGH.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent mhct = new Intent(ManHinhChinhKhachHangActivity.this, ChiTietSachActivity.class);
+                        Intent mhct = new Intent(ManHinhChinhKhachHangActivity.this, ChiTietSanPhamActivity.class);
                         startActivity(mhct);
                         adapter.notifyDataSetChanged();
                     }
@@ -107,5 +105,4 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
             adapter.setFilteredList(fiIteredList);
         }
     }
-
 }

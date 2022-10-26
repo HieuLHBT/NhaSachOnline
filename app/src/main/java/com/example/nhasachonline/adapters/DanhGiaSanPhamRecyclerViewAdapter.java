@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.doituong.DanhGiaSanPham;
+import com.example.nhasachonline.item.DanhGiaSanPham;
 
 import java.util.ArrayList;
 
