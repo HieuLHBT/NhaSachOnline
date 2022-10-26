@@ -10,14 +10,14 @@
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/itemGH_llCardView"
+        android:id="@+id/itemTT_llCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/itemGH_imgHinhSanPham"
+            android:id="@+id/itemTT_imgHinhSanPham"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -30,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/itemGH_tvTenSanPham"
+                android:id="@+id/itemTT_tvTenSanPham"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -55,7 +55,7 @@
                     android:textSize="@dimen/textsize" />
 
                 <TextView
-                    android:id="@+id/itemGH_tvGiaTien"
+                    android:id="@+id/itemTT_tvGiaTien"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
@@ -83,6 +83,7 @@
                     android:textSize="@dimen/textsize" />
 
                 <TextView
+                    android:id="@+id/itemTT_tvSoLuong"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
