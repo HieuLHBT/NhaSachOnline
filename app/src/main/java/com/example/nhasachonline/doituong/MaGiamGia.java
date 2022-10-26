@@ -2,8 +2,8 @@ package com.example.nhasachonline.doituong;
 
 public class MaGiamGia {
     private String tieuDeMaGiamGia;
-    private int tienGiamGia;
-    private String hinhMaGiamGia;
+    private String tienGiamGia;
+   // private String hinhMaGiamGia;
 
     public String getTieuDeMaGiamGia() {
         return tieuDeMaGiamGia;
@@ -13,28 +13,28 @@ public class MaGiamGia {
         this.tieuDeMaGiamGia = tieuDeMaGiamGia;
     }
 
-    public int getTienGiamGia() {
+    public String getTienGiamGia() {
         return tienGiamGia;
     }
 
-    public void setTienGiamGia(int tienGiamGia) {
+    public void setTienGiamGia(String tienGiamGia) {
         this.tienGiamGia = tienGiamGia;
     }
 
-    public String getHinhMaGiamGia() {
-        return hinhMaGiamGia;
-    }
-
-    public void setHinhMaGiamGia(String hinhMaGiamGia) {
-        this.hinhMaGiamGia = hinhMaGiamGia;
-    }
+//    public String getHinhMaGiamGia() {
+//        return hinhMaGiamGia;
+//    }
+//
+//    public void setHinhMaGiamGia(String hinhMaGiamGia) {
+//        this.hinhMaGiamGia = hinhMaGiamGia;
+//    }
 
     public MaGiamGia() {
     }
 
-    public MaGiamGia(String tieuDeMaGiamGia, int tienGiamGia, String hinhMaGiamGia) {
+    public MaGiamGia(String tieuDeMaGiamGia, String tienGiamGia) {
         this.tieuDeMaGiamGia = tieuDeMaGiamGia;
         this.tienGiamGia = tienGiamGia;
-        this.hinhMaGiamGia = hinhMaGiamGia;
+        //this.hinhMaGiamGia = hinhMaGiamGia;
     }
 }

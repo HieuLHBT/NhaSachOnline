@@ -43,7 +43,7 @@
         android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layoutDGSP_rvDanhSach"
+            android:id="@+id/layoutDGSP_rvDanhGiaSanPham"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -75,7 +75,7 @@
                 android:background="@drawable/border_layout"
                 android:layout_weight="1"
                 android:hint="  Bình luận sản phẩm"
-                android:paddingBottom="110dp"
+                android:paddingBottom="130dp"
                 android:textSize="18dp"
                 android:textColorHint="@color/black"
                 android:layout_marginRight="10dp"
