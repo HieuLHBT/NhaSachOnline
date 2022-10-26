@@ -1,23 +1,21 @@
-package com.example.nhasachonline.activity;
+package com.example.nhasachonline.activity.dangky;
 
 import androidx.appcompat.app.AlertDialog;
 
-import android.app.Notification;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
-import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhasachonline.R;
-// import com.google.firebase.auth.FirebaseAuth;
+import com.example.nhasachonline.activity.dangnhap.DangNhapActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class DangKyActivity extends AppCompatActivity implements DangKyContract.View {
     private EditText taiKhoan , eMail, matKhau,

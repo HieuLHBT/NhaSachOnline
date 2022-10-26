@@ -12,7 +12,6 @@ public class NguoiDung {
     private int loaiNguoiDung;
     private static int khachHang = 1 ;
     private static int nhanVien = 2;
-    private static int quanLy = 3;
 
     public NguoiDung() {
     }
@@ -27,6 +26,9 @@ public class NguoiDung {
         this.hoTen = hoTen;
         this.sDT = sDT;
         this.loaiNguoiDung = loaiNguoiDung;
+    }
+
+    public NguoiDung(String uid, String taiKhoan, String email, String hoTen, String sdt, String matKhau) {
     }
 
     public String getiD() {
@@ -117,13 +119,7 @@ public class NguoiDung {
         NguoiDung.nhanVien = nhanVien;
     }
 
-    public static int getQuanLy() {
-        return quanLy;
-    }
 
-    public static void setQuanLy(int quanLy) {
-        NguoiDung.quanLy = quanLy;
-    }
 
     @Override
     public String toString() {
