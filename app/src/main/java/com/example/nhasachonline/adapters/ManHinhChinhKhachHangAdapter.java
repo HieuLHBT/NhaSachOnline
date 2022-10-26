@@ -35,6 +35,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         notifyDataSetChanged();
     }
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
