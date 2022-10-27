@@ -27,7 +27,6 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
     private Button btnTaoTaiKhoan;
     private ImageButton btnBack;
     private ProgressBar progressBar;
-    private FirebaseAuth auth;
     private static final String TAG = "simple_test";
     private DangKyPresenter presenter;
     private ProgressDialog progressDialog;
@@ -39,7 +38,7 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
         init();
     }
     private void init(){
-    presenter = new DangKyPresenter(this);
+//    presenter = new DangKyPresenter(this);
     taiKhoan = findViewById(R.id.layoutDK_edtNhapTaiKhoan);
     eMail = findViewById(R.id.layoutDK_edtEmail);
     matKhau = findViewById(R.id.layoutDK_edtNhapMatKhau);

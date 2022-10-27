@@ -79,7 +79,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                 item_btnTVGH.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent mhct = new Intent(ManHinhChinhKhachHangActivity.this, ChiTietSanPhamActivity.class);
+                        Intent mhct = new Intent(ManHinhChinhKhachHangActivity.this, ChiTietSachActivity.class);
                         startActivity(mhct);
                         adapter.notifyDataSetChanged();
                     }
