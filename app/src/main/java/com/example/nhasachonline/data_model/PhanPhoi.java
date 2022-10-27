@@ -5,7 +5,7 @@ public class PhanPhoi {
     private String maKhachHang;
     private String maDonHang;
     private String binhLuan;
-    private int danhGia;
+    private String danhGia;
     private String ngayBinhLuan;
     private String maNhanVien;
     private String traLoi;
@@ -26,7 +26,7 @@ public class PhanPhoi {
         return binhLuan;
     }
 
-    public int getDanhGia() {
+    public String getDanhGia() {
         return danhGia;
     }
 
@@ -58,7 +58,7 @@ public class PhanPhoi {
         this.binhLuan = binhLuan;
     }
 
-    public void setDanhGia(int danhGia) {
+    public void setDanhGia(String danhGia) {
         this.danhGia = danhGia;
     }
 
@@ -77,7 +77,7 @@ public class PhanPhoi {
     public PhanPhoi() {
     }
 
-    public PhanPhoi(String maSanPham, String maKhachHang, String maDonHang, String binhLuan, int danhGia, String ngayBinhLuan, String maNhanVien, String traLoi) {
+    public PhanPhoi(String maSanPham, String maKhachHang, String maDonHang, String binhLuan, String danhGia, String ngayBinhLuan, String maNhanVien, String traLoi) {
         this.maSanPham = maSanPham;
         this.maKhachHang = maKhachHang;
         this.maDonHang = maDonHang;

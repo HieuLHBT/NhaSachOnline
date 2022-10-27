@@ -3,7 +3,7 @@ package com.example.nhasachonline.data_model;
 public class XuatKho {
     private String maDonHang;
     private String maSanPham;
-    private int soLuongXuat;
+    private String soLuongXuat;
 
     public String getMaDonHang() {
         return maDonHang;
@@ -13,7 +13,7 @@ public class XuatKho {
         return maSanPham;
     }
 
-    public int getSoLuongXuat() {
+    public String getSoLuongXuat() {
         return soLuongXuat;
     }
 
@@ -25,14 +25,14 @@ public class XuatKho {
         this.maSanPham = maSanPham;
     }
 
-    public void setSoLuongXuat(int soLuongXuat) {
+    public void setSoLuongXuat(String soLuongXuat) {
         this.soLuongXuat = soLuongXuat;
     }
 
     public XuatKho() {
     }
 
-    public XuatKho(String maDonHang, String maSanPham, int soLuongXuat) {
+    public XuatKho(String maDonHang, String maSanPham, String soLuongXuat) {
         this.maDonHang = maDonHang;
         this.maSanPham = maSanPham;
         this.soLuongXuat = soLuongXuat;
