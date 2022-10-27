@@ -35,7 +35,7 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
         init();
     }
     private void init(){
-    presenter = new DangKyPresenter(this);
+//    presenter = new DangKyPresenter(this);
     taiKhoan = findViewById(R.id.layoutDK_edtNhapTaiKhoan);
     eMail = findViewById(R.id.layoutDK_edtEmail);
     matKhau = findViewById(R.id.layoutDK_edtNhapMatKhau);

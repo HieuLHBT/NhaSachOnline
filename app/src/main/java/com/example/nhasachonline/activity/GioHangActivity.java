@@ -1,9 +1,12 @@
 package com.example.nhasachonline.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -16,11 +19,13 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.GioHang;
+import com.example.nhasachonline.tools.SharePreferences;
 
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
-    private String maKhacHang = "kh1";
+    private String maKhacHang;
+    private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
     private int selectedRow = -1;
@@ -31,15 +36,20 @@ public class GioHangActivity extends AppCompatActivity {
     private ArrayList<com.example.nhasachonline.data_model.GioHang> gioHangsModel = new ArrayList<>();
     private GioHangRecyclerViewAdapter adapter;
 
-    private TextView layoutGH_tvTongTienThanhToan;
+    private TextView layoutGH_tvTongTienThanhToan, layoutGH_btnTroVe;
+    private Button layoutGH_btnMuaHang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
 
+        maKhacHang = sharePreferences.getKhachHang("nguoidung", this);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutGH_rvDanhSach);
         layoutGH_tvTongTienThanhToan = findViewById(R.id.layoutGH_tvTongTienThanhToan);
+        layoutGH_btnMuaHang = findViewById(R.id.layoutGH_btnMuaHang);
+        layoutGH_btnTroVe = findViewById(R.id.layoutGH_btnTroVe);
 
         adapter = new GioHangRecyclerViewAdapter(this, R.layout.giohang_item, gioHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -95,6 +105,16 @@ public class GioHangActivity extends AppCompatActivity {
                         gioHangs.get(position).setTongTien((gioHangs.get(position).getGiaSanPham() - (gioHangs.get(position).getGiaSanPham() * gioHangs.get(position).getKhuyenMai() / 100)) * gioHangs.get(position).getSoLuongSanPham());
                         adapter.notifyDataSetChanged();
                         TongTienThanhToan();
+                    }
+                });
+                layoutGH_btnMuaHang.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
+                        intent.putExtra("maGioHang", "muahang");
+                        startActivity(intent);
+
+                        String maGioHang = getIntent().getStringExtra("maGioHang");
                     }
                 });
             }
