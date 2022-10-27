@@ -10,18 +10,16 @@ import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.GioHang;
+import com.example.nhasachonline.tools.SharePreferences;
 
 import java.util.ArrayList;
 
 public class NhaSachOnlineActivity extends AppCompatActivity {
-    FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
-        ArrayList<GioHang> gioHangs = new ArrayList<>();
-//        fireBaseNhaSachOnline.hienThiGioHang("kh1", gioHangs);
     }
 
 }
