@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ChiTietGiaoHangRecyclerViewAdapter;
-import com.example.nhasachonline.doituong.ChiTietGiaoHang;
+import com.example.nhasachonline.item.ChiTietGiaoHang;
 
 import java.util.ArrayList;
 

@@ -3,7 +3,6 @@ package com.example.nhasachonline.adapters;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,7 +16,6 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhChinhKhachHangAdapter.MyViewHolder> {
@@ -30,11 +28,6 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         this.context = context;
         this.resource = resource;
         this.books = books;
-    }
-
-    public void setFilteredList(ArrayList<Sach> filteredList){
-        this.books = filteredList;
-        notifyDataSetChanged();
     }
 
     public void setFilteredList(ArrayList<Sach> filteredList){

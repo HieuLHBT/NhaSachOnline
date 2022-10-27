@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
-import com.example.nhasachonline.doituong.DanhGiaSanPham;
+import com.example.nhasachonline.item.DanhGiaSanPham;
 
 import java.util.ArrayList;
 
