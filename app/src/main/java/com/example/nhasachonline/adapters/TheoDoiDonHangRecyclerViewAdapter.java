@@ -12,7 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.doituong.TheoDoiDonHang;
+import com.example.nhasachonline.item.TheoDoiDonHang;
 
 import java.util.ArrayList;
 

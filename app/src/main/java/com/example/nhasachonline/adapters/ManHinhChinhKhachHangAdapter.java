@@ -14,7 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.doituong.Sach;
+import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,12 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         this.books = filteredList;
         notifyDataSetChanged();
     }
+
+    public void setFilteredList(ArrayList<Sach> filteredList){
+        this.books = filteredList;
+        notifyDataSetChanged();
+    }
+
 
     @NonNull
     @Override
