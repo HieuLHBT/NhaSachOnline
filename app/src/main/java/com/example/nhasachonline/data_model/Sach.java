@@ -2,12 +2,12 @@ package com.example.nhasachonline.data_model;
 
 public class Sach {
     private String maSach;
-    private int giaTien;
+    private String giaTien;
     private String hinhSach;
-    private int khuyenMai;
+    private String khuyenMai;
     private String ngayXuatBan;
     private String nhaXuatBan;
-    private int soLuongKho;
+    private String soLuongKho;
     private String tacGia;
     private String tenSach;
     private String theLoai;
@@ -16,7 +16,7 @@ public class Sach {
         return maSach;
     }
 
-    public int getGiaTien() {
+    public String getGiaTien() {
         return giaTien;
     }
 
@@ -24,7 +24,7 @@ public class Sach {
         return hinhSach;
     }
 
-    public int getKhuyenMai() {
+    public String getKhuyenMai() {
         return khuyenMai;
     }
 
@@ -36,7 +36,7 @@ public class Sach {
         return nhaXuatBan;
     }
 
-    public int getSoLuongKho() {
+    public String getSoLuongKho() {
         return soLuongKho;
     }
 
@@ -56,7 +56,7 @@ public class Sach {
         this.maSach = maSach;
     }
 
-    public void setGiaTien(int giaTien) {
+    public void setGiaTien(String giaTien) {
         this.giaTien = giaTien;
     }
 
@@ -64,7 +64,7 @@ public class Sach {
         this.hinhSach = hinhSach;
     }
 
-    public void setKhuyenMai(int khuyenMai) {
+    public void setKhuyenMai(String khuyenMai) {
         this.khuyenMai = khuyenMai;
     }
 
@@ -76,7 +76,7 @@ public class Sach {
         this.nhaXuatBan = nhaXuatBan;
     }
 
-    public void setSoLuongKho(int soLuongKho) {
+    public void setSoLuongKho(String soLuongKho) {
         this.soLuongKho = soLuongKho;
     }
 
@@ -95,7 +95,7 @@ public class Sach {
     public Sach() {
     }
 
-    public Sach(String maSach, int giaTien, String hinhSach, int khuyenMai, String ngayXuatBan, String nhaXuatBan, int soLuongKho, String tacGia, String tenSach, String theLoai) {
+    public Sach(String maSach, String giaTien, String hinhSach, String khuyenMai, String ngayXuatBan, String nhaXuatBan, String soLuongKho, String tacGia, String tenSach, String theLoai) {
         this.maSach = maSach;
         this.giaTien = giaTien;
         this.hinhSach = hinhSach;

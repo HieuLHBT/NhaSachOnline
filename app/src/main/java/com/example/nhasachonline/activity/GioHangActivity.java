@@ -15,11 +15,11 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.GioHang;
-import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
+    private String maKhacHang = "kh1";
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
     private int selectedRow = -1;
@@ -37,14 +37,8 @@ public class GioHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
 
-
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutGH_rvDanhSach);
         layoutGH_tvTongTienThanhToan = findViewById(R.id.layoutGH_tvTongTienThanhToan);
-
-        gioHangs.add(new GioHang("Sach 1", 30000, 10, 3));
-        gioHangs.add(new GioHang("Sach 2", 60000, 5, 1));
-        gioHangs.add(new GioHang("Sach 3", 20000, 30, 2));
 
         adapter = new GioHangRecyclerViewAdapter(this, R.layout.giohang_item, gioHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -102,19 +96,11 @@ public class GioHangActivity extends AppCompatActivity {
                         TongTienThanhToan();
                     }
                 });
-//                itemGH_btnCong.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        fireBase.ghiSach(GioHangActivity.this, adapter, gioHangsModel);
-//                    }
-//                });
             }
         });
 
         recyclerView.setAdapter(adapter);
-
-
-        TongTienThanhToan();
+        fireBase.hienThiGioHang(maKhacHang, gioHangs, adapter, this);
 
     }
 
