@@ -5,7 +5,7 @@ public class NhapKho {
     private String maNhanVien;
     private String maSanPham;
     private String ngayNhapKho;
-    private int soLuongNhap;
+    private String soLuongNhap;
 
     public String getMaNhapKho() {
         return maNhapKho;
@@ -23,7 +23,7 @@ public class NhapKho {
         return ngayNhapKho;
     }
 
-    public int getSoLuongNhap() {
+    public String getSoLuongNhap() {
         return soLuongNhap;
     }
 
@@ -43,14 +43,14 @@ public class NhapKho {
         this.ngayNhapKho = ngayNhapKho;
     }
 
-    public void setSoLuongNhap(int soLuongNhap) {
+    public void setSoLuongNhap(String soLuongNhap) {
         this.soLuongNhap = soLuongNhap;
     }
 
     public NhapKho() {
     }
 
-    public NhapKho(String maNhapKho, String maNhanVien, String maSanPham, String ngayNhapKho, int soLuongNhap) {
+    public NhapKho(String maNhapKho, String maNhanVien, String maSanPham, String ngayNhapKho, String soLuongNhap) {
         this.maNhapKho = maNhapKho;
         this.maNhanVien = maNhanVien;
         this.maSanPham = maSanPham;

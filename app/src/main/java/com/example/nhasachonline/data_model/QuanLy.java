@@ -1,22 +1,27 @@
 package com.example.nhasachonline.data_model;
 
 public class QuanLy {
+    private String nguoiDung;
     private String maQuanLy;
-    private int cmnd;
+    private String cmnd;
     private String diaChi;
     private String email;
     private String hinhQuanLy;
-    private int luong;
+    private String luong;
     private String matKhau;
-    private int soDienThoai;
+    private String soDienThoai;
     private String taiKhoan;
     private String tenQuanLy;
+
+    public String getNguoiDung() {
+        return nguoiDung;
+    }
 
     public String getMaQuanLy() {
         return maQuanLy;
     }
 
-    public int getCmnd() {
+    public String getCmnd() {
         return cmnd;
     }
 
@@ -32,7 +37,7 @@ public class QuanLy {
         return hinhQuanLy;
     }
 
-    public int getLuong() {
+    public String getLuong() {
         return luong;
     }
 
@@ -40,7 +45,7 @@ public class QuanLy {
         return matKhau;
     }
 
-    public int getSoDienThoai() {
+    public String getSoDienThoai() {
         return soDienThoai;
     }
 
@@ -52,11 +57,15 @@ public class QuanLy {
         return tenQuanLy;
     }
 
+    public void setNguoiDung(String nguoiDung) {
+        this.nguoiDung = nguoiDung;
+    }
+
     public void setMaQuanLy(String maQuanLy) {
         this.maQuanLy = maQuanLy;
     }
 
-    public void setCmnd(int cmnd) {
+    public void setCmnd(String cmnd) {
         this.cmnd = cmnd;
     }
 
@@ -72,7 +81,7 @@ public class QuanLy {
         this.hinhQuanLy = hinhQuanLy;
     }
 
-    public void setLuong(int luong) {
+    public void setLuong(String luong) {
         this.luong = luong;
     }
 
@@ -80,7 +89,7 @@ public class QuanLy {
         this.matKhau = matKhau;
     }
 
-    public void setSoDienThoai(int soDienThoai) {
+    public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
     }
 
@@ -95,7 +104,8 @@ public class QuanLy {
     public QuanLy() {
     }
 
-    public QuanLy(String maQuanLy, int cmnd, String diaChi, String email, String hinhQuanLy, int luong, String matKhau, int soDienThoai, String taiKhoan, String tenQuanLy) {
+    public QuanLy(String nguoiDung, String maQuanLy, String cmnd, String diaChi, String email, String hinhQuanLy, String luong, String matKhau, String soDienThoai, String taiKhoan, String tenQuanLy) {
+        this.nguoiDung = nguoiDung;
         this.maQuanLy = maQuanLy;
         this.cmnd = cmnd;
         this.diaChi = diaChi;

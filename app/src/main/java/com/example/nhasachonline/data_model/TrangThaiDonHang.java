@@ -4,17 +4,17 @@ public class TrangThaiDonHang {
     private String maDonHang;
     private String kieuThanhToan;
     private String lyDoHuy;
-    private String TrangThaiChuyenHangQL;
-    private String TrangThaiChuyenTienKH;
-    private String TrangThaiDon;
-    private String TrangThaiDuyetNV;
-    private String TrangThaiGiaoHangKH;
-    private String TrangThaiGiaoHangNV;
-    private String TrangThaiNhanHangNV;
-    private String TrangThaiNhanTienKH;
-    private String TrangThaiNhanTienQL;
-    private String TrangThaiPhanCongQL;
-    private String TrangThaiTraTienQL;
+    private String trangThaiChuyenHangQL;
+    private String trangThaiChuyenTienKH;
+    private String trangThaiDon;
+    private String trangThaiDuyetNV;
+    private String trangThaiGiaoHangKH;
+    private String trangThaiGiaoHangNV;
+    private String trangThaiNhanHangNV;
+    private String trangThaiNhanTienKH;
+    private String trangThaiNhanTienQL;
+    private String trangThaiPhanCongQL;
+    private String trangThaiTraTienQL;
 
     public String getMaDonHang() {
         return maDonHang;
@@ -29,47 +29,47 @@ public class TrangThaiDonHang {
     }
 
     public String getTrangThaiChuyenHangQL() {
-        return TrangThaiChuyenHangQL;
+        return trangThaiChuyenHangQL;
     }
 
     public String getTrangThaiChuyenTienKH() {
-        return TrangThaiChuyenTienKH;
+        return trangThaiChuyenTienKH;
     }
 
     public String getTrangThaiDon() {
-        return TrangThaiDon;
+        return trangThaiDon;
     }
 
     public String getTrangThaiDuyetNV() {
-        return TrangThaiDuyetNV;
+        return trangThaiDuyetNV;
     }
 
     public String getTrangThaiGiaoHangKH() {
-        return TrangThaiGiaoHangKH;
+        return trangThaiGiaoHangKH;
     }
 
     public String getTrangThaiGiaoHangNV() {
-        return TrangThaiGiaoHangNV;
+        return trangThaiGiaoHangNV;
     }
 
     public String getTrangThaiNhanHangNV() {
-        return TrangThaiNhanHangNV;
+        return trangThaiNhanHangNV;
     }
 
     public String getTrangThaiNhanTienKH() {
-        return TrangThaiNhanTienKH;
+        return trangThaiNhanTienKH;
     }
 
     public String getTrangThaiNhanTienQL() {
-        return TrangThaiNhanTienQL;
+        return trangThaiNhanTienQL;
     }
 
     public String getTrangThaiPhanCongQL() {
-        return TrangThaiPhanCongQL;
+        return trangThaiPhanCongQL;
     }
 
     public String getTrangThaiTraTienQL() {
-        return TrangThaiTraTienQL;
+        return trangThaiTraTienQL;
     }
 
     public void setMaDonHang(String maDonHang) {
@@ -85,47 +85,47 @@ public class TrangThaiDonHang {
     }
 
     public void setTrangThaiChuyenHangQL(String trangThaiChuyenHangQL) {
-        TrangThaiChuyenHangQL = trangThaiChuyenHangQL;
+        this.trangThaiChuyenHangQL = trangThaiChuyenHangQL;
     }
 
     public void setTrangThaiChuyenTienKH(String trangThaiChuyenTienKH) {
-        TrangThaiChuyenTienKH = trangThaiChuyenTienKH;
+        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
     }
 
     public void setTrangThaiDon(String trangThaiDon) {
-        TrangThaiDon = trangThaiDon;
+        this.trangThaiDon = trangThaiDon;
     }
 
     public void setTrangThaiDuyetNV(String trangThaiDuyetNV) {
-        TrangThaiDuyetNV = trangThaiDuyetNV;
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
     }
 
     public void setTrangThaiGiaoHangKH(String trangThaiGiaoHangKH) {
-        TrangThaiGiaoHangKH = trangThaiGiaoHangKH;
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
     }
 
     public void setTrangThaiGiaoHangNV(String trangThaiGiaoHangNV) {
-        TrangThaiGiaoHangNV = trangThaiGiaoHangNV;
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
     }
 
     public void setTrangThaiNhanHangNV(String trangThaiNhanHangNV) {
-        TrangThaiNhanHangNV = trangThaiNhanHangNV;
+        this.trangThaiNhanHangNV = trangThaiNhanHangNV;
     }
 
     public void setTrangThaiNhanTienKH(String trangThaiNhanTienKH) {
-        TrangThaiNhanTienKH = trangThaiNhanTienKH;
+        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
     }
 
     public void setTrangThaiNhanTienQL(String trangThaiNhanTienQL) {
-        TrangThaiNhanTienQL = trangThaiNhanTienQL;
+        this.trangThaiNhanTienQL = trangThaiNhanTienQL;
     }
 
     public void setTrangThaiPhanCongQL(String trangThaiPhanCongQL) {
-        TrangThaiPhanCongQL = trangThaiPhanCongQL;
+        this.trangThaiPhanCongQL = trangThaiPhanCongQL;
     }
 
     public void setTrangThaiTraTienQL(String trangThaiTraTienQL) {
-        TrangThaiTraTienQL = trangThaiTraTienQL;
+        this.trangThaiTraTienQL = trangThaiTraTienQL;
     }
 
     public TrangThaiDonHang() {
@@ -135,16 +135,16 @@ public class TrangThaiDonHang {
         this.maDonHang = maDonHang;
         this.kieuThanhToan = kieuThanhToan;
         this.lyDoHuy = lyDoHuy;
-        TrangThaiChuyenHangQL = trangThaiChuyenHangQL;
-        TrangThaiChuyenTienKH = trangThaiChuyenTienKH;
-        TrangThaiDon = trangThaiDon;
-        TrangThaiDuyetNV = trangThaiDuyetNV;
-        TrangThaiGiaoHangKH = trangThaiGiaoHangKH;
-        TrangThaiGiaoHangNV = trangThaiGiaoHangNV;
-        TrangThaiNhanHangNV = trangThaiNhanHangNV;
-        TrangThaiNhanTienKH = trangThaiNhanTienKH;
-        TrangThaiNhanTienQL = trangThaiNhanTienQL;
-        TrangThaiPhanCongQL = trangThaiPhanCongQL;
-        TrangThaiTraTienQL = trangThaiTraTienQL;
+        this.trangThaiChuyenHangQL = trangThaiChuyenHangQL;
+        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
+        this.trangThaiDon = trangThaiDon;
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
+        this.trangThaiNhanHangNV = trangThaiNhanHangNV;
+        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
+        this.trangThaiNhanTienQL = trangThaiNhanTienQL;
+        this.trangThaiPhanCongQL = trangThaiPhanCongQL;
+        this.trangThaiTraTienQL = trangThaiTraTienQL;
     }
 }

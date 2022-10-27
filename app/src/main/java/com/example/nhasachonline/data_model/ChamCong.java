@@ -2,17 +2,17 @@ package com.example.nhasachonline.data_model;
 
 public class ChamCong {
     private String maChamCong;
-    private int ca1;
-    private int ca2;
+    private String ca1;
+    private String ca2;
     private String gioRaCa1;
     private String gioRaCa2;
-    private int gioTangCa;
+    private String gioTangCa;
     private String gioVaoCa1;
     private String gioVaoCa2;
     private String maNhanVien;
     private String ngay;
-    private int nghiKhongPhep;
-    private int nghiPhep;
+    private String nghiKhongPhep;
+    private String nghiPhep;
     private String thoiGianTre;
     private String trangThaiPhanCong;
 
@@ -20,11 +20,11 @@ public class ChamCong {
         return maChamCong;
     }
 
-    public int getCa1() {
+    public String getCa1() {
         return ca1;
     }
 
-    public int getCa2() {
+    public String getCa2() {
         return ca2;
     }
 
@@ -36,7 +36,7 @@ public class ChamCong {
         return gioRaCa2;
     }
 
-    public int getGioTangCa() {
+    public String getGioTangCa() {
         return gioTangCa;
     }
 
@@ -56,11 +56,11 @@ public class ChamCong {
         return ngay;
     }
 
-    public int getNghiKhongPhep() {
+    public String getNghiKhongPhep() {
         return nghiKhongPhep;
     }
 
-    public int getNghiPhep() {
+    public String getNghiPhep() {
         return nghiPhep;
     }
 
@@ -76,11 +76,11 @@ public class ChamCong {
         this.maChamCong = maChamCong;
     }
 
-    public void setCa1(int ca1) {
+    public void setCa1(String ca1) {
         this.ca1 = ca1;
     }
 
-    public void setCa2(int ca2) {
+    public void setCa2(String ca2) {
         this.ca2 = ca2;
     }
 
@@ -92,7 +92,7 @@ public class ChamCong {
         this.gioRaCa2 = gioRaCa2;
     }
 
-    public void setGioTangCa(int gioTangCa) {
+    public void setGioTangCa(String gioTangCa) {
         this.gioTangCa = gioTangCa;
     }
 
@@ -112,11 +112,11 @@ public class ChamCong {
         this.ngay = ngay;
     }
 
-    public void setNghiKhongPhep(int nghiKhongPhep) {
+    public void setNghiKhongPhep(String nghiKhongPhep) {
         this.nghiKhongPhep = nghiKhongPhep;
     }
 
-    public void setNghiPhep(int nghiPhep) {
+    public void setNghiPhep(String nghiPhep) {
         this.nghiPhep = nghiPhep;
     }
 
@@ -131,7 +131,7 @@ public class ChamCong {
     public ChamCong() {
     }
 
-    public ChamCong(String maChamCong, int ca1, int ca2, String gioRaCa1, String gioRaCa2, int gioTangCa, String gioVaoCa1, String gioVaoCa2, String maNhanVien, String ngay, int nghiKhongPhep, int nghiPhep, String thoiGianTre, String trangThaiPhanCong) {
+    public ChamCong(String maChamCong, String ca1, String ca2, String gioRaCa1, String gioRaCa2, String gioTangCa, String gioVaoCa1, String gioVaoCa2, String maNhanVien, String ngay, String nghiKhongPhep, String nghiPhep, String thoiGianTre, String trangThaiPhanCong) {
         this.maChamCong = maChamCong;
         this.ca1 = ca1;
         this.ca2 = ca2;
