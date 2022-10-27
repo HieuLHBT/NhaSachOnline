@@ -26,7 +26,6 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
     private Button btnTaoTaiKhoan;
     private ImageButton btnBack;
     private ProgressBar progressBar;
-    private FirebaseAuth auth;
     private static final String TAG = "simple_test";
     private DangKyPresenter presenter;
     private ProgressDialog progressDialog;
