@@ -2,7 +2,6 @@ package com.example.nhasachonline.activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -14,16 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
-import com.example.nhasachonline.doituong.GioHang;
+import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonline.item.GioHang;
+import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
+    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+
     private int selectedRow = -1;
     private Drawable backBackground;
     private CardView previousItem;
 
     private ArrayList<GioHang> gioHangs = new ArrayList<>();
+    private ArrayList<com.example.nhasachonline.data_model.GioHang> gioHangsModel = new ArrayList<>();
     private GioHangRecyclerViewAdapter adapter;
 
     private TextView layoutGH_tvTongTienThanhToan;
@@ -32,6 +36,8 @@ public class GioHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
+
+
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutGH_rvDanhSach);
         layoutGH_tvTongTienThanhToan = findViewById(R.id.layoutGH_tvTongTienThanhToan);
@@ -96,20 +102,28 @@ public class GioHangActivity extends AppCompatActivity {
                         TongTienThanhToan();
                     }
                 });
+//                itemGH_btnCong.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        fireBase.ghiSach(GioHangActivity.this, adapter, gioHangsModel);
+//                    }
+//                });
             }
         });
 
         recyclerView.setAdapter(adapter);
 
+
         TongTienThanhToan();
 
     }
 
-    private void TongTienThanhToan() {
+    public void TongTienThanhToan() {
         Integer sum = 0;
         for (int i = 0; i < gioHangs.size(); i++) {
             sum += gioHangs.get(i).getTongTien();
         }
         layoutGH_tvTongTienThanhToan.setText(sum + "");
     }
+
 }

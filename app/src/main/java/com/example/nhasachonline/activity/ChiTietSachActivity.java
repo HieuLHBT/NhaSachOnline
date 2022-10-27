@@ -12,11 +12,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.doituong.Sach;
+import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 
-public class ChiTietSanPhamActivity extends AppCompatActivity {
+public class ChiTietSachActivity extends AppCompatActivity {
 
     ImageView anhSanPham, anh1Sao, anh2Sao, anh3Sao, anh4Sao, anh5Sao;
     TextView tenSP, tacGia, theLoai, namSX, nhaXB, gia, giaKM, khuyenMai, soLuong, danhGia;
@@ -27,8 +27,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chitietsanpham_layout);
-
+        setContentView(R.layout.chitietsach_layout);
 
         anhSanPham = findViewById(R.id.CTSP_imgAnhSanPham);
         anh1Sao = findViewById(R.id.CTSP_img1Sao);
@@ -53,13 +52,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         btnThemVaoGH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mhgh = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
-                startActivity(mhgh);
+                Intent intent1 = new Intent(ChiTietSachActivity.this, GioHangActivity.class);
+                startActivity(intent1);
             }
         });
 
         imageButtonThemSL.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
             }
