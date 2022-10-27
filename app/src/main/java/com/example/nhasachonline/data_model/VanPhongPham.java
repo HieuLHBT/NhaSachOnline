@@ -3,11 +3,11 @@ package com.example.nhasachonline.data_model;
 public class VanPhongPham {
     private String maVanPhongPham;
     private String donVi;
-    private int giaTien;
+    private String giaTien;
     private String hinhVanPhongPham;
     private String khuyenMai;
     private String nhaPhanPhoi;
-    private int soLuongKho;
+    private String soLuongKho;
     private String tenVanPhongPham;
     private String xuatXu;
 
@@ -19,7 +19,7 @@ public class VanPhongPham {
         return donVi;
     }
 
-    public int getGiaTien() {
+    public String getGiaTien() {
         return giaTien;
     }
 
@@ -35,7 +35,7 @@ public class VanPhongPham {
         return nhaPhanPhoi;
     }
 
-    public int getSoLuongKho() {
+    public String getSoLuongKho() {
         return soLuongKho;
     }
 
@@ -55,7 +55,7 @@ public class VanPhongPham {
         this.donVi = donVi;
     }
 
-    public void setGiaTien(int giaTien) {
+    public void setGiaTien(String giaTien) {
         this.giaTien = giaTien;
     }
 
@@ -71,7 +71,7 @@ public class VanPhongPham {
         this.nhaPhanPhoi = nhaPhanPhoi;
     }
 
-    public void setSoLuongKho(int soLuongKho) {
+    public void setSoLuongKho(String soLuongKho) {
         this.soLuongKho = soLuongKho;
     }
 
@@ -86,7 +86,7 @@ public class VanPhongPham {
     public VanPhongPham() {
     }
 
-    public VanPhongPham(String maVanPhongPham, String donVi, int giaTien, String hinhVanPhongPham, String khuyenMai, String nhaPhanPhoi, int soLuongKho, String tenVanPhongPham, String xuatXu) {
+    public VanPhongPham(String maVanPhongPham, String donVi, String giaTien, String hinhVanPhongPham, String khuyenMai, String nhaPhanPhoi, String soLuongKho, String tenVanPhongPham, String xuatXu) {
         this.maVanPhongPham = maVanPhongPham;
         this.donVi = donVi;
         this.giaTien = giaTien;
