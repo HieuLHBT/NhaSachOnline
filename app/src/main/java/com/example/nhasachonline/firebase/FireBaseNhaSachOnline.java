@@ -4,12 +4,16 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.GioHang;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.VanPhongPham;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +23,43 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FireBaseNhaSachOnline {
+
+    public void xoaSanPhamGioHang(String maKhachHang, ArrayList<com.example.nhasachonline.item.GioHang> gioHangs, int position, GioHangRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference gioHangDatabase = firebaseDatabase.getReference("GIOHANG");
+        gioHangDatabase.child(maKhachHang).child(gioHangs.get(position).getMaSanPham()).removeValue(new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                gioHangs.clear();
+                hienThiGioHang(maKhachHang, gioHangs, adapter, context);
+            }
+        });
+    }
+
+    public void congSoLuongGioHang(String maKhachHang, ArrayList<com.example.nhasachonline.item.GioHang> gioHangs, int position, GioHangRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference gioHangDatabase = firebaseDatabase.getReference("GIOHANG");
+        gioHangDatabase.child(maKhachHang).child(gioHangs.get(position).getMaSanPham()).child("soLuong").setValue((gioHangs.get(position).getSoLuongSanPham() + 1) + "", new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                gioHangs.clear();
+                hienThiGioHang(maKhachHang, gioHangs, adapter, context);
+            }
+        });
+    }
+
+    public void truSoLuongGioHang(String maKhachHang, ArrayList<com.example.nhasachonline.item.GioHang> gioHangs, int position, GioHangRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference gioHangDatabase = firebaseDatabase.getReference("GIOHANG");
+        gioHangDatabase.child(maKhachHang).child(gioHangs.get(position).getMaSanPham()).child("soLuong").setValue((gioHangs.get(position).getSoLuongSanPham() - 1) + "", new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                gioHangs.clear();
+                hienThiGioHang(maKhachHang, gioHangs, adapter, context);
+            }
+        });
+    }
+
     public void hienThiGioHang(String maKhachHang, ArrayList<com.example.nhasachonline.item.GioHang> gioHangItem, GioHangRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference gioHangDatabase = firebaseDatabase.getReference("GIOHANG");
@@ -27,19 +68,19 @@ public class FireBaseNhaSachOnline {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue() != null) {
+                    gioHangItem.clear();
+                    ArrayList<com.example.nhasachonline.item.GioHang> dsGioHang = new ArrayList<>();
                     for (DataSnapshot sanPhamSnapshot : snapshot.getChildren()) {
                         gioHangDataModel.add(sanPhamSnapshot.getValue(GioHang.class));
                     }
                     for (int i = 0; i < gioHangDataModel.size(); i++) {
                         if (gioHangDataModel.get(i).getMaSanPham().contains("s")) {
-                            getSachDatabase(i ,gioHangDataModel, gioHangItem, adapter, context);
+                            getSachDatabase(i, gioHangDataModel, gioHangItem, adapter, context);
                         } else if (gioHangDataModel.get(i).getMaSanPham().contains("vpp")) {
-                            getVanPhongPhamDatabase(i ,gioHangDataModel, gioHangItem, adapter, context);
+                            getVanPhongPhamDatabase(i, gioHangDataModel, gioHangItem, adapter, context);
                         }
                     }
-
-                }
-                else {
+                } else {
                     Log.d("onDataChange", "Không có dữ liệu!");
                 }
             }
@@ -58,13 +99,16 @@ public class FireBaseNhaSachOnline {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue() != null) {
-                    Sach sach = snapshot.getValue(Sach.class);
-                    gioHangItem.add(new com.example.nhasachonline.item.GioHang(sach.getTenSach(),Integer.valueOf(sach.getGiaTien()),Integer.valueOf(sach.getKhuyenMai()),Integer.valueOf(gioHangDataModel.get(i).getSoLuong())));
-//                    Log.d("onDataChange",  gioHangItem.size() + "");
-                    adapter.notifyDataSetChanged();
-                    ((GioHangActivity)context).TongTienThanhToan();
-                }
-                else {
+                    if (i != gioHangDataModel.size() - 1) {
+                        Sach sach = snapshot.getValue(Sach.class);
+                        gioHangItem.add(new com.example.nhasachonline.item.GioHang(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getKhuyenMai()), Integer.valueOf(gioHangDataModel.get(i).getSoLuong()), sach.getHinhSach()));
+                    } else {
+                        Sach sach = snapshot.getValue(Sach.class);
+                        gioHangItem.add(new com.example.nhasachonline.item.GioHang(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getKhuyenMai()), Integer.valueOf(gioHangDataModel.get(i).getSoLuong()), sach.getHinhSach()));
+                        adapter.notifyDataSetChanged();
+                        ((GioHangActivity) context).TongTienThanhToan();
+                    }
+                } else {
                     Log.d("onDataChange", "Không có dữ liệu!");
                 }
             }
@@ -83,13 +127,16 @@ public class FireBaseNhaSachOnline {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.getValue() != null) {
-                    VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
-                    gioHangItem.add(new com.example.nhasachonline.item.GioHang(vanPhongPham.getTenVanPhongPham(),Integer.valueOf(vanPhongPham.getGiaTien()),Integer.valueOf(vanPhongPham.getKhuyenMai()),Integer.valueOf(gioHangDataModel.get(i).getSoLuong())));
-//                    Log.d("onDataChange", gioHangItem.size()  + "");
-                    adapter.notifyDataSetChanged();
-                    ((GioHangActivity)context).TongTienThanhToan();
-                }
-                else {
+                    if (i != gioHangDataModel.size() - 1) {
+                        VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
+                        gioHangItem.add(new com.example.nhasachonline.item.GioHang(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(vanPhongPham.getKhuyenMai()), Integer.valueOf(gioHangDataModel.get(i).getSoLuong()), vanPhongPham.getHinhVanPhongPham()));
+                    } else {
+                        VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
+                        gioHangItem.add(new com.example.nhasachonline.item.GioHang(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(vanPhongPham.getKhuyenMai()), Integer.valueOf(gioHangDataModel.get(i).getSoLuong()), vanPhongPham.getHinhVanPhongPham()));
+                        adapter.notifyDataSetChanged();
+                        ((GioHangActivity) context).TongTienThanhToan();
+                    }
+                } else {
                     Log.d("onDataChange", "Không có dữ liệu!");
                 }
             }
