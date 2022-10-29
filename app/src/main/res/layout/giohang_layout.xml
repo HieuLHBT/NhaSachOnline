@@ -106,14 +106,35 @@
             android:paddingRight="@dimen/btnmuahang">
 
             <Button
-                android:id="@+id/layoutGH_btnMuaHang"
-                android:layout_width="match_parent"
+                android:id="@+id/layoutGH_btnChonHet"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/btnchonhet"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/layoutGH_btnBoChon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/btnbochon"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/layoutGH_btnMuaHang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="@string/btnmuahang" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

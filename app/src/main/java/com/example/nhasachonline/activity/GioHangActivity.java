@@ -1,9 +1,9 @@
 package com.example.nhasachonline.activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -20,116 +20,140 @@ import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.GioHang;
 import com.example.nhasachonline.tools.SharePreferences;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
-    private String maKhacHang;
     private SharePreferences sharePreferences = new SharePreferences();
-    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private String maKhacHang;
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
-    private int selectedRow = -1;
     private Drawable backBackground;
-    private CardView previousItem;
 
     private ArrayList<GioHang> gioHangs = new ArrayList<>();
-    private ArrayList<com.example.nhasachonline.data_model.GioHang> gioHangsModel = new ArrayList<>();
     private GioHangRecyclerViewAdapter adapter;
 
     private TextView layoutGH_tvTongTienThanhToan, layoutGH_btnTroVe;
-    private Button layoutGH_btnMuaHang;
+    private Button layoutGH_btnMuaHang, layoutGH_btnChonHet, layoutGH_btnBoChon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
-
         maKhacHang = sharePreferences.getKhachHang("nguoidung", this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutGH_rvDanhSach);
         layoutGH_tvTongTienThanhToan = findViewById(R.id.layoutGH_tvTongTienThanhToan);
         layoutGH_btnMuaHang = findViewById(R.id.layoutGH_btnMuaHang);
         layoutGH_btnTroVe = findViewById(R.id.layoutGH_btnTroVe);
+        layoutGH_btnChonHet = findViewById(R.id.layoutGH_btnChonHet);
+        layoutGH_btnBoChon = findViewById(R.id.layoutGH_btnBoChon);
 
         adapter = new GioHangRecyclerViewAdapter(this, R.layout.giohang_item, gioHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        fireBaseNhaSachOnline.hienThiGioHang(maKhacHang, gioHangs, adapter, this);
 
         adapter.setOnItemClickListener(new GioHangRecyclerViewAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClickListener(int position, View view) {
-                if (selectedRow == -1) {
-                    selectedRow = position;
-                    // Change the item background color
-                    CardView cvItem = view.findViewById(R.id.itemGH);
+            @Override
+            public void onItemClickListener(int position, View view) {
+                CardView cvItem = view.findViewById(R.id.itemGH);
+                if (gioHangs.get(position).getCheck() == 0) {
                     backBackground = cvItem.getBackground();
                     cvItem.setBackgroundColor(getResources().getColor(R.color.clickgiohang, getTheme()));
-                    previousItem = cvItem;
-                } else {
-                    if (selectedRow == position) {//Tap on the same item
-                        selectedRow = -1;
-                        CardView cvItem = view.findViewById(R.id.itemGH);
-                        cvItem.setBackground(backBackground);
-                    } else {// Tap on other item
-                        previousItem.setBackground(backBackground);
-                        selectedRow = position;
-                        CardView cvItem = view.findViewById(R.id.itemGH);
-                        cvItem.setBackgroundColor(getResources().getColor(R.color.clickgiohang, getTheme()));
-                        previousItem = cvItem;
+                    gioHangs.get(position).setCheck(1);
+                    layoutGH_btnBoChon.setVisibility(View.VISIBLE);
+                    layoutGH_btnChonHet.setVisibility(View.VISIBLE);
+                } else if (gioHangs.get(position).getCheck() == 1) {
+                    cvItem.setBackground(backBackground);
+                    gioHangs.get(position).setCheck(0);
+                    int sum = 0;
+                    for (GioHang gioHang : gioHangs) {
+                        if (gioHang.getCheck() == 1) {
+                            sum++;
+                        }
+                    }
+                    if (sum == 0) {
+                        layoutGH_btnBoChon.setVisibility(View.GONE);
+                        layoutGH_btnChonHet.setVisibility(View.GONE);
                     }
                 }
 
                 ImageButton itemGH_btnTru = view.findViewById(R.id.itemGH_btnTru);
                 ImageButton itemGH_btnCong = view.findViewById(R.id.itemGH_btnCong);
-                TextView itemGH_tvTongTien = view.findViewById(R.id.itemGH_tvTongTien);
                 itemGH_btnTru.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (gioHangs.get(position).getSoLuongSanPham() == 1) {
-                            gioHangs.remove(position);
-                            adapter.notifyDataSetChanged();
-                            TongTienThanhToan();
+                            fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhacHang, gioHangs, position, adapter, v.getContext());
                         } else if (gioHangs.get(position).getSoLuongSanPham() > 1) {
-                            gioHangs.get(position).setSoLuongSanPham(gioHangs.get(position).getSoLuongSanPham() - 1);
-                            gioHangs.get(position).setTongTien((gioHangs.get(position).getGiaSanPham() - (gioHangs.get(position).getGiaSanPham() * gioHangs.get(position).getKhuyenMai() / 100)) * gioHangs.get(position).getSoLuongSanPham());
-                            adapter.notifyDataSetChanged();
-                            TongTienThanhToan();
+                            fireBaseNhaSachOnline.truSoLuongGioHang(maKhacHang, gioHangs, position, adapter, v.getContext());
                         }
                     }
                 });
                 itemGH_btnCong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        gioHangs.get(position).setSoLuongSanPham(gioHangs.get(position).getSoLuongSanPham() + 1);
-                        gioHangs.get(position).setTongTien((gioHangs.get(position).getGiaSanPham() - (gioHangs.get(position).getGiaSanPham() * gioHangs.get(position).getKhuyenMai() / 100)) * gioHangs.get(position).getSoLuongSanPham());
-                        adapter.notifyDataSetChanged();
-                        TongTienThanhToan();
-                    }
-                });
-                layoutGH_btnMuaHang.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
-                        intent.putExtra("maGioHang", "muahang");
-                        startActivity(intent);
-
-                        String maGioHang = getIntent().getStringExtra("maGioHang");
+                        fireBaseNhaSachOnline.congSoLuongGioHang(maKhacHang, gioHangs, position, adapter, v.getContext());
                     }
                 });
             }
         });
 
-        recyclerView.setAdapter(adapter);
-        fireBase.hienThiGioHang(maKhacHang, gioHangs, adapter, this);
+        layoutGH_btnChonHet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (GioHang gioHang : gioHangs) {
+                    if (gioHang.getCheck() == 0) {
+                        gioHang.setCheck(1);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        layoutGH_btnBoChon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (GioHang gioHang : gioHangs) {
+                    if (gioHang.getCheck() == 1) {
+                        gioHang.setCheck(0);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+                layoutGH_btnBoChon.setVisibility(View.GONE);
+                layoutGH_btnChonHet.setVisibility(View.GONE);
+            }
+        });
+
+        layoutGH_btnMuaHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        layoutGH_btnTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
     }
 
     public void TongTienThanhToan() {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         Integer sum = 0;
-        for (int i = 0; i < gioHangs.size(); i++) {
-            sum += gioHangs.get(i).getTongTien();
+        for (GioHang gioHang : gioHangs) {
+            sum += gioHang.getTongTien();
         }
-        layoutGH_tvTongTienThanhToan.setText(sum + "");
+        Log.d("test", gioHangs.size() + "");
+        layoutGH_tvTongTienThanhToan.setText(formatter.format(sum));
     }
 
 }
