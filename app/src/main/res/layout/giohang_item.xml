@@ -87,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2.4"
                     android:text="@string/tvkhuyenmai"
-                    android:textColor="@color/giamgia"
+                    android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
                 <TextView
@@ -97,7 +97,7 @@
                     android:layout_weight="0.5"
                     android:gravity="center|top"
                     android:text="10"
-                    android:textColor="@color/giamgia"
+                    android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:text="%"
-                    android:textColor="@color/giamgia"
+                    android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
             </LinearLayout>
