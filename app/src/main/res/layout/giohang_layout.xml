@@ -70,20 +70,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:gravity="center|right"
+                android:layout_weight="3"
+                android:gravity="center"
                 android:text="@string/tvtongtienthanhtoan"
-                android:textColor="@color/tien"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
             <TextView
                 android:id="@+id/layoutGH_tvTongTienThanhToan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:text="38.000 "
-                android:textColor="@color/tien"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:layout_weight="1"
                 android:gravity="center|left"
                 android:text="@string/tvvnd"
-                android:textColor="@color/tien"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
         </LinearLayout>

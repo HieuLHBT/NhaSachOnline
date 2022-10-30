@@ -1,5 +1,6 @@
 package com.example.nhasachonline.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -87,16 +89,16 @@ public class GioHangActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (gioHangs.get(position).getSoLuongSanPham() == 1) {
-                            fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhacHang, gioHangs, position, adapter, v.getContext());
+                            fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhacHang, gioHangs.get(position).getMaSanPham());
                         } else if (gioHangs.get(position).getSoLuongSanPham() > 1) {
-                            fireBaseNhaSachOnline.truSoLuongGioHang(maKhacHang, gioHangs, position, adapter, v.getContext());
+                            fireBaseNhaSachOnline.truSoLuongGioHang(maKhacHang, gioHangs.get(position).getMaSanPham(), gioHangs.get(position).getSoLuongSanPham());
                         }
                     }
                 });
                 itemGH_btnCong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fireBaseNhaSachOnline.congSoLuongGioHang(maKhacHang, gioHangs, position, adapter, v.getContext());
+                        fireBaseNhaSachOnline.congSoLuongGioHang(maKhacHang, gioHangs.get(position).getMaSanPham(), gioHangs.get(position).getSoLuongSanPham());
                     }
                 });
             }
@@ -131,8 +133,17 @@ public class GioHangActivity extends AppCompatActivity {
         layoutGH_btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
-                startActivity(intent);
+                ArrayList<GioHang> dsGioHang = new ArrayList<>();
+                for (int i = 0; i < gioHangs.size(); i++) {
+                    if (gioHangs.get(i).getCheck() == 1) {
+                        dsGioHang.add(gioHangs.get(i));
+                    }
+                }
+                if (dsGioHang.size() == 0) {
+                    ThongBaoMuaHang(gioHangs);
+                } else {
+                    ThongBaoMuaHang(dsGioHang);
+                }
             }
         });
 
@@ -143,7 +154,28 @@ public class GioHangActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    public void ThongBaoMuaHang(ArrayList<GioHang> gioHangs) {
+        AlertDialog.Builder b = new AlertDialog.Builder(GioHangActivity.this);
+        b.setTitle("Xác nhận");
+        b.setMessage("Xác nhận thanh toán các sản phẩm?");
+        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
+//                intent.putExtra("thanhToan", gioHangs);
+                startActivity(intent);
+            }
+        });
+        b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog al = b.create();
+        al.show();
     }
 
     public void TongTienThanhToan() {
@@ -152,7 +184,6 @@ public class GioHangActivity extends AppCompatActivity {
         for (GioHang gioHang : gioHangs) {
             sum += gioHang.getTongTien();
         }
-        Log.d("test", gioHangs.size() + "");
         layoutGH_tvTongTienThanhToan.setText(formatter.format(sum));
     }
 
