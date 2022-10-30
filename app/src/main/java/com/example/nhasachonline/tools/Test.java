@@ -28,10 +28,10 @@ public class Test extends AppCompatActivity {
         setContentView(R.layout.chupanh);
         upload = findViewById(R.id.btnChupAnh);
         imgView = findViewById(R.id.imgAnhChup);
-        Bitmap photo = BitmapFactory.decodeResource(this.getResources(), R.drawable.anhdemo);
-//        imgView.setImageBitmap(photo);
-        String test = toBase64(photo);
-        imgView.setImageBitmap(StringToBitMap(test));
+//        Bitmap photo = BitmapFactory.decodeResource(this.getResources(), R.drawable.anhdemo);
+//       imgView.setImageBitmap(photo);
+//        String test = toBase64(photo);
+//        imgView.setImageBitmap(StringToBitMap(test));
         upload.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
@@ -46,6 +46,7 @@ public class Test extends AppCompatActivity {
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
             imgString = toBase64(photo);
+            imgView.setImageBitmap(photo);
         }
     }
 

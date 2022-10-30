@@ -81,17 +81,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:gravity="center"
-                android:text="38.000 "
-                android:textColor="@color/tongtien"
-                android:textSize="@dimen/textsize" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center|left"
-                android:text="@string/tvvnd"
+                android:text="0 VNĐ"
                 android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 

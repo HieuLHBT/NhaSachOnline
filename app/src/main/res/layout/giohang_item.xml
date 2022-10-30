@@ -37,7 +37,6 @@
                 android:gravity="center|left"
                 android:inputType="text"
                 android:maxLines="1"
-                android:text="@string/tvtensanpham"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -50,7 +49,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.6"
+                    android:layout_weight="0.5"
                     android:text="@string/tvgia"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textsize" />
@@ -59,17 +58,8 @@
                     android:id="@+id/itemGH_tvGiaTien"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:gravity="top|center"
-                    android:text="20.000"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/textsize" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5"
-                    android:text="@string/tvvnd"
+                    android:layout_weight="2"
+                    android:gravity="top"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textsize" />
 
@@ -85,7 +75,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2.4"
+                    android:layout_weight="1"
                     android:text="@string/tvkhuyenmai"
                     android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
@@ -94,17 +84,8 @@
                     android:id="@+id/itemGH_tvKhuyenMai"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center|top"
-                    android:text="10"
-                    android:textColor="@color/tien"
-                    android:textSize="@dimen/textsize" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:text="%"
+                    android:layout_weight="1"
+                    android:gravity="left|top"
                     android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
@@ -146,7 +127,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="1"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textsize" />
 
@@ -170,7 +150,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center"
                     android:text="@string/tvtongtien"
                     android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
@@ -179,18 +158,8 @@
                     android:id="@+id/itemGH_tvTongTien"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="20.000"
-                    android:textColor="@color/tien"
-                    android:textSize="@dimen/textsize" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center|left"
-                    android:text="@string/tvvnd"
+                    android:layout_weight="1.5"
+                    android:gravity="left"
                     android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
