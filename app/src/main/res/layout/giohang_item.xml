@@ -35,6 +35,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center|left"
+                android:inputType="text"
+                android:maxLines="1"
                 android:text="@string/tvtensanpham"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
@@ -85,7 +87,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2.4"
                     android:text="@string/tvkhuyenmai"
-                    android:textColor="@color/giamgia"
+                    android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
                 <TextView
@@ -95,7 +97,7 @@
                     android:layout_weight="0.5"
                     android:gravity="center|top"
                     android:text="10"
-                    android:textColor="@color/giamgia"
+                    android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
                 <TextView
@@ -103,7 +105,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:text="%"
-                    android:textColor="@color/giamgia"
+                    android:textColor="@color/tien"
                     android:textSize="@dimen/textsize" />
 
             </LinearLayout>
