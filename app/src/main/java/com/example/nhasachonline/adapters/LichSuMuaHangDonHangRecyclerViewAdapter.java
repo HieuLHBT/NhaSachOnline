@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.doituong.LichSuMuaHang_DonHang;
+import com.example.nhasachonline.item.LichSuMuaHang_DonHang;
 
 import java.util.ArrayList;
 
@@ -47,7 +47,7 @@ public class LichSuMuaHangDonHangRecyclerViewAdapter extends RecyclerView.Adapte
 
         adapter = new LichSuMuaHangSanPhamRecyclerViewAdapter(this.context, R.layout.lichsumuahang_sanpham_item, lichSuMuaHang_donHang.getSanPham());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.context);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         holder.lichSuMuaHangSanPhamRecyclerViewAdapter.setLayoutManager(layoutManager);
         holder.lichSuMuaHangSanPhamRecyclerViewAdapter.setAdapter(adapter);
     }
@@ -81,6 +81,7 @@ public class LichSuMuaHangDonHangRecyclerViewAdapter extends RecyclerView.Adapte
             itemLSMH_txtTongTien = itemView.findViewById(R.id.itemLSMH_txtTongTien);
             itemLSMH_DonHang_llCardView = itemView.findViewById(R.id.layoutLSMH_rvLichSuMuahang);
             itemLSMH_DonHang = itemView.findViewById(R.id.itemLSMH_DonHang);
+
             lichSuMuaHangSanPhamRecyclerViewAdapter = itemView.findViewById(R.id.layoutLSMH_SanPham_rvLichSuMuaHang);
 
         }

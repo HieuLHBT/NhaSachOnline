@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity;
 
 import android.content.Intent;
@@ -71,3 +72,4 @@ public class ChiTietVanPPActivity extends AppCompatActivity {
 
 
 }
+*/

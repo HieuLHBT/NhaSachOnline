@@ -35,10 +35,6 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         notifyDataSetChanged();
     }
 
-    public void setFilteredList(ArrayList<Sach> filteredList){
-        this.books = filteredList;
-        notifyDataSetChanged();
-    }
 
     @NonNull
     @Override

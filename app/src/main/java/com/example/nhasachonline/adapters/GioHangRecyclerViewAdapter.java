@@ -1,6 +1,7 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -13,8 +14,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
+import com.example.nhasachonline.activity.GioHangActivity;
+import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.GioHang;
+import com.example.nhasachonline.tools.SharePreferences;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecyclerViewAdapter.MyViewHolder> {
@@ -22,6 +27,7 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecy
     private int resource;
     private ArrayList<GioHang> gioHangs;
     private OnItemClickListener onItemClickListener;
+    private Drawable backBackground;
 
     public GioHangRecyclerViewAdapter(Activity context, int resource, ArrayList<GioHang> gioHangs) {
         this.context = context;
@@ -33,19 +39,25 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecy
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView viewItem = (CardView) context.getLayoutInflater().inflate(viewType, parent, false);
+        backBackground = viewItem.getBackground();
         return new MyViewHolder(viewItem);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         GioHang gioHang = gioHangs.get(pos);
         holder.itemGH_tvTenSanPham.setText(gioHang.getTenSanPham());
-        holder.itemGH_tvGiaTien.setText(gioHang.getGiaSanPham() + "");
+        holder.itemGH_tvGiaTien.setText(formatter.format(gioHang.getGiaSanPham()));
         holder.itemGH_tvKhuyenMai.setText(gioHang.getKhuyenMai() + "");
         holder.itemGH_tvSoLuong.setText(gioHang.getSoLuongSanPham() + "");
-        holder.itemGH_tvTongTien.setText(gioHang.getTongTien() + "");
-
+        holder.itemGH_tvTongTien.setText(formatter.format(gioHang.getTongTien()));
+        if (gioHang.getCheck() == 0) {
+            holder.itemGH.setBackground(backBackground);
+        } else if (gioHang.getCheck() == 1) {
+            holder.itemGH.setBackgroundColor(context.getResources().getColor(R.color.clickgiohang, context.getTheme()));
+        }
 
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
@@ -64,9 +76,9 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecy
     }
 
     @Override
-        public int getItemViewType(int position) {
-            return resource;
-        }
+    public int getItemViewType(int position) {
+        return resource;
+    }
 
     // ViewHolder definition
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

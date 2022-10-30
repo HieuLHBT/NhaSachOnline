@@ -1,11 +1,18 @@
 package com.example.nhasachonline.item;
 
 public class GioHang {
+    private String maSanPham;
     private String tenSanPham;
     private int giaSanPham;
     private int khuyenMai;
     private int soLuongSanPham;
     private int tongTien;
+    private int check = 0;
+    private String hinhSanpham;
+
+    public String getMaSanPham() {
+        return maSanPham;
+    }
 
     public String getTenSanPham() {
         return tenSanPham;
@@ -25,6 +32,18 @@ public class GioHang {
 
     public int getTongTien() {
         return tongTien;
+    }
+
+    public int getCheck() {
+        return check;
+    }
+
+    public String getHinhSanpham() {
+        return hinhSanpham;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
     public void setTenSanPham(String tenSanPham) {
@@ -47,14 +66,24 @@ public class GioHang {
         this.tongTien = tongTien;
     }
 
+    public void setCheck(int check) {
+        this.check = check;
+    }
+
+    public void setHinhSanpham(String hinhSanpham) {
+        this.hinhSanpham = hinhSanpham;
+    }
+
     public GioHang() {
     }
 
-    public GioHang(String tenSanPham, int giaSanPham, int khuyenMai, int soLuongSanPham) {
+    public GioHang(String maSanPham, String tenSanPham, int giaSanPham, int khuyenMai, int soLuongSanPham, String hinhSanpham) {
+        this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.giaSanPham = giaSanPham;
         this.khuyenMai = khuyenMai;
         this.soLuongSanPham = soLuongSanPham;
+        this.hinhSanpham = hinhSanpham;
         this.tongTien = (giaSanPham - (giaSanPham * khuyenMai / 100)) * soLuongSanPham;
     }
 }
