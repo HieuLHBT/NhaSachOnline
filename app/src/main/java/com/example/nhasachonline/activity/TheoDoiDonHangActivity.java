@@ -47,7 +47,7 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
+        //fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
 
         adapter.setOnItemClickListener(new TheoDoiDonHangRecyclerViewAdapter.OnItemClickListener() {
             @Override
