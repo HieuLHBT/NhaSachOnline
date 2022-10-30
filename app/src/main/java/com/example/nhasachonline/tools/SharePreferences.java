@@ -18,4 +18,15 @@ public class SharePreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences(tenFile, context.MODE_PRIVATE);
         return sharedPreferences.getString("maNguoiDung", null);
     }
+
+    public void themMaDonHang(Context context, String maDonHang) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("donHang", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("maDonHang", maDonHang);
+        editor.commit();
+    }
+    public String layMaDonHang(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("donHang", context.MODE_PRIVATE);
+        return sharedPreferences.getString("maDonHang", null);
+    }
 }

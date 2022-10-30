@@ -1,13 +1,27 @@
 package com.example.nhasachonline.item;
 
 public class ThanhToan {
-    private String tenSanPham;
+    private String maSanPhan;
+    private String tenSanPhan;
     private int giaSanPham;
     private int soLuong;
     private String hinhSanPham;
+    private int tongTien;
 
-    public String getTenSanPham() {
-        return tenSanPham;
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    public String getMaSanPhan() {
+        return maSanPhan;
+    }
+
+    public String getTenSanPhan() {
+        return tenSanPhan;
     }
 
     public int getGiaSanPham() {
@@ -22,8 +36,12 @@ public class ThanhToan {
         return hinhSanPham;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public void setMaSanPhan(String maSanPhan) {
+        this.maSanPhan = maSanPhan;
+    }
+
+    public void setTenSanPhan(String tenSanPhan) {
+        this.tenSanPhan = tenSanPhan;
     }
 
     public void setGiaSanPham(int giaSanPham) {
@@ -41,10 +59,12 @@ public class ThanhToan {
     public ThanhToan() {
     }
 
-    public ThanhToan(String tenSanPham, int giaSanPham, int soLuong, String hinhSanPham) {
-        this.tenSanPham = tenSanPham;
+    public ThanhToan(String maSanPhan, String tenSanPhan, int giaSanPham, int soLuong, String hinhSanPham) {
+        this.maSanPhan = maSanPhan;
+        this.tenSanPhan = tenSanPhan;
         this.giaSanPham = giaSanPham;
         this.soLuong = soLuong;
         this.hinhSanPham = hinhSanPham;
+        this.tongTien = soLuong * giaSanPham;
     }
 }
