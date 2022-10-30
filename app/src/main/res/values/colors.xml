@@ -12,7 +12,8 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bgBottomNavigation">#1283E6</color>
     <color name="darker_gray">#9FA8AF</color>
-    <color name="tien">#EF0413</color>
+    <color name="tien">#FF9800</color>
+    <color name="tongtien">#EF0413</color>
     <color name="choXN">#EF0413</color>
     <color name="giamgia">#DD410F</color>
     <color name="trangthaiHT">#06EF0A</color>
