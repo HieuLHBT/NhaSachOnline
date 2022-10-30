@@ -7,9 +7,12 @@ import androidx.annotation.NonNull;
 
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.TheoDoiDonHangRecyclerViewAdapter;
+import com.example.nhasachonline.data_model.DonHang;
 import com.example.nhasachonline.data_model.GioHang;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.VanPhongPham;
+import com.example.nhasachonline.item.TheoDoiDonHang;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,20 +40,17 @@ public class FireBaseNhaSachOnline {
                             getVanPhongPhamDatabase(i ,gioHangDataModel, gioHangItem, adapter, context);
                         }
                     }
-
                 }
                 else {
                     Log.d("onDataChange", "Không có dữ liệu!");
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("onCancelled", "Lỗi!" + error.getMessage());
             }
         });
     }
-
     private void getSachDatabase(int i, ArrayList<GioHang> gioHangDataModel, ArrayList<com.example.nhasachonline.item.GioHang> gioHangItem, GioHangRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference sachDatabase = firebaseDatabase.getReference("SACH");
@@ -101,7 +101,56 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-//    public void test(Context context, GioHangRecyclerViewAdapter adapter, ArrayList<GioHang> gioHangs, Sach sach) {
+ /*   public void hienThiTheoDoiDonHang(String maKhachHang, ArrayList<TheoDoiDonHang> theoDoiDonHangItem, TheoDoiDonHangRecyclerViewAdapter adapter, Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
+        ArrayList<DonHang> donHangDataModel = new ArrayList<>();
+        donHangDatabase.child(maKhachHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null){
+                    for(DataSnapshot sanPhamSnapShot : snapshot.getChildren()){
+                        donHangDataModel.add(sanPhamSnapShot.getValue(DonHang.class));
+                        for(int i = 0; i < donHangDataModel.size(); i++){
+                            getDonHangDatabase(i, donHangDataModel, theoDoiDonHangItem, adapter, context);
+                        }
+                    }
+                }
+                else{
+                    Log.d("onDataChange", "Không có dữ liệu!");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+
+            }
+        });
+    }
+
+    private void getDonHangDatabase(int i, ArrayList<DonHang> donHangDataModel, ArrayList<TheoDoiDonHang>theoDoiDonHangItem, TheoDoiDonHangRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
+        donHangDatabase.child(donHangDataModel.get(i).getMaDonHang()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.getValue() != null) {
+                    TheoDoiDonHang theoDoiDonHang = snapshot.getValue(TheoDoiDonHang.class);
+                    theoDoiDonHangItem.add(new TheoDoiDonHang(theoDoiDonHang.getMaDonHang(), theoDoiDonHang.getTenNVGiaoHang(), donHangDataModel.get(i).getThoiGianGiao(), donHangDataModel.get(i).getThoiGianLap(), Integer.valueOf(theoDoiDonHang.getTongTienThanhToan()), theoDoiDonHang.getTrangThai()));
+                    ((GioHangActivity)context).TongTienThanhToan();
+                }
+                else {
+                    Log.d("onDataChange", "Không có dữ liệu!");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+*/
+    //    public void test(Context context, GioHangRecyclerViewAdapter adapter, ArrayList<GioHang> gioHangs, Sach sach) {
 //        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 //        DatabaseReference databaseReference = firebaseDatabase.getReference("SACH");
 //
