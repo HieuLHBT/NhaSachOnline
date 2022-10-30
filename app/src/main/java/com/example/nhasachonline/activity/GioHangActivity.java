@@ -10,9 +10,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 
 public class GioHangActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
-    private String maKhacHang;
+    private String maKhachHang;
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
     private Drawable backBackground;
@@ -42,7 +45,7 @@ public class GioHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
-        maKhacHang = sharePreferences.getKhachHang("nguoidung", this);
+        maKhachHang = sharePreferences.getKhachHang("nguoidung", this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutGH_rvDanhSach);
         layoutGH_tvTongTienThanhToan = findViewById(R.id.layoutGH_tvTongTienThanhToan);
@@ -56,7 +59,22 @@ public class GioHangActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        fireBaseNhaSachOnline.hienThiGioHang(maKhacHang, gioHangs, adapter, this);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(itemDecoration);
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhachHang, gioHangs.get(position).getMaSanPham(), adapter);
+            }
+        });
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+        fireBaseNhaSachOnline.hienThiGioHang(maKhachHang, gioHangs, adapter, this);
 
         adapter.setOnItemClickListener(new GioHangRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -89,16 +107,16 @@ public class GioHangActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (gioHangs.get(position).getSoLuongSanPham() == 1) {
-                            fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhacHang, gioHangs.get(position).getMaSanPham());
+                            fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhachHang, gioHangs.get(position).getMaSanPham(), adapter);
                         } else if (gioHangs.get(position).getSoLuongSanPham() > 1) {
-                            fireBaseNhaSachOnline.truSoLuongGioHang(maKhacHang, gioHangs.get(position).getMaSanPham(), gioHangs.get(position).getSoLuongSanPham());
+                            fireBaseNhaSachOnline.truSoLuongGioHang(maKhachHang, gioHangs.get(position).getMaSanPham(), gioHangs.get(position).getSoLuongSanPham());
                         }
                     }
                 });
                 itemGH_btnCong.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fireBaseNhaSachOnline.congSoLuongGioHang(maKhacHang, gioHangs.get(position).getMaSanPham(), gioHangs.get(position).getSoLuongSanPham());
+                        fireBaseNhaSachOnline.congSoLuongGioHang(maKhachHang, gioHangs.get(position).getMaSanPham(), gioHangs.get(position).getSoLuongSanPham());
                     }
                 });
             }
@@ -133,16 +151,37 @@ public class GioHangActivity extends AppCompatActivity {
         layoutGH_btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<GioHang> dsGioHang = new ArrayList<>();
-                for (int i = 0; i < gioHangs.size(); i++) {
-                    if (gioHangs.get(i).getCheck() == 1) {
-                        dsGioHang.add(gioHangs.get(i));
-                    }
-                }
-                if (dsGioHang.size() == 0) {
-                    ThongBaoMuaHang(gioHangs);
+                if (sharePreferences.layMaDonHang(GioHangActivity.this) != null) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(GioHangActivity.this);
+                    b.setTitle("CẢNH BÁO");
+                    b.setMessage("Đơn hàng đã tồn tại, không thể tiếp tục mua! Xác nhận đi tới đơn hàng?");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
+                            GioHangActivity.this.startActivity(intent);
+                        }
+                    });
+                    b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
                 } else {
-                    ThongBaoMuaHang(dsGioHang);
+                    ArrayList<GioHang> dsGioHang = new ArrayList<>();
+                    for (int i = 0; i < gioHangs.size(); i++) {
+                        if (gioHangs.get(i).getCheck() == 1) {
+                            dsGioHang.add(gioHangs.get(i));
+                        }
+                    }
+                    if (dsGioHang.size() == 0) {
+                        ThongBaoMuaHang(gioHangs, gioHangs.size());
+                    } else {
+                        ThongBaoMuaHang(dsGioHang, gioHangs.size());
+                    }
                 }
             }
         });
@@ -156,16 +195,14 @@ public class GioHangActivity extends AppCompatActivity {
 
     }
 
-    public void ThongBaoMuaHang(ArrayList<GioHang> gioHangs) {
+    public void ThongBaoMuaHang(ArrayList<GioHang> gioHangs, int size) {
         AlertDialog.Builder b = new AlertDialog.Builder(GioHangActivity.this);
-        b.setTitle("Xác nhận");
+        b.setTitle("THÔNG BÁO");
         b.setMessage("Xác nhận thanh toán các sản phẩm?");
         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(GioHangActivity.this, ThanhToanActivity.class);
-//                intent.putExtra("thanhToan", gioHangs);
-                startActivity(intent);
+                fireBaseNhaSachOnline.taoXuatKho(maKhachHang, gioHangs, GioHangActivity.this, size, adapter);
             }
         });
         b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
@@ -184,7 +221,7 @@ public class GioHangActivity extends AppCompatActivity {
         for (GioHang gioHang : gioHangs) {
             sum += gioHang.getTongTien();
         }
-        layoutGH_tvTongTienThanhToan.setText(formatter.format(sum));
+        layoutGH_tvTongTienThanhToan.setText(formatter.format(sum) + " VNĐ");
     }
 
 }

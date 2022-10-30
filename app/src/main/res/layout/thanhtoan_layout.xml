@@ -29,7 +29,7 @@
             android:layout_weight="6"
             android:gravity="center"
             android:paddingRight="@dimen/tieude"
-            android:text="@string/tvgiohang"
+            android:text="@string/tvthanhtoan"
             android:textColor="@color/design_default_color_error"
             android:textSize="@dimen/tieudesize"
             android:textStyle="bold" />
@@ -62,7 +62,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:text="DH01"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -87,7 +86,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:text="@string/tvhotenkh"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -112,7 +110,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:text="0389065771"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -137,7 +134,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:text="tho123@gmail.com"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -162,7 +158,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:text="145 QL13, Hiệp Bình Chánh, TP.Thủ Đức, TP.HCM"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -171,6 +166,7 @@
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
+                android:layout_marginRight="20dp"
                 android:layout_weight="0.5"
                 android:background="@color/white"
                 android:scaleType="fitXY"
@@ -185,13 +181,13 @@
         android:layout_margin="@dimen/le"
         android:layout_weight="3"
         android:background="@drawable/border"
-        android:orientation="horizontal"
-        android:padding="@dimen/border">
+        android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/layoutTT_rvDanhSach"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="@dimen/le"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -225,8 +221,7 @@
                 android:id="@+id/layoutTT_spnHinhThucGiao"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:entries="@array/vanchuyen" />
+                android:layout_weight="1.9" />
 
         </LinearLayout>
 
@@ -251,7 +246,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/tvmagiam"
                 android:textColor="@color/tien"
                 android:textSize="@dimen/textsize" />
 
@@ -262,7 +256,8 @@
                 android:layout_marginRight="@dimen/le"
                 android:layout_weight="1"
                 android:text="@string/btnchonma"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:backgroundTint="@color/clickgiohang"/>
 
         </LinearLayout>
 
@@ -285,8 +280,7 @@
                 android:id="@+id/layoutTT_spnPhuongThucThanhToan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:entries="@array/ptthanhtoan" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <LinearLayout
@@ -308,7 +302,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="@string/tvtienhang"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -333,7 +326,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="@string/tvvanchuyen"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -358,7 +350,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="@string/tvtiengiamgia"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -375,7 +366,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="@string/tvtongtienthanhtoan"
-                android:textColor="@color/tien"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
             <TextView
@@ -383,8 +374,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="@string/tvtienthanhtoan"
-                android:textColor="@color/tien"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
         </LinearLayout>

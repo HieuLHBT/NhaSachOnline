@@ -8,5 +8,5 @@
     <dimen name="btnmuahang">10dp</dimen>
     <dimen name="imgbtn">15dp</dimen>
     <dimen name="le">5dp</dimen>
-    <dimen name="border">1dp</dimen>
+    <dimen name="spinner">15sp</dimen>
 </resources>

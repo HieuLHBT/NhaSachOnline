@@ -28,29 +28,23 @@
     <string name="tvtrove"><![CDATA[<]]></string>
     <string name="tvgiohang">Giỏ Hàng</string>
     <string name="tvtongtienthanhtoan">Tổng tiền thanh toán:</string>
-    <string name="tvvnd">VNĐ</string>
     <string name="btnmuahang">MUA HÀNG</string>
-    <string name="tvtensanpham">Truyện Conan tập 1</string>
     <string name="tvgia">Giá:</string>
-    <string name="tvkhuyenmai">Khuyến mãi</string>
+    <string name="tvkhuyenmai">Khuyến mãi:</string>
     <string name="tvtongtien">Tổng tiền:</string>
     <string name="tvmadonhang">Mã đơn hàng:</string>
     <string name="tvhoten">Họ tên:</string>
-    <string name="tvhotenkh">Trương Đình Thọ</string>
     <string name="tvsodienthoai">Số điện thoại:</string>
     <string name="tvhinhthucgiao">Hình thức giao:</string>
     <string name="tvmagiamgia">Mã giảm giá:</string>
-    <string name="tvmagiam">-15.000 VNĐ</string>
     <string name="btnchonma">Chọn mã</string>
     <string name="tvphuongthucthanhtoan">Phương thức thanh toán:</string>
     <string name="tvtongtienhang">Tổng tiền hàng:</string>
-    <string name="tvtienhang">80.000 VNĐ</string>
     <string name="tvphivanchuyen">Phí vận chuyển:</string>
-    <string name="tvvanchuyen">30.000 VNĐ</string>
     <string name="tvgiamgia">Giảm giá:</string>
-    <string name="tvtiengiamgia">-15.000 VNĐ</string>
-    <string name="tvtienthanhtoan">95.000 VNĐ</string>
     <string name="btnbochon">Bỏ chọn</string>
     <string name="btnchonhet">Chọn hết</string>
+    <string name="tvthanhtoan">Thanh Toán</string>
+    <string name="tvtong">Tổng:</string>
 
 </resources>
