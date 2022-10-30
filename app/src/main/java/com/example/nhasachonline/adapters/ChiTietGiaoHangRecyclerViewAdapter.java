@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<ChiTietGiaoHangRecyclerViewAdapter.MyViewHolder> {
@@ -35,11 +36,12 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChiTietGiaoHangRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         ChiTietGiaoHang chiTietGiaoHang = chiTietGiaoHangs.get(pos);
         holder.itemCTGH_txtTenSanPham.setText(chiTietGiaoHang.getTenSanPham());
-        holder.itemCTGH_txtGiaTien.setText(chiTietGiaoHang.getGiaSanPham());
+        holder.itemCTGH_txtGiaTien.setText(formatter.format(chiTietGiaoHang.getGiaSanPham()));
         holder.itemCTGH_txtSoLuong.setText(chiTietGiaoHang.getSoLuong() + "");
         //holder.itemCTGH_imgHinhSanPham.setText(chiTietGiaoHang.getHinhSanPham());
     }
@@ -75,7 +77,7 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
     }
 
     // Interface for event processing
-    public interface OnItemClickListener {
+    public interface OnItemClickListener extends LichSuMuaHangDonHangRecyclerViewAdapter.OnItemClickListener {
         void onItemClickListener(int position, View view);
     }
 

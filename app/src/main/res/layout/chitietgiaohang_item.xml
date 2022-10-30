@@ -81,7 +81,7 @@
                     android:layout_weight="1"
                     android:gravity="right"
                     android:text="x"
-                    android:textColor="@color/black"
+                    android:textColor="@color/choXN"
                     android:textSize="25dp" />
                 <TextView
                     android:id="@+id/itemCTGH_txtSoLuong"
@@ -89,7 +89,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="3"
-                    android:textColor="@color/black"
+                    android:textColor="@color/choXN"
                     android:textSize="25dp" />
             </LinearLayout>
 

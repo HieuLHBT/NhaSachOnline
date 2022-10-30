@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.LichSuMuaHang_SanPham;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
@@ -36,10 +37,11 @@ public class LichSuMuaHangSanPhamRecyclerViewAdapter extends RecyclerView.Adapte
 
     @Override
     public void onBindViewHolder(@NonNull LichSuMuaHangSanPhamRecyclerViewAdapter.MyViewHolder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         LichSuMuaHang_SanPham lichSuMuaHang_sanPham = lichSuMuaHang_sanPhams.get(pos);
         holder.itemLSMH_txtTenSanPham.setText(lichSuMuaHang_sanPham.getTenSanPham());
-        holder.itemLSMH_txtGiaTien.setText(lichSuMuaHang_sanPham.getGiaSanPham() + "");
+        holder.itemLSMH_txtGiaTien.setText(formatter.format(lichSuMuaHang_sanPham.getGiaSanPham()));
 //        holder.itemLSMH_imgHinhSanPham.setText(lichSuMuaHang_sanPham.get());
 
     }

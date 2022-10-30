@@ -3,6 +3,7 @@ package com.example.nhasachonline.adapters;
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class MaGiamGiaRecyclerViewAdapter extends RecyclerView.Adapter<MaGiamGia
     private Activity context;
     private int resource;
     private ArrayList<MaGiamGia> maGiamGias;
+    private OnItemClickListener onItemClickListener;
 
     public MaGiamGiaRecyclerViewAdapter(Activity context, int resource, ArrayList<MaGiamGia> maGiamGias){
         this.context = context;
@@ -62,6 +64,16 @@ public class MaGiamGiaRecyclerViewAdapter extends RecyclerView.Adapter<MaGiamGia
             itemMGG_txtTienGiamGia = itemView.findViewById(R.id.itemMGG_txtTienGiamGia);
             itemMGG_llCardView = itemView.findViewById(R.id.layoutMGG_rvMaGiamGia);
             itemMGG = itemView.findViewById(R.id.itemMGG);
+
         }
+    }
+
+    // Interface for event processing
+    public interface OnItemClickListener{
+        void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
