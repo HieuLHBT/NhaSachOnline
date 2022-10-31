@@ -1,4 +1,4 @@
-package com.example.nhasachonline.activity;
+/*package com.example.nhasachonline.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -77,3 +77,4 @@ public class LichSuMuaHangActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 }
+*/

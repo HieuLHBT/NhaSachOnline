@@ -16,7 +16,7 @@ import com.example.nhasachonline.item.Sach;
 
 import java.util.ArrayList;
 
-public class ChiTietSachActivity extends AppCompatActivity {
+public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     ImageView anhSanPham, anh1Sao, anh2Sao, anh3Sao, anh4Sao, anh5Sao;
     TextView tenSP, tacGia, theLoai, namSX, nhaXB, gia, giaKM, khuyenMai, soLuong, danhGia;
@@ -27,7 +27,7 @@ public class ChiTietSachActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chitietsach_layout);
+        setContentView(R.layout.chitietsanpham_layout);
 
         anhSanPham = findViewById(R.id.CTSP_imgAnhSanPham);
         anh1Sao = findViewById(R.id.CTSP_img1Sao);
@@ -52,7 +52,7 @@ public class ChiTietSachActivity extends AppCompatActivity {
         btnThemVaoGH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(ChiTietSachActivity.this, GioHangActivity.class);
+                Intent intent1 = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
                 startActivity(intent1);
             }
         });

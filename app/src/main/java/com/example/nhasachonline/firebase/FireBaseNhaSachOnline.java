@@ -273,15 +273,25 @@ public class FireBaseNhaSachOnline {
                     xuatKhoDatabase.child(donHang.getMaDonHang()).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for (DataSnapshot xuatKhoDataSnapshot : snapshot.getChildren()) {
-                                XuatKho xuatKho = xuatKhoDataSnapshot.getValue(XuatKho.class);
-                                if (xuatKho.getMaSanPham().contains("s")) {
-                                    sachDatabase.child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            Sach sach = snapshot.getValue(Sach.class);
-                                            theoDoiDonHangSanPhams.add(new TheoDoiDonHangSanPham(sach.getMaSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getKhuyenMai()),Integer.valueOf(sach.getSoLuongKho())));
-                                        }
+                            int tongDanhGia = 0;
+                            int soLuongDanhGia = 0;
+                            int danhGia = 0;
+                            int binhLuan = 0;
+                            for (DataSnapshot phanHoiDataSnapshot : snapshot.getChildren()) {
+                                PhanPhoi phanPhoi = phanHoiDataSnapshot.getValue(PhanPhoi.class);
+                                if (phanPhoi.getDanhGia() != null) {
+                                    tongDanhGia += Integer.valueOf(phanPhoi.getDanhGia());
+                                    soLuongDanhGia++;
+                                }
+                                if (phanPhoi.getBinhLuan() != null) {
+                                    binhLuan++;
+                                }
+                                danhGia = tongDanhGia / soLuongDanhGia;
+                            }
+
+                            sanPhams.add(new SanPham(sach.getMaSach(), sach.getTenSach(), sach.getHinhSach(), sach.getTacGia(), "",Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getSoLuongKho()), danhGia, binhLuan));
+                            adapter.notifyDataSetChanged();
+                        }
 
                                         @Override
                                         public void onCancelled(@NonNull DatabaseError error) {
@@ -302,7 +312,11 @@ public class FireBaseNhaSachOnline {
                                         }
                                     });
                                 }
+                                danhGia = tongDanhGia / soLuongDanhGia;
                             }
+
+                            sanPhams.add(new SanPham(vanPhongPham.getMaVanPhongPham(),vanPhongPham.getTenVanPhongPham(),vanPhongPham.getHinhVanPhongPham(),"",vanPhongPham.getXuatXu(),Integer.valueOf(vanPhongPham.getGiaTien()),Integer.valueOf(vanPhongPham.getSoLuongKho()),danhGia,binhLuan));
+                            adapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -319,5 +333,104 @@ public class FireBaseNhaSachOnline {
             }
         });
     }
-*/
+
+    public void hienThiChiTietSanPham(ArrayList<SanPham> sanPhams, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
+        DatabaseReference sachDatabase = firebaseDatabase.getReference("SACH");
+        DatabaseReference vanPhongPhamDatabase = firebaseDatabase.getReference("VANPHONGPHAM");
+        sachDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot sachDataSnapshot : snapshot.getChildren()) {
+                    Sach sach = sachDataSnapshot.getValue(Sach.class);
+                    for (SanPham sanPham: sanPhams) {
+                        if (sanPham.getMaSanPham() == sach.getMaSach()) {
+                            sanPhams.remove(sanPham);
+                        }
+                    }
+                    phanHoiDatabase.child(sach.getMaSach()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int tongDanhGia = 0;
+                            int soLuongDanhGia = 0;
+                            int danhGia = 0;
+                            int binhLuan = 0;
+                            for (DataSnapshot phanHoiDataSnapshot : snapshot.getChildren()) {
+                                PhanPhoi phanPhoi = phanHoiDataSnapshot.getValue(PhanPhoi.class);
+                                if (phanPhoi.getDanhGia() != null) {
+                                    tongDanhGia += Integer.valueOf(phanPhoi.getDanhGia());
+                                    soLuongDanhGia++;
+                                }
+                                if (phanPhoi.getBinhLuan() != null) {
+                                    binhLuan++;
+                                }
+                                danhGia = tongDanhGia / soLuongDanhGia;
+                            }
+
+                            sanPhams.add(new SanPham(sach.getMaSach(), sach.getTenSach(), sach.getHinhSach(), sach.getTacGia(), "",Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getSoLuongKho()), danhGia, binhLuan));
+                        //    adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+        vanPhongPhamDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot vanPhongPhamDataSnapshot : snapshot.getChildren()) {
+                    VanPhongPham vanPhongPham = vanPhongPhamDataSnapshot.getValue(VanPhongPham.class);
+                    for (SanPham sanPham: sanPhams) {
+                        if (sanPham.getMaSanPham() == vanPhongPham.getMaVanPhongPham()) {
+                            sanPhams.remove(sanPham);
+                        }
+                    }
+                    phanHoiDatabase.child(vanPhongPham.getMaVanPhongPham()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int tongDanhGia = 0;
+                            int soLuongDanhGia = 0;
+                            int danhGia = 0;
+                            int binhLuan = 0;
+                            for (DataSnapshot phanHoiDataSnapshot : snapshot.getChildren()) {
+                                PhanPhoi phanPhoi = phanHoiDataSnapshot.getValue(PhanPhoi.class);
+                                if (phanPhoi.getDanhGia() != null) {
+                                    tongDanhGia += Integer.valueOf(phanPhoi.getDanhGia());
+                                    soLuongDanhGia++;
+                                }
+                                if (phanPhoi.getBinhLuan() != null) {
+                                    binhLuan++;
+                                }
+                                danhGia = tongDanhGia / soLuongDanhGia;
+                            }
+
+                            sanPhams.add(new SanPham(vanPhongPham.getMaVanPhongPham(),vanPhongPham.getTenVanPhongPham(),vanPhongPham.getHinhVanPhongPham(),"",vanPhongPham.getXuatXu(),Integer.valueOf(vanPhongPham.getGiaTien()),Integer.valueOf(vanPhongPham.getSoLuongKho()),danhGia,binhLuan));
+                          //  adapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
 }

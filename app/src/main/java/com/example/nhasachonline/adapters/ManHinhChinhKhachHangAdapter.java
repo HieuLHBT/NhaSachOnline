@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.Sach;
+import com.example.nhasachonline.item.SanPham;
 
 import java.util.ArrayList;
 
@@ -21,17 +22,17 @@ import java.util.ArrayList;
 public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhChinhKhachHangAdapter.MyViewHolder> {
     private Activity context;
     private int resource;
-    private ArrayList<Sach> books;
+    private ArrayList<SanPham> sanPhams;
     private ManHinhChinhKhachHangAdapter.OnItemClickListener onItemClickListener;
 
-    public ManHinhChinhKhachHangAdapter(Activity context, int resource, ArrayList<Sach> books) {
+    public ManHinhChinhKhachHangAdapter(Activity context, int resource, ArrayList<SanPham> sanPhams) {
         this.context = context;
         this.resource = resource;
-        this.books = books;
+        this.sanPhams = sanPhams;
     }
 
-    public void setFilteredList(ArrayList<Sach> filteredList){
-        this.books = filteredList;
+    public void setFilteredList(ArrayList<SanPham> filteredList){
+        this.sanPhams = filteredList;
         notifyDataSetChanged();
     }
 
@@ -46,11 +47,21 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final int pos = position;
-        Sach sach = books.get(pos);
-        holder.itemMHCKH_tvTenSanPham.setText(sach.getTenSach());
-        holder.itemMHCKH_tvGia.setText(sach.getGia() + "");
-        holder.itemMHCKH_tvSoLuong.setText(sach.getSoLuong() + "");
-        holder.itemMHCKH_tvDanhGia.setText(sach.getsoLuongdanhGia() + "");
+        SanPham sanpham = sanPhams.get(pos);
+        holder.itemMHCKH_tvTenSanPham.setText(sanpham.getTenSanPham());
+        holder.itemMHCKH_tvGia.setText(sanpham.getGiaSanPham() + " VNĐ");
+        holder.itemMHCKH_tvSoLuong.setText(sanpham.getSoLuong() + "");
+        holder.itemMHCKH_tvDanhGia.setText(sanpham.getSoLuongDanhGia() + "");
+        if(sanpham.getMaSanPham().contains("s")){
+            holder.itemMHCKH_tvTacGia.setVisibility(View.VISIBLE);
+            holder.itemMHCKH_tvXuatXu.setVisibility(View.GONE);
+            holder.itemMHCKH_tvDuLieu.setText(sanpham.getTacGia());
+        }else if(sanpham.getMaSanPham().contains("vpp")){
+            holder.itemMHCKH_tvTacGia.setVisibility(View.GONE);
+            holder.itemMHCKH_tvXuatXu.setVisibility(View.VISIBLE);
+            holder.itemMHCKH_tvDuLieu.setText(sanpham.getXuatXu());
+        }
+
 
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
@@ -65,7 +76,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
 
     @Override
     public int getItemCount() {
-        return books.size();
+        return sanPhams.size();
     }
 
     @Override
@@ -76,6 +87,9 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
     // ViewHolder definition
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemMHCKH_tvTenSanPham;
+        TextView itemMHCKH_tvTacGia;
+        TextView itemMHCKH_tvXuatXu;
+        TextView itemMHCKH_tvDuLieu;
         TextView itemMHCKH_tvGia;
         TextView itemMHCKH_tvDanhGia;
         TextView itemMHCKH_tvSoLuong;
@@ -93,6 +107,9 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             itemMHCKH_tvTenSanPham = itemView.findViewById(R.id.itemMHCKH_tvTenSanPham);
+            itemMHCKH_tvTacGia = itemView.findViewById(R.id.itemMHCKH_tvTacGia);
+            itemMHCKH_tvXuatXu = itemView.findViewById(R.id.itemMHCKH_tvXuatXu);
+            itemMHCKH_tvDuLieu = itemView.findViewById(R.id.itemMHCKH_tvDL);
             itemMHCKH_tvGia = itemView.findViewById(R.id.itemMHCKH_tvGiaTien);
             itemMHCKH_tvDanhGia = itemView.findViewById(R.id.itemMHCKH_tvSLDanhGia);
             itemMHCKH_tvSoLuong = itemView.findViewById(R.id.itemMHCKH_tvSo);

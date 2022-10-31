@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity;
 
 import android.content.DialogInterface;
@@ -126,8 +127,8 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(ChiTietGiaoHangActivity.this, LichSuMuaHangActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(ChiTietGiaoHangActivity.this, LichSuMuaHangActivity.class);
+        //        startActivity(intent);
             }
         });
         b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
@@ -160,3 +161,4 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     }
 
 }
+*/
