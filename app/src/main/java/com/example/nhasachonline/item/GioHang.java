@@ -1,5 +1,7 @@
 package com.example.nhasachonline.item;
 
+import android.graphics.Bitmap;
+
 public class GioHang {
     private String maSanPham;
     private String tenSanPham;
@@ -9,6 +11,15 @@ public class GioHang {
     private int tongTien;
     private int check = 0;
     private String hinhSanpham;
+    private Bitmap hinh;
+
+    public Bitmap getHinh() {
+        return hinh;
+    }
+
+    public void setHinh(Bitmap hinh) {
+        this.hinh = hinh;
+    }
 
     public String getMaSanPham() {
         return maSanPham;
