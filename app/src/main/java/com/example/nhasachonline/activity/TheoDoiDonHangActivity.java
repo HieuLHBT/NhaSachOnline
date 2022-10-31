@@ -63,6 +63,7 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
                 });
             }
         });
-
+        recyclerView.setAdapter(adapter);
+//        fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
     }
 }
