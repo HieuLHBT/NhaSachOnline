@@ -13,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ThanhToan;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToanRecyclerViewAdapter.MyViewHolder>{
+public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToanRecyclerViewAdapter.MyViewHolder> {
     private Activity context;
     private int resource;
     private ArrayList<ThanhToan> thanhToans;
@@ -35,11 +36,13 @@ public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToan
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         ThanhToan thanhToan = thanhToans.get(pos);
-        holder.itemTT_tvTenSanPham.setText(thanhToan.getTenSanPham());
-        holder.itemTT_tvGiaTien.setText(thanhToan.getGiaSanPham() + "");
-        holder.itemTT_tvSoLuong.setText(thanhToan.getSoLuong() + "");
+        holder.itemTT_tvTenSanPham.setText(thanhToan.getTenSanPhan());
+        holder.itemTT_tvGiaTien.setText(formatter.format(thanhToan.getGiaSanPham()) + " VNĐ");
+        holder.itemTT_tvTongTien.setText(formatter.format(thanhToan.getTongTien()) + " VNĐ");
+        holder.itemTT_tvSoLuong.setText("(sl: " + thanhToan.getSoLuong() + ")");
     }
 
     @Override
@@ -57,6 +60,7 @@ public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToan
         TextView itemTT_tvTenSanPham;
         TextView itemTT_tvGiaTien;
         TextView itemTT_tvSoLuong;
+        TextView itemTT_tvTongTien;
         ImageView itemTT_imgHinhSanPham;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -64,8 +68,8 @@ public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToan
             itemTT_tvTenSanPham = itemView.findViewById(R.id.itemTT_tvTenSanPham);
             itemTT_tvGiaTien = itemView.findViewById(R.id.itemTT_tvGiaTien);
             itemTT_tvSoLuong = itemView.findViewById(R.id.itemTT_tvSoLuong);
+            itemTT_tvTongTien = itemView.findViewById(R.id.itemTT_tvTongTien);
             itemTT_imgHinhSanPham = itemView.findViewById(R.id.itemTT_imgHinhSanPham);
-
         }
     }
 }

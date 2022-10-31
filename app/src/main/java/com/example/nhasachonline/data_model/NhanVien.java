@@ -1,22 +1,27 @@
 package com.example.nhasachonline.data_model;
 
 public class NhanVien {
+    private String nguoiDung;
     private String maNhanVien;
-    private int cmnd;
+    private String cmnd;
     private String diaChi;
     private String email;
     private String hinhNhanVien;
-    private int luong;
+    private String luong;
     private String matKhau;
-    private int soDienThoai;
+    private String soDienThoai;
     private String taiKhoan;
     private String tenNhanVien;
+
+    public String getNguoiDung() {
+        return nguoiDung;
+    }
 
     public String getMaNhanVien() {
         return maNhanVien;
     }
 
-    public int getCmnd() {
+    public String getCmnd() {
         return cmnd;
     }
 
@@ -32,7 +37,7 @@ public class NhanVien {
         return hinhNhanVien;
     }
 
-    public int getLuong() {
+    public String getLuong() {
         return luong;
     }
 
@@ -40,7 +45,7 @@ public class NhanVien {
         return matKhau;
     }
 
-    public int getSoDienThoai() {
+    public String getSoDienThoai() {
         return soDienThoai;
     }
 
@@ -52,11 +57,15 @@ public class NhanVien {
         return tenNhanVien;
     }
 
+    public void setNguoiDung(String nguoiDung) {
+        this.nguoiDung = nguoiDung;
+    }
+
     public void setMaNhanVien(String maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
 
-    public void setCmnd(int cmnd) {
+    public void setCmnd(String cmnd) {
         this.cmnd = cmnd;
     }
 
@@ -72,7 +81,7 @@ public class NhanVien {
         this.hinhNhanVien = hinhNhanVien;
     }
 
-    public void setLuong(int luong) {
+    public void setLuong(String luong) {
         this.luong = luong;
     }
 
@@ -80,7 +89,7 @@ public class NhanVien {
         this.matKhau = matKhau;
     }
 
-    public void setSoDienThoai(int soDienThoai) {
+    public void setSoDienThoai(String soDienThoai) {
         this.soDienThoai = soDienThoai;
     }
 
@@ -95,7 +104,8 @@ public class NhanVien {
     public NhanVien() {
     }
 
-    public NhanVien(String maNhanVien, int cmnd, String diaChi, String email, String hinhNhanVien, int luong, String matKhau, int soDienThoai, String taiKhoan, String tenNhanVien) {
+    public NhanVien(String nguoiDung, String maNhanVien, String cmnd, String diaChi, String email, String hinhNhanVien, String luong, String matKhau, String soDienThoai, String taiKhoan, String tenNhanVien) {
+        this.nguoiDung = nguoiDung;
         this.maNhanVien = maNhanVien;
         this.cmnd = cmnd;
         this.diaChi = diaChi;

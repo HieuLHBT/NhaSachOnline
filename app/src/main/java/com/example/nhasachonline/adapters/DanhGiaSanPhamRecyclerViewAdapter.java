@@ -3,6 +3,7 @@
 import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,6 +40,7 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
         final int pos = position;
         DanhGiaSanPham danhGiaSanPham = danhGiaSanPhams.get(pos);
         holder.itemDGSP_txtTenSanPham.setText(danhGiaSanPham.getTenSanPham());
+       //holder.itemDGSP_imgHinhSanPham.setText(danhGiaSanPham.getHinhSanPham());
     }
 
     @Override
@@ -52,12 +54,14 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView itemDGSP_txtTenSanPham;
+        //ImageView itemDGSP_imgHinhSanPham;
         LinearLayout itemDGSP_llCardView;
         CardView itemDGSP;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             itemDGSP_txtTenSanPham = itemView.findViewById(R.id.itemDGSP_txtTenSanPham);
+            //itemDGSP_imgHinhSanPham = itemView.findViewById(R.id.itemDGSP_imgHinhSanPham);
             itemDGSP_llCardView = itemView.findViewById(R.id.layoutDGSP_rvDanhGiaSanPham);
             itemDGSP = itemView.findViewById(R.id.itemDGSP);
         }

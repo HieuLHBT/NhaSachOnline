@@ -70,29 +70,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:gravity="center|right"
+                android:layout_weight="3"
+                android:gravity="center"
                 android:text="@string/tvtongtienthanhtoan"
-                android:textColor="@color/tien"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
             <TextView
                 android:id="@+id/layoutGH_tvTongTienThanhToan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="38.000 "
-                android:textColor="@color/tien"
-                android:textSize="@dimen/textsize" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center|left"
-                android:text="@string/tvvnd"
-                android:textColor="@color/tien"
+                android:text="0 VNĐ"
+                android:textColor="@color/tongtien"
                 android:textSize="@dimen/textsize" />
 
         </LinearLayout>
@@ -106,14 +97,35 @@
             android:paddingRight="@dimen/btnmuahang">
 
             <Button
-                android:id="@+id/layoutGH_btnMuaHang"
-                android:layout_width="match_parent"
+                android:id="@+id/layoutGH_btnChonHet"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/btnchonhet"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/layoutGH_btnBoChon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:text="@string/btnbochon"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/layoutGH_btnMuaHang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:text="@string/btnmuahang" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

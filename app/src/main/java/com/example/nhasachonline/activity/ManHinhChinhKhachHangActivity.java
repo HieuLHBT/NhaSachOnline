@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity;
 
 import android.content.ClipData;
@@ -117,3 +118,4 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         }
     }
 }
+*/

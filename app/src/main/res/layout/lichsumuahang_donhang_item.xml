@@ -3,7 +3,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/itemLSMH_DonHang"
     android:layout_width="match_parent"
-    android:layout_height="270dp"
+    android:layout_height="280dp"
     android:orientation="horizontal"
     card_view:cardCornerRadius="10dp"
     card_view:cardElevation="7dp"
@@ -25,14 +25,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="0.1"
-                android:orientation="horizontal"
-                android:layout_marginBottom="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center|right"
-                    android:text="Ngày giao: "
+                    android:gravity="center"
+                    android:text="  Ngày giao:  "
                     android:textColor="@color/black"
                     android:textSize="19dp" />
 
@@ -49,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
-                    android:text=" /"
+                    android:text=" / "
                     android:textColor="@color/black"
                     android:textSize="19dp" />
 
@@ -66,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center|left"
-                    android:text=" /"
+                    android:text=" / "
                     android:textColor="@color/black"
                     android:textSize="19dp" />
 
@@ -92,7 +91,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3"
+                android:layout_weight="0.35"
                 android:orientation="horizontal"
                 android:layout_marginBottom="10dp">
                 <androidx.recyclerview.widget.RecyclerView
@@ -121,7 +120,7 @@
                     android:id="@+id/itemLSMH_txtTongTien"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
+                    android:layout_weight="1.4"
                     android:text="40.000"
                     android:textColor="#EF0614"
                     android:textSize="21dp" />

@@ -3,12 +3,14 @@ package com.example.nhasachonline.item;
 public class TheoDoiDonHang {
     private String maDonHang;
     private String tenNVGiaoHang;
-    private String ngayDuKienGiao;
-    private String thangDuKienGiao;
-    private String namDuKienGiao;
-    private String ngayDat;
-    private String thangDat;
-    private String namDat;
+    /*    private String ngayDuKienGiao;
+        private String thangDuKienGiao;
+        private String namDuKiGiao;
+        private String ngayDat;
+        private String thangDat;
+        private String namDat;*/
+    private String thoiGianDat;
+    private String thoiGianDuKienGiao;
     private int tongTienThanhToan;
     private String trangThai;
 
@@ -36,7 +38,7 @@ public class TheoDoiDonHang {
         this.tenNVGiaoHang = tenNVGiaoHang;
     }
 
-    public String getNgayDuKienGiao() {
+   /* public String getNgayDuKienGiao() {
         return ngayDuKienGiao;
     }
 
@@ -82,6 +84,22 @@ public class TheoDoiDonHang {
 
     public void setNamDat(String namDat) {
         this.namDat = namDat;
+    }*/
+
+    public String getThoiGianDat() {
+        return thoiGianDat;
+    }
+
+    public void setThoiGianDat(String thoiGianDat) {
+        this.thoiGianDat = thoiGianDat;
+    }
+
+    public String getThoiGianDuKienGiao() {
+        return thoiGianDuKienGiao;
+    }
+
+    public void setThoiGianDuKienGiao(String thoiGianDuKienGiao) {
+        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
     }
 
     public int getTongTienThanhToan() {
@@ -93,15 +111,11 @@ public class TheoDoiDonHang {
     }
 
 
-    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String ngayDuKienGiao, String thangDuKienGiao, String namDuKienGiao, String ngayDat, String thangDat, String namDat, int tongTienThanhToan, String trangThai) {
+    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDat, String thoiGianDuKienGiao, int tongTienThanhToan, String trangThai) {
         this.maDonHang = maDonHang;
         this.tenNVGiaoHang = tenNVGiaoHang;
-        this.ngayDuKienGiao = ngayDuKienGiao;
-        this.thangDuKienGiao = thangDuKienGiao;
-        this.namDuKienGiao = namDuKienGiao;
-        this.ngayDat = ngayDat;
-        this.thangDat = thangDat;
-        this.namDat = namDat;
+        this.thoiGianDat = thoiGianDat;
+        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
         this.tongTienThanhToan = tongTienThanhToan;
         this.trangThai = trangThai;
     }

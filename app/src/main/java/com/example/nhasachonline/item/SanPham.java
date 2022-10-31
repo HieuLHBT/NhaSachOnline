@@ -55,8 +55,13 @@ public class SanPham {
         return giaSanPham;
     }
 
-    public void setGiaSanPham(int giaSanPham) {
+    public void setGiaSanPham(String giaSanPham) {
         this.giaSanPham = giaSanPham;
+        this.tacGia = tacGia;
+        this.xuatXuat = xuatXuat;
+        this.soLuong = soLuong;
+        this.danhGia = danhGia;
+        this.binhLuan = binhLuan;
     }
 
     public int getSoLuong() {

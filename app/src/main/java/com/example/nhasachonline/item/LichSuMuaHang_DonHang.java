@@ -1,4 +1,4 @@
-package com.example.nhasachonline.doituong;
+package com.example.nhasachonline.item;
 
 import java.util.ArrayList;
 
