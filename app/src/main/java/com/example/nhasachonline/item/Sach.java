@@ -8,11 +8,10 @@ public class Sach {
     private String theLoai;
     private String namSanXuat;
     private String nhaXuatBan;
-    private int gia;
-    private int khuyenMai;
-    private int soLuong;
+    private int giaTien;
+    private int soLuongKho;
     private int soLuongdanhGia;
-    private String anhDanhGia;
+    private int binhLuan;
 
     public String getMaSach() {
         return maSach;
@@ -70,28 +69,20 @@ public class Sach {
         this.nhaXuatBan = nhaXuatBan;
     }
 
-    public int getGia() {
-        return gia;
+    public int getGiaTien() {
+        return giaTien;
     }
 
-    public void setGia(int gia) {
-        this.gia = gia;
+    public void setGiaTien(int giaTien) {
+        this.giaTien = giaTien;
     }
 
-    public int getKhuyenMai() {
-        return khuyenMai;
+    public int getsoLuongKho() {
+        return soLuongKho;
     }
 
-    public void setKhuyenMai(int khuyenMai) {
-        this.khuyenMai = khuyenMai;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setSoLuongKho(int soLuongKho) {
+        this.soLuongKho = soLuongKho;
     }
 
     public int getSoLuongdanhGia() {
@@ -102,18 +93,18 @@ public class Sach {
         this.soLuongdanhGia = soLuongdanhGia;
     }
 
-    public String getAnhDanhGia() {
-        return anhDanhGia;
+    public int getBinhLuan() {
+        return binhLuan;
     }
 
-    public void setAnhDanhGia(String anhDanhGia) {
-        this.anhDanhGia = anhDanhGia;
+    public void setBinhLuan(int binhLuan) {
+        this.binhLuan = binhLuan;
     }
 
     public Sach() {
     }
 
-    public Sach(String maSach, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, int gia, int khuyenMai, int soLuong, int soLuongdanhGia, String anhDanhGia) {
+    public Sach(String maSach, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, int giaTien, int soLuongKho, int soLuongdanhGia, int binhLuan) {
         this.maSach = maSach;
         this.anhSach = anhSach;
         this.tenSach = tenSach;
@@ -121,10 +112,9 @@ public class Sach {
         this.theLoai = theLoai;
         this.namSanXuat = namSanXuat;
         this.nhaXuatBan = nhaXuatBan;
-        this.gia = gia;
-        this.khuyenMai = khuyenMai;
-        this.soLuong = soLuong;
+        this.giaTien = giaTien;
+        this.soLuongKho = soLuongKho;
         this.soLuongdanhGia = soLuongdanhGia;
-        this.anhDanhGia = anhDanhGia;
+        this.binhLuan = binhLuan;
     }
 }

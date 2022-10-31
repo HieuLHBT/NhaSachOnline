@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity;
 
 
@@ -67,3 +68,4 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
 //        fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
     }
 }
+*/

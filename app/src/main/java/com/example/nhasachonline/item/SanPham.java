@@ -11,14 +11,6 @@ public class SanPham {
     private int soLuongDanhGia;
     private int binhLuan;
 
-    public String getHinhSanPham() {
-        return hinhSanPham;
-    }
-
-    public void setHinhSanPham(String hinhSanPham) {
-        this.hinhSanPham = hinhSanPham;
-    }
-
     public String getMaSanPham() {
         return maSanPham;
     }
@@ -33,6 +25,14 @@ public class SanPham {
 
     public void setTenSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
+    }
+
+    public String getHinhSanPham() {
+        return hinhSanPham;
+    }
+
+    public void setHinhSanPham(String hinhSanPham) {
+        this.hinhSanPham = hinhSanPham;
     }
 
     public String getTacGia() {
@@ -55,13 +55,8 @@ public class SanPham {
         return giaSanPham;
     }
 
-    public void setGiaSanPham(String giaSanPham) {
+    public void setGiaSanPham(int giaSanPham) {
         this.giaSanPham = giaSanPham;
-        this.tacGia = tacGia;
-        this.xuatXuat = xuatXuat;
-        this.soLuong = soLuong;
-        this.danhGia = danhGia;
-        this.binhLuan = binhLuan;
     }
 
     public int getSoLuong() {
