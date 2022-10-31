@@ -48,7 +48,6 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
       /*  theoDoiDonHangs.add(new TheoDoiDonHang("DH01", "Nguyen Van Tho", "30/09/2022", "11/10/2022", 130000, "Đang chờ xác nhận"));
         theoDoiDonHangs.add(new TheoDoiDonHang("DH02", "Tran Bao Tin", "27/09/2022", "14/10/2022", 120000, "Đang chờ xác nhận"));
         theoDoiDonHangs.add(new TheoDoiDonHang("DH03", "Nguyen Van Tho", "29/09/2022", "15/10/2022", 150000, "Đã xác nhận"));
-*/
         adapter = new TheoDoiDonHangRecyclerViewAdapter(this, R.layout.theodoidonhang_item, theoDoiDonHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);

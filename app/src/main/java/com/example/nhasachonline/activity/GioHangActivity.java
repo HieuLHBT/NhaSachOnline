@@ -168,7 +168,25 @@ public class GioHangActivity extends AppCompatActivity {
         layoutGH_btnMuaHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sharePreferences.layMaDonHang(GioHangActivity.this) != null) {
+                if (gioHangs.size() == 0) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(GioHangActivity.this);
+                    b.setTitle("CẢNH BÁO");
+                    b.setMessage("Không có sản phẩm trong giỏ hàng! Đồng ý quay về màn hình chính!");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    });
+                    b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
+                } else if (sharePreferences.layMaDonHang(GioHangActivity.this) != null) {
                     AlertDialog.Builder b = new AlertDialog.Builder(GioHangActivity.this);
                     b.setTitle("CẢNH BÁO");
                     b.setMessage("Đơn hàng đã tồn tại, không thể tiếp tục mua! Xác nhận đi tới đơn hàng?");
