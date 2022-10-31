@@ -18,4 +18,5 @@ public class SharePreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences(tenFile, context.MODE_PRIVATE);
         return sharedPreferences.getString("maNguoiDung", null);
     }
+
 }

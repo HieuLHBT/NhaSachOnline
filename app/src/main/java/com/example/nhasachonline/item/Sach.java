@@ -1,7 +1,7 @@
 package com.example.nhasachonline.item;
 
 public class Sach {
-    private int ID;
+    private String maSach;
     private String anhSach;
     private String tenSach;
     private String tacGia;
@@ -14,30 +14,12 @@ public class Sach {
     private int soLuongdanhGia;
     private String anhDanhGia;
 
-    public Sach() {
+    public String getMaSach() {
+        return maSach;
     }
 
-    public Sach(int ID, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, int gia, int khuyenMai, int soLuong, int soLuongdanhGia, String anhDanhGia) {
-        this.ID = ID;
-        this.anhSach = anhSach;
-        this.tenSach = tenSach;
-        this.tacGia = tacGia;
-        this.theLoai = theLoai;
-        this.namSanXuat = namSanXuat;
-        this.nhaXuatBan = nhaXuatBan;
-        this.gia = gia;
-        this.khuyenMai = khuyenMai;
-        this.soLuong = soLuong;
-        this.soLuongdanhGia = soLuongdanhGia;
-        this.anhDanhGia = anhDanhGia;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setMaSach(String maSach) {
+        this.maSach = maSach;
     }
 
     public String getAnhSach() {
@@ -112,11 +94,11 @@ public class Sach {
         this.soLuong = soLuong;
     }
 
-    public int getsoLuongdanhGia() {
+    public int getSoLuongdanhGia() {
         return soLuongdanhGia;
     }
 
-    public void setDanhGia(int soLuongdanhGia) {
+    public void setSoLuongdanhGia(int soLuongdanhGia) {
         this.soLuongdanhGia = soLuongdanhGia;
     }
 
@@ -125,6 +107,24 @@ public class Sach {
     }
 
     public void setAnhDanhGia(String anhDanhGia) {
+        this.anhDanhGia = anhDanhGia;
+    }
+
+    public Sach() {
+    }
+
+    public Sach(String maSach, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, int gia, int khuyenMai, int soLuong, int soLuongdanhGia, String anhDanhGia) {
+        this.maSach = maSach;
+        this.anhSach = anhSach;
+        this.tenSach = tenSach;
+        this.tacGia = tacGia;
+        this.theLoai = theLoai;
+        this.namSanXuat = namSanXuat;
+        this.nhaXuatBan = nhaXuatBan;
+        this.gia = gia;
+        this.khuyenMai = khuyenMai;
+        this.soLuong = soLuong;
+        this.soLuongdanhGia = soLuongdanhGia;
         this.anhDanhGia = anhDanhGia;
     }
 }

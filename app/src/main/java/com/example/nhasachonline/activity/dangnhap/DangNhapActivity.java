@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity.dangnhap;
 
 import android.app.ProgressDialog;
@@ -86,3 +87,4 @@ public class DangNhapActivity extends AppCompatActivity implements DangNhapContr
 
 
 }
+*/

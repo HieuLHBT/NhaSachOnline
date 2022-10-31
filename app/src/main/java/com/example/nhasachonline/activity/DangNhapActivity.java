@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity;
 
 import com.example.nhasachonline.doituong.NguoiDung;
@@ -9,4 +10,4 @@ public class DangNhapActivity {
 
 
 
-}
+}*/

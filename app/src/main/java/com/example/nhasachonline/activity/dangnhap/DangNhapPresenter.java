@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity.dangnhap;
 
 import com.example.nhasachonline.activity.dangky.DangKyPresenter;
@@ -24,3 +25,4 @@ public class DangNhapPresenter implements DangNhapContract.Presenter{
                 }).addOnFailureListener(e -> view.loginThatBai("Dang Nhap That Bai"));
     }
 }
+*/

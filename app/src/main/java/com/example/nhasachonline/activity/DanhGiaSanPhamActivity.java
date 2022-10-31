@@ -1,3 +1,4 @@
+/*
 package com.example.nhasachonline.activity;
 
 import android.os.Bundle;
@@ -95,3 +96,4 @@ public class DanhGiaSanPhamActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 }
+*/

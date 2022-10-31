@@ -1,4 +1,4 @@
-package com.example.nhasachonline.activity.dangky;
+/*package com.example.nhasachonline.activity.dangky;
 
 import android.util.Log;
 
@@ -47,3 +47,4 @@ public class DangKyPresenter implements DangKyContract.Presenter {
                 });
     }
 }
+*/

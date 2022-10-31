@@ -1,4 +1,4 @@
-package com.example.nhasachonline.adapters;
+/* package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
 import android.view.View;
@@ -71,3 +71,4 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
         this.onItemClickListener = onItemClickListener;
     }
 }
+*/

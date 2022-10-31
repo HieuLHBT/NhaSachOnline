@@ -1,4 +1,4 @@
-package com.example.nhasachonline.activity.dangky;
+/* package com.example.nhasachonline.activity.dangky;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -80,3 +80,5 @@ public class DangKyActivity extends AppCompatActivity implements DangKyContract.
         builder.show();
     }
 }
+
+ */
