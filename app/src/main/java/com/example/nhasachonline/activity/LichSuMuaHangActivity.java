@@ -1,6 +1,9 @@
 package com.example.nhasachonline.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,6 +49,30 @@ public class LichSuMuaHangActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+
+        adapter.setOnItemClickListener(new LichSuMuaHangDonHangRecyclerViewAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClickListener(int position, View view) {
+                Button itemLSMH_btnDanhGia = view.findViewById(R.id.itemLSMH_btnDanhGia);
+                Button itemLSMH_btnMuaLai = view.findViewById(R.id.itemLSMH_btnMuaLai);
+
+                itemLSMH_btnDanhGia.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent mhlsmh = new Intent(LichSuMuaHangActivity.this, DanhGiaSanPhamActivity.class);
+                        startActivity(mhlsmh);
+                    }
+                });
+
+                itemLSMH_btnMuaLai.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent mhlsmh = new Intent(LichSuMuaHangActivity.this, ThanhToanActivity.class);
+                        startActivity(mhlsmh);
+                    }
+                });
+            }
+        });
 
         recyclerView.setAdapter(adapter);
     }

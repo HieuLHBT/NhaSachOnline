@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.TheoDoiDonHang;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<TheoDoiDonHangRecyclerViewAdapter.MyViewHolder> {
@@ -37,6 +38,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         TheoDoiDonHang theoDoiDonHang = theoDoiDonHangs.get(pos);
         holder.itemTDDH_txtMaDonHang.setText(theoDoiDonHang.getMaDonHang());
@@ -49,7 +51,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         holder.itemTDDH_txtNgayDat.setText(theoDoiDonHang.getNgayDat());
         holder.itemTDDH_txtThangDat.setText(theoDoiDonHang.getThangDat());
         holder.itemTDDH_txtNamDat.setText(theoDoiDonHang.getNamDat());*/
-        holder.itemTDDH_txtTongTienThanhToan.setText(theoDoiDonHang.getTongTienThanhToan() + "");
+        holder.itemTDDH_txtTongTienThanhToan.setText(formatter.format(theoDoiDonHang.getTongTienThanhToan()));
         holder.itemTDDH_txtTrangThai.setText(theoDoiDonHang.getTrangThai());
 
         // Event processing
@@ -73,7 +75,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         return resource;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         TextView itemTDDH_txtMaDonHang;
         TextView itemTDDH_txtTenNVGiaoHang;
         TextView itemTDDH_txtThoiGianDuKienGiao;
@@ -110,10 +112,15 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
             itemTDDH = itemView.findViewById(R.id.itemTDDH);
 
             // Set event processing
-          /*  itemTDDH.setOnClickListener(this);
-            itemTDDH_btnXemChiTiet.setOnClickListener(this);*/
+            itemTDDH.setOnClickListener(this);
+            itemTDDH_btnXemChiTiet.setOnClickListener(this);
         }
-
+        @Override
+        public void onClick(View view) {
+            if (onClickListener != null) {
+                onClickListener.onClick(view);
+            }
+        }
     }
 
     // Interface for event processing
