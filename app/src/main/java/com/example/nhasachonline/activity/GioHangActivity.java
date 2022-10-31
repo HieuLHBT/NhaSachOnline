@@ -70,7 +70,24 @@ public class GioHangActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhachHang, gioHangs.get(position).getMaSanPham(), adapter);
+                AlertDialog.Builder b = new AlertDialog.Builder(GioHangActivity.this);
+                b.setTitle("CẢNH BÁO");
+                b.setMessage("Bạn có muốn xóa sản phẩm ra khỏi giỏ hàng không?");
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        fireBaseNhaSachOnline.xoaSanPhamGioHang(maKhachHang, gioHangs.get(position).getMaSanPham(), adapter);
+                    }
+                });
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.notifyDataSetChanged();
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog al = b.create();
+                al.show();
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);

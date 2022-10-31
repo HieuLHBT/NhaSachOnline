@@ -11,17 +11,20 @@ import androidx.annotation.Nullable;
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.ThanhToanActivity;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.TheoDoiDonHangRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.DonHang;
 import com.example.nhasachonline.data_model.GioHang;
 import com.example.nhasachonline.data_model.KhachHang;
 import com.example.nhasachonline.data_model.NhanVien;
+import com.example.nhasachonline.data_model.PhanPhoi;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.TrangThaiDonHang;
 import com.example.nhasachonline.data_model.VanPhongPham;
 import com.example.nhasachonline.data_model.XuatKho;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
+import com.example.nhasachonline.item.SanPham;
 import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.item.TheoDoiDonHang;
 import com.example.nhasachonline.item.TheoDoiDonHangSanPham;
@@ -73,6 +76,7 @@ public class FireBaseNhaSachOnline {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 gioHangItem.clear();
                 for (DataSnapshot gioHangSnapshot : snapshot.getChildren()) {
+                    Log.d("test", gioHangSnapshot.getValue() + "");
                     GioHang gioHang = gioHangSnapshot.getValue(GioHang.class);
                     if (gioHang.getMaSanPham().contains("s")) {
                         sachDatabase.child(gioHang.getMaSanPham()).addValueEventListener(new ValueEventListener() {
@@ -306,7 +310,6 @@ public class FireBaseNhaSachOnline {
                             Log.d("onCancelled", "Lỗi!" + error.getMessage());
                         }
                     });
-
                 }
             }
 
