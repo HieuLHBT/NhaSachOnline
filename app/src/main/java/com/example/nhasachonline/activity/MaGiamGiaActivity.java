@@ -1,6 +1,9 @@
 package com.example.nhasachonline.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,34 +11,47 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
-import com.example.nhasachonline.item.MaGiamGia;
+import com.example.nhasachonline.data_model.GiamGia;
+import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 
 import java.util.ArrayList;
 
 public class MaGiamGiaActivity extends AppCompatActivity {
-    private ArrayList<MaGiamGia> maGiamGias = new ArrayList<>();
+    private ArrayList<GiamGia> giamGias = new ArrayList<>();
     private MaGiamGiaRecyclerViewAdapter adapter;
+    private TextView layoutMGG_tvTroVe;
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.magiamgia_layout);
+        layoutMGG_tvTroVe = findViewById(R.id.layoutMGG_tvTroVe);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMGG_rvMaGiamGia);
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 500k", "99.000"));
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 200k", "79.000"));
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 100k", "59.000"));
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 400k", "89.000"));
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 600k", "129.000"));
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 800k", "189.000"));
-        maGiamGias.add(new MaGiamGia("Giá trị đơn hàng trên 1000k", "259.000"));
-        maGiamGias.add(new MaGiamGia("Thành viên mơis", "79.000"));
 
-        adapter = new MaGiamGiaRecyclerViewAdapter(this, R.layout.magiamgia_item, maGiamGias);
+        adapter = new MaGiamGiaRecyclerViewAdapter(this, R.layout.magiamgia_item, giamGias);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-
         recyclerView.setAdapter(adapter);
+        fireBaseNhaSachOnline.hienThiMaGiamGia(giamGias, adapter);
+
+        adapter.setOnItemClickListener(new MaGiamGiaRecyclerViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClickListener(int position, View view) {
+                fireBaseNhaSachOnline.chonGiamGia(giamGias.get(position).getMaGiamGia());
+                Intent intent = new Intent(MaGiamGiaActivity.this, ThanhToanActivity.class);
+                finish();
+            }
+        });
+
+        layoutMGG_tvTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
     }
 }

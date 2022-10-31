@@ -39,7 +39,7 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theodoidonhang_layout);
 
-        maKhachHang = sharePreferences.getKhachHang("nguoidung", this);
+        maKhachHang = sharePreferences.getKhachHang(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
 

@@ -5,13 +5,14 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.ThanhToanActivity;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
+import com.example.nhasachonline.data_model.GiamGia;
 import com.example.nhasachonline.data_model.GioHang;
 import com.example.nhasachonline.data_model.KhachHang;
 import com.example.nhasachonline.data_model.PhanPhoi;
@@ -22,7 +23,6 @@ import com.example.nhasachonline.item.SanPham;
 import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.tools.SharePreferences;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +34,87 @@ import java.util.ArrayList;
 
 public class FireBaseNhaSachOnline {
     private SharePreferences sharePreferences = new SharePreferences();
+
+    public void huyThanhToan(String maGiamGia, String maDonHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference giamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        DatabaseReference xuatKhoDatabase = firebaseDatabase.getReference("XUATKHO");
+        xuatKhoDatabase.child(maDonHang).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (maGiamGia != null) {
+                    giamGiaDatabase.child(maGiamGia).child("chon").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            sharePreferences.xoaMaDonHang(context);
+                        }
+                    });
+                } else {
+                    sharePreferences.xoaMaDonHang(context);
+                }
+            }
+        });
+
+    }
+
+    public void xoaChonGiamGia(String maGiamGia) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference giamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        giamGiaDatabase.child(maGiamGia).child("chon").setValue("0");
+    }
+
+    public void chonGiamGia(String maGiamGia) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference giamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        giamGiaDatabase.child(maGiamGia).child("chon").setValue("1");
+    }
+
+    public void hienThiGiamGia(GiamGia giamGia) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference giamgiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        giamgiaDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot giamGiaDataSnapshot : snapshot.getChildren()) {
+                    GiamGia giamGiaDaTa = giamGiaDataSnapshot.getValue(GiamGia.class);
+                    if (giamGiaDaTa.getChon().equalsIgnoreCase("1")) {
+                        giamGia.setChon(giamGiaDaTa.getChon());
+                        giamGia.setHinhGiamGia(giamGiaDaTa.getHinhGiamGia());
+                        giamGia.setMaGiamGia(giamGiaDaTa.getMaGiamGia());
+                        giamGia.setTienGiamGia(giamGiaDaTa.getTienGiamGia());
+                        giamGia.setTieuDe(giamGiaDaTa.getTieuDe());
+                        giamGia.setYeuCau(giamGiaDaTa.getYeuCau());
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiMaGiamGia(ArrayList<GiamGia> giamGias, MaGiamGiaRecyclerViewAdapter adapter) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference giamgiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        giamgiaDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot giamGiaDataSnapshot : snapshot.getChildren()) {
+                    GiamGia giamGia = giamGiaDataSnapshot.getValue(GiamGia.class);
+                    giamGias.add(giamGia);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
 
     public void xoaSanPhamGioHang(String maKhachHang, String maSanpham, GioHangRecyclerViewAdapter adapter) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -68,7 +149,6 @@ public class FireBaseNhaSachOnline {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 gioHangItem.clear();
                 for (DataSnapshot gioHangSnapshot : snapshot.getChildren()) {
-                    Log.d("test", gioHangSnapshot.getValue() + "");
                     GioHang gioHang = gioHangSnapshot.getValue(GioHang.class);
                     if (gioHang.getMaSanPham().contains("s")) {
                         sachDatabase.child(gioHang.getMaSanPham()).addValueEventListener(new ValueEventListener() {
@@ -220,7 +300,6 @@ public class FireBaseNhaSachOnline {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 KhachHang kh = snapshot.getValue(KhachHang.class);
-                Log.d("test", kh.getDiaChi() + "");
                 khachHang.setDiaChi(kh.getDiaChi());
                 khachHang.setEmail(kh.getEmail());
                 khachHang.setMaKhachHang(kh.getMaKhachHang());
@@ -251,7 +330,7 @@ public class FireBaseNhaSachOnline {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot sachDataSnapshot : snapshot.getChildren()) {
                     Sach sach = sachDataSnapshot.getValue(Sach.class);
-                    for (SanPham sanPham: sanPhams) {
+                    for (SanPham sanPham : sanPhams) {
                         if (sanPham.getMaSanPham() == sach.getMaSach()) {
                             sanPhams.remove(sanPham);
                         }
@@ -296,7 +375,7 @@ public class FireBaseNhaSachOnline {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot vanPhongPhamDataSnapshot : snapshot.getChildren()) {
                     VanPhongPham vanPhongPham = vanPhongPhamDataSnapshot.getValue(VanPhongPham.class);
-                    for (SanPham sanPham: sanPhams) {
+                    for (SanPham sanPham : sanPhams) {
                         if (sanPham.getMaSanPham() == vanPhongPham.getMaVanPhongPham()) {
                             sanPhams.remove(sanPham);
                         }

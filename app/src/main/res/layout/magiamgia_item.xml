@@ -52,30 +52,19 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.9"
-                    android:text="Giảm "
-                    android:textColor="@color/giamgia"
-                    android:textSize="22dp"
+                    android:layout_weight="1"
                     android:paddingLeft="10dp"
-                    />
+                    android:text="Giảm"
+                    android:textColor="@color/giamgia"
+                    android:textSize="@dimen/textsize" />
 
                 <TextView
                     android:id="@+id/itemMGG_txtTienGiamGia"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.9"
-                    android:text="20.000"
+                    android:layout_weight="3"
                     android:textColor="@color/giamgia"
-                    android:textSize="22dp"
-                   />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="VNĐ"
-                    android:textColor="@color/giamgia"
-                    android:textSize="22dp"/>
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
