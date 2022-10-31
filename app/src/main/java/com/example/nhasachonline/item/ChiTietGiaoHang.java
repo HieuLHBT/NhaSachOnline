@@ -2,7 +2,7 @@ package com.example.nhasachonline.item;
 
 public class ChiTietGiaoHang {
     private String tenSanPham;
-    private String giaSanPham;
+    private int giaSanPham;
     private int soLuong;
 //    private String hinhSanPham;
 //    private String maDonHang;
@@ -27,11 +27,11 @@ public class ChiTietGiaoHang {
         this.tenSanPham = tenSanPham;
     }
 
-    public String getGiaSanPham() {
+    public int getGiaSanPham() {
         return giaSanPham;
     }
 
-    public void setGiaSanPham(String giaSanPham) {
+    public void setGiaSanPham(int giaSanPham) {
         this.giaSanPham = giaSanPham;
     }
 
@@ -159,7 +159,7 @@ public class ChiTietGiaoHang {
     public ChiTietGiaoHang() {
     }
 
-    public ChiTietGiaoHang(String tenSanPham, String giaSanPham, int soLuong) {
+    public ChiTietGiaoHang(String tenSanPham, int giaSanPham, int soLuong) {
         this.tenSanPham = tenSanPham;
         this.giaSanPham = giaSanPham;
         this.soLuong = soLuong;
