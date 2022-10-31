@@ -1,43 +1,22 @@
 package com.example.nhasachonline.item;
 
 public class VanPhongPham {
-    private int ID;
+    private String maVanPhongPham;
     private String anhVanPhongPham;
     private String tenVanPhongPham;
     private String nhaPhanPhoi;
     private String xuatXu;
-    private String nhaXuatBan;
     private String donVi;
-    private double gia;
-    private double khuyenMai;
-    private double soLuong;
-    private String danhGia;
-    private String anhDanhGiaSao;
+    private int giaTien;
+    private int soLuongKho;
+    private int SoLuongDanhGia;
 
-    public VanPhongPham() {
+    public String getMaVanPhongPham() {
+        return maVanPhongPham;
     }
 
-    public VanPhongPham(int ID, String anhVanPhongPham, String tenVanPhongPham, String nhaPhanPhoi, String xuatXu, String nhaXuatBan, String donVi, double gia, double khuyenMai, double soLuong, String danhGia, String anhDanhGiaSao) {
-        this.ID = ID;
-        this.anhVanPhongPham = anhVanPhongPham;
-        this.tenVanPhongPham = tenVanPhongPham;
-        this.nhaPhanPhoi = nhaPhanPhoi;
-        this.xuatXu = xuatXu;
-        this.nhaXuatBan = nhaXuatBan;
-        this.donVi = donVi;
-        this.gia = gia;
-        this.khuyenMai = khuyenMai;
-        this.soLuong = soLuong;
-        this.danhGia = danhGia;
-        this.anhDanhGiaSao = anhDanhGiaSao;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setMaVanPhongPham(String maVanPhongPham) {
+        this.maVanPhongPham = maVanPhongPham;
     }
 
     public String getAnhVanPhongPham() {
@@ -72,14 +51,6 @@ public class VanPhongPham {
         this.xuatXu = xuatXu;
     }
 
-    public String getNhaXuatBan() {
-        return nhaXuatBan;
-    }
-
-    public void setNhaXuatBan(String nhaXuatBan) {
-        this.nhaXuatBan = nhaXuatBan;
-    }
-
     public String getDonVi() {
         return donVi;
     }
@@ -88,43 +59,42 @@ public class VanPhongPham {
         this.donVi = donVi;
     }
 
-    public double getGia() {
-        return gia;
+    public int getGiaTien() {
+        return giaTien;
     }
 
-    public void setGia(double gia) {
-        this.gia = gia;
+    public void setGiaTien(int giaTien) {
+        this.giaTien = giaTien;
     }
 
-    public double getKhuyenMai() {
-        return khuyenMai;
+    public int getSoLuongKho() {
+        return soLuongKho;
     }
 
-    public void setKhuyenMai(double khuyenMai) {
-        this.khuyenMai = khuyenMai;
+    public void setSoLuongKho(int soLuongKho) {
+        this.soLuongKho = soLuongKho;
     }
 
-    public double getSoLuong() {
-        return soLuong;
+    public int getSoLuongDanhGia() {
+        return SoLuongDanhGia;
     }
 
-    public void setSoLuong(double soLuong) {
-        this.soLuong = soLuong;
+    public void setSoLuongDanhGia(int soLuongDanhGia) {
+        SoLuongDanhGia = soLuongDanhGia;
     }
 
-    public String getDanhGia() {
-        return danhGia;
+    public VanPhongPham() {
     }
 
-    public void setDanhGia(String danhGia) {
-        this.danhGia = danhGia;
-    }
-
-    public String getAnhDanhGiaSao() {
-        return anhDanhGiaSao;
-    }
-
-    public void setAnhDanhGiaSao(String anhDanhGiaSao) {
-        this.anhDanhGiaSao = anhDanhGiaSao;
+    public VanPhongPham(String maVanPhongPham, String anhVanPhongPham, String tenVanPhongPham, String nhaPhanPhoi, String xuatXu, String donVi, int giaTien, int soLuongKho, int soLuongDanhGia) {
+        this.maVanPhongPham = maVanPhongPham;
+        this.anhVanPhongPham = anhVanPhongPham;
+        this.tenVanPhongPham = tenVanPhongPham;
+        this.nhaPhanPhoi = nhaPhanPhoi;
+        this.xuatXu = xuatXu;
+        this.donVi = donVi;
+        this.giaTien = giaTien;
+        this.soLuongKho = soLuongKho;
+        SoLuongDanhGia = soLuongDanhGia;
     }
 }
