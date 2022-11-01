@@ -112,7 +112,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        fireBase.hienThiManHinhChinhKhachHang(sanPhams,adapter,this);
+//        fireBase.hienThiManHinhChinhKhachHang(sanPhams,adapter,this);
 
     }
 
