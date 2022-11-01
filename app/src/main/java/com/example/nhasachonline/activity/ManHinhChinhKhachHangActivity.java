@@ -1,4 +1,4 @@
-/*
+
 package com.example.nhasachonline.activity;
 
 import android.content.Intent;
@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.item.Sach;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -63,7 +64,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHCKH_rvDanhSach);
 
-        books.add(new Sach(1,null,"Sach demo 1",null,null,null,null,25000,0,1,1,null));
+        books.add(new Sach(1,null,"Sach demo 1" ,null,null,null,null,25000,0,1,1,null));
         books.add(new Sach(2,null,"Sach demo 2",null,null,null,null,25000,0,1,1,null));
         books.add(new Sach(3,null,"Sach demo 3",null,null,null,null,25000,0,1,1,null));
 
@@ -109,4 +110,4 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         }
     }
 }
-*/
+

@@ -4,16 +4,13 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.GioHang;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.VanPhongPham;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.example.nhasachonline.item.KhachHang;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +20,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class FireBaseNhaSachOnline {
+
+
+
+    ///ko can dung ma khach hang nua ma dung FirebaseAuth.getUser().uuid thay the
+
+    public void taoKhachHang(KhachHang khachHang){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference ngDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
+        ngDungDatabase.child(khachHang.getMaKH()).setValue(khachHang);
+    }
+
+
 
     public void xoaSanPhamGioHang(String maKhachHang, String maSanpham) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();

@@ -3,21 +3,38 @@ package com.example.nhasachonline.item;
 import android.widget.Spinner;
 
 public class KhachHang {
-    private int iD;
+    public String maKH;
+    public String taiKhoan;
     private String hoTen;
     private Spinner gioiTinh;
     private String ngaySinh;
+    private String matKhau;
     private String Email;
     private String SDT;
     private String tenNganHang;
     private String sTKNganHang;
     private String diaChi;
 
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+    public String getMaKH() {
+        return maKH;
+    }
+
+    public void setMaKH(String maKH) {
+        this.maKH = maKH;
+    }
+
     public KhachHang() {
     }
 
     public KhachHang(int iD, String hoTen, Spinner gioiTinh, String ngaySinh, String email, String SDT, String tenNganHang, String sTKNganHang, String diaChi) {
-        this.iD = iD;
+
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -28,12 +45,12 @@ public class KhachHang {
         this.diaChi = diaChi;
     }
 
-    public int getiD() {
-        return iD;
+    public String getTaiKhoan() {
+        return taiKhoan;
     }
 
-    public void setiD(int iD) {
-        this.iD = iD;
+    public void setTaiKhoan(String taiKhoan) {
+        this.taiKhoan = taiKhoan;
     }
 
     public String getHoTen() {
@@ -100,13 +117,16 @@ public class KhachHang {
         this.diaChi = diaChi;
     }
 
+
     @Override
     public String toString() {
         return "KhachHang{" +
-                "iD=" + iD +
+                "uuid='" + maKH + '\'' +
+                ", taiKhoan='" + taiKhoan + '\'' +
                 ", hoTen='" + hoTen + '\'' +
                 ", gioiTinh=" + gioiTinh +
                 ", ngaySinh='" + ngaySinh + '\'' +
+                ", matKhau='" + matKhau + '\'' +
                 ", Email='" + Email + '\'' +
                 ", SDT='" + SDT + '\'' +
                 ", tenNganHang='" + tenNganHang + '\'' +

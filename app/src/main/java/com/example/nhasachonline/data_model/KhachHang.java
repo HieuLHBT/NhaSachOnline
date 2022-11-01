@@ -2,6 +2,7 @@ package com.example.nhasachonline.data_model;
 
 public class KhachHang {
     private String nguoiDung;
+    public String uuid;
     private String maKhachHang;
     private String diaChi;
     private String email;
