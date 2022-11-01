@@ -39,6 +39,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/itemCTSP_llSach"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"
@@ -152,13 +153,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="10sp"
-                android:text="Năm sản xuất: "
+                android:text="Ngày xuất bản: "
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/CTSP_tvNamSanXuat"
+                android:id="@+id/CTSP_tvngayXuatBan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -382,6 +383,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/itemCTSP_llVanPhongPham"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="7"

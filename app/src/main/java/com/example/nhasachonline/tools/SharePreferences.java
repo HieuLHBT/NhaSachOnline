@@ -29,4 +29,17 @@ public class SharePreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences("donHang", context.MODE_PRIVATE);
         return sharedPreferences.getString("maDonHang", null);
     }
+
+    public void setSanPham(String tenFile, Context context, String maSanPham) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(tenFile, context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("maSanPham", maSanPham);
+        editor.commit();
+        Log.d("test", "Thành công" + maSanPham);
+    }
+
+    public String getSanPham(String tenFile, Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(tenFile, context.MODE_PRIVATE);
+        return sharedPreferences.getString("maSanPham", null);
+    }
 }

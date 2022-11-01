@@ -5,7 +5,7 @@ public class Sach {
     private String giaTien;
     private String hinhSach;
     private String khuyenMai;
-    private String namXuatBan;
+    private String ngayXuatBan;
     private String nhaXuatBan;
     private String soLuongKho;
     private String soLuongDanhGia;
@@ -13,6 +13,14 @@ public class Sach {
     private String tenSach;
     private String theLoai;
     private String anhDanhGia;
+
+    public String getNgayXuatBan() {
+        return ngayXuatBan;
+    }
+
+    public void setNgayXuatBan(String ngayXuatBan) {
+        this.ngayXuatBan = ngayXuatBan;
+    }
 
     public String getMaSach() {
         return maSach;
@@ -44,14 +52,6 @@ public class Sach {
 
     public void setKhuyenMai(String khuyenMai) {
         this.khuyenMai = khuyenMai;
-    }
-
-    public String getNamXuatBan() {
-        return namXuatBan;
-    }
-
-    public void setNamXuatBan(String namXuatBan) {
-        this.namXuatBan = namXuatBan;
     }
 
     public String getNhaXuatBan() {
@@ -113,12 +113,12 @@ public class Sach {
     public Sach() {
     }
 
-    public Sach(String maSach, String giaTien, String hinhSach, String khuyenMai, String namXuatBan, String nhaXuatBan, String soLuongKho, String soLuongDanhGia, String tacGia, String tenSach, String theLoai, String anhDanhGia) {
+    public Sach(String maSach, String giaTien, String hinhSach, String khuyenMai, String ngayXuatBan, String nhaXuatBan, String soLuongKho, String soLuongDanhGia, String tacGia, String tenSach, String theLoai, String anhDanhGia) {
         this.maSach = maSach;
         this.giaTien = giaTien;
         this.hinhSach = hinhSach;
         this.khuyenMai = khuyenMai;
-        this.namXuatBan = namXuatBan;
+        this.ngayXuatBan = ngayXuatBan;
         this.nhaXuatBan = nhaXuatBan;
         this.soLuongKho = soLuongKho;
         this.soLuongDanhGia = soLuongDanhGia;

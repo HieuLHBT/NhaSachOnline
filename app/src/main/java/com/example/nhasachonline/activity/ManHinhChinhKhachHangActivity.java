@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,9 +47,10 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_khachhang_layout);
-
+        sharePreferences.setKhachHang("nguoidung",this,"kh1");
 
 
         //search
@@ -89,10 +91,21 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                 item_btnTVGH.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent = new Intent(ManHinhChinhKhachHangActivity.this, GioHangActivity.class);
+                        intent.putExtra("maSanPham",sanPhams.get(position).getMaSanPham());
+                        ManHinhChinhKhachHangActivity.this.startActivity(intent);
 
                     }
                 });
-
+                TextView item_TenSanPham = view.findViewById(R.id.itemMHCKH_tvTenSanPham);
+                item_TenSanPham.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ManHinhChinhKhachHangActivity.this, ChiTietSanPhamActivity.class);
+                        intent.putExtra("maSanPham",sanPhams.get(position).getMaSanPham());
+                        ManHinhChinhKhachHangActivity.this.startActivity(intent);
+                    }
+                });
 
             }
         });
