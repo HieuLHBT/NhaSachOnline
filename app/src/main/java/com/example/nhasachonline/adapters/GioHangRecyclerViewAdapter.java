@@ -1,7 +1,9 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -15,7 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.GioHang;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -50,11 +59,37 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecy
         holder.itemGH_tvKhuyenMai.setText(gioHang.getKhuyenMai() + " %");
         holder.itemGH_tvSoLuong.setText(gioHang.getSoLuongSanPham() + "");
         holder.itemGH_tvTongTien.setText(formatter.format(gioHang.getTongTien()) + " VNĐ");
+
         if (gioHang.getCheck() == 0) {
             holder.itemGH.setBackground(backBackground);
         } else if (gioHang.getCheck() == 1) {
             holder.itemGH.setBackgroundColor(context.getResources().getColor(R.color.clickgiohang, context.getTheme()));
         }
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(gioHang.getHinhSanpham());
+        try {
+            File file = null;
+            if (gioHang.getHinhSanpham().contains("png")) {
+                file = File.createTempFile(gioHang.getHinhSanpham().substring(0,gioHang.getHinhSanpham().length()-4), "png");
+            } else if (gioHang.getHinhSanpham().contains("jpg")) {
+                file = File.createTempFile(gioHang.getHinhSanpham().substring(0,gioHang.getHinhSanpham().length()-4), "jpg");
+            }
+            final File fileHinh = file;
+            storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    holder.itemGH_imgHinhSanPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Event processing
         holder.onClickListener = new View.OnClickListener() {

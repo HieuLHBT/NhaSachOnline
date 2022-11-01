@@ -6,8 +6,14 @@ public class SanPham {
     private String hinhSanPham;
     private String tacGia;
     private String xuatXu;
+    private String theLoai;
+    private String namSanXuat;
+    private String nhaXuatBan;
+    private String nhaPhanPhoi;
+    private String donVi;
     private int giaSanPham;
     private int soLuong;
+    private int khuyenMai;
     private int soLuongDanhGia;
     private int binhLuan;
 
@@ -83,17 +89,71 @@ public class SanPham {
         this.binhLuan = binhLuan;
     }
 
+    public String getTheLoai() {
+        return theLoai;
+    }
+
+    public void setTheLoai(String theLoai) {
+        this.theLoai = theLoai;
+    }
+
+    public String getNamSanXuat() {
+        return namSanXuat;
+    }
+
+    public void setNamSanXuat(String namSanXuat) {
+        this.namSanXuat = namSanXuat;
+    }
+
+    public String getNhaXuatBan() {
+        return nhaXuatBan;
+    }
+
+    public void setNhaXuatBan(String nhaXuatBan) {
+        this.nhaXuatBan = nhaXuatBan;
+    }
+
+    public String getNhaPhanPhoi() {
+        return nhaPhanPhoi;
+    }
+
+    public void setNhaPhanPhoi(String nhaPhanPhoi) {
+        this.nhaPhanPhoi = nhaPhanPhoi;
+    }
+
+    public String getDonVi() {
+        return donVi;
+    }
+
+    public void setDonVi(String donVi) {
+        this.donVi = donVi;
+    }
+
+    public int getKhuyenMai() {
+        return khuyenMai;
+    }
+
+    public void setKhuyenMai(int khuyenMai) {
+        this.khuyenMai = khuyenMai;
+    }
+
     public SanPham() {
     }
 
-    public SanPham(String maSanPham, String tenSanPham, String hinhSanPham, String tacGia, String xuatXu, int giaSanPham, int soLuong, int soLuongDanhGia, int binhLuan) {
+    public SanPham(String maSanPham, String tenSanPham, String hinhSanPham, String tacGia, String xuatXu, String theLoai, String namSanXuat, String nhaXuatBan, String nhaPhanPhoi, String donVi, int giaSanPham, int soLuong, int khuyenMai, int soLuongDanhGia, int binhLuan) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.hinhSanPham = hinhSanPham;
         this.tacGia = tacGia;
         this.xuatXu = xuatXu;
+        this.theLoai = theLoai;
+        this.namSanXuat = namSanXuat;
+        this.nhaXuatBan = nhaXuatBan;
+        this.nhaPhanPhoi = nhaPhanPhoi;
+        this.donVi = donVi;
         this.giaSanPham = giaSanPham;
         this.soLuong = soLuong;
+        this.khuyenMai = khuyenMai;
         this.soLuongDanhGia = soLuongDanhGia;
         this.binhLuan = binhLuan;
     }

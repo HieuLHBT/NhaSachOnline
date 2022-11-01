@@ -389,8 +389,19 @@
         android:paddingRight="@dimen/le">
 
         <Button
+            android:id="@+id/layoutTT_btnHuy"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Hủy"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_marginRight="@dimen/le"/>
+
+        <Button
             android:id="@+id/layoutTT_btnDatHang"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="match_parent"
             android:text="Đặt hàng"
             android:textSize="@dimen/textsize"

@@ -1,7 +1,9 @@
 package com.example.nhasachonline.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -10,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
+import com.example.nhasachonline.data_model.GiamGia;
 import com.example.nhasachonline.data_model.KhachHang;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.GioHang;
@@ -38,12 +42,12 @@ public class ThanhToanActivity extends AppCompatActivity {
     private ArrayList<ThanhToan> thanhToans = new ArrayList<>();
     private ThanhToanRecyclerViewAdapter adapter;
     private Integer phiVanChuyen = 0;
-    private Integer giamGia = 0;
+    private GiamGia giamGia = new GiamGia();
 
     private TextView layoutTT_tvMaDonHang, layoutTT_tvHoTen, layoutTT_tvSoDienThoai, layoutTT_tvEmail, layoutTT_tvDiaChi, layoutTT_btnTroVe, layoutTT_tvMaGiamGia, layoutTT_tvTongTien, layoutTT_tvPhiVanChuyen, layoutTT_tvGiamGia, layoutTT_tvTongTienThanhToan;
     private ImageButton layoutTT_imgbtnDiaChi;
     private Spinner layoutTT_spnHinhThucGiao, layoutTT_spnPhuongThucThanhToan;
-    private Button layoutTT_btnChonMa, layoutTT_btnDatHang;
+    private Button layoutTT_btnChonMa, layoutTT_btnDatHang, layoutTT_btnHuy;
     DecimalFormat formatter = new DecimalFormat("#,###,###");
 
     @Override
@@ -51,7 +55,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thanhtoan_layout);
         maDonHang = sharePreferences.layMaDonHang(this);
-        maKhachHang = sharePreferences.getKhachHang("nguoidung", this);
+        maKhachHang = sharePreferences.getKhachHang(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTT_rvDanhSach);
         layoutTT_tvMaDonHang = findViewById(R.id.layoutTT_tvMaDonHang);
@@ -70,6 +74,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         layoutTT_tvGiamGia = findViewById(R.id.layoutTT_tvGiamGia);
         layoutTT_tvTongTienThanhToan = findViewById(R.id.layoutTT_tvTongTienThanhToan);
         layoutTT_btnDatHang = findViewById(R.id.layoutTT_btnDatHang);
+        layoutTT_btnHuy = findViewById(R.id.layoutTT_btnHuy);
 
         // Gán dữ liệu
         layoutTT_tvMaDonHang.setText(maDonHang);
@@ -91,6 +96,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(adapter);
         fireBaseNhaSachOnline.hienThiItemThanhToan(maDonHang, thanhToans, adapter, this);
+        fireBaseNhaSachOnline.hienThiGiamGia(giamGia);
 
         layoutTT_spnHinhThucGiao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -106,6 +112,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                         break;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 phiVanChuyen = 15000;
@@ -113,14 +120,14 @@ public class ThanhToanActivity extends AppCompatActivity {
             }
         });
 
-        giamGia = 10000;
-        layoutTT_tvGiamGia.setText("-" +formatter.format(giamGia) + " VNĐ");
         layoutTT_btnChonMa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(ThanhToanActivity.this, MaGiamGiaActivity.class);
-//                startActivity(intent);
-
+                if (giamGia.getMaGiamGia() != null) {
+                    fireBaseNhaSachOnline.xoaChonGiamGia(giamGia.getMaGiamGia());
+                }
+                Intent intent = new Intent(ThanhToanActivity.this, MaGiamGiaActivity.class);
+                ThanhToanActivity.this.startActivity(intent);
             }
         });
 
@@ -128,6 +135,30 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        layoutTT_btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(ThanhToanActivity.this);
+                b.setTitle("CẢNH BÁO");
+                b.setMessage("Xác nhận hủy thanh toán?");
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        fireBaseNhaSachOnline.huyThanhToan(giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
+                        ThanhToanActivity.this.finish();
+                    }
+                });
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog al = b.create();
+                al.show();
             }
         });
     }
@@ -140,12 +171,26 @@ public class ThanhToanActivity extends AppCompatActivity {
     }
 
     public void tongTien() {
-        Integer sum = 0;
+        int sum = 0;
         for (ThanhToan thanhToan : thanhToans) {
             sum += thanhToan.getTongTien();
         }
         layoutTT_tvTongTien.setText(formatter.format(sum) + " VNĐ");
-        Integer tongTienThanhToan = sum + phiVanChuyen - giamGia;
+        int tongTienThanhToan = sum + phiVanChuyen;
+        if (giamGia.getMaGiamGia() != null) {
+            if (tongTienThanhToan > Integer.valueOf(giamGia.getYeuCau())) {
+                tongTienThanhToan = tongTienThanhToan - Integer.valueOf(giamGia.getTienGiamGia());
+                layoutTT_tvMaGiamGia.setText(giamGia.getMaGiamGia());
+                layoutTT_tvGiamGia.setText("-" + formatter.format(Integer.valueOf(giamGia.getTienGiamGia())) + " VNĐ");
+            }
+            else {
+                layoutTT_tvMaGiamGia.setText(giamGia.getMaGiamGia());
+                layoutTT_tvGiamGia.setText("Không đủ điều kiện!");
+            }
+        } else {
+            layoutTT_tvMaGiamGia.setText("chưa có mã!");
+            layoutTT_tvGiamGia.setText("-" + 0 + " VNĐ");
+        }
         layoutTT_tvTongTienThanhToan.setText(formatter.format(tongTienThanhToan) + " VNĐ");
     }
 
