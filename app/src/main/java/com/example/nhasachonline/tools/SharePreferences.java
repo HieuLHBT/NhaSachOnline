@@ -48,5 +48,12 @@ public class SharePreferences {
         editor.remove("maDonHang");
         editor.commit();
     }
-
+    public String getMaKhachHang(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        return sharedPreferences.getString("maKhachHang", null);
+    }
+    public String getMaSanPham(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        return sharedPreferences.getString("maSanPham", null);
+    }
 }

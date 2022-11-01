@@ -1,4 +1,4 @@
-/* package com.example.nhasachonline.adapters;
+ package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
 import android.view.View;
@@ -12,20 +12,21 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.item.DanhGiaSanPham;
+import com.example.nhasachonline.item.DanhGia;
+import com.example.nhasachonline.item.GioHang;
 
 import java.util.ArrayList;
 
 public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<DanhGiaSanPhamRecyclerViewAdapter.MyViewHolder> {
     private Activity context;
     private int resource;
-    private ArrayList<DanhGiaSanPham> danhGiaSanPhams;
+    private ArrayList<DanhGia> danhGias;
     private OnItemClickListener onItemClickListener;
 
-    public DanhGiaSanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<DanhGiaSanPham> danhGiaSanPhams){
+    public DanhGiaSanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<DanhGia> danhGias){
         this.context = context;
         this.resource = resource;
-        this.danhGiaSanPhams = danhGiaSanPhams;
+        this.danhGias = danhGias;
     }
 
     @NonNull
@@ -38,14 +39,15 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
     @Override
     public void onBindViewHolder(@NonNull DanhGiaSanPhamRecyclerViewAdapter.MyViewHolder holder, int position) {
         final int pos = position;
-        DanhGiaSanPham danhGiaSanPham = danhGiaSanPhams.get(pos);
-        holder.itemDGSP_txtTenSanPham.setText(danhGiaSanPham.getTenSanPham());
-       //holder.itemDGSP_imgHinhSanPham.setText(danhGiaSanPham.getHinhSanPham());
+        DanhGia danhGia = danhGias.get(pos);
+        holder.itemDGSP_txtTenSanPham.setText(danhGia.getTenSanPham());
+        //holder.itemDGSP_imgHinhSanPham.setText(danhGia.getTenSanPham());
+
     }
 
     @Override
     public int getItemCount() {
-        return danhGiaSanPhams.size();
+        return danhGias.size();
     }
 
     public int getItemViewType(int position){
@@ -54,14 +56,16 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView itemDGSP_txtTenSanPham;
-        //ImageView itemDGSP_imgHinhSanPham;
+        ImageView itemDGSP_imgHinhSanPham;
+
         LinearLayout itemDGSP_llCardView;
         CardView itemDGSP;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             itemDGSP_txtTenSanPham = itemView.findViewById(R.id.itemDGSP_txtTenSanPham);
-            //itemDGSP_imgHinhSanPham = itemView.findViewById(R.id.itemDGSP_imgHinhSanPham);
+            itemDGSP_imgHinhSanPham = itemView.findViewById(R.id.itemDGSP_imgHinhSanPham);
+
             itemDGSP_llCardView = itemView.findViewById(R.id.layoutDGSP_rvDanhGiaSanPham);
             itemDGSP = itemView.findViewById(R.id.itemDGSP);
         }
@@ -75,4 +79,3 @@ public class DanhGiaSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<Danh
         this.onItemClickListener = onItemClickListener;
     }
 }
-*/

@@ -35,12 +35,12 @@ public class MaGiamGiaActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        fireBaseNhaSachOnline.hienThiMaGiamGia(giamGias, adapter);
+        //fireBaseNhaSachOnline.hienThiMaGiamGia(giamGias, adapter);
 
         adapter.setOnItemClickListener(new MaGiamGiaRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                fireBaseNhaSachOnline.chonGiamGia(giamGias.get(position).getMaGiamGia());
+                //fireBaseNhaSachOnline.chonGiamGia(giamGias.get(position).getMaGiamGia());
                 Intent intent = new Intent(MaGiamGiaActivity.this, ThanhToanActivity.class);
                 finish();
             }

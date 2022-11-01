@@ -2,11 +2,11 @@ package com.example.nhasachonline.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +30,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     private String maDonHang;
     private String maKhachHang;
 
-    private com.example.nhasachonline.data_model.KhachHang khachHang = new KhachHang();
+    private KhachHang khachHang = new KhachHang();
     private DonHang donHang = new DonHang();
 
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.chitietgiaohang_layout);
         maDonHang = sharePreferences.layMaDonHang(this);
-        //maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = sharePreferences.getMaKhachHang(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutCTGH_rvChiTietGiaoHang);
 
@@ -73,32 +73,19 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         layoutCTGH_btnHuyDonHang = findViewById(R.id.layoutCTGH_btnHuyDonHang);
         layoutCTGH_btnTroVe = findViewById(R.id.layoutCTGH_btnTroVe);
 
-        /*itemCTGH_txtMaDonHang.setText("DH05");
-        itemCTGH_txtTenNVGiaoHang.setText("Trần Bảo Tín");
-        itemCTGH_txtNgayDuKienGiao.setText("15");
-        itemCTGH_txtThangDuKienGiao.setText("09");
-        itemCTGH_txtNamDuKienGiao.setText("2022");
-        itemCTGH_txtNgayDat.setText("10");
-        itemCTGH_txtThangDat.setText("09");
-        itemCTGH_txtNamDat.setText("2022");
-        layoutCTGH_txtPhuongThucThanhToan.setText("Online");
-        layoutCTGH_txtTongTienHang.setText(formatter.format(250000));
-        layoutCTGH_txtPhiVanChuyen.setText(formatter.format(30000));
-        layoutCTGH_txtGiamGia.setText(formatter.format(-20000));
-        layoutCTGH_txtTongTienThanhToan.setText(formatter.format(260000));
-*/
 
         // Gán dữ liệu
-        layoutCTGH_txtMaDonHang.setText(maDonHang);
-        fireBase.hienThiDonHang(maDonHang, donHang, this);
-        //fireBase.hienThiChiTietKhachHang(maKhachHang, khachHang, this);
+        layoutCTGH_txtMaDonHang.setText("dh1");
+
+        Log.d("Test", maDonHang + "");
+        fireBase.hienThiDonHang("dh1", this);
 
         adapter = new ChiTietGiaoHangRecyclerViewAdapter(this, R.layout.chitietgiaohang_item, chiTietGiaoHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        fireBase.hienThiItemChiTietGiaoHang(maDonHang, chiTietGiaoHangs, adapter, this);
+        fireBase.hienThiItemChiTietGiaoHang("dh1", chiTietGiaoHangs, adapter, this);
 
         layoutCTGH_btnXacNhanDonHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,10 +113,11 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         });
     }
 
-    public void hienThiThongTin(){
-        layoutCTGH_txtTenNVGiaoHang.setText(khachHang.getTenKhachHang());
+    public void hienThiDonHang(){
         layoutCTGH_txtThoiGianDuKienGiao.setText(donHang.getThoiGianGiao());
         layoutCTGH_txtThoiGianDat.setText(donHang.getThoiGianLap());
+        layoutCTGH_txtMaDonHang.setText(donHang.getMaDonHang());
+
     }
     public void ThongBaoXacNhanDonHang(ArrayList<ChiTietGiaoHang> chiTietGiaoHangs) {
         AlertDialog.Builder b = new AlertDialog.Builder(ChiTietGiaoHangActivity.this);

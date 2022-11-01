@@ -50,7 +50,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_khachhang_layout);
-        sharePreferences.setKhachHang("nguoidung",this,"kh1");
+        //sharePreferences.setKhachHang("nguoidung",this,"kh1");
 
 
         //search

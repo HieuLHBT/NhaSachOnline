@@ -82,7 +82,7 @@
                 android:layout_weight="2"
                 android:text="Thời gian đặt:"
                 android:textColor="@color/black"
-                android:textSize="19dp" />
+                android:textSize="18dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -111,16 +111,18 @@
             <TextView
                 android:id="@+id/layoutCTGH_txtThoiGianDuKienGiao"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
                 android:textColor="@color/black"
-                android:textSize="19dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/layoutCTGH_txtThoiGianDat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="2"
                 android:textColor="@color/black"
-                android:textSize="19dp" />
+                android:textSize="18dp"/>
 
         </LinearLayout>
     </LinearLayout>
@@ -171,7 +173,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.8"
                 android:gravity="center|left"
-                android:text="Online"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -187,7 +188,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.68"
                 android:gravity="center|right"
                 android:text="Tổng tiền hàng: "
                 android:textColor="@color/black"
@@ -200,7 +201,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingRight="130dp"
-                android:text="80.000 "
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -230,7 +230,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingRight="130dp"
-                android:text="30.000 "
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -247,7 +246,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.4"
+                android:layout_weight="0.38"
                 android:gravity="center|right"
                 android:text="Giảm giá: "
                 android:textColor="@color/black"
@@ -260,7 +259,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingRight="150dp"
-                android:text="-15.000 "
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -277,7 +275,7 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2"
+                android:layout_weight="1.1"
                 android:gravity="center|right"
                 android:text="Tổng tiền thanh toán: "
                 android:textColor="@color/tien"
@@ -290,7 +288,6 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingRight="70dp"
-                android:text="95.000"
                 android:textColor="@color/tien"
                 android:textSize="20sp" />
 
