@@ -125,6 +125,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
 
             // Set event processing
             itemMHCKH_btnThemVaoGioHang.setOnClickListener(this);
+            itemMHCKH_tvTenSanPham.setOnClickListener(this);
         }
 
         public void onClick(View view) {
