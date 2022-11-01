@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.example.nhasachonline.activity.ChiTietGiaoHangActivity;
+
 public class SharePreferences {
 
     public void setKhachHang(String tenFile, Context context, String maKhachHang) {
@@ -29,4 +31,5 @@ public class SharePreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences("donHang", context.MODE_PRIVATE);
         return sharedPreferences.getString("maDonHang", null);
     }
+
 }

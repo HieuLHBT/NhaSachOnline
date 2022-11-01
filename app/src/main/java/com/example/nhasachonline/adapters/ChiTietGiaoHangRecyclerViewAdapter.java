@@ -20,7 +20,6 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
     private Activity context;
     private int resource;
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs;
-    private OnItemClickListener onItemClickListener;
 
     public ChiTietGiaoHangRecyclerViewAdapter(Activity context, int resource, ArrayList<ChiTietGiaoHang> chiTietGiaoHangs){
         this.context = context;
@@ -30,7 +29,7 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChiTietGiaoHangRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView viewItem = (CardView) context.getLayoutInflater().inflate(viewType, parent, false);
         return new MyViewHolder(viewItem);
     }
@@ -41,9 +40,10 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
         final int pos = position;
         ChiTietGiaoHang chiTietGiaoHang = chiTietGiaoHangs.get(pos);
         holder.itemCTGH_txtTenSanPham.setText(chiTietGiaoHang.getTenSanPham());
-        holder.itemCTGH_txtGiaTien.setText(formatter.format(chiTietGiaoHang.getGiaSanPham()));
-        holder.itemCTGH_txtSoLuong.setText(chiTietGiaoHang.getSoLuong() + "");
+        holder.itemCTGH_txtGiaTien.setText(formatter.format(chiTietGiaoHang.getGiaSanPham()) + " VNĐ");
+        holder.itemCTGH_txtSoLuong.setText("(sl: " + chiTietGiaoHang.getSoLuong() + ")");
         //holder.itemCTGH_imgHinhSanPham.setText(chiTietGiaoHang.getHinhSanPham());
+        holder.itemCTGH_txtTongTien.setText(formatter.format(chiTietGiaoHang.getTongTien()) + " VNĐ");
     }
 
     @Override
@@ -59,29 +59,23 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
         TextView itemCTGH_txtTenSanPham;
         TextView itemCTGH_txtGiaTien;
         TextView itemCTGH_txtSoLuong;
-        /* TextView itemCTGH_imgHinhSanPham;*/
+        //TextView itemCTGH_imgHinhSanPham;
+        TextView itemCTGH_txtTongTien;
 
-        LinearLayout itemCTGH_llCardView;
-        CardView itemCTGH;
+       /* LinearLayout itemCTGH_llCardView;
+        CardView itemCTGH;*/
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             itemCTGH_txtTenSanPham = itemView.findViewById(R.id.itemCTGH_txtTenSanPham);
             itemCTGH_txtGiaTien = itemView.findViewById(R.id.itemCTGH_txtGiaTien);
             itemCTGH_txtSoLuong = itemView.findViewById(R.id.itemCTGH_txtSoLuong);
-//            itemCTGH_imgHinhSanPham = itemView.findViewById(R.id.itemCTGH_imgHinhSanPham);
+            //itemCTGH_imgHinhSanPham = itemView.findViewById(R.id.itemCTGH_imgHinhSanPham);
+            itemCTGH_txtTongTien = itemView.findViewById(R.id.itemCTGH_txtTongTien);
 
-            itemCTGH_llCardView = itemView.findViewById(R.id.itemCTGH_llCardView);
-            itemCTGH = itemView.findViewById(R.id.itemCTGH);
+          /*  itemCTGH_llCardView = itemView.findViewById(R.id.itemCTGH_llCardView);
+            itemCTGH = itemView.findViewById(R.id.itemCTGH);*/
         }
     }
 
-    // Interface for event processing
-    public interface OnItemClickListener extends LichSuMuaHangDonHangRecyclerViewAdapter.OnItemClickListener {
-        void onItemClickListener(int position, View view);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
 }

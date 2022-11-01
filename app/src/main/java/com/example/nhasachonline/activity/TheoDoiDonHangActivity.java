@@ -1,4 +1,4 @@
-/*
+
 package com.example.nhasachonline.activity;
 
 
@@ -60,8 +60,8 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
                 itemTDDH_btnXemChiTiet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent mhctgh = new Intent(TheoDoiDonHangActivity.this, ChiTietGiaoHangActivity.class);
-                        startActivity(mhctgh);
+                        //Intent mhctgh = new Intent(TheoDoiDonHangActivity.this, ChiTietGiaoHangActivity.class);
+                        //startActivity(mhctgh);
                     }
                 });
             }
@@ -70,4 +70,3 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
 //        fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
     }
 }
-*/

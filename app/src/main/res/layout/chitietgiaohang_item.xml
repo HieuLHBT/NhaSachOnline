@@ -37,7 +37,8 @@
                 android:layout_weight="2"
                 android:gravity="center|left"
                 android:paddingBottom="10dp"
-                android:text="Truyện Conan tập 1"
+               android:inputType="text"
+                android:maxLines="1"
                 android:textColor="@color/black"
                 android:textSize="20dp" />
 
@@ -62,33 +63,40 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1.5"
-                    android:text="20.000"
+                    android:textColor="@color/black"
+                    android:textSize="20dp"
+                    android:paddingTop="6dp"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.8"
+                    android:text="Tổng tiền: "
                     android:textColor="@color/black"
                     android:textSize="20dp"
                     android:paddingTop="6dp"/>
 
                 <TextView
+                    android:id="@+id/itemCTGH_txtTongTien"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="VNĐ"
+                    android:layout_weight="0.8"
                     android:textColor="@color/black"
                     android:textSize="20dp"
-                    android:paddingTop="6dp"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="right"
-                    android:text="x"
-                    android:textColor="@color/choXN"
-                    android:textSize="25dp" />
+                    android:paddingTop="6dp" />
                 <TextView
                     android:id="@+id/itemCTGH_txtSoLuong"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3"
+                    android:layout_weight="0.5"
                     android:textColor="@color/choXN"
                     android:textSize="25dp" />
             </LinearLayout>
