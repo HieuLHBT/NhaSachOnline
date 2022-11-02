@@ -108,7 +108,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
 
-        fireBase.hienThiChiTiet(maSanPham,this);
+        //fireBase.hienThiChiTiet(maSanPham,this);
 
     }
 

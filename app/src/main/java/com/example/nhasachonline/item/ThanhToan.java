@@ -7,14 +7,7 @@ public class ThanhToan {
     private int soLuong;
     private String hinhSanPham;
     private int tongTien;
-
-    public int getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(int tongTien) {
-        this.tongTien = tongTien;
-    }
+    private int khuyenMai;
 
     public String getMaSanPhan() {
         return maSanPhan;
@@ -32,8 +25,16 @@ public class ThanhToan {
         return soLuong;
     }
 
+    public int getKhuyenMai() {
+        return khuyenMai;
+    }
+
     public String getHinhSanPham() {
         return hinhSanPham;
+    }
+
+    public int getTongTien() {
+        return tongTien;
     }
 
     public void setMaSanPhan(String maSanPhan) {
@@ -52,19 +53,28 @@ public class ThanhToan {
         this.soLuong = soLuong;
     }
 
+    public void setKhuyenMai(int khuyenMai) {
+        this.khuyenMai = khuyenMai;
+    }
+
     public void setHinhSanPham(String hinhSanPham) {
         this.hinhSanPham = hinhSanPham;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
     }
 
     public ThanhToan() {
     }
 
-    public ThanhToan(String maSanPhan, String tenSanPhan, int giaSanPham, int soLuong, String hinhSanPham) {
+    public ThanhToan(String maSanPhan, String tenSanPhan, int giaSanPham, int soLuong, String hinhSanPham, int khuyenMai) {
         this.maSanPhan = maSanPhan;
         this.tenSanPhan = tenSanPhan;
         this.giaSanPham = giaSanPham;
         this.soLuong = soLuong;
         this.hinhSanPham = hinhSanPham;
-        this.tongTien = soLuong * giaSanPham;
+        this.khuyenMai = khuyenMai;
+        this.tongTien = (giaSanPham - (giaSanPham * khuyenMai / 100)) * soLuong;
     }
 }

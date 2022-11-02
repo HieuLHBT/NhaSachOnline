@@ -20,6 +20,11 @@
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="Giỏ hàng"
         />
+<!--    <item-->
+<!--        android:id="@+id/GioHang"-->
+<!--        android:icon="@drawable/ic_baseline_shopping_cart_24"-->
+<!--        android:title="Giỏ hàng"-->
+<!--        />-->
     <item
         android:id="@+id/ThongTin"
         android:icon="@drawable/ic_baseline_person_24"

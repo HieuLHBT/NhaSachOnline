@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
+import com.example.nhasachonline.data_model.DonHang;
 import com.example.nhasachonline.data_model.GiamGia;
 import com.example.nhasachonline.data_model.KhachHang;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
@@ -28,7 +29,9 @@ import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.tools.SharePreferences;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ThanhToanActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
@@ -96,7 +99,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(adapter);
         fireBaseNhaSachOnline.hienThiItemThanhToan(maDonHang, thanhToans, adapter, this);
-        fireBaseNhaSachOnline.hienThiGiamGia(giamGia);
+        fireBaseNhaSachOnline.hienThiGiamGia(giamGia, this);
 
         layoutTT_spnHinhThucGiao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -105,10 +108,12 @@ public class ThanhToanActivity extends AppCompatActivity {
                     case 0:
                         phiVanChuyen = 15000;
                         layoutTT_tvPhiVanChuyen.setText(formatter.format(phiVanChuyen) + " VNĐ");
+                        tongTien();
                         break;
                     case 1:
                         phiVanChuyen = 30000;
                         layoutTT_tvPhiVanChuyen.setText(formatter.format(phiVanChuyen) + " VNĐ");
+                        tongTien();
                         break;
                 }
             }
@@ -124,7 +129,7 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (giamGia.getMaGiamGia() != null) {
-                    fireBaseNhaSachOnline.xoaChonGiamGia(giamGia.getMaGiamGia());
+                    //fireBaseNhaSachOnline.xoaChonGiamGia(giamGia.getMaGiamGia());
                 }
                 Intent intent = new Intent(ThanhToanActivity.this, MaGiamGiaActivity.class);
                 ThanhToanActivity.this.startActivity(intent);
@@ -142,13 +147,43 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThanhToanActivity.this);
-                b.setTitle("CẢNH BÁO");
+                b.setTitle("CẢNH BÁO!");
                 b.setMessage("Xác nhận hủy thanh toán?");
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBaseNhaSachOnline.huyThanhToan(giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
+                        //fireBaseNhaSachOnline.huyThanhToan(giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
                         ThanhToanActivity.this.finish();
+                    }
+                });
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog al = b.create();
+                al.show();
+            }
+        });
+        layoutTT_btnDatHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(ThanhToanActivity.this);
+                b.setTitle("THÔNG BÁO!");
+                b.setMessage("Xác nhận đặt hàng?");
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        String ngayHienTai = sdf.format(new Date());
+                        DonHang donHang;
+                        if (giamGia.getMaGiamGia() != null) {
+                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","","",ngayHienTai);
+                        } else {
+                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","","",ngayHienTai);
+                        }
+                        fireBaseNhaSachOnline.datHang(layoutTT_spnPhuongThucThanhToan.getSelectedItem().toString() ,donHang, ThanhToanActivity.this);
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
