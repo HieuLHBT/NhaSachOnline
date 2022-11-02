@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.ThanhToanActivity;
@@ -43,6 +44,98 @@ import java.util.ArrayList;
 public class FireBaseNhaSachOnline {
     private SharePreferences sharePreferences = new SharePreferences();
 
+    public void datHang(String phuongThucThanhToan, DonHang donHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
+        DatabaseReference giamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        donHangDatabase.child(donHang.getMaDonHang()).setValue(donHang, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                if (donHang.getMaGiamGia() != "") {
+                    giamGiaDatabase.child(donHang.getMaGiamGia()).child("chon").setValue("0").addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            sharePreferences.xoaMaDonHang(context);
+                            if (phuongThucThanhToan.equalsIgnoreCase("Trực tiếp")) {
+                                TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang(
+                                        donHang.getMaDonHang(),
+                                        phuongThucThanhToan,
+                                        "",
+                                        "",
+                                        "",
+                                        "Đang xử lý",
+                                        "Chờ xác nhận",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "");
+                                trangThaiDonHangDatabase.child(donHang.getMaDonHang()).setValue(trangThaiDonHang);
+                            } else if (phuongThucThanhToan.equalsIgnoreCase("Online")) {
+                                TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang(
+                                        donHang.getMaDonHang(),
+                                        phuongThucThanhToan,
+                                        "",
+                                        "",
+                                        "Chờ thanh toán",
+                                        "Đang xử lý",
+                                        "Chờ xác nhận",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "");
+                                trangThaiDonHangDatabase.child(donHang.getMaDonHang()).setValue(trangThaiDonHang);
+                            }
+                        }
+                    });
+                } else {
+                    sharePreferences.xoaMaDonHang(context);
+                    if (phuongThucThanhToan.equalsIgnoreCase("Trực tiếp")) {
+                        TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang(
+                                donHang.getMaDonHang(),
+                                phuongThucThanhToan,
+                                "",
+                                "",
+                                "",
+                                "Đang xử lý",
+                                "Chờ xác nhận",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "");
+                        trangThaiDonHangDatabase.child(donHang.getMaDonHang()).setValue(trangThaiDonHang);
+                    } else if (phuongThucThanhToan.equalsIgnoreCase("Online")) {
+                        TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang(
+                                donHang.getMaDonHang(),
+                                phuongThucThanhToan,
+                                "",
+                                "",
+                                "Chờ thanh toán",
+                                "Đang xử lý",
+                                "Chờ xác nhận",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "");
+                        trangThaiDonHangDatabase.child(donHang.getMaDonHang()).setValue(trangThaiDonHang);
+                    }
+                }
+            }
+        });
+    }
+
     public void huyThanhToan(String maGiamGia, String maDonHang, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference giamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
@@ -77,7 +170,7 @@ public class FireBaseNhaSachOnline {
         giamGiaDatabase.child(maGiamGia).child("chon").setValue("1");
     }
 
-    public void hienThiGiamGia(GiamGia giamGia) {
+    public void hienThiGiamGia(GiamGia giamGia, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference giamgiaDatabase = firebaseDatabase.getReference("GIAMGIA");
         giamgiaDatabase.addValueEventListener(new ValueEventListener() {
@@ -92,6 +185,7 @@ public class FireBaseNhaSachOnline {
                         giamGia.setTienGiamGia(giamGiaDaTa.getTienGiamGia());
                         giamGia.setTieuDe(giamGiaDaTa.getTieuDe());
                         giamGia.setYeuCau(giamGiaDaTa.getYeuCau());
+                        ((ThanhToanActivity) context).tongTien();
                         break;
                     }
                 }
@@ -150,8 +244,7 @@ public class FireBaseNhaSachOnline {
     public void hienThiGioHang(String maKhachHang, ArrayList<com.example.nhasachonline.item.GioHang> gioHangItem, GioHangRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference gioHangDatabase = firebaseDatabase.getReference("GIOHANG");
-        DatabaseReference sachDatabase = firebaseDatabase.getReference("SACH");
-        DatabaseReference vanPhongPhamDatabase = firebaseDatabase.getReference("VANPHONGPHAM");
+        DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
         gioHangDatabase.child(maKhachHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -159,13 +252,14 @@ public class FireBaseNhaSachOnline {
                 for (DataSnapshot gioHangSnapshot : snapshot.getChildren()) {
                     GioHang gioHang = gioHangSnapshot.getValue(GioHang.class);
                     if (gioHang.getMaSanPham().contains("s")) {
-                        sachDatabase.child(gioHang.getMaSanPham()).addValueEventListener(new ValueEventListener() {
+                        sanPhamDatabase.child("SACH").child(gioHang.getMaSanPham()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Sach sach = snapshot.getValue(Sach.class);
                                 gioHangItem.add(new com.example.nhasachonline.item.GioHang(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getKhuyenMai()), Integer.valueOf(gioHang.getSoLuong()), sach.getHinhSach()));
                                 adapter.notifyDataSetChanged();
                                 ((GioHangActivity) context).TongTienThanhToan();
+                                Log.d("test", sach.getMaSach() + " sach");
                             }
 
                             @Override
@@ -174,13 +268,14 @@ public class FireBaseNhaSachOnline {
                             }
                         });
                     } else if (gioHang.getMaSanPham().contains("vpp")) {
-                        vanPhongPhamDatabase.child(gioHang.getMaSanPham()).addValueEventListener(new ValueEventListener() {
+                        sanPhamDatabase.child("VANPHONGPHAM").child(gioHang.getMaSanPham()).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
                                 gioHangItem.add(new com.example.nhasachonline.item.GioHang(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(vanPhongPham.getKhuyenMai()), Integer.valueOf(gioHang.getSoLuong()), vanPhongPham.getHinhVanPhongPham()));
                                 adapter.notifyDataSetChanged();
                                 ((GioHangActivity) context).TongTienThanhToan();
+                                Log.d("test", vanPhongPham.getMaVanPhongPham() + " vanphongpham");
                             }
 
                             @Override
@@ -197,6 +292,7 @@ public class FireBaseNhaSachOnline {
                 Log.d("onCancelled", "Lỗi!" + error.getMessage());
             }
         });
+
     }
 
     public void taoXuatKho(String maKhachHang, ArrayList<com.example.nhasachonline.item.GioHang> gioHangs, Context context, int size, GioHangRecyclerViewAdapter adapter) {
@@ -228,13 +324,7 @@ public class FireBaseNhaSachOnline {
                     for (com.example.nhasachonline.item.GioHang gioHang : gioHangs) {
                         XuatKho xuatKho = new XuatKho(maDonHang, gioHang.getMaSanPham(), String.valueOf(gioHang.getSoLuongSanPham()));
                         xuatKhoDatabase.child(maDonHang).child(gioHang.getMaSanPham()).setValue(xuatKho);
-                        gioHangDatabase.child(maKhachHang).child(gioHang.getMaSanPham()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                adapter.notifyDataSetChanged();
-                                ((GioHangActivity) context).TongTienThanhToan();
-                            }
-                        });
+                        gioHangDatabase.child(maKhachHang).child(gioHang.getMaSanPham()).removeValue();
                     }
                 }
                 sharePreferences.themMaDonHang(context, maDonHang);
@@ -252,8 +342,7 @@ public class FireBaseNhaSachOnline {
     public void hienThiItemThanhToan(String maDonHang, ArrayList<ThanhToan> thanhToan, ThanhToanRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference xuatKhoDatabase = firebaseDatabase.getReference("XUATKHO");
-        DatabaseReference sachDatabase = firebaseDatabase.getReference("SACH");
-        DatabaseReference vanPhongPhamDatabase = firebaseDatabase.getReference("VANPHONGPHAM");
+        DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
         xuatKhoDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -261,11 +350,11 @@ public class FireBaseNhaSachOnline {
                 for (DataSnapshot xuatKhoSnapshot : snapshot.getChildren()) {
                     XuatKho xuatKho = xuatKhoSnapshot.getValue(XuatKho.class);
                     if (xuatKho.getMaSanPham().contains("s")) {
-                        sachDatabase.child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
+                        sanPhamDatabase.child("SACH").child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Sach sach = snapshot.getValue(Sach.class);
-                                thanhToan.add(new ThanhToan(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), sach.getHinhSach()));
+                                thanhToan.add(new ThanhToan(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), sach.getHinhSach(), Integer.valueOf(sach.getKhuyenMai())));
                                 adapter.notifyDataSetChanged();
                                 ((ThanhToanActivity) context).tongTien();
                             }
@@ -276,11 +365,11 @@ public class FireBaseNhaSachOnline {
                             }
                         });
                     } else if (xuatKho.getMaSanPham().contains("vpp")) {
-                        vanPhongPhamDatabase.child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
+                        sanPhamDatabase.child("VANPHAMPHONG").child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
-                                thanhToan.add(new ThanhToan(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), vanPhongPham.getHinhVanPhongPham()));
+                                thanhToan.add(new ThanhToan(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), vanPhongPham.getHinhVanPhongPham(), Integer.valueOf(vanPhongPham.getKhuyenMai())));
                                 adapter.notifyDataSetChanged();
                                 ((ThanhToanActivity) context).tongTien();
                             }
@@ -437,8 +526,8 @@ public class FireBaseNhaSachOnline {
                                 danhGia = tongDanhGia / soLuongDanhGia;
                             }
 
-                            sanPhams.add(new SanPham(sach.getMaSach(), sach.getTenSach(), sach.getHinhSach(), sach.getTacGia(), "",Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getSoLuongKho()), danhGia, binhLuan));
-                        //    adapter.notifyDataSetChanged();
+                            sanPhams.add(new SanPham(sach.getMaSach(), sach.getTenSach(), sach.getHinhSach(), sach.getTacGia(), "", Integer.valueOf(sach.getGiaTien()), Integer.valueOf(sach.getSoLuongKho()), danhGia, binhLuan));
+                            //    adapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -483,8 +572,8 @@ public class FireBaseNhaSachOnline {
                                 danhGia = tongDanhGia / soLuongDanhGia;
                             }
 
-                            sanPhams.add(new SanPham(vanPhongPham.getMaVanPhongPham(),vanPhongPham.getTenVanPhongPham(),vanPhongPham.getHinhVanPhongPham(),"",vanPhongPham.getXuatXu(),Integer.valueOf(vanPhongPham.getGiaTien()),Integer.valueOf(vanPhongPham.getSoLuongKho()),danhGia,binhLuan));
-                          //  adapter.notifyDataSetChanged();
+                            sanPhams.add(new SanPham(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), vanPhongPham.getHinhVanPhongPham(), "", vanPhongPham.getXuatXu(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(vanPhongPham.getSoLuongKho()), danhGia, binhLuan));
+                            //  adapter.notifyDataSetChanged();
                         }
 
                         @Override

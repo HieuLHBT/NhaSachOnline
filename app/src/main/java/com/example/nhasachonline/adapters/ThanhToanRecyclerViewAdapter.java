@@ -1,6 +1,8 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -12,7 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ThanhToan;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -43,6 +52,30 @@ public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToan
         holder.itemTT_tvGiaTien.setText(formatter.format(thanhToan.getGiaSanPham()) + " VNĐ");
         holder.itemTT_tvTongTien.setText(formatter.format(thanhToan.getTongTien()) + " VNĐ");
         holder.itemTT_tvSoLuong.setText("(sl: " + thanhToan.getSoLuong() + ")");
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(thanhToan.getHinhSanPham());
+        try {
+            File file = null;
+            if (thanhToan.getHinhSanPham().contains("png")) {
+                file = File.createTempFile(thanhToan.getHinhSanPham().substring(0,thanhToan.getHinhSanPham().length()-4), "png");
+            } else if (thanhToan.getHinhSanPham().contains("jpg")) {
+                file = File.createTempFile(thanhToan.getHinhSanPham().substring(0,thanhToan.getHinhSanPham().length()-4), "jpg");
+            }
+            final File fileHinh = file;
+            storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    holder.itemTT_imgHinhSanPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
