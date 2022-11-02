@@ -1,6 +1,6 @@
 package com.example.nhasachonline.item;
 
-public class VanPhongPham {
+public class ItemVanPhongPham {
     private String maVanPhongPham;
     private String anhVanPhongPham;
     private String tenVanPhongPham;
@@ -83,10 +83,10 @@ public class VanPhongPham {
         SoLuongDanhGia = soLuongDanhGia;
     }
 
-    public VanPhongPham() {
+    public ItemVanPhongPham() {
     }
 
-    public VanPhongPham(String maVanPhongPham, String anhVanPhongPham, String tenVanPhongPham, String nhaPhanPhoi, String xuatXu, String donVi, int giaTien, int soLuongKho, int soLuongDanhGia) {
+    public ItemVanPhongPham(String maVanPhongPham, String anhVanPhongPham, String tenVanPhongPham, String nhaPhanPhoi, String xuatXu, String donVi, int giaTien, int soLuongKho, int soLuongDanhGia) {
         this.maVanPhongPham = maVanPhongPham;
         this.anhVanPhongPham = anhVanPhongPham;
         this.tenVanPhongPham = tenVanPhongPham;

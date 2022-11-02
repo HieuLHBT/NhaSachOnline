@@ -1,12 +1,11 @@
 
 package com.example.nhasachonline.activity;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -21,27 +20,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonline.item.Sach;
-import com.example.nhasachonline.item.SanPham;
+import com.example.nhasachonline.item.ItemSach;
+import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.tools.SharePreferences;
 
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private String maKhachHang;
 
     private CardView previousItem;
     private SearchView timkiemSP;
-    private ArrayList<SanPham> sanPhams = new ArrayList<>();
-    private ArrayList<Sach> sachs = new ArrayList<>();
-    private ArrayList<com.example.nhasachonline.data_model.Sach> sachModel = new ArrayList<>();
+    private ArrayList<ItemSanPham> sanPhams = new ArrayList<>();
     private ManHinhChinhKhachHangAdapter adapter;
-    private Spinner spSanPham;
+    private Spinner layoutMHCKH_spnSanPham;
   //  private EditText
     ArrayList<String> dataSanPham = new ArrayList<>();
 
@@ -50,32 +46,20 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_khachhang_layout);
-        //sharePreferences.setKhachHang("nguoidung",this,"kh1");
+        maKhachHang = sharePreferences.getKhachHang(this);
 
 
         //search
         timkiemSP = findViewById(R.id.layoutMHCKH_swTimKiem);
-        timkiemSP.clearFocus();
-        timkiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterList(newText);
-                return true;
-            }
-        });
+        timKiem();
 
         //Get views from layout
-        spSanPham = findViewById(R.id.layoutMHCKH_spSanPham);
+        layoutMHCKH_spnSanPham = findViewById(R.id.layoutMHCKH_spSanPham);
         dataSanPham.add("Tất cả");
         dataSanPham.add("Sách");
-        dataSanPham.add("Văn phòng phẩm");
+        dataSanPham.add("Văn phẩm");
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, dataSanPham);
-        spSanPham.setAdapter(arrayAdapter);
+        layoutMHCKH_spnSanPham.setAdapter(arrayAdapter);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHCKH_rvDanhSach);
 
@@ -83,6 +67,8 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        fireBase.hienThiManHinhChinhKhachHang(sanPhams,adapter,this);
 
         adapter.setOnItemClickListener(new ManHinhChinhKhachHangAdapter.OnItemClickListener(){
             @Override
@@ -106,19 +92,14 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                         ManHinhChinhKhachHangActivity.this.startActivity(intent);
                     }
                 });
-
             }
         });
-
-        recyclerView.setAdapter(adapter);
-
-//        fireBase.hienThiManHinhChinhKhachHang(sanPhams,adapter,this);
 
     }
 
     public void filterList(String newText) {
-        ArrayList<SanPham> fiIteredList = new ArrayList<>();
-        for(SanPham sanPham : sanPhams){
+        ArrayList<ItemSanPham> fiIteredList = new ArrayList<>();
+        for(ItemSanPham sanPham : sanPhams){
             if(sanPham.getTenSanPham().toLowerCase().contains(newText.toLowerCase())){
                 fiIteredList.add(sanPham);
             }
@@ -129,6 +110,22 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         }else {
             adapter.setFilteredList(fiIteredList);
         }
+    }
+
+    public void timKiem(){
+        timkiemSP.clearFocus();
+        timkiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
     }
 }
 
