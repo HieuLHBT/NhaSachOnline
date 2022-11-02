@@ -248,7 +248,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Giảm giá"
+                android:text="Giảm giá "
                 android:layout_marginLeft="15dp"
                 android:background="@color/tien"
                 android:textColor="@color/black"
@@ -315,20 +315,8 @@
             android:orientation="horizontal"
             >
             <ImageView
-                android:id="@+id/CTSP_img5Sao"
+                android:id="@+id/CTSP_img1Sao"
                 android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"
-                />
-            <ImageView
-                android:id="@+id/CTSP_img4Sao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"
-                />
-            <ImageView
-                android:id="@+id/CTSP_img3Sao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_outline_24"
@@ -340,7 +328,19 @@
                 android:src="@drawable/ic_baseline_star_outline_24"
                 />
             <ImageView
-                android:id="@+id/CTSP_img1Sao"
+                android:id="@+id/CTSP_img3Sao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_star_outline_24"
+                />
+            <ImageView
+                android:id="@+id/CTSP_img4Sao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_star_outline_24"
+                />
+            <ImageView
+                android:id="@+id/CTSP_img5Sao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_outline_24"
@@ -532,7 +532,7 @@
                 android:id="@+id/CTVPP_tvGia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="79.000 "
+                android:text=" 79.000 "
                 android:textColor="@color/black"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -565,7 +565,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Giảm giá"
+                android:text="Giảm giá "
                 android:layout_marginLeft="15dp"
                 android:background="@color/tien"
                 android:textColor="@color/black"
@@ -632,20 +632,8 @@
             android:orientation="horizontal"
             >
             <ImageView
-                android:id="@+id/CTVPP_img5Sao"
+                android:id="@+id/CTVPP_img1Sao"
                 android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"
-                />
-            <ImageView
-                android:id="@+id/CTVPP_img4Sao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_star_outline_24"
-                />
-            <ImageView
-                android:id="@+id/CTVPP_img3Sao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_outline_24"
@@ -657,7 +645,19 @@
                 android:src="@drawable/ic_baseline_star_outline_24"
                 />
             <ImageView
-                android:id="@+id/CTVPP_img1Sao"
+                android:id="@+id/CTVPP_img3Sao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_star_outline_24"
+                />
+            <ImageView
+                android:id="@+id/CTVPP_img4Sao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_baseline_star_outline_24"
+                />
+            <ImageView
+                android:id="@+id/CTVPP_img5Sao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_star_outline_24"

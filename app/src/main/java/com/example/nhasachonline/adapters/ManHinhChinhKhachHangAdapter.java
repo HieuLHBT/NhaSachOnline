@@ -1,6 +1,8 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -13,25 +15,33 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.item.Sach;
-import com.example.nhasachonline.item.SanPham;
+import com.example.nhasachonline.item.ItemSanPham;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+
+import java.io.File;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
 public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhChinhKhachHangAdapter.MyViewHolder> {
     private Activity context;
     private int resource;
-    private ArrayList<SanPham> sanPhams;
+    private ArrayList<ItemSanPham> sanPhams;
     private ManHinhChinhKhachHangAdapter.OnItemClickListener onItemClickListener;
 
-    public ManHinhChinhKhachHangAdapter(Activity context, int resource, ArrayList<SanPham> sanPhams) {
+    public ManHinhChinhKhachHangAdapter(Activity context, int resource, ArrayList<ItemSanPham> sanPhams) {
         this.context = context;
         this.resource = resource;
         this.sanPhams = sanPhams;
     }
 
-    public void setFilteredList(ArrayList<SanPham> filteredList){
+    public void setFilteredList(ArrayList<ItemSanPham> filteredList){
         this.sanPhams = filteredList;
         notifyDataSetChanged();
     }
@@ -46,12 +56,13 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
-        SanPham sanpham = sanPhams.get(pos);
+        ItemSanPham sanpham = sanPhams.get(pos);
         holder.itemMHCKH_tvTenSanPham.setText(sanpham.getTenSanPham());
-        holder.itemMHCKH_tvGia.setText(sanpham.getGiaSanPham() + " VNĐ");
-        holder.itemMHCKH_tvSoLuong.setText(sanpham.getSoLuong() + "");
-        holder.itemMHCKH_tvDanhGia.setText(sanpham.getSoLuongDanhGia() + "");
+        holder.itemMHCKH_tvGia.setText(formatter.format(sanpham.getGiaSanPham()) + " VNĐ");
+        holder.itemMHCKH_tvSoLuong.setText("1");
+        holder.itemMHCKH_tvSoLuongDanhGia.setText(sanpham.getSoLuongDanhGia() + " ");
         if(sanpham.getMaSanPham().contains("s")){
             holder.itemMHCKH_tvTacGia.setVisibility(View.VISIBLE);
             holder.itemMHCKH_tvXuatXu.setVisibility(View.GONE);
@@ -60,6 +71,30 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             holder.itemMHCKH_tvTacGia.setVisibility(View.GONE);
             holder.itemMHCKH_tvXuatXu.setVisibility(View.VISIBLE);
             holder.itemMHCKH_tvDuLieu.setText(sanpham.getXuatXu());
+        }
+
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(sanpham.getHinhSanPham());
+        try {
+            File file = null;
+            if (sanpham.getHinhSanPham().contains("png")) {
+                file = File.createTempFile(sanpham.getHinhSanPham().substring(0,sanpham.getHinhSanPham().length()-4), "png");
+            } else if (sanpham.getHinhSanPham().contains("jpg")) {
+                file = File.createTempFile(sanpham.getHinhSanPham().substring(0,sanpham.getHinhSanPham().length()-4), "jpg");
+            }
+            final File fileHinh = file;
+            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    holder.itemMHCKH_imgHinhSanPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
@@ -91,7 +126,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         TextView itemMHCKH_tvXuatXu;
         TextView itemMHCKH_tvDuLieu;
         TextView itemMHCKH_tvGia;
-        TextView itemMHCKH_tvDanhGia;
+        TextView itemMHCKH_tvSoLuongDanhGia;
         TextView itemMHCKH_tvSoLuong;
         ImageView itemMHCKH_imgHinhSanPham;
         ImageView itemMHCKH_img1Sao;
@@ -111,7 +146,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             itemMHCKH_tvXuatXu = itemView.findViewById(R.id.itemMHCKH_tvXuatXu);
             itemMHCKH_tvDuLieu = itemView.findViewById(R.id.itemMHCKH_tvDL);
             itemMHCKH_tvGia = itemView.findViewById(R.id.itemMHCKH_tvGiaTien);
-            itemMHCKH_tvDanhGia = itemView.findViewById(R.id.itemMHCKH_tvSLDanhGia);
+            itemMHCKH_tvSoLuongDanhGia = itemView.findViewById(R.id.itemMHCKH_tvSLDanhGia);
             itemMHCKH_tvSoLuong = itemView.findViewById(R.id.itemMHCKH_tvSo);
             itemMHCKH_imgHinhSanPham = itemView.findViewById(R.id.itemMHCKH_imgAnhSanPham);
             itemMHCKH_img1Sao = itemView.findViewById(R.id.itemMHCKH_img1Sao);
