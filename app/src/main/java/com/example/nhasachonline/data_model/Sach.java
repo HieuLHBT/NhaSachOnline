@@ -14,6 +14,14 @@ public class Sach {
     private String theLoai;
     private String anhDanhGia;
 
+    public String getNgayXuatBan() {
+        return ngayXuatBan;
+    }
+
+    public void setNgayXuatBan(String ngayXuatBan) {
+        this.ngayXuatBan = ngayXuatBan;
+    }
+
     public String getMaSach() {
         return maSach;
     }

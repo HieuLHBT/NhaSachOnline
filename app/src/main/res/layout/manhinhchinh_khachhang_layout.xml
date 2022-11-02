@@ -68,10 +68,10 @@
             android:id="@+id/layoutMHCKH_swTimKiem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/search_view_bg"
             android:layout_margin="8dp"
-            app:queryHint="Nhập tên sản phẩm "
-            app:iconifiedByDefault="false"/>
+            android:background="@drawable/search_view_bg"
+            app:iconifiedByDefault="false"
+            app:queryHint="Nhập tên sản phẩm " />
 
         <LinearLayout
             android:layout_width="match_parent"

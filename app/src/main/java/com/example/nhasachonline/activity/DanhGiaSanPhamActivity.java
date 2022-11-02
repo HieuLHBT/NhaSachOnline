@@ -1,10 +1,10 @@
-/*
 package com.example.nhasachonline.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -14,14 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
-import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
-import com.example.nhasachonline.item.DanhGiaSanPham;
+import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonline.item.DanhGia;
+import com.example.nhasachonline.tools.SharePreferences;
 
 import java.util.ArrayList;
 
 public class DanhGiaSanPhamActivity extends AppCompatActivity {
-    private ArrayList<DanhGiaSanPham> danhGiaSanPhams = new ArrayList<>();
+    private SharePreferences sharePreferences = new SharePreferences();
+    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+
+    private ArrayList<DanhGia> danhGias = new ArrayList<>();
     private DanhGiaSanPhamRecyclerViewAdapter adapter;
+
+    private String maSanPham;
+    private String maKhachHang;
+    private String maDonHang;
 
     private ImageButton itemDGSP_btn1Sao;
     private ImageButton itemDGSP_btn2Sao;
@@ -30,12 +38,15 @@ public class DanhGiaSanPhamActivity extends AppCompatActivity {
     private ImageButton itemDGSP_btn5Sao;
     private Button itemDGSP_btnDanhGia;
     private Button layoutDGSP_btnTroVe;
+    private EditText layoutDGSP_edtBinhLuan;
 
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.danhgiasanpham_layout);
+        maSanPham = sharePreferences.getMaSanPham(this);
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutDGSP_rvDanhGiaSanPham);
 
         itemDGSP_btn1Sao = findViewById(R.id.itemDGSP_btn1Sao);
         itemDGSP_btn2Sao = findViewById(R.id.itemDGSP_btn2Sao);
@@ -44,6 +55,16 @@ public class DanhGiaSanPhamActivity extends AppCompatActivity {
         itemDGSP_btn5Sao = findViewById(R.id.itemDGSP_btn5Sao);
         itemDGSP_btnDanhGia = findViewById(R.id.itemDGSP_btnDanhGia);
         layoutDGSP_btnTroVe = findViewById(R.id.layoutDGSP_btnTroVe);
+        layoutDGSP_edtBinhLuan = findViewById(R.id.layoutDGSP_edtBinhLuan);
+
+        adapter = new DanhGiaSanPhamRecyclerViewAdapter(this, R.layout.danhgiasanpham_item, danhGias);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(RecyclerView.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setAdapter(adapter);
+        fireBase.hienThiItemDanhGiaSanPham("s1", "kh1", danhGias, adapter, this);
+
 
         itemDGSP_btn1Sao.setOnClickListener(new View.OnClickListener() {
 
@@ -96,15 +117,8 @@ public class DanhGiaSanPhamActivity extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutDGSP_rvDanhGiaSanPham);
-        danhGiaSanPhams.add(new DanhGiaSanPham("Truyện Conan tập 1"));
 
-        adapter = new DanhGiaSanPhamRecyclerViewAdapter(this, R.layout.danhgiasanpham_item, danhGiaSanPhams);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
 
-        recyclerView.setAdapter(adapter);
+
     }
 }
-*/

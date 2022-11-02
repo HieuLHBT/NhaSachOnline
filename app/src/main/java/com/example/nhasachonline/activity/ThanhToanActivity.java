@@ -129,7 +129,7 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (giamGia.getMaGiamGia() != null) {
-                    fireBaseNhaSachOnline.xoaChonGiamGia(giamGia.getMaGiamGia());
+                    //fireBaseNhaSachOnline.xoaChonGiamGia(giamGia.getMaGiamGia());
                 }
                 Intent intent = new Intent(ThanhToanActivity.this, MaGiamGiaActivity.class);
                 ThanhToanActivity.this.startActivity(intent);
@@ -152,7 +152,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBaseNhaSachOnline.huyThanhToan(giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
+                        //fireBaseNhaSachOnline.huyThanhToan(giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
                         ThanhToanActivity.this.finish();
                     }
                 });
