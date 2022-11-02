@@ -274,4 +274,11 @@ public class GioHangActivity extends AppCompatActivity {
         layoutGH_tvTongTienThanhToan.setText(formatter.format(sum) + " VNĐ");
     }
 
+    public void thanhToan(String maDonHang) {
+        adapter.notifyDataSetChanged();
+        sharePreferences.themMaDonHang(this, maDonHang);
+        Intent intent = new Intent(this, ThanhToanActivity.class);
+        startActivity(intent);
+    }
+
 }
