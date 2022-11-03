@@ -30,7 +30,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     private String maDonHang;
     private String maKhachHang;
 
-    private KhachHang khachHang = new KhachHang();
+//    private KhachHang khachHang = new KhachHang();
     private DonHang donHang = new DonHang();
 
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs = new ArrayList<>();
