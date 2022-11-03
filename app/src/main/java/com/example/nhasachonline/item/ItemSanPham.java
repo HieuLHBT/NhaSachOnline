@@ -12,7 +12,7 @@ public class ItemSanPham {
     private String nhaPhanPhoi;
     private String donVi;
     private int giaSanPham;
-    private int soLuong;
+    private int soLuong = 1;
     private int khuyenMai;
     private int soLuongDanhGia;
     private int binhLuan;
@@ -140,7 +140,7 @@ public class ItemSanPham {
     public ItemSanPham() {
     }
 
-    public ItemSanPham(String maSanPham, String tenSanPham, String hinhSanPham, String tacGia, String xuatXu, String theLoai, String namSanXuat, String nhaXuatBan, String nhaPhanPhoi, String donVi, int giaSanPham, int soLuong, int khuyenMai, int soLuongDanhGia, int binhLuan) {
+    public ItemSanPham(String maSanPham, String tenSanPham, String hinhSanPham, String tacGia, String xuatXu, String theLoai, String namSanXuat, String nhaXuatBan, String nhaPhanPhoi, String donVi, int giaSanPham, int khuyenMai, int soLuongDanhGia, int binhLuan) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.hinhSanPham = hinhSanPham;
@@ -152,7 +152,6 @@ public class ItemSanPham {
         this.nhaPhanPhoi = nhaPhanPhoi;
         this.donVi = donVi;
         this.giaSanPham = giaSanPham;
-        this.soLuong = soLuong;
         this.khuyenMai = khuyenMai;
         this.soLuongDanhGia = soLuongDanhGia;
         this.binhLuan = binhLuan;

@@ -3,9 +3,14 @@ package com.example.nhasachonline.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonline.item.DanhGia;
 import com.example.nhasachonline.item.ItemSach;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.tools.SharePreferences;
@@ -31,6 +37,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private String maSanPham;
     private String maKhachHang;
 
     private CardView previousItem;
@@ -46,6 +53,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_khachhang_layout);
+        maSanPham = getIntent().getStringExtra("maSanPham");
         maKhachHang = sharePreferences.getKhachHang(this);
 
 
@@ -73,16 +81,21 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new ManHinhChinhKhachHangAdapter.OnItemClickListener(){
             @Override
             public void onItemClickListener(int position, View view) {
+
+
+
                 ImageButton item_btnTVGH = view.findViewById(R.id.itemMHCKH_btnThemGioHang);
                 item_btnTVGH.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        fireBase.themVaoGioHang(maKhachHang, maSanPham, String.valueOf(sanPhams.get(position).getSoLuong()));
                         Intent intent = new Intent(ManHinhChinhKhachHangActivity.this, GioHangActivity.class);
                         intent.putExtra("maSanPham",sanPhams.get(position).getMaSanPham());
                         ManHinhChinhKhachHangActivity.this.startActivity(intent);
 
                     }
                 });
+
                 TextView item_TenSanPham = view.findViewById(R.id.itemMHCKH_tvTenSanPham);
                 item_TenSanPham.setOnClickListener(new View.OnClickListener() {
                     @Override

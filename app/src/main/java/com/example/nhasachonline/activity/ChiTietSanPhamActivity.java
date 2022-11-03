@@ -19,6 +19,7 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.VanPhongPham;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonline.tools.SharePreferences;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -33,21 +34,23 @@ import java.util.ArrayList;
 public class ChiTietSanPhamActivity extends AppCompatActivity {
 
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private SharePreferences sharePreferences = new SharePreferences();
     private String maSanPham;
-
-
+    private String maKhachHang;
 
     LinearLayout llSach, llVanPhongPham;
     ImageView anhSanPham, anhVPP,anh1Sao, anh2Sao, anh3Sao, anh4Sao, anh5Sao;
     TextView tenSach, tacGia, theLoai, ngayXuatBan, nhaXB, giaSach, giaKMSach, khuyenMaiSach, soLuong, slBinhLuan, layout_btnTroVe, xuatXu, nhaPhanPhoi, donVi, tenVanPhongPham, giaVPP, khuyenMaiVPP, giaKMVanPhongPham;
     Button btnThemVaoGH;
     ImageButton imageButtonThemSL,imageButtonGiamSL;
+    int soLuongMua = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chitietsanpham_layout);
         maSanPham = getIntent().getStringExtra("maSanPham");
+        maKhachHang = sharePreferences.getKhachHang(this);
 
         anhSanPham = findViewById(R.id.CTSP_imgAnhSanPham);
         anhVPP = findViewById(R.id.CTVPP_imgAnhSanPham);
@@ -80,23 +83,22 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         llVanPhongPham = findViewById(R.id.itemCTSP_llVanPhongPham);
         layout_btnTroVe = findViewById(R.id.itemCTSP_tvTroVe);
 
-
-
         imageButtonThemSL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // fireBase.congSoLuongChiTietSanPham(maSanPham);
+                soLuong.setText(String.valueOf(++soLuongMua));
             }
         });
         imageButtonGiamSL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // fireBase.truSoLuongChiTietSanPham());
+                soLuong.setText(String.valueOf(--soLuongMua));
             }
         });
         btnThemVaoGH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fireBase.themVaoGioHang(maKhachHang,maSanPham,String.valueOf(soLuongMua));
                 Intent intent1 = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
                 startActivity(intent1);
             }
@@ -108,7 +110,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             }
         });
 
-        //fireBase.hienThiChiTiet(maSanPham,this);
+        fireBase.hienThiChiTietSanPham(maSanPham,this);
 
     }
 
@@ -121,12 +123,10 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             ngayXuatBan.setText(sach.getNgayXuatBan());
             nhaXB.setText(sach.getNhaXuatBan());
             giaSach.setText(sach.getGiaTien());
-
             int giaTien = Integer.valueOf(sach.getGiaTien());
             int tien = giaTien - (giaTien * Integer.valueOf(sach.getKhuyenMai()) /100);
             khuyenMaiSach.setText(sach.getKhuyenMai() + "%");
             giaKMSach.setText(formatter.format(tien) + " VNĐ");
-            soLuong.setText("1");
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(sach.getHinhSach());
             try {
                 File file = null;
@@ -163,7 +163,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             int tien = giaTien - (giaTien * Integer.valueOf(vanPhongPham.getKhuyenMai()) /100);
             khuyenMaiVPP.setText(vanPhongPham.getKhuyenMai() + "%");
             giaKMVanPhongPham.setText(formatter.format(tien)+ " VNĐ");
-            soLuong.setText("1");
+
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(vanPhongPham.getHinhVanPhongPham());
             try {
                 File file = null;
@@ -187,10 +187,11 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             llSach.setVisibility(View.GONE);
             llVanPhongPham.setVisibility(View.VISIBLE);
         }
-
+        soLuong.setText(String.valueOf(soLuongMua));
         switch (danhGia){
             case 0:
                 anh1Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
@@ -236,7 +237,6 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 anh5Sao.setImageResource(R.drawable.ic_baseline_star_24);
                 break;
         }
-
         slBinhLuan.setText(binhLuan + "");
     }
 
