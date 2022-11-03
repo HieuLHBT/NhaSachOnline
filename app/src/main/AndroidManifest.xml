@@ -41,7 +41,9 @@
         <activity
             android:name=".activity.MaGiamGiaActivity"
             android:exported="true"></activity>
-
+       <!-- <activity
+            android:name=".activity.ChiTietGiaoHangActivity"
+            android:exported="true"></activity>-->
     </application>
 
 </manifest>

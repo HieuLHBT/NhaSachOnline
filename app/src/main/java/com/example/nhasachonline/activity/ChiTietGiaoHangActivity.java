@@ -17,6 +17,7 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ChiTietGiaoHangRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.DonHang;
 import com.example.nhasachonline.data_model.KhachHang;
+import com.example.nhasachonline.data_model.NhanVien;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
 import com.example.nhasachonline.tools.SharePreferences;
@@ -27,11 +28,10 @@ import java.util.ArrayList;
 public class ChiTietGiaoHangActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
-    private String maDonHang;
-    private String maKhachHang;
-
-    private KhachHang khachHang = new KhachHang();
+    private String maDonHang = "dh2";
+    private String maNhanVien = "nv1";
     private DonHang donHang = new DonHang();
+    private NhanVien nhanVien = new NhanVien();
 
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs = new ArrayList<>();
     private ChiTietGiaoHangRecyclerViewAdapter adapter;
@@ -55,8 +55,9 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.chitietgiaohang_layout);
+
+        sharePreferences.themMaDonHang(this, maDonHang);
         maDonHang = sharePreferences.layMaDonHang(this);
-        maKhachHang = sharePreferences.getMaKhachHang(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutCTGH_rvChiTietGiaoHang);
 
@@ -75,17 +76,17 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
 
 
         // Gán dữ liệu
-        layoutCTGH_txtMaDonHang.setText("dh1");
-
-        Log.d("Test", maDonHang + "");
-        fireBase.hienThiDonHang("dh1", this);
+        layoutCTGH_txtMaDonHang.setText(maDonHang);
+        //Log.d("Test", maDonHang + "");
+        fireBase.hienThiDonHang(maDonHang, donHang, this);
+        fireBase.hienThiTenNhanVien_CTGH(maNhanVien, nhanVien, this);
 
         adapter = new ChiTietGiaoHangRecyclerViewAdapter(this, R.layout.chitietgiaohang_item, chiTietGiaoHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        fireBase.hienThiItemChiTietGiaoHang("dh1", chiTietGiaoHangs, adapter, this);
+        fireBase.hienThiItemChiTietGiaoHang(maDonHang, chiTietGiaoHangs, adapter, this);
 
         layoutCTGH_btnXacNhanDonHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,12 +114,6 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         });
     }
 
-    public void hienThiDonHang(){
-        layoutCTGH_txtThoiGianDuKienGiao.setText(donHang.getThoiGianGiao());
-        layoutCTGH_txtThoiGianDat.setText(donHang.getThoiGianLap());
-        layoutCTGH_txtMaDonHang.setText(donHang.getMaDonHang());
-
-    }
     public void ThongBaoXacNhanDonHang(ArrayList<ChiTietGiaoHang> chiTietGiaoHangs) {
         AlertDialog.Builder b = new AlertDialog.Builder(ChiTietGiaoHangActivity.this);
         b.setTitle("Xác nhận nhận đơn hàng");
@@ -158,4 +153,11 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         al.show();
     }
 
+    public void hienThiDonHang(){
+        layoutCTGH_txtThoiGianDuKienGiao.setText(donHang.getThoiGianGiao());
+        layoutCTGH_txtThoiGianDat.setText(donHang.getThoiGianLap());
+    }
+   /* public void hienThiTenNhanVien_CTGH(){
+        layoutCTGH_txtTenNVGiaoHang.setText(nhanVien.getTenNhanVien());
+    }*/
 }
