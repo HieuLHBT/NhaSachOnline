@@ -2,7 +2,6 @@ package com.example.nhasachonline.firebase;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -31,6 +30,7 @@ import com.example.nhasachonline.data_model.VanPhongPham;
 import com.example.nhasachonline.data_model.XuatKho;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
 import com.example.nhasachonline.item.DanhGia;
+import com.example.nhasachonline.item.ItemKhachHang;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.item.TheoDoiDonHang;
@@ -49,7 +49,11 @@ import java.util.ArrayList;
 
 public class FireBaseNhaSachOnline {
     private SharePreferences sharePreferences = new SharePreferences();
-
+    public void taoKhachHang(ItemKhachHang khachHang){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference ngDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
+        ngDungDatabase.child(khachHang.getMaKhachHang()).setValue(khachHang);
+    }
     public void datHang(String phuongThucThanhToan, DonHang donHang, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");

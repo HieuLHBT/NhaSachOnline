@@ -2,22 +2,27 @@ package com.example.nhasachonline.item;
 
 import android.widget.Spinner;
 
-public class KhachHang {
-    private int iD;
-    private String hoTen;
-    private Spinner gioiTinh;
-    private String ngaySinh;
-    private String Email;
-    private String SDT;
-    private String tenNganHang;
-    private String sTKNganHang;
-    private String diaChi;
+public class ItemKhachHang {
+//    private int iD;
+    public String maKhachHang;
+    public String matKhau;
+    public String taiKhoan;
+    public String hoTen;
+    public Spinner gioiTinh;
+    public String ngaySinh;
+    public String Email;
+    public String SDT;
+    public String tenNganHang;
+    public String sTKNganHang;
+    public String diaChi;
 
-    public KhachHang() {
+    public ItemKhachHang(){
+
     }
-
-    public KhachHang(int iD, String hoTen, Spinner gioiTinh, String ngaySinh, String email, String SDT, String tenNganHang, String sTKNganHang, String diaChi) {
-        this.iD = iD;
+    public ItemKhachHang(String maKhachHang, String matKhau, String taiKhoan, String hoTen, Spinner gioiTinh, String ngaySinh, String email, String SDT, String tenNganHang, String sTKNganHang, String diaChi) {
+        this.maKhachHang = maKhachHang;
+        this.matKhau = matKhau;
+        this.taiKhoan = taiKhoan;
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
         this.ngaySinh = ngaySinh;
@@ -28,12 +33,28 @@ public class KhachHang {
         this.diaChi = diaChi;
     }
 
-    public int getiD() {
-        return iD;
+    public String getMaKhachHang() {
+        return maKhachHang;
     }
 
-    public void setiD(int iD) {
-        this.iD = iD;
+    public void setMaKhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
+    }
+
+    public String getMatKhau() {
+        return matKhau;
+    }
+
+    public void setMatKhau(String matKhau) {
+        this.matKhau = matKhau;
+    }
+
+    public String getTaiKhoan() {
+        return taiKhoan;
+    }
+
+    public void setTaiKhoan(String taiKhoan) {
+        this.taiKhoan = taiKhoan;
     }
 
     public String getHoTen() {
@@ -103,7 +124,9 @@ public class KhachHang {
     @Override
     public String toString() {
         return "KhachHang{" +
-                "iD=" + iD +
+                "maKhachHang='" + maKhachHang + '\'' +
+                ", matKhau='" + matKhau + '\'' +
+                ", taiKhoan='" + taiKhoan + '\'' +
                 ", hoTen='" + hoTen + '\'' +
                 ", gioiTinh=" + gioiTinh +
                 ", ngaySinh='" + ngaySinh + '\'' +

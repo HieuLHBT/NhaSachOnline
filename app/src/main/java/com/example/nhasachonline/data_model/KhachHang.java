@@ -92,9 +92,6 @@ public class KhachHang {
         this.tenKhachHang = tenKhachHang;
     }
 
-    public KhachHang() {
-    }
-
     public KhachHang(String nguoiDung, String maKhachHang, String diaChi, String email, String matKhau, String nganHang, String soDienThoai, String soTaiKhoan, String taiKhoan, String tenKhachHang) {
         this.nguoiDung = nguoiDung;
         this.maKhachHang = maKhachHang;
@@ -107,4 +104,6 @@ public class KhachHang {
         this.taiKhoan = taiKhoan;
         this.tenKhachHang = tenKhachHang;
     }
+
+
 }
