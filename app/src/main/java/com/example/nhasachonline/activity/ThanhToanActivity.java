@@ -51,7 +51,7 @@ public class ThanhToanActivity extends AppCompatActivity {
     private ImageButton layoutTT_imgbtnDiaChi;
     private Spinner layoutTT_spnHinhThucGiao, layoutTT_spnPhuongThucThanhToan;
     private Button layoutTT_btnChonMa, layoutTT_btnDatHang, layoutTT_btnHuy;
-    DecimalFormat formatter = new DecimalFormat("#,###,###");
+    private DecimalFormat formatter = new DecimalFormat("#,###,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

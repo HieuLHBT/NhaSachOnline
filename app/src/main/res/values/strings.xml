@@ -46,5 +46,7 @@
     <string name="btnchonhet">Chọn hết</string>
     <string name="tvthanhtoan">Thanh Toán</string>
     <string name="tvtong">Tổng:</string>
+    <string name="tvtruoc"><![CDATA[<-]]></string>
+    <string name="tvsau"><![CDATA[->]]></string>
 
 </resources>
