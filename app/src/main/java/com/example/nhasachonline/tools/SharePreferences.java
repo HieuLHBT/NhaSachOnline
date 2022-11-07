@@ -30,30 +30,22 @@ public class SharePreferences {
         return sharedPreferences.getString("maDonHang", null);
     }
 
-    public void setSanPham(String tenFile, Context context, String maSanPham) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(tenFile, context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("maSanPham", maSanPham);
-        editor.commit();
-        Log.d("test", "Thành công" + maSanPham);
-    }
-
-    public String getSanPham(String tenFile, Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(tenFile, context.MODE_PRIVATE);
-        return sharedPreferences.getString("maSanPham", null);
-    }
     public void xoaMaDonHang(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.remove("maDonHang");
         editor.commit();
     }
-    public String getMaKhachHang(Context context) {
+
+    public void setNhanVien(Context context, String maNhanVien) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
-        return sharedPreferences.getString("maKhachHang", null);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("maNguoiDung", maNhanVien);
+        editor.commit();
     }
-    public String getMaSanPham(Context context) {
+
+    public String getNhanVien(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
-        return sharedPreferences.getString("maSanPham", null);
+        return sharedPreferences.getString("maNguoiDung", null);
     }
 }

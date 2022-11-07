@@ -70,7 +70,6 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         layoutMHCKH_spnSanPham.setAdapter(arrayAdapter);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHCKH_rvDanhSach);
-
         adapter = new ManHinhChinhKhachHangAdapter(this, R.layout.manhinhchinh_khachhang_item, sanPhams);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -82,8 +81,6 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
             @Override
             public void onItemClickListener(int position, View view) {
 
-
-
                 ImageButton item_btnTVGH = view.findViewById(R.id.itemMHCKH_btnThemGioHang);
                 item_btnTVGH.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -92,7 +89,6 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                         Intent intent = new Intent(ManHinhChinhKhachHangActivity.this, GioHangActivity.class);
                         intent.putExtra("maSanPham",sanPhams.get(position).getMaSanPham());
                         ManHinhChinhKhachHangActivity.this.startActivity(intent);
-
                     }
                 });
 

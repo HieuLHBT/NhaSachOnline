@@ -16,6 +16,7 @@ import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
+import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.TheoDoiDonHangRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.GiamGia;
@@ -31,6 +32,7 @@ import com.example.nhasachonline.data_model.XuatKho;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
 import com.example.nhasachonline.item.DanhGia;
 import com.example.nhasachonline.item.ItemKhachHang;
+import com.example.nhasachonline.item.ItemNhanVien;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.item.TheoDoiDonHang;
@@ -49,11 +51,13 @@ import java.util.ArrayList;
 
 public class FireBaseNhaSachOnline {
     private SharePreferences sharePreferences = new SharePreferences();
+
     public void taoKhachHang(ItemKhachHang khachHang){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference ngDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
         ngDungDatabase.child(khachHang.getMaKhachHang()).setValue(khachHang);
     }
+
     public void datHang(String phuongThucThanhToan, DonHang donHang, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
@@ -921,7 +925,6 @@ public class FireBaseNhaSachOnline {
     }
 */
 
-
     public void hienThiChiTietSanPham(String maSanPham, Context context) {
        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
        DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
@@ -1105,5 +1108,93 @@ public class FireBaseNhaSachOnline {
         gioHangDatabase.child(maKhachHang).child(maSanPham).child("soLuong").setValue(soLuong);
         gioHangDatabase.child(maKhachHang).child(maSanPham).child("maKhachHang").setValue(maKhachHang);
         gioHangDatabase.child(maKhachHang).child(maSanPham).child("maSanPham").setValue(maSanPham);
+    }
+
+    public void hienThiManHinhChinhQuanLyNhanVien(ArrayList<ItemNhanVien> nhanViens, NhanVienRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nhanViens.clear();
+                nguoiDungDatabase.child("nhanvien").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot sachDataSnapshot : snapshot.getChildren()) {
+                            NhanVien nhanVien = sachDataSnapshot.getValue(NhanVien.class);
+                            nhanViens.add(new ItemNhanVien(
+                                    nhanVien.getNguoiDung(),
+                                    nhanVien.getMaNhanVien(),
+                                    nhanVien.getTenNhanVien(),
+                                    nhanVien.getCmnd(),
+                                    nhanVien.getDiaChi(),
+                                    nhanVien.getEmail(),
+                                    nhanVien.getHinhNhanVien(),
+                                    Integer.valueOf(nhanVien.getLuong() + "VND"),
+                                    nhanVien.getMatKhau(),
+                                    nhanVien.getSoDienThoai(),
+                                    nhanVien.getTaiKhoan()
+                            ));
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+
+    }
+
+    public void themNhanVien(String maNhanVien, ArrayList<ItemNhanVien> itemNhanVien , Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                NhanVien nhanvien = snapshot.getValue(NhanVien.class);
+                itemNhanVien.add(new ItemNhanVien(
+                        nhanvien.getNguoiDung(),
+                        nhanvien.getMaNhanVien(),
+                        nhanvien.getTenNhanVien(),
+                        nhanvien.getCmnd(),
+                        nhanvien.getDiaChi(),
+                        nhanvien.getEmail(),
+                        nhanvien.getHinhNhanVien(),
+                        Integer.valueOf(nhanvien.getLuong() + "VND"),
+                        nhanvien.getMatKhau(),
+                        nhanvien.getSoDienThoai(),
+                        nhanvien.getTaiKhoan()
+                ));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
