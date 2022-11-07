@@ -38,9 +38,9 @@ public class ThanhToanRecyclerViewAdapter extends RecyclerView.Adapter<ThanhToan
 
     @NonNull
     @Override
-    public ThanhToanRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView viewItem = (CardView) context.getLayoutInflater().inflate(viewType, parent, false);
-        return new ThanhToanRecyclerViewAdapter.MyViewHolder(viewItem);
+        return new MyViewHolder(viewItem);
     }
 
     @Override
