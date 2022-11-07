@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ItemNhanVien;
-import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -53,39 +52,16 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         ItemNhanVien nhanVien = nhanViens.get(pos);
+        holder.itemMHQLNV_tvMaNhanVien.setText(nhanVien.getMaNhanVien());
         holder.itemMHQLNV_tvChucVu.setText(nhanVien.getNguoiDung());
         holder.itemMHQLNV_tvTenNhanVien.setText(nhanVien.getTenNhanVien());
         holder.itemMHQLNV_tvSDTNhanVien.setText(nhanVien.getSoDienThoai());
         holder.itemMHQLNV_tvDiaChiNhanVien.setText(nhanVien.getDiaChi());
         holder.itemMHQLNV_tvCMNDNhanVien.setText(nhanVien.getCmnd());
-        holder.itemMHQLNV_tvLuongNhanVien.setText(formatter.format(nhanVien.getLuong()) + " VND");
+        holder.itemMHQLNV_tvLuongNhanVien.setText(nhanVien.getLuong());
         holder.itemMHQLNV_tvEmailNhanVien.setText(nhanVien.getEmail());
         holder.itemMHQLNV_tvTaiKhoanNhanVien.setText(nhanVien.getTaiKhoan());
         holder.itemMHQLNV_tvMatKhauNhanVien.setText(nhanVien.getMatKhau());
-
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(nhanVien.getHinhNhanVien());
-        try {
-            File file = null;
-            if (nhanVien.getHinhNhanVien().contains("png")) {
-                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "png");
-            } else if (nhanVien.getHinhNhanVien().contains("jpg")) {
-                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "jpg");
-            }
-            final File fileHinh = file;
-            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    holder.itemMHQLNV_anhNhanVien.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 
@@ -122,10 +98,7 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         TextView itemMHQLNV_tvTaiKhoanNhanVien;
         TextView itemMHQLNV_tvMatKhauNhanVien;
         ImageView itemMHQLNV_anhNhanVien;
-        Button itemMHQLNV_btnXoaNhanVien;
-        Button itemMHQLNV_btnSuaNhanVien;
         View.OnClickListener onClickListener;
-        LinearLayout itemMHQLNV_llCardView;
         CardView itemMHQLNV;
 
         public MyViewHolder(@NonNull View itemView){
@@ -141,14 +114,11 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
             itemMHQLNV_tvTaiKhoanNhanVien = itemView.findViewById(R.id.itemMHQLNV_tvTaiKhoanNhanVien);
             itemMHQLNV_tvMatKhauNhanVien = itemView.findViewById(R.id.itemMHQLNV_tvMatKhauNhanVien);
             itemMHQLNV_anhNhanVien = itemView.findViewById(R.id.itemMHQLNV_anhNhanVien);
-            itemMHQLNV_llCardView = itemView.findViewById(R.id.itemMHQLNV_llCardView);
             itemMHQLNV = itemView.findViewById(R.id.itemMHQLNV);
-            itemMHQLNV_btnXoaNhanVien = itemView.findViewById(R.id.itemMHQLNV_btnXoaNhanVien);
-            itemMHQLNV_btnSuaNhanVien = itemView.findViewById(R.id.itemMHQLNV_btnSuaNhanVien);
+
 
             // Set event processing
-            itemMHQLNV_btnXoaNhanVien.setOnClickListener(this);
-            itemMHQLNV_btnSuaNhanVien.setOnClickListener(this);
+
         }
 
         public void onClick(View view) {

@@ -8,7 +8,7 @@ public class ItemNhanVien {
     private String diaChi;
     private String email;
     private String hinhNhanVien;
-    private int luong;
+    private String luong;
     private String matKhau;
     private String soDienThoai;
     private String taiKhoan;
@@ -69,11 +69,11 @@ public class ItemNhanVien {
         this.hinhNhanVien = hinhNhanVien;
     }
 
-    public int getLuong() {
+    public String getLuong() {
         return luong;
     }
 
-    public void setLuong(int luong) {
+    public void setLuong(String luong) {
         this.luong = luong;
     }
 
@@ -104,7 +104,7 @@ public class ItemNhanVien {
     public ItemNhanVien() {
     }
 
-    public ItemNhanVien(String nguoiDung, String maNhanVien, String tenNhanVien, String cmnd, String diaChi, String email, String hinhNhanVien, int luong, String matKhau, String soDienThoai, String taiKhoan) {
+    public ItemNhanVien(String nguoiDung, String maNhanVien, String tenNhanVien, String cmnd, String diaChi, String email, String hinhNhanVien, String luong, String matKhau, String soDienThoai, String taiKhoan) {
         this.nguoiDung = nguoiDung;
         this.maNhanVien = maNhanVien;
         this.tenNhanVien = tenNhanVien;
