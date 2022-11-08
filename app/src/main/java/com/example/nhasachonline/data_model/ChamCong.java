@@ -1,7 +1,6 @@
 package com.example.nhasachonline.data_model;
 
 public class ChamCong {
-    private String maChamCong;
     private String ca1;
     private String ca2;
     private String gioRaCa1;
@@ -15,10 +14,6 @@ public class ChamCong {
     private String nghiPhep;
     private String thoiGianTre;
     private String trangThaiPhanCong;
-
-    public String getMaChamCong() {
-        return maChamCong;
-    }
 
     public String getCa1() {
         return ca1;
@@ -70,10 +65,6 @@ public class ChamCong {
 
     public String getTrangThaiPhanCong() {
         return trangThaiPhanCong;
-    }
-
-    public void setMaChamCong(String maChamCong) {
-        this.maChamCong = maChamCong;
     }
 
     public void setCa1(String ca1) {
@@ -131,8 +122,7 @@ public class ChamCong {
     public ChamCong() {
     }
 
-    public ChamCong(String maChamCong, String ca1, String ca2, String gioRaCa1, String gioRaCa2, String gioTangCa, String gioVaoCa1, String gioVaoCa2, String maNhanVien, String ngay, String nghiKhongPhep, String nghiPhep, String thoiGianTre, String trangThaiPhanCong) {
-        this.maChamCong = maChamCong;
+    public ChamCong(String ca1, String ca2, String gioRaCa1, String gioRaCa2, String gioTangCa, String gioVaoCa1, String gioVaoCa2, String maNhanVien, String ngay, String nghiKhongPhep, String nghiPhep, String thoiGianTre, String trangThaiPhanCong) {
         this.ca1 = ca1;
         this.ca2 = ca2;
         this.gioRaCa1 = gioRaCa1;
