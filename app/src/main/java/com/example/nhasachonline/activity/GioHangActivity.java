@@ -273,7 +273,6 @@ public class GioHangActivity extends AppCompatActivity {
         layoutGH_tvTongTienThanhToan.setText(formatter.format(sum) + " VNĐ");
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();

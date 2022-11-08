@@ -46,6 +46,7 @@ public class ThanhToanActivity extends AppCompatActivity {
     private ThanhToanRecyclerViewAdapter adapter;
     private Integer phiVanChuyen = 0;
     private GiamGia giamGia = new GiamGia();
+    private int tongTien = 0;
 
     private TextView layoutTT_tvMaDonHang, layoutTT_tvHoTen, layoutTT_tvSoDienThoai, layoutTT_tvEmail, layoutTT_tvDiaChi, layoutTT_btnTroVe, layoutTT_tvMaGiamGia, layoutTT_tvTongTien, layoutTT_tvPhiVanChuyen, layoutTT_tvGiamGia, layoutTT_tvTongTienThanhToan;
     private ImageButton layoutTT_imgbtnDiaChi;
@@ -99,7 +100,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(adapter);
         fireBaseNhaSachOnline.hienThiItemThanhToan(maDonHang, thanhToans, adapter, this);
-        fireBaseNhaSachOnline.hienThiGiamGia(giamGia, this);
+        fireBaseNhaSachOnline.hienThiGiamGia(maKhachHang, giamGia,this);
 
         layoutTT_spnHinhThucGiao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -129,9 +130,10 @@ public class ThanhToanActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (giamGia.getMaGiamGia() != null) {
-                    fireBaseNhaSachOnline.xoaChonGiamGia(giamGia.getMaGiamGia());
+                    fireBaseNhaSachOnline.xoaChonGiamGia(maKhachHang, giamGia.getMaGiamGia());
                 }
                 Intent intent = new Intent(ThanhToanActivity.this, MaGiamGiaActivity.class);
+                intent.putExtra("tongTien", tongTien);
                 ThanhToanActivity.this.startActivity(intent);
             }
         });
@@ -152,8 +154,8 @@ public class ThanhToanActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBaseNhaSachOnline.huyThanhToan(giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
-                        ThanhToanActivity.this.finish();
+                        fireBaseNhaSachOnline.huyThanhToan(maKhachHang, giamGia.getMaGiamGia(),maDonHang, ThanhToanActivity.this);
+                        finish();
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
@@ -179,11 +181,12 @@ public class ThanhToanActivity extends AppCompatActivity {
                         String ngayHienTai = sdf.format(new Date());
                         DonHang donHang;
                         if (giamGia.getMaGiamGia() != null) {
-                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","","",ngayHienTai);
+                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
                         } else {
-                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","","",ngayHienTai);
+                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
                         }
                         fireBaseNhaSachOnline.datHang(layoutTT_spnPhuongThucThanhToan.getSelectedItem().toString() ,donHang, ThanhToanActivity.this);
+                        finish();
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
@@ -211,6 +214,7 @@ public class ThanhToanActivity extends AppCompatActivity {
             sum += thanhToan.getTongTien();
         }
         layoutTT_tvTongTien.setText(formatter.format(sum) + " VNĐ");
+        tongTien = sum + phiVanChuyen;
         int tongTienThanhToan = sum + phiVanChuyen;
         if (giamGia.getMaGiamGia() != null) {
             if (tongTienThanhToan > Integer.valueOf(giamGia.getYeuCau())) {

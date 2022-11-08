@@ -1,6 +1,8 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -43,7 +45,12 @@ public class MaGiamGiaRecyclerViewAdapter extends RecyclerView.Adapter<MaGiamGia
         GiamGia giamGia = giamGias.get(pos);
         holder.itemMGG_txtTieuDe.setText(giamGia.getTieuDe());
         holder.itemMGG_txtTienGiamGia.setText(formatter.format(Integer.valueOf(giamGia.getTienGiamGia())) + " VNĐ");
-
+        Drawable mauHienTai = holder.itemMGG.getBackground();
+        if (giamGia.getKiemTra()) {
+            mauHienTai.setColorFilter(context.getResources().getColor(R.color.darker_gray, context.getTheme()), PorterDuff.Mode.MULTIPLY);
+            holder.itemMGG.setBackground(mauHienTai);
+            holder.itemMGG.setEnabled(false);
+        }
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
             @Override

@@ -13,6 +13,7 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.GiamGia;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonline.tools.SharePreferences;
 
 import java.util.ArrayList;
 
@@ -21,12 +22,17 @@ public class MaGiamGiaActivity extends AppCompatActivity {
     private MaGiamGiaRecyclerViewAdapter adapter;
     private TextView layoutMGG_tvTroVe;
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+    private SharePreferences sharePreferences = new SharePreferences();
+    private String maKhachHang;
+    private int tongTien;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.magiamgia_layout);
         layoutMGG_tvTroVe = findViewById(R.id.layoutMGG_tvTroVe);
+        maKhachHang = sharePreferences.getKhachHang(this);
+        tongTien = getIntent().getIntExtra("tongTien", 0);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMGG_rvMaGiamGia);
 
@@ -35,12 +41,12 @@ public class MaGiamGiaActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        fireBaseNhaSachOnline.hienThiMaGiamGia(giamGias, adapter);
+        fireBaseNhaSachOnline.hienThiMaGiamGia(tongTien ,maKhachHang, giamGias, adapter);
 
         adapter.setOnItemClickListener(new MaGiamGiaRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                fireBaseNhaSachOnline.chonGiamGia(giamGias.get(position).getMaGiamGia());
+                fireBaseNhaSachOnline.chonGiamGia(maKhachHang, giamGias.get(position).getMaGiamGia());
                 Intent intent = new Intent(MaGiamGiaActivity.this, ThanhToanActivity.class);
                 finish();
             }
@@ -52,6 +58,5 @@ public class MaGiamGiaActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 }
