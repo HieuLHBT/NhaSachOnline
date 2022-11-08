@@ -6,7 +6,7 @@ import android.util.Log;
 
 public class SharePreferences {
 
-    public void setKhachHang(Context context, String maKhachHang) {
+    public void setKhachHang(String uid, Context context, String maKhachHang) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("maNguoiDung", maKhachHang);
