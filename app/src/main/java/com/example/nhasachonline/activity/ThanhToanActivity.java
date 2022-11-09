@@ -180,7 +180,7 @@ public class ThanhToanActivity extends AppCompatActivity {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                         String ngayHienTai = sdf.format(new Date());
                         DonHang donHang;
-                        if (giamGia.getMaGiamGia() != null) {
+                        if (giamGia.getMaGiamGia() != null && Integer.valueOf(giamGia.getYeuCau()) < tongTien) {
                             donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
                         } else {
                             donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
