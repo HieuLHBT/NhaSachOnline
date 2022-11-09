@@ -16,7 +16,8 @@ import com.example.nhasachonline.tools.SharePreferences;
 public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
-    private String maNhanVien;
+    private String maNhanVien = "nv1";
+    private String maKhachHang = "kh1";
     private NhanVien nhanVien = new NhanVien();
 
     private TextView layoutMHCNV_txtTenNhanVien;
@@ -33,7 +34,6 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_nhanvien_layout);
-        sharePreferences.setKhachHng(this, maNhanVien);
         maNhanVien = sharePreferences.getKhachHang(this);
 
         layoutMHCNV_txtTenNhanVien = findViewById(R.id.layoutMHCNV_txtTenNhanVien);
