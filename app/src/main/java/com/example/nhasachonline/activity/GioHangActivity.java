@@ -96,7 +96,6 @@ public class GioHangActivity extends AppCompatActivity {
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
-        fireBaseNhaSachOnline.hienThiGioHang(maKhachHang, gioHangs, adapter, this);
 
         adapter.setOnItemClickListener(new GioHangRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -274,4 +273,10 @@ public class GioHangActivity extends AppCompatActivity {
         layoutGH_tvTongTienThanhToan.setText(formatter.format(sum) + " VNĐ");
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fireBaseNhaSachOnline.hienThiGioHang(maKhachHang, gioHangs, adapter, this);
+    }
 }

@@ -1,23 +1,31 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
+import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.common.io.Resources;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -61,8 +69,41 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         ItemSanPham sanpham = sanPhams.get(pos);
         holder.itemMHCKH_tvTenSanPham.setText(sanpham.getTenSanPham());
         holder.itemMHCKH_tvGia.setText(formatter.format(sanpham.getGiaSanPham()) + " VNĐ");
-        holder.itemMHCKH_tvSoLuong.setText("1");
-        holder.itemMHCKH_tvSoLuongDanhGia.setText(sanpham.getSoLuongDanhGia() + " ");
+        holder.itemMHCKH_edtSoLuong.setText(sanpham.getSoLuong() + "");
+        holder.itemMHCKH_tvSoLuongDanhGia.setText( " ");
+
+        holder.itemMHCKH_edtSoLuong.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count != 0) {
+                    if (s.charAt(0) == '0') {
+                        AlertDialog.Builder b = new AlertDialog.Builder(context);
+                        b.setTitle("CẢNH BÁO!");
+                        b.setMessage("Bạn không được nhập số 0");
+                        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                                holder.itemMHCKH_edtSoLuong.setBackgroundColor(context.getResources().getColor(R.color.red, context.getTheme()));
+                            }
+                        });
+                        AlertDialog al = b.create();
+                        al.show();
+                    } else {
+                        holder.itemMHCKH_edtSoLuong.setBackgroundColor(context.getResources().getColor(R.color.white, context.getTheme()));
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         if(sanpham.getMaSanPham().contains("s")){
             holder.itemMHCKH_tvTacGia.setVisibility(View.VISIBLE);
             holder.itemMHCKH_tvXuatXu.setVisibility(View.GONE);
@@ -97,7 +138,6 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             e.printStackTrace();
         }
 
-
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
             @Override
@@ -127,7 +167,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         TextView itemMHCKH_tvDuLieu;
         TextView itemMHCKH_tvGia;
         TextView itemMHCKH_tvSoLuongDanhGia;
-        TextView itemMHCKH_tvSoLuong;
+        EditText itemMHCKH_edtSoLuong;
         ImageView itemMHCKH_imgHinhSanPham;
         ImageView itemMHCKH_img1Sao;
         ImageView itemMHCKH_img2Sao;
@@ -135,6 +175,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         ImageView itemMHCKH_img4Sao;
         ImageView itemMHCKH_img5Sao;
         ImageButton itemMHCKH_btnThemVaoGioHang;
+        ImageButton itemMHCKH_btnLogout;
         View.OnClickListener onClickListener;
         LinearLayout itemMHCKH_llCardView;
         CardView itemMHCKH;
@@ -147,7 +188,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             itemMHCKH_tvDuLieu = itemView.findViewById(R.id.itemMHCKH_tvDL);
             itemMHCKH_tvGia = itemView.findViewById(R.id.itemMHCKH_tvGiaTien);
             itemMHCKH_tvSoLuongDanhGia = itemView.findViewById(R.id.itemMHCKH_tvSLDanhGia);
-            itemMHCKH_tvSoLuong = itemView.findViewById(R.id.itemMHCKH_tvSo);
+            itemMHCKH_edtSoLuong = itemView.findViewById(R.id.itemMHCKH_edtSoLuong);
             itemMHCKH_imgHinhSanPham = itemView.findViewById(R.id.itemMHCKH_imgAnhSanPham);
             itemMHCKH_img1Sao = itemView.findViewById(R.id.itemMHCKH_img1Sao);
             itemMHCKH_img2Sao = itemView.findViewById(R.id.itemMHCKH_img2Sao);
@@ -157,9 +198,11 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             itemMHCKH_btnThemVaoGioHang = itemView.findViewById(R.id.itemMHCKH_btnThemGioHang);
             itemMHCKH_llCardView = itemView.findViewById(R.id.itemMHCKH_llCardView);
             itemMHCKH = itemView.findViewById(R.id.itemManHinhChinhKH);
+            itemMHCKH_btnLogout = itemView.findViewById(R.id.layoutMHCKH_btnLogout);
 
             // Set event processing
             itemMHCKH_btnThemVaoGioHang.setOnClickListener(this);
+          //  itemMHCKH_btnLogout.setOnClickListener(this);
             itemMHCKH_tvTenSanPham.setOnClickListener(this);
         }
 
