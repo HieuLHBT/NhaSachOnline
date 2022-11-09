@@ -870,6 +870,8 @@ public class FireBaseNhaSachOnline {
     }
 
     ///////////////////////////////////////////////////////
+
+    //Tin
     public void taoKhachHang(ItemKhachHang khachHang) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference ngDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
