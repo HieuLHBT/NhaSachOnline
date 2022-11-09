@@ -90,7 +90,6 @@ public class GioHangRecyclerViewAdapter extends RecyclerView.Adapter<GioHangRecy
             e.printStackTrace();
         }
 
-
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
             @Override

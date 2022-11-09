@@ -1,12 +1,26 @@
 package com.example.nhasachonline.data_model;
 
 public class GiamGia {
+    private String maKhachHang;
     private String hinhGiamGia;
     private String maGiamGia;
     private String tienGiamGia;
     private String tieuDe;
     private String yeuCau;
     private String chon;
+    private Boolean kiemTra = false;
+
+    public Boolean getKiemTra() {
+        return kiemTra;
+    }
+
+    public void setKiemTra(Boolean kiemTra) {
+        this.kiemTra = kiemTra;
+    }
+
+    public String getMaKhachHang() {
+        return maKhachHang;
+    }
 
     public String getHinhGiamGia() {
         return hinhGiamGia;
@@ -30,6 +44,10 @@ public class GiamGia {
 
     public String getChon() {
         return chon;
+    }
+
+    public void setMaKhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
     }
 
     public void setHinhGiamGia(String hinhGiamGia) {
@@ -59,7 +77,8 @@ public class GiamGia {
     public GiamGia() {
     }
 
-    public GiamGia(String hinhGiamGia, String maGiamGia, String tienGiamGia, String tieuDe, String yeuCau, String chon) {
+    public GiamGia(String maKhachHang, String hinhGiamGia, String maGiamGia, String tienGiamGia, String tieuDe, String yeuCau, String chon) {
+        this.maKhachHang = maKhachHang;
         this.hinhGiamGia = hinhGiamGia;
         this.maGiamGia = maGiamGia;
         this.tienGiamGia = tienGiamGia;

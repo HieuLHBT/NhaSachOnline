@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/layoutBCC_btnTroVe"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tvtrove"
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:paddingRight="@dimen/tieude"
+            android:text="BẢNG CHẤM CÔNG"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:orientation="vertical"
+        android:padding="@dimen/le">
+
+        <Spinner
+            android:id="@+id/layoutBCC_spnNgay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5" />
+
+        <Button
+            android:id="@+id/layoutBCC_btnBangLuong"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="Bảng lương"
+            android:textSize="@dimen/textthu"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.5"
+            android:gravity="center|left"
+            android:text="CA 1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/border_layout"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/marginleft"
+                    android:layout_weight="0.7"
+                    android:gravity="center|left"
+                    android:text="@string/giovao"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvGioVaoCa1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|left"
+                    android:text="@string/giora"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvGioRaCa1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.5"
+            android:gravity="center|left"
+            android:text="CA 2"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/border_layout"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/marginleft"
+                    android:layout_weight="0.7"
+                    android:gravity="center|left"
+                    android:text="@string/giovao"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvGioVaoCa2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|left"
+                    android:text="@string/giora"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvGioRaCa2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/marginleft"
+                        android:layout_weight="1"
+                        android:gravity="center|left"
+                        android:text="Đi trễ:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/layoutBCC_tvDiTre"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center|left"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textsize" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:gravity="center|left"
+                        android:text="Tăng ca:"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textsize"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/layoutBCC_tvTangCa"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center|left"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/textsize" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/marginleft"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="@string/sodondanhan"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvSoDonDaNhan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <Button
+                    android:id="@+id/layoutBCC_btnChiTietDonNhan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/le"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Chi tiết"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/marginleft"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="@string/sodondagiao"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvSoDonDaGiao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <Button
+                    android:id="@+id/layoutBCC_btnChiTietDonGiao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/le"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Chi tiết"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/marginleft"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:text="@string/sodondahuy"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/layoutBCC_tvSoDonDaHuy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <Button
+                    android:id="@+id/layoutBCC_btnChiTietDonHuy"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/le"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Chi tiết"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -42,7 +42,7 @@ public class GioHangActivity extends AppCompatActivity {
     private TextView layoutGH_tvTongTienThanhToan, layoutGH_btnTroVe;
     private Button layoutGH_btnMuaHang, layoutGH_btnChonHet, layoutGH_btnBoChon;
 
-    ArrayList<GioHang> dsGioHang = new ArrayList<>();
+    private ArrayList<GioHang> dsGioHang = new ArrayList<>();
 
 
     @Override
@@ -272,7 +272,6 @@ public class GioHangActivity extends AppCompatActivity {
         }
         layoutGH_tvTongTienThanhToan.setText(formatter.format(sum) + " VNĐ");
     }
-
 
     @Override
     protected void onResume() {

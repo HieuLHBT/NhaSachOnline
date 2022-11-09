@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".activity.ManHinhQuanLyNhanVienActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.4"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"
+            android:paddingLeft="15dp"
+            android:text="@string/tvtrove"
+            android:textSize="50dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="THÊM NHÂN VIÊN"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+    >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1.5">
+
+            <ImageView
+                android:id="@+id/MHTNV_imgAnhNhanVien"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/nhanvien1"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Mã NV"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtMaNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="NV004"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Chức vụ"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtChucVu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="Nhân viên"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Tên NV"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtTenNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="Jwon"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Tài khoản"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtTaiKhoanNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.8"
+                android:background="@drawable/border"
+                android:hint="jwonid"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Mật khẩu"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtMatKhauNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.8"
+                android:background="@drawable/border"
+                android:hint="jwon123"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Email"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtEmailNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="jwon@gmail.com"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Địa chỉ"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtDiaChiNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="Tân Phú"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="SĐT"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtSoDienThoaiNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="0795159786"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="CMND"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtCMNDNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="0402033901"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Lương căn bản"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHTNV_edtLuongNhanVien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.7"
+                android:background="@drawable/border"
+                android:hint="9.000.000"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/MHTNV_btnNhapMoi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="50dp"
+            android:backgroundTint="#03A9F4"
+            android:text="Nhập mới" />
+
+        <Button
+            android:id="@+id/MHTNV_btnThemNhanVien"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#03A9F4"
+            android:text="Thêm" />
+
+    </LinearLayout>
+
+</LinearLayout>
