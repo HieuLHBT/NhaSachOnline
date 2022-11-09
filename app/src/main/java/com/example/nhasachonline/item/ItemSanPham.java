@@ -17,6 +17,9 @@ public class ItemSanPham {
     private int soLuongDanhGia;
     private int binhLuan;
 
+    public ItemSanPham(String maSach, String tenSach, String theLoai, String tacGia, String nhaXuatBan, String ngayXuatBan, String giaTien, String soLuongKho, String hinhSach) {
+    }
+
     public String getMaSanPham() {
         return maSanPham;
     }
