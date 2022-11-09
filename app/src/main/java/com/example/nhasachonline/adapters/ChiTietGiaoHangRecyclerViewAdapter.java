@@ -62,9 +62,6 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
         //TextView itemCTGH_imgHinhSanPham;
         TextView itemCTGH_txtTongTien;
 
-       /* LinearLayout itemCTGH_llCardView;
-        CardView itemCTGH;*/
-
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             itemCTGH_txtTenSanPham = itemView.findViewById(R.id.itemCTGH_txtTenSanPham);
@@ -72,9 +69,6 @@ public class ChiTietGiaoHangRecyclerViewAdapter extends RecyclerView.Adapter<Chi
             itemCTGH_txtSoLuong = itemView.findViewById(R.id.itemCTGH_txtSoLuong);
             //itemCTGH_imgHinhSanPham = itemView.findViewById(R.id.itemCTGH_imgHinhSanPham);
             itemCTGH_txtTongTien = itemView.findViewById(R.id.itemCTGH_txtTongTien);
-
-          /*  itemCTGH_llCardView = itemView.findViewById(R.id.itemCTGH_llCardView);
-            itemCTGH = itemView.findViewById(R.id.itemCTGH);*/
         }
     }
 
