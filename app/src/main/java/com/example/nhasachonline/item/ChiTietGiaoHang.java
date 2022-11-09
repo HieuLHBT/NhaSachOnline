@@ -7,7 +7,15 @@ public class ChiTietGiaoHang {
     private int soLuong;
     private String hinhSanPham;
     private int tongTien;
+    private int khuyenMai;
 
+    public int getKhuyenMai() {
+        return khuyenMai;
+    }
+
+    public void setKhuyenMai(int khuyenMai) {
+        this.khuyenMai = khuyenMai;
+    }
 
     public String getMaSanPham() {
         return maSanPham;

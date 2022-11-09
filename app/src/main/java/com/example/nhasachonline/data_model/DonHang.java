@@ -9,6 +9,7 @@ public class DonHang {
     private String maNVGiao;
     private String thoiGianGiao;
     private String thoiGianLap;
+    private String phiVanChuyen;
 
     public String getMaDonHang() {
         return maDonHang;
@@ -40,6 +41,10 @@ public class DonHang {
 
     public String getThoiGianLap() {
         return thoiGianLap;
+    }
+
+    public String getPhiVanChuyen() {
+        return phiVanChuyen;
     }
 
     public void setMaDonHang(String maDonHang) {
@@ -74,10 +79,14 @@ public class DonHang {
         this.thoiGianLap = thoiGianLap;
     }
 
+    public void setPhiVanChuyen(String phiVanChuyen) {
+        this.phiVanChuyen = phiVanChuyen;
+    }
+
     public DonHang() {
     }
 
-    public DonHang(String maDonHang, String diaChiGiao, String maGiamGia, String maKhachHang, String maNVDuyet, String maNVGiao, String thoiGianGiao, String thoiGianLap) {
+    public DonHang(String maDonHang, String diaChiGiao, String maGiamGia, String maKhachHang, String maNVDuyet, String maNVGiao, String thoiGianGiao, String thoiGianLap, String phiVanChuyen) {
         this.maDonHang = maDonHang;
         this.diaChiGiao = diaChiGiao;
         this.maGiamGia = maGiamGia;
@@ -86,5 +95,6 @@ public class DonHang {
         this.maNVGiao = maNVGiao;
         this.thoiGianGiao = thoiGianGiao;
         this.thoiGianLap = thoiGianLap;
+        this.phiVanChuyen = phiVanChuyen;
     }
 }

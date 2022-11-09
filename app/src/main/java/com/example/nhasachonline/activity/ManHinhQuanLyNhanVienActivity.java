@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -45,6 +46,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -95,7 +97,16 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent1 = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                        startActivity(intent1);
+                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent1);
+                    }
+                });
+
+                CardView itemMHQLNV = view.findViewById(R.id.itemMHQLNV);
+                itemMHQLNV.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });
             }
