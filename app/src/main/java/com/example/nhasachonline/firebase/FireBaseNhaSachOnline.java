@@ -8,11 +8,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.nhasachonline.activity.BangChamCongActivity;
+import com.example.nhasachonline.activity.ChiTietGiaoHangActivity;
 import com.example.nhasachonline.activity.ChiTietSanPhamActivity;
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.LichLamViecActivity;
 import com.example.nhasachonline.activity.MaGiamGiaActivity;
+import com.example.nhasachonline.activity.ManHinhChinhNhanVienActivity;
 import com.example.nhasachonline.activity.ThanhToanActivity;
+import com.example.nhasachonline.activity.ThongTinGiaoHangNVActivity;
 import com.example.nhasachonline.adapters.ChiTietGiaoHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
@@ -517,7 +520,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void xoaChonGiamGia(String maKhachHang,String maGiamGia) {
+    public void xoaChonGiamGia(String maKhachHang, String maGiamGia) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference giamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
         giamGiaDatabase.child(maKhachHang).child(maGiamGia).child("chon").setValue("0");
@@ -644,7 +647,7 @@ public class FireBaseNhaSachOnline {
     }
 
     // Giảm giá
-    public void hienThiMaGiamGia(Integer tongTien,String maKhachHang,ArrayList<GiamGia> giamGias, MaGiamGiaRecyclerViewAdapter adapter) {
+    public void hienThiMaGiamGia(Integer tongTien, String maKhachHang, ArrayList<GiamGia> giamGias, MaGiamGiaRecyclerViewAdapter adapter) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference giamgiaDatabase = firebaseDatabase.getReference("GIAMGIA");
         giamgiaDatabase.child(maKhachHang).addValueEventListener(new ValueEventListener() {
@@ -878,120 +881,6 @@ public class FireBaseNhaSachOnline {
         ngDungDatabase.child(khachHang.getMaKhachHang()).setValue(khachHang);
     }
 
-    public void hienThiItemChiTietGiaoHang(String maDonHang, ArrayList<ChiTietGiaoHang> chiTietGiaoHang, ChiTietGiaoHangRecyclerViewAdapter adapter, Context context) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference xuatKhoDatabase = firebaseDatabase.getReference("XUATKHO");
-        DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
-        xuatKhoDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                xuatKhoDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        chiTietGiaoHang.clear();
-                        for (DataSnapshot xuatKhoSnapshot : snapshot.getChildren()) {
-                            //Log.d("test", xuatKhoSnapshot.getValue() + " ");
-                            XuatKho xuatKho = xuatKhoSnapshot.getValue(XuatKho.class);
-                            if (xuatKho.getMaSanPham().contains("s")) {
-                                sanPhamDatabase.child("SACH").child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        Sach sach = snapshot.getValue(Sach.class);
-                                        chiTietGiaoHang.add(new ChiTietGiaoHang(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), sach.getHinhSach()));
-                                        //Log.d("test", snapshot.getValue() + " ");
-                                        adapter.notifyDataSetChanged();
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
-                                    }
-                                });
-                            } else if (xuatKho.getMaSanPham().contains("vpp")) {
-                                sanPhamDatabase.child("VANPHONGPHAM").child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
-                                        chiTietGiaoHang.add(new ChiTietGiaoHang(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), vanPhongPham.getHinhVanPhongPham()));
-                                        adapter.notifyDataSetChanged();
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
-                                    }
-                                });
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    public void hienThiDonHang(String maDonHang, DonHang donHang, Context context) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
-        donHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DonHang dh = snapshot.getValue(DonHang.class);
-                donHang.setMaDonHang(dh.getMaDonHang());
-                donHang.setMaGiamGia(dh.getMaKhachHang());
-                donHang.setDiaChiGiao(dh.getDiaChiGiao());
-                donHang.setMaNVDuyet(dh.getMaNVDuyet());
-                donHang.setMaNVGiao(dh.getMaNVGiao());
-                donHang.setThoiGianGiao(dh.getThoiGianGiao());
-                donHang.setThoiGianLap(dh.getThoiGianLap());
-                donHang.setMaKhachHang(dh.getMaKhachHang());
-                Log.d("test", snapshot.getValue() + "");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("onCancelled", "Lỗi!" + error.getMessage());
-            }
-        });
-    }
-
-    public void hienThiTenNhanVien_CTGH(String maNhanVien, NhanVien nhanVien, Context context) {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference nhanVienDatabase = firebaseDatabase.getReference("NGUOIDUNG");
-        nhanVienDatabase.child("NHANVIEN").child(maNhanVien).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                NhanVien nv = snapshot.getValue(NhanVien.class);
-                nhanVien.setHinhNhanVien(nv.getHinhNhanVien());
-                nhanVien.setMaNhanVien(nv.getMaNhanVien());
-                nhanVien.setTenNhanVien(nv.getTenNhanVien());
-                nhanVien.setDiaChi(nv.getDiaChi());
-                nhanVien.setEmail(nv.getEmail());
-                nhanVien.setCmnd(nv.getCmnd());
-                nhanVien.setLuong(nv.getLuong());
-                nhanVien.setMatKhau(nv.getMatKhau());
-                nhanVien.setTaiKhoan(nv.getTaiKhoan());
-                nhanVien.setSoDienThoai(nv.getSoDienThoai());
-                nhanVien.setNguoiDung(nv.getNguoiDung());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("onCancelled", "Lỗi!" + error.getMessage());
-            }
-        });
-    }
-
     public void hienThiItemDanhGiaSanPham(String maSanPham, String maKhachHang, ArrayList<DanhGia> danhGias, DanhGiaSanPhamRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
@@ -1053,6 +942,292 @@ public class FireBaseNhaSachOnline {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
         phanHoiDatabase.child(maSanPham).child(maKhachHang).child("danhGia").setValue(danhGia);
+    }
+
+    //Thong tin giao hang
+    public void hienThiItemChiTietGiaoHang(String maDonHang, ArrayList<ChiTietGiaoHang> chiTietGiaoHang, ChiTietGiaoHangRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference xuatKhoDatabase = firebaseDatabase.getReference("XUATKHO");
+        DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
+        xuatKhoDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                xuatKhoDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        chiTietGiaoHang.clear();
+                        for (DataSnapshot xuatKhoSnapshot : snapshot.getChildren()) {
+                            XuatKho xuatKho = xuatKhoSnapshot.getValue(XuatKho.class);
+                            if (xuatKho.getMaSanPham().contains("s")) {
+                                sanPhamDatabase.child("SACH").child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Sach sach = snapshot.getValue(Sach.class);
+                                        chiTietGiaoHang.add(new ChiTietGiaoHang(sach.getMaSach(), sach.getTenSach(), Integer.valueOf(sach.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), sach.getHinhSach()));
+                                        adapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                                    }
+                                });
+                            } else if (xuatKho.getMaSanPham().contains("vpp")) {
+                                sanPhamDatabase.child("VANPHONGPHAM").child(xuatKho.getMaSanPham()).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        VanPhongPham vanPhongPham = snapshot.getValue(VanPhongPham.class);
+                                        chiTietGiaoHang.add(new ChiTietGiaoHang(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getTenVanPhongPham(), Integer.valueOf(vanPhongPham.getGiaTien()), Integer.valueOf(xuatKho.getSoLuongXuat()), vanPhongPham.getHinhVanPhongPham()));
+                                        adapter.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiKhachHang_TTGH(String maKhachHang, KhachHang khachHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference khachHangDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        khachHangDatabase.child("khachhang").child(maKhachHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                KhachHang kh = snapshot.getValue(KhachHang.class);
+                khachHang.setNguoiDung(kh.getNguoiDung());
+                khachHang.setMaKhachHang(kh.getMaKhachHang());
+                khachHang.setDiaChi(kh.getDiaChi());
+                khachHang.setEmail(kh.getEmail());
+                khachHang.setMatKhau(kh.getMatKhau());
+                khachHang.setNganHang(kh.getNganHang());
+                khachHang.setSoDienThoai(kh.getSoDienThoai());
+                khachHang.setSoTaiKhoan(kh.getSoTaiKhoan());
+                khachHang.setTaiKhoan(kh.getTaiKhoan());
+                khachHang.setTenKhachHang(kh.getTenKhachHang());
+                ((ThongTinGiaoHangNVActivity) context).hienThiKhachHang();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiDonHang_TTGH(String maDonHang, DonHang donHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
+        donHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DonHang dh = snapshot.getValue(DonHang.class);
+                donHang.setMaDonHang(dh.getMaDonHang());
+                donHang.setMaGiamGia(dh.getMaKhachHang());
+                donHang.setDiaChiGiao(dh.getDiaChiGiao());
+                donHang.setMaNVDuyet(dh.getMaNVDuyet());
+                donHang.setMaNVGiao(dh.getMaNVGiao());
+                donHang.setThoiGianGiao(dh.getThoiGianGiao());
+                donHang.setThoiGianLap(dh.getThoiGianLap());
+                donHang.setMaKhachHang(dh.getMaKhachHang());
+                donHang.setPhiVanChuyen(dh.getPhiVanChuyen());
+                ((ThongTinGiaoHangNVActivity) context).hienThiDonHang();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiTinhTrang_TTGH(String maDonHang, TrangThaiDonHang trangThaiDonHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        trangThaiDonHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TrangThaiDonHang tt = snapshot.getValue(TrangThaiDonHang.class);
+                trangThaiDonHang.setMaDonHang(tt.getMaDonHang());
+                trangThaiDonHang.setKieuThanhToan(tt.getKieuThanhToan());
+                trangThaiDonHang.setLyDoHuy(tt.getLyDoHuy());
+                trangThaiDonHang.setTrangThaiChuyenHangQL(tt.getTrangThaiChuyenHangQL());
+                trangThaiDonHang.setTrangThaiChuyenTienKH(tt.getTrangThaiChuyenTienKH());
+                trangThaiDonHang.setTrangThaiDon(tt.getTrangThaiDon());
+                trangThaiDonHang.setTrangThaiDuyetNV(tt.getTrangThaiDuyetNV());
+                trangThaiDonHang.setTrangThaiGiaoHangKH(tt.getTrangThaiGiaoHangKH());
+                trangThaiDonHang.setTrangThaiGiaoHangNV(tt.getTrangThaiGiaoHangNV());
+                trangThaiDonHang.setTrangThaiNhanHangNV(tt.getTrangThaiNhanHangNV());
+                trangThaiDonHang.setTrangThaiNhanTienKH(tt.getTrangThaiNhanTienKH());
+                trangThaiDonHang.setTrangThaiNhanTienQL(tt.getTrangThaiNhanTienQL());
+                trangThaiDonHang.setTrangThaiPhanCongQL(tt.getTrangThaiPhanCongQL());
+                trangThaiDonHang.setTrangThaiTraTienQL(tt.getTrangThaiTraTienQL());
+                ((ThongTinGiaoHangNVActivity) context).hienThiTinhTrang();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    //Chi tiet giao hang
+    public void hienThiTenNhanVien_CTGH(String maNhanVien, NhanVien nhanVien, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nhanVienDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nhanVienDatabase.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                NhanVien nv = snapshot.getValue(NhanVien.class);
+                nhanVien.setHinhNhanVien(nv.getHinhNhanVien());
+                nhanVien.setMaNhanVien(nv.getMaNhanVien());
+                nhanVien.setTenNhanVien(nv.getTenNhanVien());
+                nhanVien.setDiaChi(nv.getDiaChi());
+                nhanVien.setEmail(nv.getEmail());
+                nhanVien.setCmnd(nv.getCmnd());
+                nhanVien.setLuong(nv.getLuong());
+                nhanVien.setMatKhau(nv.getMatKhau());
+                nhanVien.setTaiKhoan(nv.getTaiKhoan());
+                nhanVien.setSoDienThoai(nv.getSoDienThoai());
+                nhanVien.setNguoiDung(nv.getNguoiDung());
+                ((ChiTietGiaoHangActivity) context).hienThiTenNhanVien_CTGH();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiPhuongThucThanhToan_CTGH(String maDonHang, TrangThaiDonHang trangThaiDonHang, Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        trangThaiDonHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TrangThaiDonHang tt = snapshot.getValue(TrangThaiDonHang.class);
+                trangThaiDonHang.setMaDonHang(tt.getMaDonHang());
+                trangThaiDonHang.setKieuThanhToan(tt.getKieuThanhToan());
+                trangThaiDonHang.setLyDoHuy(tt.getLyDoHuy());
+                trangThaiDonHang.setTrangThaiChuyenHangQL(tt.getTrangThaiChuyenHangQL());
+                trangThaiDonHang.setTrangThaiChuyenTienKH(tt.getTrangThaiChuyenTienKH());
+                trangThaiDonHang.setTrangThaiDon(tt.getTrangThaiDon());
+                trangThaiDonHang.setTrangThaiDuyetNV(tt.getTrangThaiDuyetNV());
+                trangThaiDonHang.setTrangThaiGiaoHangKH(tt.getTrangThaiGiaoHangKH());
+                trangThaiDonHang.setTrangThaiGiaoHangNV(tt.getTrangThaiGiaoHangNV());
+                trangThaiDonHang.setTrangThaiNhanHangNV(tt.getTrangThaiNhanHangNV());
+                trangThaiDonHang.setTrangThaiNhanTienKH(tt.getTrangThaiNhanTienKH());
+                trangThaiDonHang.setTrangThaiNhanTienQL(tt.getTrangThaiNhanTienQL());
+                trangThaiDonHang.setTrangThaiPhanCongQL(tt.getTrangThaiPhanCongQL());
+                trangThaiDonHang.setTrangThaiTraTienQL(tt.getTrangThaiTraTienQL());
+                ((ChiTietGiaoHangActivity) context).hienThiTrangThai_CTGH();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiMaGiamGia_CTGH(String maGiamGia, String maKhachHang, GiamGia giamGia, Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference maGiamGiaDatabase = firebaseDatabase.getReference("GIAMGIA");
+        maGiamGiaDatabase.child(maKhachHang).child(maGiamGia).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GiamGia gg = snapshot.getValue(GiamGia.class);
+                giamGia.setMaGiamGia(gg.getMaGiamGia());
+                giamGia.setHinhGiamGia(gg.getHinhGiamGia());
+                giamGia.setMaGiamGia(gg.getMaGiamGia());
+                giamGia.setTienGiamGia(gg.getTienGiamGia());
+                giamGia.setTieuDe(gg.getTieuDe());
+                giamGia.setYeuCau(gg.getYeuCau());
+                giamGia.setChon(gg.getChon());
+                giamGia.setKiemTra(gg.getKiemTra());
+                ((ChiTietGiaoHangActivity) context).hienThiTienGiamGia_CTGH();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    public void hienThiDonHang(String maDonHang, DonHang donHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
+        donHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DonHang dh = snapshot.getValue(DonHang.class);
+                donHang.setMaDonHang(dh.getMaDonHang());
+                donHang.setMaGiamGia(dh.getMaKhachHang());
+                donHang.setDiaChiGiao(dh.getDiaChiGiao());
+                donHang.setMaNVDuyet(dh.getMaNVDuyet());
+                donHang.setMaNVGiao(dh.getMaNVGiao());
+                donHang.setThoiGianGiao(dh.getThoiGianGiao());
+                donHang.setThoiGianLap(dh.getThoiGianLap());
+                donHang.setMaKhachHang(dh.getMaKhachHang());
+                donHang.setPhiVanChuyen(dh.getPhiVanChuyen());
+                ((ChiTietGiaoHangActivity) context).hienThiDonHang();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
+    //Man hinh chinh nhan vien
+    public void hienThiManHinhChinhNhanVien(String maNhanVien, NhanVien nhanVien, Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nhanVienDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nhanVienDatabase.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                NhanVien nv = snapshot.getValue(NhanVien.class);
+                nhanVien.setHinhNhanVien(nv.getHinhNhanVien());
+                nhanVien.setMaNhanVien(nv.getMaNhanVien());
+                nhanVien.setTenNhanVien(nv.getTenNhanVien());
+                nhanVien.setDiaChi(nv.getDiaChi());
+                nhanVien.setEmail(nv.getEmail());
+                nhanVien.setCmnd(nv.getCmnd());
+                nhanVien.setLuong(nv.getLuong());
+                nhanVien.setMatKhau(nv.getMatKhau());
+                nhanVien.setTaiKhoan(nv.getTaiKhoan());
+                nhanVien.setSoDienThoai(nv.getSoDienThoai());
+                nhanVien.setNguoiDung(nv.getNguoiDung());
+                ((ManHinhChinhNhanVienActivity) context).hienThiManHinhChinhNhanVien();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
     }
 
 /*
@@ -1379,7 +1554,7 @@ public class FireBaseNhaSachOnline {
     }
 
     // Man hinh them nhan vien
-    public void themNhanVien(ArrayList<ItemNhanVien> itemNhanVien , Context context){
+    public void themNhanVien(ArrayList<ItemNhanVien> itemNhanVien, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoiDungDatabase.child("nhanvien").addChildEventListener(new ChildEventListener() {
@@ -1424,7 +1599,7 @@ public class FireBaseNhaSachOnline {
     }
 
     // Xoa nhan vien
-    public void xoaNhanVien(String maNhanVien,  NhanVienRecyclerViewAdapter adapter) {
+    public void xoaNhanVien(String maNhanVien, NhanVienRecyclerViewAdapter adapter) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference gioHangDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         gioHangDatabase.child("nhanvien").child(maNhanVien).removeValue();
