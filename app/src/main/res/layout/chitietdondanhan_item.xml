@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/itemCTDDN"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:orientation="horizontal"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="7dp"
+    card_view:cardUseCompatPadding="true">
+
+
+
+</androidx.cardview.widget.CardView>
