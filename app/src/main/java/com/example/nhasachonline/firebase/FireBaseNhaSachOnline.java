@@ -17,6 +17,7 @@ import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.SanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.ChamCong;
 import com.example.nhasachonline.data_model.GiamGia;
@@ -1276,7 +1277,46 @@ public class FireBaseNhaSachOnline {
                     }
                 });
             }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
 
+    }
+    public void hienThiManHinhChinhQuanLySanPham(ArrayList<ItemSanPham> sanPhams, SanPhamRecyclerViewAdapter adapter, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                sanPhams.clear();
+                nguoiDungDatabase.child("nhanvien").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot sachDataSnapshot : snapshot.getChildren()) {
+                            Sach sach = sachDataSnapshot.getValue(Sach.class);
+                            sanPhams.add(new ItemSanPham(
+                                    sach.getMaSach(),
+                                    sach.getTenSach(),
+                                    sach.getTheLoai(),
+                                    sach.getTacGia(),
+                                    sach.getNhaXuatBan(),
+                                    sach.getNgayXuatBan(),
+                                    sach.getGiaTien(),
+                                    sach.getSoLuongKho(),
+                                    sach.getHinhSach()
+                            ));
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                    }
+                });
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.d("onCancelled", "Lỗi!" + error.getMessage());
@@ -1336,5 +1376,11 @@ public class FireBaseNhaSachOnline {
         DatabaseReference gioHangDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         gioHangDatabase.child("nhanvien").child(maNhanVien).removeValue();
     }
-
+    //xoa San Pham
+    public void xoaSanPham(String maSanPham,  SanPhamRecyclerViewAdapter adapter) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference gioHangDatabase = firebaseDatabase.getReference("SANPHAM");
+        gioHangDatabase.child("SACH").child(maSanPham).removeValue();
+        gioHangDatabase.child("VANPHONGPHAM").child(maSanPham).removeValue();
+    }
 }
