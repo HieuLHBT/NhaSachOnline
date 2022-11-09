@@ -42,6 +42,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     private TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang();
     private GiamGia giamGia = new GiamGia();
     private Integer phiVanChuyen = 0;
+    private int tongTienHang = 0;
 
     private ArrayList<ThanhToan> thanhToans = new ArrayList<>();
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs = new ArrayList<>();
@@ -91,7 +92,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         fireBase.hienThiTenNhanVien_CTGH(maNhanVien, nhanVien, this);
         fireBase.hienThiPhuongThucThanhToan_CTGH(maDonHang, trangThaiDonHang, this);
         fireBase.hienThiMaGiamGia_CTGH(maGiamGia, maKhachHang, giamGia, this);
-
+        TongTienHang();
 
         adapter = new ChiTietGiaoHangRecyclerViewAdapter(this, R.layout.chitietgiaohang_item, chiTietGiaoHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -100,7 +101,6 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         fireBase.hienThiItemChiTietGiaoHang(maDonHang, chiTietGiaoHangs, adapter, this);
-        TongTienHang();
 
         layoutCTGH_btnXacNhanDonHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,9 +187,12 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         int sum = 0;
         for (ChiTietGiaoHang chiTietGiaoHang : chiTietGiaoHangs){
             sum += chiTietGiaoHang.getTongTien();
+            Log.d("Test", chiTietGiaoHang.getTongTien() + " ");
         }
+
         layoutCTGH_txtTongTienHang.setText(formatter.format(sum) + " VNĐ");
         int tongTienThanhToan = sum + phiVanChuyen;
         layoutCTGH_txtTongTienThanhToan.setText(formatter.format(tongTienThanhToan) + " VNĐ");
+
     }
 }
