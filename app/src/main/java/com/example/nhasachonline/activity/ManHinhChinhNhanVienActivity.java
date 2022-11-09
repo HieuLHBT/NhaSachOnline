@@ -33,7 +33,7 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_nhanvien_layout);
-        sharePreferences.setKhachHang(this, maNhanVien);
+        sharePreferences.setKhachHng(this, maNhanVien);
         maNhanVien = sharePreferences.getKhachHang(this);
 
         layoutMHCNV_txtTenNhanVien = findViewById(R.id.layoutMHCNV_txtTenNhanVien);

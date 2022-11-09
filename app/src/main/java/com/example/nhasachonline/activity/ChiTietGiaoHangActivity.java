@@ -35,6 +35,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     private String maDonHang = "dh2";
     private String maNhanVien = "nv1";
     private String maGiamGia = "gg1";
+    private String maKhachHang = "kh1";
 
     private DonHang donHang = new DonHang();
     private NhanVien nhanVien = new NhanVien();
@@ -84,21 +85,22 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         layoutCTGH_btnHuyDonHang = findViewById(R.id.layoutCTGH_btnHuyDonHang);
         layoutCTGH_btnTroVe = findViewById(R.id.layoutCTGH_btnTroVe);
 
-
         // Gán dữ liệu
         layoutCTGH_txtMaDonHang.setText(maDonHang);
-        //Log.d("Test", maDonHang + "");
         fireBase.hienThiDonHang(maDonHang, donHang, this);
         fireBase.hienThiTenNhanVien_CTGH(maNhanVien, nhanVien, this);
         fireBase.hienThiPhuongThucThanhToan_CTGH(maDonHang, trangThaiDonHang, this);
-        fireBase.hienThiMaGiamGia_CTGH(maGiamGia, giamGia, this);
-        //TongTienHang();
+        fireBase.hienThiMaGiamGia_CTGH(maGiamGia, maKhachHang, giamGia, this);
+
+
         adapter = new ChiTietGiaoHangRecyclerViewAdapter(this, R.layout.chitietgiaohang_item, chiTietGiaoHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
         fireBase.hienThiItemChiTietGiaoHang(maDonHang, chiTietGiaoHangs, adapter, this);
+        TongTienHang();
 
         layoutCTGH_btnXacNhanDonHang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +170,7 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     public void hienThiDonHang(){
         layoutCTGH_txtThoiGianDuKienGiao.setText(donHang.getThoiGianGiao());
         layoutCTGH_txtThoiGianDat.setText(donHang.getThoiGianLap());
-        //layoutCTGH_txtPhiVanChuyen.setText(donHang.getPhiVanChuyen());
+        layoutCTGH_txtPhiVanChuyen.setText(donHang.getPhiVanChuyen());
 
     }
     public void hienThiTenNhanVien_CTGH(){
@@ -183,8 +185,8 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
 
     public void TongTienHang(){
         int sum = 0;
-        for (ThanhToan thanhToan : thanhToans){
-            sum += thanhToan.getTongTien();
+        for (ChiTietGiaoHang chiTietGiaoHang : chiTietGiaoHangs){
+            sum += chiTietGiaoHang.getTongTien();
         }
         layoutCTGH_txtTongTienHang.setText(formatter.format(sum) + " VNĐ");
         int tongTienThanhToan = sum + phiVanChuyen;
