@@ -15,11 +15,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ChiTietGiaoHangRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.DonHang;
+import com.example.nhasachonline.data_model.GiamGia;
 import com.example.nhasachonline.data_model.KhachHang;
 import com.example.nhasachonline.data_model.NhanVien;
+import com.example.nhasachonline.data_model.TrangThaiDonHang;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
+import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.tools.SharePreferences;
 
 import java.text.DecimalFormat;
@@ -30,9 +34,15 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private String maDonHang = "dh2";
     private String maNhanVien = "nv1";
+    private String maGiamGia = "gg1";
+
     private DonHang donHang = new DonHang();
     private NhanVien nhanVien = new NhanVien();
+    private TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang();
+    private GiamGia giamGia = new GiamGia();
+    private Integer phiVanChuyen = 0;
 
+    private ArrayList<ThanhToan> thanhToans = new ArrayList<>();
     private ArrayList<ChiTietGiaoHang> chiTietGiaoHangs = new ArrayList<>();
     private ChiTietGiaoHangRecyclerViewAdapter adapter;
 
@@ -80,7 +90,9 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
         //Log.d("Test", maDonHang + "");
         fireBase.hienThiDonHang(maDonHang, donHang, this);
         fireBase.hienThiTenNhanVien_CTGH(maNhanVien, nhanVien, this);
-
+        fireBase.hienThiPhuongThucThanhToan_CTGH(maDonHang, trangThaiDonHang, this);
+        fireBase.hienThiMaGiamGia_CTGH(maGiamGia, giamGia, this);
+        //TongTienHang();
         adapter = new ChiTietGiaoHangRecyclerViewAdapter(this, R.layout.chitietgiaohang_item, chiTietGiaoHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -156,8 +168,26 @@ public class ChiTietGiaoHangActivity extends AppCompatActivity {
     public void hienThiDonHang(){
         layoutCTGH_txtThoiGianDuKienGiao.setText(donHang.getThoiGianGiao());
         layoutCTGH_txtThoiGianDat.setText(donHang.getThoiGianLap());
+        //layoutCTGH_txtPhiVanChuyen.setText(donHang.getPhiVanChuyen());
+
     }
-   /* public void hienThiTenNhanVien_CTGH(){
+    public void hienThiTenNhanVien_CTGH(){
         layoutCTGH_txtTenNVGiaoHang.setText(nhanVien.getTenNhanVien());
-    }*/
+    }
+    public void hienThiTrangThai_CTGH(){
+        layoutCTGH_txtPhuongThucThanhToan.setText(trangThaiDonHang.getKieuThanhToan());
+    }
+    public void hienThiTienGiamGia_CTGH(){
+        layoutCTGH_txtGiamGia.setText(giamGia.getTienGiamGia());
+    }
+
+    public void TongTienHang(){
+        int sum = 0;
+        for (ThanhToan thanhToan : thanhToans){
+            sum += thanhToan.getTongTien();
+        }
+        layoutCTGH_txtTongTienHang.setText(formatter.format(sum) + " VNĐ");
+        int tongTienThanhToan = sum + phiVanChuyen;
+        layoutCTGH_txtTongTienThanhToan.setText(formatter.format(tongTienThanhToan) + " VNĐ");
+    }
 }
