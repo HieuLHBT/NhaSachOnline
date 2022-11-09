@@ -1,5 +1,6 @@
 package com.example.nhasachonline.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,10 +28,11 @@ public class BangChamCongActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
     private SharePreferences sharePreferences = new SharePreferences();
 
-    private String maNhanVien = "";
     private ArrayList<ChamCong> chamCongs = new ArrayList<>();
     private ArrayList<String> ngayLamViec = new ArrayList<>();
     private BangChamCong bangChamCong = new BangChamCong();
+    private String maNhanVien = "";
+    private String ngay = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +57,15 @@ public class BangChamCongActivity extends AppCompatActivity {
         layoutBCC_tvSoDonDaHuy = findViewById(R.id.layoutBCC_tvSoDonDaHuy);
         layoutBCC_btnChiTietDonHuy = findViewById(R.id.layoutBCC_btnChiTietDonHuy);
 
+        layoutBCC_btnChiTietDonNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BangChamCongActivity.this, ChiTietDonDaNhanActivity.class);
+                intent.putExtra("ngay", ngay);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -67,17 +78,21 @@ public class BangChamCongActivity extends AppCompatActivity {
         for (ChamCong chamCong : chamCongs) {
             ngayLamViec.add(chamCong.getNgay());
         }
+
+        ngay = ngayLamViec.get(0);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.bangchamcong_spinner, ngayLamViec);
         layoutBCC_spnNgay.setAdapter(arrayAdapter);
 
         layoutBCC_spnNgay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ngay = ngayLamViec.get(position);
                 hienThiThongTinCa(ngayLamViec.get(position));
                 fireBaseNhaSachOnline.hienThiDon(maNhanVien, ngayLamViec.get(position), bangChamCong, BangChamCongActivity.this);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                ngay = ngayLamViec.get(0);
                 hienThiThongTinCa(ngayLamViec.get(0));
                 fireBaseNhaSachOnline.hienThiDon(maNhanVien, ngayLamViec.get(0), bangChamCong, BangChamCongActivity.this);
             }
