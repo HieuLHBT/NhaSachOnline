@@ -16,9 +16,10 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".activity.SuaNhanVienActivity"
+            android:name=".activity.ThemNhanVienActivity"
             android:exported="true">
             <intent-filter>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -43,6 +44,11 @@
         <activity
             android:name=".activity.MaGiamGiaActivity"
             android:exported="true"></activity>
+
+        <activity
+            android:name=".activity.SuaNhanVienActivity"
+            android:exported="true"></activity>
+
         <!-- <activity
              android:name=".activity.ChiTietGiaoHangActivity"
              android:exported="true"></activity>-->
