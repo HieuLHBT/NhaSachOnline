@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/itemMHQLNV"
+    android:id="@+id/itemMHQLSP"
     android:layout_width="match_parent"
     android:layout_height="300dp"
     card_view:cardCornerRadius="10dp"
@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="8"
+            android:layout_weight="7"
             android:background="@drawable/border"
             android:orientation="horizontal">
 
@@ -28,35 +28,12 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_marginTop="30dp"
-                    android:id="@+id/itemMHQLNV_anhNhanVien"
-                    android:layout_width="200dp"
-                    android:layout_height="190dp"
-                    android:src="@drawable/nhanvien1" />
+                    android:id="@+id/itemMHQLSP_anhSanPham"
+                    android:layout_width="180dp"
+                    android:layout_height="170dp"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/anhdemo" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2"
-                        android:paddingLeft="20dp"
-                        android:text="Chức vụ:"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/itemMHQLNV_tvChucVu"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="2.5"
-                        android:text="nhân viên"
-                        android:textColor="#978C8C" />
-
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -76,15 +53,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Mã nhân viên:"
+                        android:text="Mã Sách:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvMaNhanVien"
+                        android:id="@+id/itemMHQLSP_tvMaSach"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="NV001"
+                        android:text="S001"
                         android:textColor="#978C8C" />
 
                 </LinearLayout>
@@ -99,15 +76,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:text="Tên nhân viên:"
+                        android:text="Tên Sách:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvTenNhanVien"
+                        android:id="@+id/itemMHQLSP_tvTenSach"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.9"
-                        android:text="Irene"
+                        android:text="Conan"
                         android:textColor="#978C8C" />
                 </LinearLayout>
 
@@ -121,15 +98,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Số điện thoại:"
+                        android:text="Số Thể Loại:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvSDTNhanVien"
+                        android:id="@+id/itemMHQLSP_tvTheLoaiSach"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="0123456789"
+                        android:text="Trinh Thám"
                         android:textColor="#978C8C" />
 
                 </LinearLayout>
@@ -144,15 +121,15 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="Địa chỉ:"
+                        android:text="Tác Giả"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvDiaChiNhanVien"
+                        android:id="@+id/itemMHQLSP_tvTacGia"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.5"
-                        android:text="Bình Thạnh"
+                        android:text="Hiếu"
                         android:textColor="#978C8C" />
 
                 </LinearLayout>
@@ -161,22 +138,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:paddingTop="5dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="CMND:"
+                        android:layout_weight="2"
+                        android:text="Nhà Xuất Bản:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvCMNDNhanVien"
+                        android:id="@+id/itemMHQLSP_tvNhaXuatBan"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.5"
-                        android:text="0102000888"
+                        android:text="Kim Đồng "
                         android:textColor="#978C8C" />
                 </LinearLayout>
 
@@ -189,16 +165,16 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Lương CB:"
+                        android:layout_weight="2"
+                        android:text="Ngày Xuất Bản:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvLuongNhanVien"
+                        android:id="@+id/itemMHQLSP_tvNgayXuatBan"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1.6"
-                        android:text="7.000.000 đồng"
+                        android:text="15/06/2000"
                         android:textColor="#978C8C" />
                 </LinearLayout>
 
@@ -211,16 +187,16 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="Email:"
+                        android:layout_weight="2"
+                        android:text="Giá Tiền:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvEmailNhanVien"
+                        android:id="@+id/itemMHQLSP_tvGiaTien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="3.2"
-                        android:text="irene@gmail.com"
+                        android:text="30000"
                         android:textColor="#978C8C" />
                 </LinearLayout>
 
@@ -231,42 +207,70 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.5"
-                        android:text="Tài khoản:"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/itemMHQLNV_tvTaiKhoanNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2.5"
-                        android:text="ireneid"
-                        android:textColor="#978C8C" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.3"
-                        android:text="Mật khẩu:"
+                        android:text="Số Lượng Kho:"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/itemMHQLNV_tvMatKhauNhanVien"
+                        android:id="@+id/itemMHQLSP_tvSoLuongKho"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.2"
-                        android:text="irene123"
+                        android:layout_weight="2.5"
+                        android:text="150"
                         android:textColor="#978C8C" />
                 </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="10"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/itemMHQLSP_btnThem"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:text="Thêm"
+                    >
+                </Button>
+                <Button
+                    android:id="@+id/itemMHQLSP_btnXoá"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:text="Xoá"
+                    >
+                </Button>
+                <Button
+                    android:id="@+id/itemMHQLSP_btnSửa"
+                    android:layout_margin="5dp"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Sửa">
+                </Button>
+                <Button
+                    android:id="@+id/itemMHQLSP_btnNhapKho"
+                    android:layout_margin="5dp"
+                    android:layout_weight="2.5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="Nhập Kho">
+                </Button>
+
 
             </LinearLayout>
 

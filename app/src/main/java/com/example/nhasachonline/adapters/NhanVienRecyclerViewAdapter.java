@@ -63,6 +63,29 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         holder.itemMHQLNV_tvTaiKhoanNhanVien.setText(nhanVien.getTaiKhoan());
         holder.itemMHQLNV_tvMatKhauNhanVien.setText(nhanVien.getMatKhau());
 
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(nhanVien.getHinhNhanVien());
+        try {
+            File file = null;
+            if (nhanVien.getHinhNhanVien().contains("png")) {
+                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "png");
+            } else if (nhanVien.getHinhNhanVien().contains("jpg")) {
+                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "jpg");
+            }
+            final File fileHinh = file;
+            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    holder.itemMHQLNV_anhNhanVien.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         // Event processing
@@ -98,6 +121,7 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         TextView itemMHQLNV_tvTaiKhoanNhanVien;
         TextView itemMHQLNV_tvMatKhauNhanVien;
         ImageView itemMHQLNV_anhNhanVien;
+        Button itemMHQLNV_btnThemNhanVien;
         View.OnClickListener onClickListener;
         CardView itemMHQLNV;
 
@@ -115,9 +139,12 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
             itemMHQLNV_tvMatKhauNhanVien = itemView.findViewById(R.id.itemMHQLNV_tvMatKhauNhanVien);
             itemMHQLNV_anhNhanVien = itemView.findViewById(R.id.itemMHQLNV_anhNhanVien);
             itemMHQLNV = itemView.findViewById(R.id.itemMHQLNV);
-
+            itemMHQLNV_btnThemNhanVien = itemView.findViewById(R.id.layoutMHQLNV_btnThemNhanVien);
+            itemMHQLNV = itemMHQLNV.findViewById(R.id.itemMHQLNV);
 
             // Set event processing
+          //  itemMHQLNV.setOnClickListener(this);
+          //  itemMHQLNV_btnThemNhanVien.setOnClickListener(this);
 
         }
 
