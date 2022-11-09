@@ -41,7 +41,7 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         ItemQuanLyDonHangNV itemQuanLyDonHangNV = itemQuanLyDonHangNVs.get(pos);
         holder.itemQLDH_NV_txtMaDonHang.setText(itemQuanLyDonHangNV.getMaDonHang());
         holder.itemQLDH_NV_txtTrangThaiDonHang.setText(itemQuanLyDonHangNV.getTrangThaiDonHang());
-        holder.itemQLDH_NV_txtThoiGian.setText(itemQuanLyDonHangNV.getThoiGian());
+        //holder.itemQLDH_NV_txtThoiGian.setText(itemQuanLyDonHangNV.getThoiGian());
         holder.itemQLDH_NV_txtNgay.setText(itemQuanLyDonHangNV.getNgay());
 
 
