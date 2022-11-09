@@ -1376,6 +1376,7 @@ public class FireBaseNhaSachOnline {
         DatabaseReference gioHangDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         gioHangDatabase.child("nhanvien").child(maNhanVien).removeValue();
     }
+    //trieu
     //xoa San Pham
     public void xoaSanPham(String maSanPham,  SanPhamRecyclerViewAdapter adapter) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
