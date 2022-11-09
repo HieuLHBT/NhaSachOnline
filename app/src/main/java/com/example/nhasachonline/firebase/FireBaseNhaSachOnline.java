@@ -3,6 +3,7 @@ package com.example.nhasachonline.firebase;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +13,8 @@ import com.example.nhasachonline.activity.ChiTietGiaoHangActivity;
 import com.example.nhasachonline.activity.ChiTietSanPhamActivity;
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.LichLamViecActivity;
+import com.example.nhasachonline.activity.SuaNhanVienActivity;
+import com.example.nhasachonline.activity.ThemNhanVienActivity;
 import com.example.nhasachonline.activity.MaGiamGiaActivity;
 import com.example.nhasachonline.activity.ManHinhChinhNhanVienActivity;
 import com.example.nhasachonline.activity.ThanhToanActivity;
@@ -1316,7 +1319,7 @@ public class FireBaseNhaSachOnline {
     ///////////////////////////////////////////////////////
 
     //Tho
-    // Man hinh chi tiet san pham
+    // Màn hình hiển thị chi tiết sản phẩm
     public void hienThiChiTietSanPham(String maSanPham, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
@@ -1400,7 +1403,7 @@ public class FireBaseNhaSachOnline {
         }
     }
 
-    //Man hinh chinh khach hang
+    //Màn hình chính khách hàng
     public void hienThiManHinhChinhKhachHang(ArrayList<ItemSanPham> sanPhams, ManHinhChinhKhachHangAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
@@ -1499,7 +1502,7 @@ public class FireBaseNhaSachOnline {
 
     }
 
-    //Them so luong vao gio hang
+    //Thêm số lượng vào giỏ hàng
     public void themVaoGioHang(String maKhachHang, String maSanPham, String soLuong) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference gioHangDatabase = firebaseDatabase.getReference("GIOHANG");
@@ -1508,7 +1511,7 @@ public class FireBaseNhaSachOnline {
         gioHangDatabase.child(maKhachHang).child(maSanPham).child("maSanPham").setValue(maSanPham);
     }
 
-    // Man hien thi danh sach nhan vien
+    // Màn hình hiển thị danh sách nhân viên
     public void hienThiManHinhChinhQuanLyNhanVien(ArrayList<ItemNhanVien> nhanViens, NhanVienRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
@@ -1553,56 +1556,72 @@ public class FireBaseNhaSachOnline {
 
     }
 
-    // Man hinh them nhan vien
-    public void themNhanVien(ArrayList<ItemNhanVien> itemNhanVien, Context context) {
+    // Thêm nhân viên
+    public void themNhanVien(String maNhanVien, String hinhNhanVien, String tenNhanVien, String cmnd, String diaChi, String email, String luongCoBan, String matKhau, String nguoiDung, String soDienThoai, String taiKhoan){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
-        nguoiDungDatabase.child("nhanvien").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                NhanVien nhanvien = snapshot.getValue(NhanVien.class);
-                itemNhanVien.add(new ItemNhanVien(
-                        nhanvien.getNguoiDung(),
-                        nhanvien.getMaNhanVien(),
-                        nhanvien.getTenNhanVien(),
-                        nhanvien.getCmnd(),
-                        nhanvien.getDiaChi(),
-                        nhanvien.getEmail(),
-                        nhanvien.getHinhNhanVien(),
-                        nhanvien.getLuong(),
-                        nhanvien.getMatKhau(),
-                        nhanvien.getSoDienThoai(),
-                        nhanvien.getTaiKhoan()
-                ));
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("onCancelled", "Lỗi!" + error.getMessage());
-            }
-        });
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("maNhanVien").setValue(maNhanVien);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("hinhNhanVien").setValue(hinhNhanVien);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("tenNhanVien").setValue(tenNhanVien);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("cmnd").setValue(cmnd);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("diaChi").setValue(diaChi);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("email").setValue(email);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("luong").setValue(luongCoBan);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("matKhau").setValue(matKhau);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("matKhau").setValue(nguoiDung);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("soDienThoai").setValue(soDienThoai);
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("taiKhoan").setValue(taiKhoan);
     }
 
-    // Xoa nhan vien
-    public void xoaNhanVien(String maNhanVien, NhanVienRecyclerViewAdapter adapter) {
+    // Xóa nhân viên
+    public void xoaNhanVien(String maNhanVien,  NhanVienRecyclerViewAdapter adapter) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference gioHangDatabase = firebaseDatabase.getReference("NGUOIDUNG");
-        gioHangDatabase.child("nhanvien").child(maNhanVien).removeValue();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).removeValue();
     }
+
+    // Sửa Nhân Viên
+    public void suaNhanVien(Context context, String maNhanVien, String hinhNhanVien, String tenNhanVien, String cmnd, String diaChi, String email, String luongCoBan, String matKhau, String nguoiDung, String soDienThoai, String taiKhoan){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    NhanVien nhanVien = snapshot.getValue(NhanVien.class);
+                    nguoiDungDatabase.child(nhanVien.getMaNhanVien()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            ((SuaNhanVienActivity) context).thongTinNhanVien(nhanVien);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("hinhNhanVien").setValue(hinhNhanVien);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("tenNhanVien").setValue(tenNhanVien);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("cmnd").setValue(cmnd);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("diaChi").setValue(diaChi);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("email").setValue(email);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("luong").setValue(luongCoBan);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("matKhau").setValue(matKhau);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("matKhau").setValue(nguoiDung);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("soDienThoai").setValue(soDienThoai);
+                            nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("taiKhoan").setValue(taiKhoan);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                }
+            });
+
+    }
+
+    // Màn hình xác nhận đơn hàng
+
+    // Màn hình thông báo hủy
 
 }
