@@ -49,7 +49,8 @@ public class GioHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.giohang_layout);
-        maKhachHang = sharePreferences.getKhachHang(this);
+//        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutGH_rvDanhSach);
         layoutGH_tvTongTienThanhToan = findViewById(R.id.layoutGH_tvTongTienThanhToan);
