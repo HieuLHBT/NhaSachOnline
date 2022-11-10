@@ -25,77 +25,19 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/layoutMHCNV_imgHinhNhanVien"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight="4"/>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_weight="10"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="7"
-                        android:gravity="left|center"
-                        android:text="Họ tên"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:id="@+id/layoutMHCNV_txtTenNhanVien"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="11"
-                        android:gravity="center"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="7"
-                        android:gravity="left|center"
-                        android:text="Mã nhân viên"
-                        android:textSize="18dp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
-
-                    <TextView
-                        android:id="@+id/layoutMHCNV_txtMaNhanVien"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="11"
-                        android:gravity="center"
-                        android:textSize="18dp"
-                        android:textColor="@color/black"/>
-                </LinearLayout>
-
-
-            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/layoutMHCNV_NV_rvManHinhChinhNhanVien"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
