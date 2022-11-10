@@ -1940,5 +1940,35 @@ public class FireBaseNhaSachOnline {
         gioHangDatabase.child("SACH").child(maSanPham).removeValue();
         gioHangDatabase.child("VANPHONGPHAM").child(maSanPham).removeValue();
     }
+    //THEM SACH
+    public void themSanPham_Sach(String maSach, String hinhSach, String tenSach,String theLoai, String tacGia, String nhaXuatBan
+            , String ngayXuatBan, String giaTien, String soLuongKho){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("SANPHAM");
+        nguoiDungDatabase.child("SACH").child(maSach).child("maSach").setValue(maSach);
+        nguoiDungDatabase.child("SACH").child(maSach).child("hinhSach").setValue(hinhSach);
+        nguoiDungDatabase.child("SACH").child(maSach).child("tenSach").setValue(tenSach);
+        nguoiDungDatabase.child("SACH").child(maSach).child("theLoao").setValue(theLoai);
+        nguoiDungDatabase.child("SACH").child(maSach).child("tacGia").setValue(tacGia);
+        nguoiDungDatabase.child("SACH").child(maSach).child("nhaXuatBan").setValue(nhaXuatBan);
+        nguoiDungDatabase.child("SACH").child(maSach).child("ngayXuatBan").setValue(ngayXuatBan);
+        nguoiDungDatabase.child("SACH").child(maSach).child("giaTien").setValue(giaTien);
+        nguoiDungDatabase.child("SACH").child(maSach).child("soLongKho").setValue(soLuongKho);
+    }
+    // THÊM VPPP
+    public void themSanPham_vpp(String maVanPhongPHam, String hinhVanPhongPham, String tenVanPhongPham
+            ,String nhaPhanPhoi, String xuatXu, String donVi
+            , String giaTien, String soLuongKho){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("SANPHAM");
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("maVanPhongPHam").setValue(maVanPhongPHam);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("hinhSach").setValue(hinhVanPhongPham);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("tenSach").setValue(tenVanPhongPham);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("theLoao").setValue(nhaPhanPhoi);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("tacGia").setValue(xuatXu);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("nhaXuatBan").setValue(donVi);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("giaTien").setValue(giaTien);
+        nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("soLongKho").setValue(soLuongKho);
+    }
 
 }

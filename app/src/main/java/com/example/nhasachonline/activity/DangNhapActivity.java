@@ -55,6 +55,12 @@ public class DangNhapActivity  extends AppCompatActivity {
                 startActivity(new Intent(DangNhapActivity.this, QuenMatKhauActivity.class));
             }
         });
+        layoutDN_btnDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DangNhapActivity.this,DangKyActivity.class));
+            }
+        });
         layoutDN_bntDangNhap.setOnClickListener(view -> {
             Task<AuthResult> task = FirebaseAuth.getInstance().signInWithEmailAndPassword(layoutDN_edtTaiKhoan.getText().toString(), layoutDN_edtNhapMatKhau.getText().toString());
             task.addOnSuccessListener(o ->{
