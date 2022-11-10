@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -21,6 +22,7 @@ import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 
 import com.example.nhasachonline.item.ItemNhanVien;
+import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.tools.SharePreferences;
 
 import java.util.ArrayList;
@@ -39,6 +41,10 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinh_quanly_nhanvien_layout);
+
+        //search
+        timkiemSP = findViewById(R.id.layoutMHQLNV_swTimKiem);
+        timKiem();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLNV_rvDanhSachNhanVien);
         adapter = new NhanVienRecyclerViewAdapter(this, R.layout.manhinh_quanly_nhanvien_item, nhanViens);
@@ -97,7 +103,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent1 = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent1);
+                        startActivity(intent1);
                     }
                 });
 
@@ -106,11 +112,41 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
+                        startActivity(intent);
                     }
                 });
             }
         });
     }
 
+    public void filterList(String newText) {
+        ArrayList<ItemNhanVien> fiIteredList = new ArrayList<>();
+        for(ItemNhanVien nhanVien : nhanViens){
+            if(nhanVien.getTenNhanVien().toLowerCase().contains(newText.toLowerCase()) || nhanVien.getMaNhanVien().toLowerCase().contains(newText.toLowerCase())){
+                fiIteredList.add(nhanVien);
+            }
+        }
+
+        if(fiIteredList.isEmpty()){
+            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList1(fiIteredList);
+        }
+    }
+
+    public void timKiem(){
+        timkiemSP.clearFocus();
+        timkiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+    }
 }

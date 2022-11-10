@@ -81,12 +81,6 @@ public class SuaNhanVienActivity extends AppCompatActivity {
                                 MHSNV_edtSoDienThoai.getText().toString(),
                                 MHSNV_edtTaiKhoan.getText().toString()
                                 );
-                        //Kiểm tra các trường bỏ trống
-                        if(MHSNV_edtMaNhanVien.getTouchables().isEmpty() || MHSNV_edtTenNhanVien.getTouchables().isEmpty() || MHSNV_edtChucVu.getTouchables().isEmpty() ||
-                                MHSNV_edtTaiKhoan.getTouchables().isEmpty() || MHSNV_edtMatKhau.getTouchables().isEmpty() || MHSNV_edtEmail.getTouchables().isEmpty() ||
-                                MHSNV_edtDiaChi.getTouchables().isEmpty() || MHSNV_edtSoDienThoai.getTouchables().isEmpty() || MHSNV_edtCMND.getTouchables().isEmpty() || MHSNV_edtLuongCoBan.getTouchables().isEmpty()){
-                            Toast.makeText(SuaNhanVienActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
