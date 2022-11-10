@@ -1,6 +1,9 @@
 package com.example.nhasachonline.activity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -9,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
@@ -27,10 +31,11 @@ public class BangChamCongActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
     private SharePreferences sharePreferences = new SharePreferences();
 
-    private String maNhanVien = "";
     private ArrayList<ChamCong> chamCongs = new ArrayList<>();
     private ArrayList<String> ngayLamViec = new ArrayList<>();
     private BangChamCong bangChamCong = new BangChamCong();
+    private String maNhanVien = "";
+    private String ngay = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,6 +60,75 @@ public class BangChamCongActivity extends AppCompatActivity {
         layoutBCC_tvSoDonDaHuy = findViewById(R.id.layoutBCC_tvSoDonDaHuy);
         layoutBCC_btnChiTietDonHuy = findViewById(R.id.layoutBCC_btnChiTietDonHuy);
 
+        layoutBCC_btnChiTietDonNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (layoutBCC_tvSoDonDaNhan.getText().toString().equalsIgnoreCase("0")) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(BangChamCongActivity.this);
+                    b.setTitle("CẢNH BÁO");
+                    b.setMessage("Không có chi tiết đơn hàng nào!");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
+                } else {
+                    Intent intent = new Intent(BangChamCongActivity.this, ChiTietDonDaNhanActivity.class);
+                    intent.putExtra("ngay", ngay);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        layoutBCC_btnChiTietDonGiao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (layoutBCC_tvSoDonDaGiao.getText().toString().equalsIgnoreCase("0")) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(BangChamCongActivity.this);
+                    b.setTitle("CẢNH BÁO");
+                    b.setMessage("Không có chi tiết đơn hàng nào!");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
+                } else {
+                    Intent intent = new Intent(BangChamCongActivity.this, ChiTietDonDaGiaoActivity.class);
+                    intent.putExtra("ngay", ngay);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        layoutBCC_btnChiTietDonHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (layoutBCC_tvSoDonDaHuy.getText().toString().equalsIgnoreCase("0")) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(BangChamCongActivity.this);
+                    b.setTitle("CẢNH BÁO");
+                    b.setMessage("Không có chi tiết đơn hàng nào!");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
+                } else {
+                    Intent intent = new Intent(BangChamCongActivity.this, ChiTietDonDaHuyActivity.class);
+                    intent.putExtra("ngay", ngay);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -64,20 +138,26 @@ public class BangChamCongActivity extends AppCompatActivity {
     }
 
     public void hienThiNgay() {
+        ngayLamViec.clear();
         for (ChamCong chamCong : chamCongs) {
             ngayLamViec.add(chamCong.getNgay());
         }
+
+        ngay = ngayLamViec.get(0);
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.bangchamcong_spinner, ngayLamViec);
         layoutBCC_spnNgay.setAdapter(arrayAdapter);
 
         layoutBCC_spnNgay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ngay = ngayLamViec.get(position);
                 hienThiThongTinCa(ngayLamViec.get(position));
                 fireBaseNhaSachOnline.hienThiDon(maNhanVien, ngayLamViec.get(position), bangChamCong, BangChamCongActivity.this);
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+                ngay = ngayLamViec.get(0);
                 hienThiThongTinCa(ngayLamViec.get(0));
                 fireBaseNhaSachOnline.hienThiDon(maNhanVien, ngayLamViec.get(0), bangChamCong, BangChamCongActivity.this);
             }
