@@ -25,7 +25,9 @@ import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
+import com.example.nhasachonline.adapters.ManHinhChinhNhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.QuanLyDonHangNVRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.SanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ThanhToanRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.ChamCong;
@@ -44,7 +46,9 @@ import com.example.nhasachonline.item.ChiTietDonDaNhan;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
 import com.example.nhasachonline.item.DanhGia;
 import com.example.nhasachonline.item.ItemKhachHang;
+import com.example.nhasachonline.item.ItemManHinhChinhNhanVien;
 import com.example.nhasachonline.item.ItemNhanVien;
+import com.example.nhasachonline.item.ItemQuanLyDonHangNV;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.item.LichLamViec;
 import com.example.nhasachonline.item.SanPhamTinhTongTien;
@@ -870,6 +874,25 @@ public class FireBaseNhaSachOnline {
         phanHoiDatabase.child(maSanPham).child(maKhachHang).child("danhGia").setValue(danhGia);
     }
 
+    //Quan ly don hang
+    public void hienThiItemQuanLyDonHang(String maDonHang, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        trangThaiDonHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TrangThaiDonHang trangThaiDonHang = snapshot.getValue(TrangThaiDonHang.class);
+                itemQuanLyDonHangNVS.add(new ItemQuanLyDonHangNV(trangThaiDonHang.getMaDonHang(), trangThaiDonHang.getTrangThaiNhanHangNV(), ""));
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }
+
     //Thong tin giao hang
     public void hienThiItemChiTietGiaoHang(String maDonHang, ArrayList<ChiTietGiaoHang> chiTietGiaoHang, ChiTietGiaoHangRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -1128,7 +1151,7 @@ public class FireBaseNhaSachOnline {
     }
 
     //Man hinh chinh nhan vien
-    public void hienThiManHinhChinhNhanVien(String maNhanVien, NhanVien nhanVien, Context context) {
+   /* public void hienThiManHinhChinhNhanVien(String maNhanVien, NhanVien nhanVien, Context context){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nhanVienDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nhanVienDatabase.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
@@ -1146,7 +1169,25 @@ public class FireBaseNhaSachOnline {
                 nhanVien.setTaiKhoan(nv.getTaiKhoan());
                 nhanVien.setSoDienThoai(nv.getSoDienThoai());
                 nhanVien.setNguoiDung(nv.getNguoiDung());
-                ((ManHinhChinhNhanVienActivity) context).hienThiManHinhChinhNhanVien();
+                ((ManHinhChinhNhanVienActivity)context).hienThiManHinhChinhNhanVien();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
+    }*/
+
+    public void hienThiManHinhChinhNhanVien(String maNhanVien, ArrayList<ItemManHinhChinhNhanVien> itemManHinhChinhNhanViens, ManHinhChinhNhanVienRecyclerViewAdapter adapter, Context context){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference manHinhChinhNhanVien = firebaseDatabase.getReference("NGUOIDUNG");
+        manHinhChinhNhanVien.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                NhanVien nhanVien = snapshot.getValue(NhanVien.class);
+                itemManHinhChinhNhanViens.add(new ItemManHinhChinhNhanVien(nhanVien.getHinhNhanVien(), nhanVien.getTenNhanVien(), nhanVien.getMaNhanVien()));
+                adapter.notifyDataSetChanged();
             }
 
             @Override
