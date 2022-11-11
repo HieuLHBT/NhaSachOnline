@@ -23,6 +23,7 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
     private String maDonHang = "dh2";
     private String maKhachHang = "kh1";
 
+
     private DonHang donHang = new DonHang();
     private KhachHang khachHang = new KhachHang();
     private TrangThaiDonHang trangThaiDonHang = new TrangThaiDonHang();

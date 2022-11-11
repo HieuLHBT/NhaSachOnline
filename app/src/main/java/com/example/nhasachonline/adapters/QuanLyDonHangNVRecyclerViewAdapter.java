@@ -20,8 +20,9 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
     private Activity context;
     private int resource;
     private ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVs;
+    private OnItemClickListener onItemClickListener;
 
-    public QuanLyDonHangNVRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVs){
+    public QuanLyDonHangNVRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVs) {
         this.context = context;
         this.resource = resource;
         this.itemQuanLyDonHangNVs = itemQuanLyDonHangNVs;
@@ -44,7 +45,14 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         //holder.itemQLDH_NV_txtThoiGian.setText(itemQuanLyDonHangNV.getThoiGian());
         holder.itemQLDH_NV_txtNgay.setText(itemQuanLyDonHangNV.getNgay());
 
-
+        holder.onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClickListener(pos, holder.itemView);
+                }
+            }
+        };
     }
 
     @Override
@@ -52,11 +60,11 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         return itemQuanLyDonHangNVs.size();
     }
 
-    public int getItemViewType(int position){
-        return  resource;
+    public int getItemViewType(int position) {
+        return resource;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemQLDH_NV_txtMaDonHang;
         TextView itemQLDH_NV_txtTrangThaiDonHang;
         TextView itemQLDH_NV_txtThoiGian;
@@ -67,7 +75,9 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         Button itemQLDH_NV_btnGiaoHang;
         Button itemQLDH_NV_btnHuyDon;
 
-        public MyViewHolder(@NonNull View itemView){
+        View.OnClickListener onClickListener;
+
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemQLDH_NV_txtMaDonHang = itemView.findViewById(R.id.itemQLDH_NV_txtMaDonHang);
             itemQLDH_NV_txtTrangThaiDonHang = itemView.findViewById(R.id.itemQLDH_NV_txtTrangThaiDonHang);
@@ -77,6 +87,26 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
             itemQLDH_NV_btnThongBaoHuy = itemView.findViewById(R.id.itemQLDH_NV_btnThongBaoHuy);
             itemQLDH_NV_btnGiaoHang = itemView.findViewById(R.id.itemQLDH_NV_btnGiaoHang);
             itemQLDH_NV_btnHuyDon = itemView.findViewById(R.id.itemQLDH_NV_btnHuyDon);
+
+            itemQLDH_NV_btnChiTietDon.setOnClickListener(this);
+            itemQLDH_NV_btnThongBaoHuy.setOnClickListener(this);
+            itemQLDH_NV_btnGiaoHang.setOnClickListener(this);
+            itemQLDH_NV_btnHuyDon.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            if (onClickListener != null) {
+                onClickListener.onClick(view);
+            }
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }
