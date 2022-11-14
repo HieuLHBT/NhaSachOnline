@@ -3,12 +3,16 @@ package com.example.nhasachonline.activity;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,7 +26,14 @@ import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.ChiTietGiaoHang;
 import com.example.nhasachonline.item.ItemManHinhChinhNhanVien;
 import com.example.nhasachonline.tools.SharePreferences;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +50,8 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     private NhanVien nhanVien = new NhanVien();
 
     private TextView layoutMHCNV_txtNgay;
+    private TextView layoutMHCNV_NV_txtHoTen;
+    private TextView layoutMHCNV_NV_txtMaNhanVien;
     private Button layoutMHCNV_btnCheckin;
     private Button layoutMHCNV_btnCheckout;
     private Button layoutMHCNV_btnQuanLyDonHang;
@@ -46,14 +59,15 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     private Button layoutMHCNV_btnLichLamViec;
     private Button layoutMHCNV_btnBangCong;
     private Button layoutMHCNV_btnPhanHoiKhachHang;
-
+    private ImageView layoutMHCNV_NV_imgHinhNhanVien;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_nhanvien_layout);
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHCNV_NV_rvManHinhChinhNhanVien);
+        maNhanVien = getIntent().getStringExtra("maNhanVien");
+        maNhanVien = sharePreferences.getKhachHang(this);
 
         layoutMHCNV_txtNgay = findViewById(R.id.layoutMHCNV_txtNgay);
         layoutMHCNV_btnCheckin = findViewById(R.id.layoutMHCNV_btnCheckin);
@@ -63,12 +77,14 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
         layoutMHCNV_btnLichLamViec = findViewById(R.id.layoutMHCNV_btnLichLamViec);
         layoutMHCNV_btnBangCong = findViewById(R.id.layoutMHCNV_btnBangCong);
         layoutMHCNV_btnPhanHoiKhachHang = findViewById(R.id.layoutMHCNV_btnPhanHoiKhachHang);
+        layoutMHCNV_NV_txtHoTen = findViewById(R.id.layoutMHCNV_NV_txtHoTen);
+        layoutMHCNV_NV_txtMaNhanVien = findViewById(R.id.layoutMHCNV_NV_txtMaNhanVien);
+        layoutMHCNV_NV_imgHinhNhanVien = findViewById(R.id.layoutMHCNV_NV_imgHinhNhanVien);
 
         adapter = new ManHinhChinhNhanVienRecyclerViewAdapter(this, R.layout.manhinhchinh_nhanvien_item, itemManHinhChinhNhanViens);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
+
 
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat sdfTime = new SimpleDateFormat("hh.mm");
@@ -76,7 +92,8 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
         thoiGian = sdfTime.format(new Date());
         layoutMHCNV_txtNgay.setText(ngay);
 
-        fireBase.hienThiManHinhChinhNhanVien(maNhanVien, itemManHinhChinhNhanViens, adapter, this);
+        fireBase.hienThiManHinhChinhNhanVien(maNhanVien, nhanVien, this);
+
         layoutMHCNV_btnCheckin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +149,35 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
             }
         });
     }
+    public void hienThiManHinhChinhNhanVien(){
+        layoutMHCNV_NV_txtMaNhanVien.setText(nhanVien.getMaNhanVien());
+        layoutMHCNV_NV_txtHoTen.setText(nhanVien.getTenNhanVien());
 
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(nhanVien.getHinhNhanVien());
+        try {
+            File file = null;
+            if (nhanVien.getHinhNhanVien().contains("png")) {
+                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "png");
+            } else if (nhanVien.getHinhNhanVien().contains("jpg")) {
+                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "jpg");
+            }
+            final File fileHinh = file;
+            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    layoutMHCNV_NV_imgHinhNhanVien.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
     public void ThongBaoXacNhanCheckin(ArrayList<ItemManHinhChinhNhanVien> manHinhChinhNhanViens) {
         AlertDialog.Builder b = new AlertDialog.Builder(ManHinhChinhNhanVienActivity.this);
         b.setTitle("Xác nhận checkin");

@@ -61,7 +61,7 @@
         <!--            android:name=".activity.TraLoiBinhLuanActivity"-->
         <!--            android:exported="true"></activity>-->
 
-
+        <!--        Tin        -->
         <activity
             android:name=".activity.ChiTietSanPhamActivity"
             android:exported="true"></activity>
@@ -74,15 +74,13 @@
         <activity
             android:name=".activity.DangKyActivity"
             android:exported="true"></activity>
-       <!-- <activity
-            android:name=".activity.ChiTietGiaoHangActivity"
-            android:exported="true"></activity>-->
         <activity
-            android:name=".activity.ThemNhanVienActivity"
+            android:name=".activity.ThongTinGiaoHangNVActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.SuaNhanVienActivity"
+            android:name=".activity.ChiTietDonHangNVActivity"
             android:exported="true"></activity>
+            
     </application>
 
 </manifest>

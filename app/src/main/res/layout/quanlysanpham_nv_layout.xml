@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/layoutQLSP_NV_swTimKiem"
+            android:id="@+id/layoutQLSP_NV_svTimKiem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
