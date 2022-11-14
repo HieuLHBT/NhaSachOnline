@@ -372,16 +372,12 @@ public class LichLamViecActivity extends AppCompatActivity {
         int tongNgayTrongThang = thangNam.lengthOfMonth();
         LocalDate ngayDauTienTrongThang = duLieuNgay.withDayOfMonth(1);
         int ngayTrongTuan = ngayDauTienTrongThang.getDayOfWeek().getValue() - 1;
-        int thu7 = 6;
         int chuNhat = 7;
         for (int i = 1; i <= 42; i++) {
             if (i <= ngayTrongTuan || i > tongNgayTrongThang + ngayTrongTuan) {
                 danhSachNgay.add(new LichLamViec(""));
             } else {
-                if (thu7 == i) {
-                    thu7 += 7;
-                    danhSachNgay.add(new LichLamViec(String.valueOf(i - ngayTrongTuan)));
-                } else if (chuNhat == i) {
+                if (chuNhat == i) {
                     chuNhat += 7;
                     danhSachNgay.add(new LichLamViec(String.valueOf(i - ngayTrongTuan)));
                 } else {
