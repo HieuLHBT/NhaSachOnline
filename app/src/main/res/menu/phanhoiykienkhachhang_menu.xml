@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuPHYKKH_itemTraLoiBinhLuan"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Trả lời bình luận" />
+    <item
+        android:id="@+id/menuPHYKKH_itemSuaTraLoiBinhLuan"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Thay đổi trả lời bình luận" />
+</menu>

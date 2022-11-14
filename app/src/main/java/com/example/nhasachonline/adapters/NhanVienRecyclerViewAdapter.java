@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ItemNhanVien;
+import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -38,6 +39,11 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         this.context = context;
         this.resource = resource;
         this.nhanViens = nhanViens;
+    }
+
+    public void setFilteredList1(ArrayList<ItemNhanVien> filteredList1){
+        this.nhanViens = filteredList1;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override

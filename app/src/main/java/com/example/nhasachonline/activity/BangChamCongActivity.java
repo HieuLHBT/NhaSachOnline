@@ -60,6 +60,14 @@ public class BangChamCongActivity extends AppCompatActivity {
         layoutBCC_tvSoDonDaHuy = findViewById(R.id.layoutBCC_tvSoDonDaHuy);
         layoutBCC_btnChiTietDonHuy = findViewById(R.id.layoutBCC_btnChiTietDonHuy);
 
+        layoutBCC_btnBangLuong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BangChamCongActivity.this, BangLuongActivity.class);
+                startActivity(intent);
+            }
+        });
+
         layoutBCC_btnChiTietDonNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

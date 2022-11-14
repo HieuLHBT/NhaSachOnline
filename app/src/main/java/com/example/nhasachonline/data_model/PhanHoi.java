@@ -1,6 +1,6 @@
 package com.example.nhasachonline.data_model;
 
-public class PhanPhoi {
+public class PhanHoi {
     private String maSanPham;
     private String maKhachHang;
     private String maDonHang;
@@ -74,10 +74,10 @@ public class PhanPhoi {
         this.traLoi = traLoi;
     }
 
-    public PhanPhoi() {
+    public PhanHoi() {
     }
 
-    public PhanPhoi(String maSanPham, String maKhachHang, String maDonHang, String binhLuan, String danhGia, String ngayBinhLuan, String maNhanVien, String traLoi) {
+    public PhanHoi(String maSanPham, String maKhachHang, String maDonHang, String binhLuan, String danhGia, String ngayBinhLuan, String maNhanVien, String traLoi) {
         this.maSanPham = maSanPham;
         this.maKhachHang = maKhachHang;
         this.maDonHang = maDonHang;
