@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.nhasachonline.activity.BangChamCongActivity;
+import com.example.nhasachonline.activity.BangLuongActivity;
 import com.example.nhasachonline.activity.ChiTietDonHangNVActivity;
 import com.example.nhasachonline.activity.ChiTietGiaoHangActivity;
 import com.example.nhasachonline.activity.ChiTietSanPhamActivity;
@@ -33,10 +34,8 @@ import com.example.nhasachonline.adapters.ChiTietDonHangNVRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ChiTietGiaoHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
-import com.example.nhasachonline.adapters.MHNVXacNhanDonHangItemRycyclerViewAdapter;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
-import com.example.nhasachonline.adapters.ManHinhChinhNhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.PhanHoiYKienKhachHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.QuanLyDonHangNVRecyclerViewAdapter;
@@ -1451,7 +1450,7 @@ public class FireBaseNhaSachOnline {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot phanHoiSnapshot : snapshot.getChildren()) {
-                    PhanPhoi phanPhoi = phanHoiSnapshot.getValue(PhanPhoi.class);
+                    PhanHoi phanPhoi = phanHoiSnapshot.getValue(PhanHoi.class);
                     if (phanPhoi.getMaSanPham().contains("s")) {
                         sachDatabase.child(phanPhoi.getMaSanPham()).addValueEventListener(new ValueEventListener() {
                             @Override
