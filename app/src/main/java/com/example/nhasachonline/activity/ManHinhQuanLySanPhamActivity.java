@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -83,7 +85,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new SanPhamRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                ImageButton item_btnTroVe = view.findViewById(R.id.layoutMHQLSP_btnBack);
+                Button item_btnTroVe = view.findViewById(R.id.layoutMHQLSP_btnBack);
                 item_btnTroVe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -91,12 +93,20 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
                     }
                 });
 
-                ImageButton itemMHQLSP_btnThem = view.findViewById(R.id.itemMHQLSP_btnThem);
+                Button itemMHQLSP_btnThem = view.findViewById(R.id.itemMHQLSP_btnThem);
                 itemMHQLSP_btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent1 = new Intent(ManHinhQuanLySanPhamActivity.this, ThemNhanVienActivity.class);
+                        Intent intent1 = new Intent(ManHinhQuanLySanPhamActivity.this, ThemSanPhamSachActivity.class);
                         startActivity(intent1);
+                    }
+                });
+                CardView itemMHQLSP = view.findViewById(R.id.itemMHQLSP);
+                itemMHQLSP.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ManHinhQuanLySanPhamActivity.this, SuaSanPhamSachActivity.class);
+                        ManHinhQuanLySanPhamActivity.this.startActivity(intent);
                     }
                 });
             }
