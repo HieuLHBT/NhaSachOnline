@@ -1,9 +1,13 @@
 package com.example.nhasachonline.adapters;
 
 import android.app.Activity;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ItemQuanLySanPhamNV;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -20,6 +31,7 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
     private Activity context;
     private int resource;
     private ArrayList<ItemQuanLySanPhamNV> itemQuanLySanPhamNVs;
+    private OnItemClickListener onItemClickListener;
 
     public QuanLySanPhamNVRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemQuanLySanPhamNV> itemQuanLySanPhamNVs){
         this.context = context;
@@ -27,6 +39,10 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         this.itemQuanLySanPhamNVs = itemQuanLySanPhamNVs;
     }
 
+    public void setFilteredList(ArrayList<ItemQuanLySanPhamNV> filteredList){
+        this.itemQuanLySanPhamNVs = filteredList;
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public QuanLySanPhamNVRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,9 +59,39 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         holder.itemQLSP_NV_txtTenSanPham.setText(itemQuanLySanPhamNV.getTenSanPham());
         holder.itemQLSP_NV_txtGiaTien.setText(formatter.format(itemQuanLySanPhamNV.getGiaTien()) + " VNĐ");
         holder.itemQLSP_NV_txtSoLuongTrongKho.setText(itemQuanLySanPhamNV.getSoLuong() + " ");
-        holder.itemQLSP_NV_imgHinhSanPham.setText(itemQuanLySanPhamNV.getHinhSanPham());
 
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(itemQuanLySanPhamNV.getHinhSanPham());
+        try {
+            File file = null;
+            if (itemQuanLySanPhamNV.getHinhSanPham().contains("png")) {
+                file = File.createTempFile(itemQuanLySanPhamNV.getHinhSanPham().substring(0,itemQuanLySanPhamNV.getHinhSanPham().length()-4), "png");
+            } else if (itemQuanLySanPhamNV.getHinhSanPham().contains("jpg")) {
+                file = File.createTempFile(itemQuanLySanPhamNV.getHinhSanPham().substring(0,itemQuanLySanPhamNV.getHinhSanPham().length()-4), "jpg");
+            }
+            final File fileHinh = file;
+            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    holder.itemQLSP_NV_imgHinhSanPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        holder.onClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClickListener(pos, holder.itemView);
+                }
+            }
+        };
     }
 
     @Override
@@ -57,13 +103,17 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         return  resource;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView itemQLSP_NV_txtMaSanPham;
         TextView itemQLSP_NV_txtTenSanPham;
         TextView itemQLSP_NV_txtGiaTien;
         TextView itemQLSP_NV_txtSoLuongTrongKho;
-        TextView itemQLSP_NV_imgHinhSanPham;
+        ImageView itemQLSP_NV_imgHinhSanPham;
         Button itemQLSP_NV_btnKiemTraDonHang;
+        LinearLayout itemQLSP_NV_llCardView;
+        CardView itemQLSP_NV;
+        View.OnClickListener onClickListener;
+
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
@@ -73,6 +123,24 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
             itemQLSP_NV_txtSoLuongTrongKho = itemView.findViewById(R.id.itemQLSP_NV_txtSoLuongTrongKho);
             itemQLSP_NV_imgHinhSanPham = itemView.findViewById(R.id.itemQLSP_NV_imgHinhSanPham);
             itemQLSP_NV_btnKiemTraDonHang = itemView.findViewById(R.id.itemQLSP_NV_btnKiemTraDonHang);
+            itemQLSP_NV_llCardView = itemView.findViewById(R.id.itemQLSP_NV_llCardView);
+            itemQLSP_NV = itemView.findViewById(R.id.itemQLSP_NV);
+
+            itemQLSP_NV_btnKiemTraDonHang.setOnClickListener(this);
         }
+        @Override
+        public void onClick(View view) {
+            if (onClickListener != null) {
+                onClickListener.onClick(view);
+            }
+        }
+    }
+    // Interface for event processing
+    public interface OnItemClickListener {
+        void onItemClickListener(int position, View view);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 }

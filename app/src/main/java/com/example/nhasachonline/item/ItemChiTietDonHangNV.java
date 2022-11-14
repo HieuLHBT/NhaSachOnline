@@ -1,18 +1,19 @@
 package com.example.nhasachonline.item;
 
 public class ItemChiTietDonHangNV {
+    private String maSanPham;
     private String tenSanPham;
     private int soLuong;
     private int donGia;
     private int tongTien;
     private String hinhSanPham;
 
-    public String getHinhSanPham() {
-        return hinhSanPham;
+    public String getMaSanPham() {
+        return maSanPham;
     }
 
-    public void setHinhSanPham(String hinhSanPham) {
-        this.hinhSanPham = hinhSanPham;
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
     public String getTenSanPham() {
@@ -47,14 +48,23 @@ public class ItemChiTietDonHangNV {
         this.tongTien = tongTien;
     }
 
+    public String getHinhSanPham() {
+        return hinhSanPham;
+    }
+
+    public void setHinhSanPham(String hinhSanPham) {
+        this.hinhSanPham = hinhSanPham;
+    }
+
     public ItemChiTietDonHangNV() {
     }
 
-    public ItemChiTietDonHangNV(String tenSanPham, int soLuong, int donGia, int tongTien, String hinhSanPham) {
+    public ItemChiTietDonHangNV(String maSanPham, String tenSanPham, int soLuong, int donGia, String hinhSanPham) {
+        this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.soLuong = soLuong;
         this.donGia = donGia;
-        this.tongTien = tongTien;
+        this.tongTien = donGia * soLuong;
         this.hinhSanPham = hinhSanPham;
     }
 }

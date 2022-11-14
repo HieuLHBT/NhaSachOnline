@@ -54,13 +54,14 @@
                 android:text="Tình trạng"
                 android:textColor="@color/black"
                 android:textSize="19dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <Spinner
                 android:id="@+id/layoutQLDH_NV_spnTinhTrang"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.8" />
+                android:layout_weight="0.8"
+                android:layout_marginLeft="15dp"/>
 
             <Button
                 android:id="@+id/layoutQLDH_NV_btnHienThi"

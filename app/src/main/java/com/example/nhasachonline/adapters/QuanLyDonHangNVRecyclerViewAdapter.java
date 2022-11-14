@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ItemQuanLyDonHangNV;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<QuanLyDonHangNVRecyclerViewAdapter.MyViewHolder> {
@@ -37,7 +36,6 @@ public class QuanLyDonHangNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
         ItemQuanLyDonHangNV itemQuanLyDonHangNV = itemQuanLyDonHangNVs.get(pos);
         holder.itemQLDH_NV_txtMaDonHang.setText(itemQuanLyDonHangNV.getMaDonHang());
