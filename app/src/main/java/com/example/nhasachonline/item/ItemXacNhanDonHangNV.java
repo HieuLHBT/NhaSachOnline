@@ -1,12 +1,20 @@
 package com.example.nhasachonline.item;
 
-public class ItemChiTietDonHangNV {
+public class ItemXacNhanDonHangNV {
+    private String maDonHang;
     private String maSanPham;
     private String tenSanPham;
+    private String anhSanPham;
     private int soLuong;
     private int donGia;
-    private int tongTien;
-    private String hinhSanPham;
+
+    public String getMaDonHang() {
+        return maDonHang;
+    }
+
+    public void setMaDonHang(String maDonHang) {
+        this.maDonHang = maDonHang;
+    }
 
     public String getMaSanPham() {
         return maSanPham;
@@ -22,6 +30,14 @@ public class ItemChiTietDonHangNV {
 
     public void setTenSanPham(String tenSanPham) {
         this.tenSanPham = tenSanPham;
+    }
+
+    public String getAnhSanPham() {
+        return anhSanPham;
+    }
+
+    public void setAnhSanPham(String anhSanPham) {
+        this.anhSanPham = anhSanPham;
     }
 
     public int getSoLuong() {
@@ -40,31 +56,15 @@ public class ItemChiTietDonHangNV {
         this.donGia = donGia;
     }
 
-    public int getTongTien() {
-        return tongTien;
+    public ItemXacNhanDonHangNV() {
     }
 
-    public void setTongTien(int tongTien) {
-        this.tongTien = tongTien;
-    }
-
-    public String getHinhSanPham() {
-        return hinhSanPham;
-    }
-
-    public void setHinhSanPham(String hinhSanPham) {
-        this.hinhSanPham = hinhSanPham;
-    }
-
-    public ItemChiTietDonHangNV() {
-    }
-
-    public ItemChiTietDonHangNV(String maSanPham, String tenSanPham, int soLuong, int donGia, String hinhSanPham) {
+    public ItemXacNhanDonHangNV(String maDonHang, String maSanPham, String tenSanPham, String anhSanPham, int soLuong, int donGia) {
+        this.maDonHang = maDonHang;
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
+        this.anhSanPham = anhSanPham;
         this.soLuong = soLuong;
         this.donGia = donGia;
-        this.tongTien = donGia * soLuong;
-        this.hinhSanPham = hinhSanPham;
     }
 }

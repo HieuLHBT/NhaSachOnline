@@ -27,14 +27,74 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/layoutMHCNV_NV_rvManHinhChinhNhanVien"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/layoutMHCNV_NV_imgHinhNhanVien"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_weight="0.8"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:text="Họ tên "
+                        android:textColor="@color/black"
+                        android:gravity="center|left"
+                        android:textSize="19dp" />
+
+                    <TextView
+                        android:id="@+id/layoutMHCNV_NV_txtHoTen"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:gravity="center|left"
+                        android:textSize="19dp"
+                        android:paddingLeft="15dp"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center|left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:text="Mã nhân viên"
+                        android:textColor="@color/black"
+                        android:textSize="19dp" />
+
+                    <TextView
+                        android:id="@+id/layoutMHCNV_NV_txtMaNhanVien"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+                        android:textSize="19dp"
+                        android:paddingLeft="15dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
 
         </LinearLayout>
 

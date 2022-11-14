@@ -172,9 +172,6 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                 al.show();
             }
         });
-
-
-
     }
 
     @Override
