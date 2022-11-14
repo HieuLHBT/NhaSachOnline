@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private String maNhanVien;
 
-    private SearchView timkiemSP;
+    private SearchView timkiemNV;
     private ArrayList<ItemNhanVien> nhanViens = new ArrayList<>();
     private NhanVienRecyclerViewAdapter adapter;
     private Spinner layout_spnNhanVien;
@@ -43,7 +44,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         setContentView(R.layout.manhinh_quanly_nhanvien_layout);
 
         //search
-        timkiemSP = findViewById(R.id.layoutMHQLNV_swTimKiem);
+        timkiemNV = findViewById(R.id.layoutMHQLNV_swTimKiem);
         timKiem();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLNV_rvDanhSachNhanVien);
@@ -90,8 +91,8 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new NhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                ImageButton item_btnTroVe = view.findViewById(R.id.layoutMHQLNV_btnTroVe);
-                item_btnTroVe.setOnClickListener(new View.OnClickListener() {
+                TextView item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);
+                item_tvTroVe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finish();
@@ -112,7 +113,8 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
-                        startActivity(intent);
+                        intent.putExtra("nguoiDung",nhanViens.get(position).getMaNhanVien());
+                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });
             }
@@ -135,8 +137,8 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     }
 
     public void timKiem(){
-        timkiemSP.clearFocus();
-        timkiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        timkiemNV.clearFocus();
+        timkiemNV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;

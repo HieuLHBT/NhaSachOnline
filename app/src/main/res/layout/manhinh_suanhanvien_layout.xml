@@ -54,16 +54,6 @@
                 android:layout_marginLeft="120dp"
                 android:src="@drawable/nhanvien1"/>
 
-            <ImageButton
-                android:id="@+id/MHSNV_btnChooseu"
-                android:text="Choose"
-                android:layout_marginTop="180dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:background="@color/white"
-                android:src="@drawable/ic_baseline_camera_alt_24"
-                android:layout_height="wrap_content" />
-
         </LinearLayout>
 
         <LinearLayout
