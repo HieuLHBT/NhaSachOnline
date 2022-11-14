@@ -26,6 +26,7 @@ import com.example.nhasachonline.adapters.ChiTietDonDaNhanRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ChiTietGiaoHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.DanhGiaSanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
+import com.example.nhasachonline.adapters.MHNVXacNhanDonHangItemRycyclerViewAdapter;
 import com.example.nhasachonline.adapters.MaGiamGiaRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonline.adapters.ManHinhChinhNhanVienRecyclerViewAdapter;
@@ -1965,7 +1966,89 @@ public class FireBaseNhaSachOnline {
         trangThiDonHangDatabase.child(maDonHang).child("lyDoHuy").setValue(lyDoHuy);
     }
 
+    //Xác nhận đơn hàng
+    public void hienThiDonHangXacNhan(String maDonHang ){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference xuatKhoDatabase = firebaseDatabase.getReference("XUATKHO");
+        DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
+        DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
+        DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        donHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot donHangDataSnapshot : snapshot.getChildren()) {
+                    DonHang donHang = donHangDataSnapshot.getValue(DonHang.class);
+                    trangThaiDonHangDatabase.child(donHang.getMaDonHang()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            TrangThaiDonHang trangThaiDonHang = snapshot.getValue(TrangThaiDonHang.class);
+                            xuatKhoDatabase.child(donHang.getMaDonHang()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    ArrayList<SanPhamTinhTongTien> sanPhamTinhTongTiens = new ArrayList<>();
+                                    ArrayList<XuatKho> xuatKhos = new ArrayList<>();
+                                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                        XuatKho xuatKho = dataSnapshot.getValue(XuatKho.class);
+                                        xuatKhos.add(xuatKho);
+                                        sanPhamDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if (trangThaiDonHang.getTrangThaiDon().equalsIgnoreCase("Hủy")) {
+                                                    for (XuatKho xuatKho : xuatKhos) {
+                                                        if (xuatKho.getMaSanPham().contains("s")) {
+                                                            Sach sach = snapshot.child("SACH").child(xuatKho.getMaSanPham()).getValue(Sach.class);
+                                                            sanPhamTinhTongTiens.add(new SanPhamTinhTongTien(
+                                                                    sach.getMaSach(),
+                                                                    Integer.valueOf(sach.getGiaTien()),
+                                                                    Integer.valueOf(sach.getKhuyenMai()),
+                                                                    Integer.valueOf(xuatKho.getSoLuongXuat())));
+                                                        } else if (xuatKho.getMaSanPham().contains("vpp")) {
+                                                            VanPhongPham vanPhongPham = snapshot.child("VANPHONGPHAM").child(xuatKho.getMaSanPham()).getValue(VanPhongPham.class);
+                                                            sanPhamTinhTongTiens.add(new SanPhamTinhTongTien(
+                                                                    vanPhongPham.getMaVanPhongPham(),
+                                                                    Integer.valueOf(vanPhongPham.getGiaTien()),
+                                                                    Integer.valueOf(vanPhongPham.getKhuyenMai()),
+                                                                    Integer.valueOf(xuatKho.getSoLuongXuat())));
+                                                        }
+                                                    }
+                                                    int tongTien = 0;
+                                                    for (SanPhamTinhTongTien sanPhamTinhTongTien : sanPhamTinhTongTiens) {
+                                                        tongTien += sanPhamTinhTongTien.getTongTien();
+                                                    }
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                            }
+                                        });
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                                }
+                            });
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("onCancelled", "Lỗi!" + error.getMessage());
+            }
+        });
 
+
+    }
+
+    public void xacNhanNhanHangNV(String maDonHang, String trangThaiNhanHangNV){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        trangThaiDonHangDatabase.child(maDonHang).child("trangThaiNhanHangNV").setValue(trangThaiNhanHangNV);
+    }
 
     ////////////////////////////////////////////////////////////////////////////////
 

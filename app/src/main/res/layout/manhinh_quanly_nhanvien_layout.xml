@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/layoutMHQLNV_btnTroVe"
+            android:id="@+id/MHQLNV_tvTroVe"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
