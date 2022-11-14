@@ -105,13 +105,6 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                                 MHTNV_edtSoDienThoai.getText().toString(),
                                 MHTNV_edtTaiKhoan.getText().toString()
                         );
-
-                        //Kiểm tra các trường bỏ trống
-                        if(MHTNV_edtMaNhanVien.getTouchables().isEmpty() || MHTNV_edtTenNhanVien.getTouchables().isEmpty() || MHTNV_edtChucVu.getTouchables().isEmpty() ||
-                                MHTNV_edtTaiKhoan.getTouchables().isEmpty() || MHTNV_edtMatKhau.getTouchables().isEmpty() || MHTNV_edtEmail.getTouchables().isEmpty() ||
-                                MHTNV_edtDiaChi.getTouchables().isEmpty() || MHTNV_edtSoDienThoai.getTouchables().isEmpty() || MHTNV_edtCMND.getTouchables().isEmpty() || MHTNV_edtLuongCoBan.getTouchables().isEmpty()){
-                            Toast.makeText(ThemNhanVienActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                        }
                         // Tai anh len storage
                         ghiAnh(uri, MHTNV_edtMaNhanVien.getText().toString());
                     };
@@ -179,9 +172,6 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                 al.show();
             }
         });
-
-
-
     }
 
     @Override

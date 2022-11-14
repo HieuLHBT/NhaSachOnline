@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".activity.SuaNhanVienActivity">
+    tools:context=".activity.SuaSanPhamSachActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/MHSSP_Sach_btnBack"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
@@ -26,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="SỬA NHÂN VIÊN"
+            android:text="Sửa Sách"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -48,11 +49,13 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/MHSNV_imgHinhNhanVien"
+                android:id="@+id/MHSSP_Sach_imgHinhSP"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginLeft="120dp"
-                android:src="@drawable/nhanvien1"/>
+                android:src="@drawable/anhdemo"/>
+
+
 
         </LinearLayout>
 
@@ -68,17 +71,16 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Mã NV"
+                android:text="Mã Sách"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtMaNhanVien"
+                android:id="@+id/MHSSP_Sach_edtMaSach"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
-                android:hint="NV004"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -96,17 +98,17 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Chức vụ"
+                android:text="Tên Sách"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtChucVu"
+                android:id="@+id/MHSSP_Sach_edtTenSach"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
-                android:hint="Nhân viên"
+
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -124,17 +126,17 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Tên NV"
+                android:text="Thể Loại"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtTenNhanVien"
+                android:id="@+id/MHSSP_Sach_edtTheLoai"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
-                android:hint="Jwon"
+
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -152,17 +154,17 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Tài khoản"
+                android:text="Tác Giả"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtTaiKhoanNhanVien"
+                android:id="@+id/MHSSP_Sach_edtTacGia"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.8"
                 android:background="@drawable/border"
-                android:hint="jwonid"
+
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -177,20 +179,48 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Mật khẩu"
+                android:text="Nhà Xuất Bản"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtMatKhauNhanVien"
+                android:id="@+id/MHSSP_Sach_edtNhaXuatBan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2.8"
+                android:layout_weight="2.5"
                 android:background="@drawable/border"
-                android:hint="jwon123"
+
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Ngày Xuất Bản"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHSSP_Sach_edtNgayXuatBan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:background="@drawable/border"
+
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -208,17 +238,17 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Email"
+                android:text="Giá Tiền"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtEmailNhanVien"
+                android:id="@+id/MHSSP_Sach_edtGiaTien"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
-                android:hint="jwon@gmail.com"
+
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -236,105 +266,25 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Địa chỉ"
+                android:text="Số Lượng Kho"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSNV_edtDiaChiNhanVien"
+                android:id="@+id/MHSSP_Sach_edtSoLuongKho"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
-                android:hint="Tân Phú"
+
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:text="SĐT"
-                android:textSize="18dp"
-                android:textStyle="bold" /> />
 
-            <EditText
-                android:id="@+id/MHSNV_edtSoDienThoaiNhanVien"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@drawable/border"
-                android:hint="0795159786"
-                android:textSize="18dp"
-                android:textStyle="bold"  />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:text="CMND"
-                android:textSize="18dp"
-                android:textStyle="bold" /> />
-
-            <EditText
-                android:id="@+id/MHSNV_edtCMNDNhanVien"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:background="@drawable/border"
-                android:hint="0402033901"
-                android:textSize="18dp"
-                android:textStyle="bold"  />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:text="Lương căn bản"
-                android:textSize="18dp"
-                android:textStyle="bold" /> />
-
-            <EditText
-                android:id="@+id/MHSNV_edtLuongNhanVien"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.7"
-                android:background="@drawable/border"
-                android:hint="9.000.000"
-                android:textSize="18dp"
-                android:textStyle="bold"  />
-
-        </LinearLayout>
 
     </LinearLayout>
 
@@ -346,7 +296,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/MHSNV_btnNhapMoi"
+            android:id="@+id/MHSSP_Sach_btnNhapMoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
@@ -354,7 +304,7 @@
             android:text="Nhập mới" />
 
         <Button
-            android:id="@+id/MHSNV_btnThemNhanVien"
+            android:id="@+id/MHSSP_Sach_btnSuaSach"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#03A9F4"

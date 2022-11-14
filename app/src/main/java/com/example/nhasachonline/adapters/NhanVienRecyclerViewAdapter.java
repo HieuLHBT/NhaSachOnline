@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.item.ItemNhanVien;
+import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -32,12 +33,17 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
     private Activity context;
     private int resource;
     private ArrayList<ItemNhanVien> nhanViens;
-    private NhanVienRecyclerViewAdapter.OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
     public NhanVienRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemNhanVien> nhanViens) {
         this.context = context;
         this.resource = resource;
         this.nhanViens = nhanViens;
+    }
+
+    public void setFilteredList1(ArrayList<ItemNhanVien> filteredList1){
+        this.nhanViens = filteredList1;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override
@@ -67,12 +73,12 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         try {
             File file = null;
             if (nhanVien.getHinhNhanVien().contains("png")) {
-                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "png");
+                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0, nhanVien.getHinhNhanVien().length() - 4), "png");
             } else if (nhanVien.getHinhNhanVien().contains("jpg")) {
-                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0,nhanVien.getHinhNhanVien().length()-4), "jpg");
+                file = File.createTempFile(nhanVien.getHinhNhanVien().substring(0, nhanVien.getHinhNhanVien().length() - 4), "jpg");
             }
             final File fileHinh = file;
-            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     holder.itemMHQLNV_anhNhanVien.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
@@ -110,6 +116,7 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView itemMHQLNV_tvTroVe;
         TextView itemMHQLNV_tvChucVu;
         TextView itemMHQLNV_tvMaNhanVien;
         TextView itemMHQLNV_tvTenNhanVien;
@@ -141,11 +148,12 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
             itemMHQLNV = itemView.findViewById(R.id.itemMHQLNV);
             itemMHQLNV_btnThemNhanVien = itemView.findViewById(R.id.layoutMHQLNV_btnThemNhanVien);
             itemMHQLNV = itemMHQLNV.findViewById(R.id.itemMHQLNV);
+            itemMHQLNV_tvTroVe = itemView.findViewById(R.id.MHQLNV_tvTroVe);
 
             // Set event processing
-          //  itemMHQLNV.setOnClickListener(this);
-          //  itemMHQLNV_btnThemNhanVien.setOnClickListener(this);
-
+         //   itemMHQLNV.setOnClickListener(this);
+            itemMHQLNV_btnThemNhanVien.setOnClickListener(this);
+            itemMHQLNV_tvTroVe.setOnClickListener(this);
         }
 
         public void onClick(View view) {
@@ -160,7 +168,7 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         void onItemClickListener(int position, View view);
     }
 
-    public void setOnItemClickListener(NhanVienRecyclerViewAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 }

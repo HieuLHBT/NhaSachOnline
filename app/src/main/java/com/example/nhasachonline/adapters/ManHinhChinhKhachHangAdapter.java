@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -212,6 +211,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             }
         }
     }
+
     // Interface for event processing
     public interface OnItemClickListener {
         void onItemClickListener(int position, View view);

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.ThongBaoHuyDonHangActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Thông báo huỷ"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:textColor="@color/black"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:text="Mã đơn hàng"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/MHTBHDH_tvMaDonHang"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="DH003"
+            android:textSize="19dp"
+            android:background="@drawable/border_layout"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingLeft="10dp"
+            android:text="Nội dung huỷ đơn"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <EditText
+            android:id="@+id/MHTBHDH_edtNoiDungHuy"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:textSize="20dp"
+            android:background="@drawable/border_layout"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:paddingTop="50dp"
+        android:layout_marginTop="20dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp">
+
+        <Button
+            android:id="@+id/MHTBHDH_btnHuy"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:text="Huỷ"
+            android:textSize="17dp"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:id="@+id/MHTBHDH_btnXacNhan"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:text="Xác nhận"
+            android:textSize="17dp"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

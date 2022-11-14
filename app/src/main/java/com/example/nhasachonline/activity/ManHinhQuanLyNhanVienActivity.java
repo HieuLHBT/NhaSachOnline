@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -21,6 +23,7 @@ import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 
 import com.example.nhasachonline.item.ItemNhanVien;
+import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.tools.SharePreferences;
 
 import java.util.ArrayList;
@@ -30,7 +33,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private String maNhanVien;
 
-    private SearchView timkiemSP;
+    private SearchView timkiemNV;
     private ArrayList<ItemNhanVien> nhanViens = new ArrayList<>();
     private NhanVienRecyclerViewAdapter adapter;
     private Spinner layout_spnNhanVien;
@@ -39,6 +42,10 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinh_quanly_nhanvien_layout);
+
+        //search
+        timkiemNV = findViewById(R.id.layoutMHQLNV_swTimKiem);
+        timKiem();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLNV_rvDanhSachNhanVien);
         adapter = new NhanVienRecyclerViewAdapter(this, R.layout.manhinh_quanly_nhanvien_item, nhanViens);
@@ -84,8 +91,8 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new NhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                ImageButton item_btnTroVe = view.findViewById(R.id.layoutMHQLNV_btnTroVe);
-                item_btnTroVe.setOnClickListener(new View.OnClickListener() {
+                TextView item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);
+                item_tvTroVe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finish();
@@ -97,7 +104,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent1 = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent1);
+                        startActivity(intent1);
                     }
                 });
 
@@ -106,6 +113,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                        intent.putExtra("nguoiDung",nhanViens.get(position).getMaNhanVien());
                         ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });
@@ -113,4 +121,34 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         });
     }
 
+    public void filterList(String newText) {
+        ArrayList<ItemNhanVien> fiIteredList = new ArrayList<>();
+        for(ItemNhanVien nhanVien : nhanViens){
+            if(nhanVien.getTenNhanVien().toLowerCase().contains(newText.toLowerCase()) || nhanVien.getMaNhanVien().toLowerCase().contains(newText.toLowerCase())){
+                fiIteredList.add(nhanVien);
+            }
+        }
+
+        if(fiIteredList.isEmpty()){
+            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList1(fiIteredList);
+        }
+    }
+
+    public void timKiem(){
+        timkiemNV.clearFocus();
+        timkiemNV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+    }
 }
