@@ -53,5 +53,6 @@
     <string name="sodondanhan">Số đơn đã nhận:</string>
     <string name="sodondagiao">Số đơn đã giao:</string>
     <string name="sodondahuy">Số đơn đã hủy:</string>
+    <string name="menu">≡</string>
 
 </resources>

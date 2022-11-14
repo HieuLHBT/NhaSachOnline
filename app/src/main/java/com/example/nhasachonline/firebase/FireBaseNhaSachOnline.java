@@ -13,6 +13,7 @@ import com.example.nhasachonline.activity.ChiTietGiaoHangActivity;
 import com.example.nhasachonline.activity.ChiTietSanPhamActivity;
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.LichLamViecActivity;
+import com.example.nhasachonline.activity.ManHinhChinhQuanLyActivity;
 import com.example.nhasachonline.activity.PhanHoiYKienKhachHangActivity;
 import com.example.nhasachonline.activity.SuaNhanVienActivity;
 import com.example.nhasachonline.activity.ThanhToanActivity;
@@ -40,6 +41,7 @@ import com.example.nhasachonline.data_model.GioHang;
 import com.example.nhasachonline.data_model.KhachHang;
 import com.example.nhasachonline.data_model.NhanVien;
 import com.example.nhasachonline.data_model.PhanHoi;
+import com.example.nhasachonline.data_model.QuanLy;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.TrangThaiDonHang;
 import com.example.nhasachonline.data_model.VanPhongPham;
@@ -1395,6 +1397,28 @@ public class FireBaseNhaSachOnline {
             }
         });
 
+    }
+
+    // Màn hình chính quản lý
+    public void hienThiThongTinQuanLy(String maQuanLy, QuanLy quanLy, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.child("quanly").child(maQuanLy).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                QuanLy ql = snapshot.getValue(QuanLy.class);
+                quanLy.setTenQuanLy(ql.getTenQuanLy());
+                quanLy.setMaQuanLy(ql.getMaQuanLy());
+                quanLy.setNguoiDung(ql.getNguoiDung());
+                quanLy.setHinhQuanLy(ql.getHinhQuanLy());
+                ((ManHinhChinhQuanLyActivity)context).hienThiQuanLy();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
