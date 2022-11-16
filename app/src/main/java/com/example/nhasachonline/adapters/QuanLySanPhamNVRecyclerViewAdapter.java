@@ -60,16 +60,17 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         holder.itemQLSP_NV_txtGiaTien.setText(formatter.format(itemQuanLySanPhamNV.getGiaTien()) + " VNĐ");
         holder.itemQLSP_NV_txtSoLuongTrongKho.setText(itemQuanLySanPhamNV.getSoLuong() + " ");
 
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(itemQuanLySanPhamNV.getHinhSanPham());
         try {
             File file = null;
             if (itemQuanLySanPhamNV.getHinhSanPham().contains("png")) {
-                file = File.createTempFile(itemQuanLySanPhamNV.getHinhSanPham().substring(0,itemQuanLySanPhamNV.getHinhSanPham().length()-4), "png");
+                file = File.createTempFile(itemQuanLySanPhamNV.getHinhSanPham().substring(0,itemQuanLySanPhamNV.getHinhSanPham().length()), "png");
             } else if (itemQuanLySanPhamNV.getHinhSanPham().contains("jpg")) {
-                file = File.createTempFile(itemQuanLySanPhamNV.getHinhSanPham().substring(0,itemQuanLySanPhamNV.getHinhSanPham().length()-4), "jpg");
+                file = File.createTempFile(itemQuanLySanPhamNV.getHinhSanPham().substring(0,itemQuanLySanPhamNV.getHinhSanPham().length()), "jpg");
             }
             final File fileHinh = file;
-            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     holder.itemQLSP_NV_imgHinhSanPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
@@ -83,7 +84,6 @@ public class QuanLySanPhamNVRecyclerViewAdapter extends RecyclerView.Adapter<Qua
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         holder.onClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
