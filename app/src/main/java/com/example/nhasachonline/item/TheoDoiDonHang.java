@@ -4,81 +4,89 @@ import java.util.ArrayList;
 
 public class TheoDoiDonHang {
     private String maDonHang;
-    private String tenNVGiaoHang;
-    private String thoiGianDat;
-    private String thoiGianDuKienGiao;
-    private int tongTienThanhToan;
-    private ArrayList<TheoDoiDonHangSanPham> theoDoiDonHangSanPhams;
+    private String tenNhanVien;
+    private String ngayGiao;
+    private String ngayLap;
+    private int tongTien;
     private String trangThai;
+    private String trangThaiChuyenTienKH;
+    private String hinhThucThanhToan;
 
     public String getMaDonHang() {
         return maDonHang;
     }
 
-    public String getTenNVGiaoHang() {
-        return tenNVGiaoHang;
+    public String getTenNhanVien() {
+        return tenNhanVien;
     }
 
-    public String getThoiGianDat() {
-        return thoiGianDat;
+    public String getNgayGiao() {
+        return ngayGiao;
     }
 
-    public String getThoiGianDuKienGiao() {
-        return thoiGianDuKienGiao;
+    public String getNgayLap() {
+        return ngayLap;
     }
 
-    public int getTongTienThanhToan() {
-        return tongTienThanhToan;
-    }
-
-    public ArrayList<TheoDoiDonHangSanPham> getTheoDoiDonHangSanPhams() {
-        return theoDoiDonHangSanPhams;
+    public int getTongTien() {
+        return tongTien;
     }
 
     public String getTrangThai() {
         return trangThai;
     }
 
+    public String getTrangThaiChuyenTienKH() {
+        return trangThaiChuyenTienKH;
+    }
+
+    public String getHinhThucThanhToan() {
+        return hinhThucThanhToan;
+    }
+
     public void setMaDonHang(String maDonHang) {
         this.maDonHang = maDonHang;
     }
 
-    public void setTenNVGiaoHang(String tenNVGiaoHang) {
-        this.tenNVGiaoHang = tenNVGiaoHang;
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
     }
 
-    public void setThoiGianDat(String thoiGianDat) {
-        this.thoiGianDat = thoiGianDat;
+    public void setNgayGiao(String ngayGiao) {
+        this.ngayGiao = ngayGiao;
     }
 
-    public void setThoiGianDuKienGiao(String thoiGianDuKienGiao) {
-        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
+    public void setNgayLap(String ngayLap) {
+        this.ngayLap = ngayLap;
     }
 
-    public void setTongTienThanhToan(int tongTienThanhToan) {
-        this.tongTienThanhToan = tongTienThanhToan;
-    }
-
-    public void setTheoDoiDonHangSanPhams(ArrayList<TheoDoiDonHangSanPham> theoDoiDonHangSanPhams) {
-        this.theoDoiDonHangSanPhams = theoDoiDonHangSanPhams;
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
     }
 
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
 
+    public void setTrangThaiChuyenTienKH(String trangThaiChuyenTienKH) {
+        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
+    }
+
+    public void setHinhThucThanhToan(String hinhThucThanhToan) {
+        this.hinhThucThanhToan = hinhThucThanhToan;
+    }
+
     public TheoDoiDonHang() {
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDat, String thoiGianDuKienGiao, ArrayList<TheoDoiDonHangSanPham> theoDoiDonHangSanPhams, String trangThai) {
+    public TheoDoiDonHang(String maDonHang, String tenNhanVien, String ngayGiao, String ngayLap, int tongTien, String trangThai, String trangThaiChuyenTienKH, String hinhThucThanhToan) {
         this.maDonHang = maDonHang;
-        this.tenNVGiaoHang = tenNVGiaoHang;
-        this.thoiGianDat = thoiGianDat;
-        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
-        this.theoDoiDonHangSanPhams = theoDoiDonHangSanPhams;
+        this.tenNhanVien = tenNhanVien;
+        this.ngayGiao = ngayGiao;
+        this.ngayLap = ngayLap;
+        this.tongTien = tongTien;
         this.trangThai = trangThai;
-        for (TheoDoiDonHangSanPham sanPham: this.theoDoiDonHangSanPhams) {
-            this.tongTienThanhToan = (sanPham.getGiaTien() - (sanPham.getGiaTien() * sanPham.getKhuyenMai() / 100)) * sanPham.getSoLuongXuat();
-        }
+        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
+        this.hinhThucThanhToan = hinhThucThanhToan;
     }
 }

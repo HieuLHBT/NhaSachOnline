@@ -44,7 +44,7 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
         setContentView(R.layout.thongtingiaohang_nv_layout);
 
         maDonHang = getIntent().getStringExtra("maDonHang");
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
         layoutTTGH_NV_txtTinhTrang = findViewById(R.id.layoutTTGH_NV_txtTinhTrang);
         layoutTTGH_NV_txtMaDonHang = findViewById(R.id.layoutTTGH_NV_txtMaDonHang);

@@ -1,11 +1,9 @@
 package com.example.nhasachonline.activity;
 
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +21,6 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ManHinhChinhNhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.data_model.NhanVien;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonline.item.ChiTietGiaoHang;
 import com.example.nhasachonline.item.ItemManHinhChinhNhanVien;
 import com.example.nhasachonline.tools.SharePreferences;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -67,7 +64,7 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
         setContentView(R.layout.manhinhchinh_nhanvien_layout);
 
         maNhanVien = getIntent().getStringExtra("maNhanVien");
-        maNhanVien = sharePreferences.getKhachHang(this);
+        maNhanVien = "nv1";
 
         layoutMHCNV_txtNgay = findViewById(R.id.layoutMHCNV_txtNgay);
         layoutMHCNV_btnCheckin = findViewById(R.id.layoutMHCNV_btnCheckin);

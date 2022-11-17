@@ -13,4 +13,13 @@
     <dimen name="marginbot">20dp</dimen>
     <dimen name="marginleft">10dp</dimen>
     <dimen name="paddingtieude">20dp</dimen>
+    <dimen name="marginQuenMatKhau">250dp</dimen>
+    <dimen name="margintop">10dp</dimen>
+    <dimen name="margintop_short">5dp</dimen>
+    <dimen name="scrollbar_size">20dp</dimen>
+    <dimen name="weight_dangKy">0.7</dimen>
+    <dimen name="textsizelight">15sp</dimen>
+    <dimen name="layoutDN_marginButton">20dp</dimen>
+    <dimen name="minh_text_title">40sp</dimen>
+
 </resources>

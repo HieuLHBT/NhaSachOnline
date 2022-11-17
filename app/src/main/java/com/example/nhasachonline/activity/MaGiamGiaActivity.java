@@ -31,7 +31,7 @@ public class MaGiamGiaActivity extends AppCompatActivity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.magiamgia_layout);
         layoutMGG_tvTroVe = findViewById(R.id.layoutMGG_tvTroVe);
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
         tongTien = getIntent().getIntExtra("tongTien", 0);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMGG_rvMaGiamGia);

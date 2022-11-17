@@ -29,7 +29,10 @@ import com.example.nhasachonline.item.ThanhToan;
 import com.example.nhasachonline.tools.SharePreferences;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -59,7 +62,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thanhtoan_layout);
         maDonHang = sharePreferences.layMaDonHang(this);
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTT_rvDanhSach);
         layoutTT_tvMaDonHang = findViewById(R.id.layoutTT_tvMaDonHang);
@@ -178,13 +181,30 @@ public class ThanhToanActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        String ngayHienTai = sdf.format(new Date());
+                        String ngayHienTai = sdf.format(LocalDate.now());
                         DonHang donHang;
                         if (giamGia.getMaGiamGia() != null && Integer.valueOf(giamGia.getYeuCau()) < tongTien) {
                             donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
                         } else {
                             donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
                         }
+                        String ngayGiao = "";
+                        if (donHang.getPhiVanChuyen().equalsIgnoreCase("15000")) {
+                            int thu = LocalDate.now().plusDays(3).getDayOfWeek().getValue();
+                            if (thu == 0) {
+                                ngayGiao = sdf.format(LocalDate.now().plusDays(4));
+                            } else {
+                                ngayGiao = sdf.format(LocalDate.now().plusDays(3));
+                            }
+                        } else if (donHang.getPhiVanChuyen().equalsIgnoreCase("30000")) {
+                            int thu = LocalDate.now().plusDays(1).getDayOfWeek().getValue();
+                            if (thu == 0) {
+                                ngayGiao = sdf.format(LocalDate.now().plusDays(2));
+                            } else {
+                                ngayGiao = sdf.format(LocalDate.now().plusDays(1));
+                            }
+                        }
+                        donHang.setThoiGianGiao(ngayGiao);
                         fireBaseNhaSachOnline.datHang(layoutTT_spnPhuongThucThanhToan.getSelectedItem().toString() ,donHang, ThanhToanActivity.this);
                         finish();
                     }
