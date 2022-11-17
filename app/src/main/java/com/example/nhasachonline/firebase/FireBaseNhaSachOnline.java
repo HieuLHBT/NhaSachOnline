@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +18,7 @@ import com.example.nhasachonline.activity.ChiTietDonHangNVActivity;
 import com.example.nhasachonline.activity.ChiTietSanPhamActivity;
 import com.example.nhasachonline.activity.ChiTietTheoDoiDonHangActivity;
 import com.example.nhasachonline.activity.DangKyActivity;
+import com.example.nhasachonline.activity.DangNhapActivity;
 import com.example.nhasachonline.activity.GioHangActivity;
 import com.example.nhasachonline.activity.LichLamViecActivity;
 import com.example.nhasachonline.activity.ManHinhChinhKhachHangActivity;
@@ -24,6 +27,8 @@ import com.example.nhasachonline.activity.ManHinhQuanLyNhanVienActivity;
 import com.example.nhasachonline.activity.PhanHoiYKienKhachHangActivity;
 import com.example.nhasachonline.activity.QuenMatKhauActivity;
 import com.example.nhasachonline.activity.QuanLySanPhamNVActivity;
+import com.example.nhasachonline.activity.QuenMatKhauCapLaiMatKhauActivity;
+import com.example.nhasachonline.activity.QuenMatKhauXacNhanOTPActivity;
 import com.example.nhasachonline.activity.SuaNhanVienActivity;
 import com.example.nhasachonline.activity.SuaSanPhamSachActivity;
 import com.example.nhasachonline.activity.SuaSanPhamVPPActivity;
@@ -74,6 +79,7 @@ import com.example.nhasachonline.item.ChiTietTheoDoiDonHang;
 import com.example.nhasachonline.item.ChiTietTheoDoiDonHang_SanPham;
 import com.example.nhasachonline.item.ChiTietTheoDoiDonHang_ThongTin;
 import com.example.nhasachonline.item.DanhGia;
+import com.example.nhasachonline.item.HeThong;
 import com.example.nhasachonline.item.ItemChiTietDonHangNV;
 import com.example.nhasachonline.item.ItemKhachHang;
 import com.example.nhasachonline.item.ItemNhanVien;
@@ -90,6 +96,15 @@ import com.example.nhasachonline.item.TheoDoiDonHang;
 import com.example.nhasachonline.tools.SharePreferences;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -101,6 +116,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 public class FireBaseNhaSachOnline {
     private SharePreferences sharePreferences = new SharePreferences();
@@ -1683,86 +1700,102 @@ public class FireBaseNhaSachOnline {
                             sanPhams.add(new SanPham(vanPhongPham.getMaVanPhongPham(), vanPhongPham.getGiaTien(), vanPhongPham.getKhuyenMai()));
                         }
 
-                        xuatKhoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                        nguoiDungDatabase.child("nhanvien").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                theoDoiDonHangs.clear();
-                                for (DonHang donHang : donHangs) {
-                                    int tong = 0;
-                                    ArrayList<XuatKho> danhSachXuatKhos = new ArrayList<>();
-                                    for (DataSnapshot dataSnapshot : snapshot.child(donHang.getMaDonHang()).getChildren()) {
-                                        XuatKho xuatKho = dataSnapshot.getValue(XuatKho.class);
-                                        danhSachXuatKhos.add(xuatKho);
-                                    }
-                                    for (XuatKho xuatKho : danhSachXuatKhos) {
-                                        for (SanPham sanPham : sanPhams) {
-                                            if (sanPham.getMaSanPham().equalsIgnoreCase(xuatKho.getMaSanPham())) {
-                                                tong += (Integer.valueOf(sanPham.getGiaTien()) - (Integer.valueOf(sanPham.getGiaTien()) * Integer.valueOf(sanPham.getKhuyenMai()) / 100)) * Integer.valueOf(xuatKho.getSoLuongXuat());
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    TheoDoiDonHang theoDoiDonHang = new TheoDoiDonHang();
-                                    theoDoiDonHang.setMaDonHang(donHang.getMaDonHang());
-                                    theoDoiDonHang.setNgayGiao(donHang.getThoiGianGiao());
-                                    theoDoiDonHang.setNgayLap(donHang.getThoiGianLap());
-                                    theoDoiDonHang.setTongTien(tong);
-
-                                    nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if (!donHang.getMaNVGiao().equalsIgnoreCase("")) {
-                                                NhanVien nhanVien = snapshot.child("nhanvien").child(donHang.getMaNVGiao()).getValue(NhanVien.class);
-                                                theoDoiDonHang.setTenNhanVien(nhanVien.getTenNhanVien());
-                                            } else {
-                                                theoDoiDonHang.setTenNhanVien("Đang xử lý");
-                                            }
-
-                                            trangThaiDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                    TrangThaiDonHang trangThaiDonHang = snapshot.child(donHang.getMaDonHang()).getValue(TrangThaiDonHang.class);
-                                                    theoDoiDonHang.setTrangThai(trangThaiDonHang.getTrangThaiDon());
-                                                    theoDoiDonHang.setTrangThaiChuyenTienKH(trangThaiDonHang.getTrangThaiChuyenTienKH());
-                                                    theoDoiDonHang.setHinhThucThanhToan(trangThaiDonHang.getKieuThanhToan());
-                                                    theoDoiDonHangs.add(theoDoiDonHang);
-                                                    adapter.notifyDataSetChanged();
-                                                }
-
-                                                @Override
-                                                public void onCancelled(@NonNull DatabaseError error) {
-
-                                                }
-                                            });
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                        }
-                                    });
+                                ArrayList<NhanVien> nhanViens = new ArrayList<>();
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    NhanVien nhanVien = dataSnapshot.getValue(NhanVien.class);
+                                    nhanViens.add(nhanVien);
                                 }
 
+                                trangThaiDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        ArrayList<TrangThaiDonHang> trangThaiDonHangs = new ArrayList<>();
+                                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                            TrangThaiDonHang trangThaiDonHang = dataSnapshot.getValue(TrangThaiDonHang.class);
+                                            trangThaiDonHangs.add(trangThaiDonHang);
+                                        }
+
+                                        xuatKhoDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                theoDoiDonHangs.clear();
+                                                for (DonHang donHang : donHangs) {
+                                                    int tong = 0;
+                                                    ArrayList<XuatKho> danhSachXuatKhos = new ArrayList<>();
+                                                    for (DataSnapshot dataSnapshot : snapshot.child(donHang.getMaDonHang()).getChildren()) {
+                                                        XuatKho xuatKho = dataSnapshot.getValue(XuatKho.class);
+                                                        danhSachXuatKhos.add(xuatKho);
+                                                    }
+                                                    for (XuatKho xuatKho : danhSachXuatKhos) {
+                                                        for (SanPham sanPham : sanPhams) {
+                                                            if (sanPham.getMaSanPham().equalsIgnoreCase(xuatKho.getMaSanPham())) {
+                                                                tong += (Integer.valueOf(sanPham.getGiaTien()) - (Integer.valueOf(sanPham.getGiaTien()) * Integer.valueOf(sanPham.getKhuyenMai()) / 100)) * Integer.valueOf(xuatKho.getSoLuongXuat());
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    TheoDoiDonHang theoDoiDonHang = new TheoDoiDonHang();
+                                                    theoDoiDonHang.setMaDonHang(donHang.getMaDonHang());
+                                                    theoDoiDonHang.setNgayGiao(donHang.getThoiGianGiao());
+                                                    theoDoiDonHang.setNgayLap(donHang.getThoiGianLap());
+                                                    theoDoiDonHang.setTongTien(tong);
+                                                    if (!donHang.getMaNVGiao().equalsIgnoreCase("")) {
+                                                        for (NhanVien nhanVien : nhanViens) {
+                                                            if (nhanVien.getMaNhanVien().equalsIgnoreCase(donHang.getMaNVGiao())) {
+                                                                theoDoiDonHang.setTenNhanVien(nhanVien.getTenNhanVien());
+                                                                break;
+                                                            }
+                                                        }
+                                                    } else {
+                                                        theoDoiDonHang.setTenNhanVien("Đang xử lý");
+                                                    }
+
+                                                    for (TrangThaiDonHang trangThaiDonHang : trangThaiDonHangs) {
+                                                        if (trangThaiDonHang.getMaDonHang().equalsIgnoreCase(donHang.getMaDonHang())) {
+                                                            theoDoiDonHang.setTrangThai(trangThaiDonHang.getTrangThaiDon());
+                                                            theoDoiDonHang.setTrangThaiChuyenTienKH(trangThaiDonHang.getTrangThaiChuyenTienKH());
+                                                            theoDoiDonHang.setTrangThaiTraTienQL(trangThaiDonHang.getTrangThaiTraTienQL());
+                                                            theoDoiDonHang.setTrangThaiNhanTienKH(trangThaiDonHang.getTrangThaiNhanTienKH());
+                                                            theoDoiDonHang.setHinhThucThanhToan(trangThaiDonHang.getKieuThanhToan());
+                                                            break;
+                                                        }
+                                                    }
+                                                    theoDoiDonHangs.add(theoDoiDonHang);
+
+                                                }
+                                                adapter.notifyDataSetChanged();
+                                                ((TheoDoiDonHangActivity) context).donHangCanXacNhan();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    }
+                                });
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-
                             }
                         });
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -1841,6 +1874,8 @@ public class FireBaseNhaSachOnline {
                                                 chiTietTheoDoiDonHang_thongTin.setPhuongThucThanhToan(trangThaiDonHang.getKieuThanhToan());
                                                 chiTietTheoDoiDonHang_thongTin.setTrangThaiChuyenTienKH(trangThaiDonHang.getTrangThaiChuyenTienKH());
                                                 chiTietTheoDoiDonHang_thongTin.setTrangThaiNhanTienQL(trangThaiDonHang.getTrangThaiNhanTienQL());
+                                                chiTietTheoDoiDonHang_thongTin.setTrangThaiTraTienQL(trangThaiDonHang.getTrangThaiTraTienQL());
+                                                chiTietTheoDoiDonHang_thongTin.setTrangThaiNhanTienKH(trangThaiDonHang.getTrangThaiNhanTienKH());
                                                 chiTietTheoDoiDonHang_thongTin.setTrangThaiDon(trangThaiDonHang.getTrangThaiDon());
                                                 if (donHang.getMaGiamGia().equalsIgnoreCase("")) {
                                                     chiTietTheoDoiDonHang_thongTin.setGiamGia(0);
@@ -1911,10 +1946,18 @@ public class FireBaseNhaSachOnline {
         });
     }
 
+    public void xacNhanNhanHoannTien(String maDonHang, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference trangThaiDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
+        trangThaiDatabase.child(maDonHang).child("trangThaiNhanTienKH").setValue("Đã xác nhận");
+        trangThaiDatabase.child(maDonHang).child("trangThaiDon").setValue("Hủy");
+        ((ChiTietTheoDoiDonHangActivity) context).finish();
+    }
+
     public void khachHangHuyDonHang(String maDonHang, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference trangThaiDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
-        trangThaiDatabase.child(maDonHang).child("trangThaiDon").setValue("Huỷ");
+        trangThaiDatabase.child(maDonHang).child("trangThaiDon").setValue("Hủy");
         trangThaiDatabase.child(maDonHang).child("lyDoHuy").setValue("Khách hàng hủy đơn");
         ((ChiTietTheoDoiDonHangActivity) context).finish();
     }
@@ -2049,7 +2092,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void hienThiSach(ArrayList<ItemQuanLySanPhamNV> itemQuanLySanPhamNVS, QuanLySanPhamNVRecyclerViewAdapter adapter, Context context){
+    public void hienThiSach(ArrayList<ItemQuanLySanPhamNV> itemQuanLySanPhamNVS, QuanLySanPhamNVRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
         sanPhamDatabase.addValueEventListener(new ValueEventListener() {
@@ -2080,7 +2123,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void hienThiVanPhongPham(ArrayList<ItemQuanLySanPhamNV> itemQuanLySanPhamNVS, QuanLySanPhamNVRecyclerViewAdapter adapter, Context context){
+    public void hienThiVanPhongPham(ArrayList<ItemQuanLySanPhamNV> itemQuanLySanPhamNVS, QuanLySanPhamNVRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference sanPhamDatabase = firebaseDatabase.getReference("SANPHAM");
         sanPhamDatabase.addValueEventListener(new ValueEventListener() {
@@ -2147,7 +2190,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void hienThiTrangThaiDaXacNhan(String maNhanVien, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context){
+    public void hienThiTrangThaiDaXacNhan(String maNhanVien, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
         DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
@@ -2162,8 +2205,8 @@ public class FireBaseNhaSachOnline {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 TrangThaiDonHang trangThaiDonHang = snapshot.getValue(TrangThaiDonHang.class);
-                                if (trangThaiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Đã xác nhận")){
-                                    itemQuanLyDonHangNVS.add(new ItemQuanLyDonHangNV(donHang.getMaDonHang(),"Đã xác nhận", ""));
+                                if (trangThaiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Đã xác nhận")) {
+                                    itemQuanLyDonHangNVS.add(new ItemQuanLyDonHangNV(donHang.getMaDonHang(), "Đã xác nhận", ""));
 
                                 }
                                 adapter.notifyDataSetChanged();
@@ -2185,7 +2228,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void hienThiTrangThaiChuaXacNhan(String maNhanVien, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context){
+    public void hienThiTrangThaiChuaXacNhan(String maNhanVien, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
         DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
@@ -2200,8 +2243,8 @@ public class FireBaseNhaSachOnline {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 TrangThaiDonHang trangThaiDonHang = snapshot.getValue(TrangThaiDonHang.class);
-                                if (trangThaiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Hủy")){
-                                    itemQuanLyDonHangNVS.add(new ItemQuanLyDonHangNV(donHang.getMaDonHang(),"Hủy", ""));
+                                if (trangThaiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Hủy")) {
+                                    itemQuanLyDonHangNVS.add(new ItemQuanLyDonHangNV(donHang.getMaDonHang(), "Hủy", ""));
 
                                 }
                                 adapter.notifyDataSetChanged();
@@ -2228,6 +2271,7 @@ public class FireBaseNhaSachOnline {
         DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
         donHangDatabase.child(maDonHang).removeValue();
     }
+
     //Chi tiet don hang
     public void hienThiChiTietDonHang(String maDonHang, ArrayList<ItemChiTietDonHangNV> itemChiTietDonHangNVS, ChiTietDonHangNVRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -2325,17 +2369,17 @@ public class FireBaseNhaSachOnline {
         maGiamGiaDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    GiamGia gg = snapshot.getValue(GiamGia.class);
-                    giamGia.setMaGiamGia(gg.getMaGiamGia());
-                    giamGia.setHinhGiamGia(gg.getHinhGiamGia());
-                    giamGia.setMaKhachHang(gg.getMaKhachHang());
-                    giamGia.setTienGiamGia(gg.getTienGiamGia());
-                    giamGia.setTieuDe(gg.getTieuDe());
-                    giamGia.setYeuCau(gg.getYeuCau());
-                    giamGia.setChon(gg.getChon());
-                    giamGia.setKiemTra(gg.getKiemTra());
-                    ((ChiTietDonHangNVActivity) context).hienThiTienGiamGiaCTDH();
-                }
+                GiamGia gg = snapshot.getValue(GiamGia.class);
+                giamGia.setMaGiamGia(gg.getMaGiamGia());
+                giamGia.setHinhGiamGia(gg.getHinhGiamGia());
+                giamGia.setMaKhachHang(gg.getMaKhachHang());
+                giamGia.setTienGiamGia(gg.getTienGiamGia());
+                giamGia.setTieuDe(gg.getTieuDe());
+                giamGia.setYeuCau(gg.getYeuCau());
+                giamGia.setChon(gg.getChon());
+                giamGia.setKiemTra(gg.getKiemTra());
+                ((ChiTietDonHangNVActivity) context).hienThiTienGiamGiaCTDH();
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -2676,24 +2720,27 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void checkinCa1(String maNhanVien, String ngay, String gioVaoCa1){
+    public void checkinCa1(String maNhanVien, String ngay, String gioVaoCa1) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference chamCongDatabase = firebaseDatabase.getReference("CHAMCONG");
         chamCongDatabase.child(maNhanVien).child("ngay").setValue(ngay);
         chamCongDatabase.child(maNhanVien).child("gioVaoCa1").setValue(gioVaoCa1);
     }
-    public void checkoutCa1(String maNhanVien, String ngay, String gioRaCa1){
+
+    public void checkoutCa1(String maNhanVien, String ngay, String gioRaCa1) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference chamCongDatabase = firebaseDatabase.getReference("CHAMCONG");
         chamCongDatabase.child(maNhanVien).child("ngay").setValue(ngay);
         chamCongDatabase.child(maNhanVien).child("gioRaCa1").setValue(gioRaCa1);
     }
-    public void checkinCa2 (String maNhanVien, String ngay, String gioVaoCa2){
+
+    public void checkinCa2(String maNhanVien, String ngay, String gioVaoCa2) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference chamCongDatabase = firebaseDatabase.getReference("CHAMCONG");
         chamCongDatabase.child(maNhanVien).child("ngay").setValue(ngay);
     }
-    public void checkoutCa2(String maNhanVien, String ngay, String gioRaCa2){
+
+    public void checkoutCa2(String maNhanVien, String ngay, String gioRaCa2) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference chamCongDatabase = firebaseDatabase.getReference("CHAMCONG");
         chamCongDatabase.child(maNhanVien).child("ngay").setValue(ngay);
@@ -3241,7 +3288,7 @@ public class FireBaseNhaSachOnline {
     }
 
     //Hiển thị thông tin cá nhân khách hàng
-    public void hienThiThongTinKhachHang(String maKhachHang, KhachHang khachHang, Context context){
+    public void hienThiThongTinKhachHang(String maKhachHang, KhachHang khachHang, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoidungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoidungDatabase.child("khachhang").child(maKhachHang).addValueEventListener(new ValueEventListener() {
@@ -3270,7 +3317,7 @@ public class FireBaseNhaSachOnline {
     }
 
     //Thay đổi thông tin khách hàng
-    public  void thayDoiThongTinKhachHang(String maKhachHang, KhachHang khachHang, Context context){
+    public void thayDoiThongTinKhachHang(String maKhachHang, KhachHang khachHang, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoidungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoidungDatabase.child("khachhang").child(maKhachHang).addValueEventListener(new ValueEventListener() {
@@ -3298,7 +3345,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void suaThongTinKhachHang(String maKhachHang,String tenKhachHang, String email, String sdt, String stk, String tenNganHang, String diaChi){
+    public void suaThongTinKhachHang(String maKhachHang, String tenKhachHang, String email, String sdt, String stk, String tenNganHang, String diaChi) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoidungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoidungDatabase.child("khachhang").child(maKhachHang).child("tenKhachHang").setValue(tenKhachHang);
@@ -3598,7 +3645,7 @@ public class FireBaseNhaSachOnline {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     dialog.dismiss();
-                                    ((DangKyActivity)context).finish();
+                                    ((DangKyActivity) context).finish();
                                 }
                             });
                             alertDialog.show();
@@ -3613,50 +3660,74 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void sendEmailResetPassword(Activity activity, String email, String taikhoan, String phone) {
+    // Màn hình quên mật khẩu
+    public void guiYeuCauQuaSoDienThoai(String taiKhoan, String soDienThoai, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean check = false;
                 for (DataSnapshot dataSnapshot : snapshot.child("khachhang").getChildren()) {
                     KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
+                    if (khachHang.getTaiKhoan().equalsIgnoreCase(taiKhoan) && khachHang.getSoDienThoai().equalsIgnoreCase(soDienThoai)) {
+                        check = true;
+                        String sdt = "+84" + soDienThoai.substring(1);
+                        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+                        PhoneAuthOptions options =
+                                PhoneAuthOptions.newBuilder(firebaseAuth)
+                                        .setPhoneNumber(sdt)
+                                        .setTimeout(60L, TimeUnit.SECONDS)
+                                        .setActivity((QuenMatKhauActivity) context)
+                                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                                            @Override
+                                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                                firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener((QuenMatKhauXacNhanOTPActivity) context, new OnCompleteListener<AuthResult>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                                        if (task.isSuccessful()) {
+                                                            FirebaseUser user = task.getResult().getUser();
+                                                            Intent intent = new Intent(context, QuenMatKhauCapLaiMatKhauActivity.class);
+                                                            intent.putExtra("taiKhoan", taiKhoan);
+                                                            intent.putExtra("soDienThoai", user.getPhoneNumber());
+                                                            context.startActivity(intent);
+                                                        }
+                                                    }
+                                                });
+                                            }
 
-                    if (khachHang.getTaiKhoan().equalsIgnoreCase(taikhoan)
-                            && khachHang.getEmail().equalsIgnoreCase(email)
-                            && khachHang.getSoDienThoai().equalsIgnoreCase(phone)) {
-                        Random ran = new Random();
-                        int x = ran.nextInt(899999) + 100000;
-                        String message = "" + x;
+                                            @Override
+                                            public void onVerificationFailed(@NonNull FirebaseException e) {
+                                            }
 
-                        nguoiDungDatabase.child("khachhang").child(khachHang.getMaKhachHang()).child("matKhau").setValue(message);
-                        ((QuenMatKhauActivity) activity).sendSMS_By_smsManager(phone, "NHA SACH ONLINE: Mật khẩu của bạn đã được thay đổi: " + message + "\n*Vui lòng thay đổi mật khẩu!");
-                        //show dialog
-                        AlertDialog alertDialogT = new AlertDialog.Builder(activity).create();
-                        alertDialogT.setTitle("THÔNG BÁO");
-                        alertDialogT.setMessage("Chúng tôi đã gửi tin nhắn chứa mật khẩu mới về số: " + khachHang.getSoDienThoai() + "");
-                        alertDialogT.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        Log.d("Test", "RESET PASSWORD SUCCESSFUL");
-                        alertDialogT.show();
-                        return;
+                                            @Override
+                                            public void onCodeSent(@NonNull String vertificationID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                                super.onCodeSent(vertificationID, forceResendingToken);
+                                                Intent intent = new Intent(context, QuenMatKhauXacNhanOTPActivity.class);
+                                                intent.putExtra("taiKhoan", taiKhoan);
+                                                intent.putExtra("soDienThoai", sdt);
+                                                intent.putExtra("id", vertificationID);
+                                                context.startActivity(intent);
+                                            }
+                                        })
+                                        .build();
+                        PhoneAuthProvider.verifyPhoneNumber(options);
+                        break;
                     }
                 }
-                //show dialog
-                AlertDialog alertDialogW = new AlertDialog.Builder(activity).create();
-                alertDialogW.setTitle("CẢNH BÁO");
-                alertDialogW.setMessage("Không tìm thấy thông tin của bạn, vui lòng kiểm tra lại dữ liệu nhập");
-                alertDialogW.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                alertDialogW.show();
+                if (!check) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(context);
+                    b.setTitle("CẢNH BÁO");
+                    b.setMessage("Sai tài khoản hoặc số điện thoại! Vui lòng nhập lại!");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
+                }
             }
 
             @Override
@@ -3667,4 +3738,113 @@ public class FireBaseNhaSachOnline {
 
     }
 
+    public void thayDoiMatKhau(String taiKhoan, String matKhau, String soDienThoai, Context context) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Boolean check = false;
+                for (DataSnapshot dataSnapshot : snapshot.child("khachhang").getChildren()) {
+                    KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
+                    String sdt = "0" + soDienThoai.substring(3);
+                    if (khachHang.getTaiKhoan().equalsIgnoreCase(taiKhoan) && khachHang.getSoDienThoai().equalsIgnoreCase(sdt)) {
+                        nguoiDungDatabase.child("khachhang").child(khachHang.getMaKhachHang()).child("matKhau").setValue(matKhau);
+                        check = true;
+                        break;
+                    }
+                }
+                if (check) {
+                    AlertDialog.Builder b = new AlertDialog.Builder(context);
+                    b.setTitle("THÔNG BÁO");
+                    b.setMessage("Cập nhật mật khẩu thành công!");
+                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            Intent intent = new Intent(context, DangNhapActivity.class);
+                            context.startActivity(intent);
+                        }
+                    });
+                    AlertDialog al = b.create();
+                    al.show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    public void xacNhanOTP(String verificationID, String maOTP, String taiKhoan, Context context) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationID, maOTP);
+        firebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener((QuenMatKhauXacNhanOTPActivity) context, (OnCompleteListener<AuthResult>) new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser user = task.getResult().getUser();
+                            Intent intent = new Intent(context, QuenMatKhauCapLaiMatKhauActivity.class);
+                            intent.putExtra("taiKhoan", taiKhoan);
+                            intent.putExtra("soDienThoai", user.getPhoneNumber());
+                            context.startActivity(intent);
+                        } else {
+                            AlertDialog.Builder b = new AlertDialog.Builder(context);
+                            b.setTitle("CẢNH BÁO");
+                            b.setMessage("Mã OTP không chính xác! Vui lòng kiểm tra lại!");
+                            b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.cancel();
+                                }
+                            });
+                            AlertDialog al = b.create();
+                            al.show();
+                        }
+                    }
+                });
+
+    }
+
+    public void guiLaiMaOTP(HeThong hethong, String taiKhoan, String soDienThoai, Context context) {
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(firebaseAuth)
+                        .setPhoneNumber(soDienThoai)
+                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setActivity((QuenMatKhauXacNhanOTPActivity) context)
+                        .setForceResendingToken(hethong.getmForceResendingToken())
+                        .setCallbacks(new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                            @Override
+                            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                                firebaseAuth.signInWithCredential(phoneAuthCredential).addOnCompleteListener((Executor) context, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            FirebaseUser user = task.getResult().getUser();
+                                            Intent intent = new Intent(context, QuenMatKhauCapLaiMatKhauActivity.class);
+                                            intent.putExtra("taiKhoan", taiKhoan);
+                                            intent.putExtra("soDienThoai", user.getPhoneNumber());
+                                            context.startActivity(intent);
+                                        }
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onVerificationFailed(@NonNull FirebaseException e) {
+                            }
+
+                            @Override
+                            public void onCodeSent(@NonNull String vertificationID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                                super.onCodeSent(vertificationID, forceResendingToken);
+                                hethong.setVertificationID(vertificationID);
+                                hethong.setmForceResendingToken(forceResendingToken);
+                            }
+                        })
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+    }
 }

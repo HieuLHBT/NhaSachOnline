@@ -10,6 +10,8 @@ public class TheoDoiDonHang {
     private int tongTien;
     private String trangThai;
     private String trangThaiChuyenTienKH;
+    private String trangThaiNhanTienKH;
+    private String trangThaiTraTienQL;
     private String hinhThucThanhToan;
 
     public String getMaDonHang() {
@@ -38,6 +40,14 @@ public class TheoDoiDonHang {
 
     public String getTrangThaiChuyenTienKH() {
         return trangThaiChuyenTienKH;
+    }
+
+    public String getTrangThaiNhanTienKH() {
+        return trangThaiNhanTienKH;
+    }
+
+    public String getTrangThaiTraTienQL() {
+        return trangThaiTraTienQL;
     }
 
     public String getHinhThucThanhToan() {
@@ -72,6 +82,14 @@ public class TheoDoiDonHang {
         this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
     }
 
+    public void setTrangThaiNhanTienKH(String trangThaiNhanTienKH) {
+        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
+    }
+
+    public void setTrangThaiTraTienQL(String trangThaiTraTienQL) {
+        this.trangThaiTraTienQL = trangThaiTraTienQL;
+    }
+
     public void setHinhThucThanhToan(String hinhThucThanhToan) {
         this.hinhThucThanhToan = hinhThucThanhToan;
     }
@@ -79,7 +97,7 @@ public class TheoDoiDonHang {
     public TheoDoiDonHang() {
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNhanVien, String ngayGiao, String ngayLap, int tongTien, String trangThai, String trangThaiChuyenTienKH, String hinhThucThanhToan) {
+    public TheoDoiDonHang(String maDonHang, String tenNhanVien, String ngayGiao, String ngayLap, int tongTien, String trangThai, String trangThaiChuyenTienKH, String trangThaiNhanTienKH, String trangThaiTraTienQL, String hinhThucThanhToan) {
         this.maDonHang = maDonHang;
         this.tenNhanVien = tenNhanVien;
         this.ngayGiao = ngayGiao;
@@ -87,6 +105,8 @@ public class TheoDoiDonHang {
         this.tongTien = tongTien;
         this.trangThai = trangThai;
         this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
+        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
+        this.trangThaiTraTienQL = trangThaiTraTienQL;
         this.hinhThucThanhToan = hinhThucThanhToan;
     }
 }

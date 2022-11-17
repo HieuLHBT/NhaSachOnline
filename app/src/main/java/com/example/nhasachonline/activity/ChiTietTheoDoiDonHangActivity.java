@@ -33,7 +33,7 @@ public class ChiTietTheoDoiDonHangActivity extends AppCompatActivity {
     private ChiTietTheoDoiDonHangRecyclerViewAdapter adapter;
 
     private TextView layoutCTTDDH_btnTroVe, layoutCTTDDH_tvMaDonHang, layoutCTTDDH_tvTenNhanVienGiao, layoutCTTDDH_tvThoiGianLap, layoutCTTDDH_tvThoiGianGiao, layoutCTTDDH_tvHinhThucGiao, layoutCTTDDH_tvPhuongThucThanhToan, layoutCTTDDH_tvTongTien, layoutCTTDDH_tvPhiVanChuyen, layoutCTTDDH_tvGiamGia, layoutCTTDDH_tvTongTienThanhToan;
-    private Button layoutCTTDDH_btnXacNhanThanhToanOnline, layoutCTTDDH_btnHuyDonHang;
+    private Button layoutCTTDDH_btnXacNhanThanhToanOnline, layoutCTTDDH_btnHuyDonHang, layoutCTTDDH_btnXacNhanHoanTien;
     private LinearLayout layoutCTTDDH_llButton;
     private DecimalFormat formatter = new DecimalFormat("#,###,###");
 
@@ -51,6 +51,7 @@ public class ChiTietTheoDoiDonHangActivity extends AppCompatActivity {
         layoutCTTDDH_btnTroVe = findViewById(R.id.layoutCTTDDH_btnTroVe);
         layoutCTTDDH_btnXacNhanThanhToanOnline = findViewById(R.id.layoutCTTDDH_btnXacNhanThanhToanOnline);
         layoutCTTDDH_btnHuyDonHang = findViewById(R.id.layoutCTTDDH_btnHuyDonHang);
+        layoutCTTDDH_btnXacNhanHoanTien = findViewById(R.id.layoutCTTDDH_btnXacNhanHoanTien);
         layoutCTTDDH_tvMaDonHang = findViewById(R.id.layoutCTTDDH_tvMaDonHang);
         layoutCTTDDH_tvTenNhanVienGiao = findViewById(R.id.layoutCTTDDH_tvTenNhanVienGiao);
         layoutCTTDDH_tvThoiGianLap = findViewById(R.id.layoutCTTDDH_tvThoiGianLap);
@@ -151,6 +152,29 @@ public class ChiTietTheoDoiDonHangActivity extends AppCompatActivity {
             }
         });
 
+        layoutCTTDDH_btnXacNhanHoanTien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder b = new AlertDialog.Builder(ChiTietTheoDoiDonHangActivity.this);
+                b.setTitle("THÔNG BÁO");
+                b.setMessage("Bạn xác nhận đã nhận được hoàn tiền từ đơn hàng!");
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        fireBaseNhaSachOnline.xacNhanNhanHoannTien(maDonHang, ChiTietTheoDoiDonHangActivity.this);
+                    }
+                });
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog al = b.create();
+                al.show();
+            }
+        });
+
         layoutCTTDDH_btnHuyDonHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,8 +239,17 @@ public class ChiTietTheoDoiDonHangActivity extends AppCompatActivity {
             layoutCTTDDH_llButton.setVisibility(View.VISIBLE);
             if (chiTietTheoDoiDonHang_thongTin.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý")) {
                 layoutCTTDDH_btnXacNhanThanhToanOnline.setVisibility(View.VISIBLE);
+                layoutCTTDDH_btnHuyDonHang.setVisibility(View.GONE);
             } else {
                 layoutCTTDDH_btnXacNhanThanhToanOnline.setVisibility(View.GONE);
+                layoutCTTDDH_btnHuyDonHang.setVisibility(View.VISIBLE);
+            }
+            if (!chiTietTheoDoiDonHang_thongTin.getTrangThaiNhanTienKH().equalsIgnoreCase("") && !chiTietTheoDoiDonHang_thongTin.getTrangThaiTraTienQL().equalsIgnoreCase("") && !chiTietTheoDoiDonHang_thongTin.getTrangThaiDon().equalsIgnoreCase("Hủy")) {
+                layoutCTTDDH_btnXacNhanHoanTien.setVisibility(View.VISIBLE);
+                layoutCTTDDH_btnHuyDonHang.setVisibility(View.GONE);
+            } else {
+                layoutCTTDDH_btnXacNhanHoanTien.setVisibility(View.GONE);
+                layoutCTTDDH_btnHuyDonHang.setVisibility(View.VISIBLE);
             }
         }
     }

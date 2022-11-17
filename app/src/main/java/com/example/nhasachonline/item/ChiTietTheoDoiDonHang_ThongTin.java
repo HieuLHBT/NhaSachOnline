@@ -12,6 +12,8 @@ public class ChiTietTheoDoiDonHang_ThongTin {
     private Integer tongTienThanhToan;
     private String trangThaiChuyenTienKH;
     private String trangThaiNhanTienQL;
+    private String trangThaiTraTienQL;
+    private String trangThaiNhanTienKH;
     private String trangThaiDon;
 
     public String getTenNhanVienGiaoHang() {
@@ -56,6 +58,14 @@ public class ChiTietTheoDoiDonHang_ThongTin {
 
     public String getTrangThaiNhanTienQL() {
         return trangThaiNhanTienQL;
+    }
+
+    public String getTrangThaiTraTienQL() {
+        return trangThaiTraTienQL;
+    }
+
+    public String getTrangThaiNhanTienKH() {
+        return trangThaiNhanTienKH;
     }
 
     public String getTrangThaiDon() {
@@ -106,6 +116,14 @@ public class ChiTietTheoDoiDonHang_ThongTin {
         this.trangThaiNhanTienQL = trangThaiNhanTienQL;
     }
 
+    public void setTrangThaiTraTienQL(String trangThaiTraTienQL) {
+        this.trangThaiTraTienQL = trangThaiTraTienQL;
+    }
+
+    public void setTrangThaiNhanTienKH(String trangThaiNhanTienKH) {
+        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
+    }
+
     public void setTrangThaiDon(String trangThaiDon) {
         this.trangThaiDon = trangThaiDon;
     }
@@ -113,7 +131,7 @@ public class ChiTietTheoDoiDonHang_ThongTin {
     public ChiTietTheoDoiDonHang_ThongTin() {
     }
 
-    public ChiTietTheoDoiDonHang_ThongTin(String tenNhanVienGiaoHang, String thoiGianLap, String thoiGianGiao, String phuongThucThanhToan, Integer tongTienHang, Integer phiVanChuyen, String hinhThucGiao, Integer giamGia, Integer tongTienThanhToan, String trangThaiChuyenTienKH, String trangThaiNhanTienQL, String trangThaiDon) {
+    public ChiTietTheoDoiDonHang_ThongTin(String tenNhanVienGiaoHang, String thoiGianLap, String thoiGianGiao, String phuongThucThanhToan, Integer tongTienHang, Integer phiVanChuyen, String hinhThucGiao, Integer giamGia, Integer tongTienThanhToan, String trangThaiChuyenTienKH, String trangThaiNhanTienQL, String trangThaiTraTienQL, String trangThaiNhanTienKH, String trangThaiDon) {
         this.tenNhanVienGiaoHang = tenNhanVienGiaoHang;
         this.thoiGianLap = thoiGianLap;
         this.thoiGianGiao = thoiGianGiao;
@@ -125,6 +143,8 @@ public class ChiTietTheoDoiDonHang_ThongTin {
         this.tongTienThanhToan = tongTienThanhToan;
         this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
         this.trangThaiNhanTienQL = trangThaiNhanTienQL;
+        this.trangThaiTraTienQL = trangThaiTraTienQL;
+        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
         this.trangThaiDon = trangThaiDon;
     }
 }

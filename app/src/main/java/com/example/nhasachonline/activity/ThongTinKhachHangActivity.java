@@ -31,8 +31,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thongtincanhan_layout);
-        sharePreferences.setKhachHang1(this,maKhachHang);
-        maKhachHang = sharePreferences.getKhachHang1(this);
+        maKhachHang = "kh1";
 
         // Ánh xạ
         layoutTTKH_tvHoTen = findViewById(R.id.layoutTTKH_tvHoTen);

@@ -32,6 +32,7 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
 
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs = new ArrayList<>();
     private ArrayList<TheoDoiDonHang> donHangCanXacNhan = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donHangHoanTien = new ArrayList<>();
     private ArrayList<TheoDoiDonHang> tatCa = new ArrayList<>();
     private TheoDoiDonHangRecyclerViewAdapter adapter;
 
@@ -48,6 +49,7 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         ArrayList<String> trangThai = new ArrayList<>();
         trangThai.add("Tất cả đơn hàng");
         trangThai.add("Đơn hàng cần xác nhận");
+        trangThai.add("Đơn hàng hoàn tiền");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.theodoidonhang_spinner, trangThai);
         layoutTDDH_spnTrangThai.setAdapter(arrayAdapter);
@@ -73,27 +75,32 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
             }
         });
 
-//        layoutTDDH_spnTrangThai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                switch (position) {
-//                    case 0:
-//                        theoDoiDonHangs.clear();
-//                        theoDoiDonHangs.addAll(tatCa);
-//                        adapter.notifyDataSetChanged();
-//                        break;
-//                    case 1:
-//                        theoDoiDonHangs.clear();
-//                        theoDoiDonHangs.addAll(donHangCanXacNhan);
-//                        adapter.notifyDataSetChanged();
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//            }
-//        });
+        layoutTDDH_spnTrangThai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(tatCa);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(donHangCanXacNhan);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(donHangHoanTien);
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     @Override
@@ -105,13 +112,31 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
     public void donHangCanXacNhan() {
         tatCa.clear();
         donHangCanXacNhan.clear();
+        donHangHoanTien.clear();
         for (TheoDoiDonHang theoDoiDonHang : theoDoiDonHangs) {
             if (theoDoiDonHang.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý") && theoDoiDonHang.getHinhThucThanhToan().equalsIgnoreCase("Online")) {
                 donHangCanXacNhan.add(theoDoiDonHang);
+            } else if (!theoDoiDonHang.getTrangThaiNhanTienKH().equalsIgnoreCase("") && !theoDoiDonHang.getTrangThaiTraTienQL().equalsIgnoreCase("") && !theoDoiDonHang.getTrangThai().equalsIgnoreCase("Hủy")) {
+                donHangHoanTien.add(theoDoiDonHang);
             } else {
                 tatCa.add(theoDoiDonHang);
             }
         }
-        Log.d("test", theoDoiDonHangs.size() + "");
+        if (donHangCanXacNhan.size() != 0) {
+            layoutTDDH_spnTrangThai.setSelection(1);
+            theoDoiDonHangs.clear();
+            theoDoiDonHangs.addAll(donHangCanXacNhan);
+            adapter.notifyDataSetChanged();
+        } else if (donHangHoanTien.size() != 0) {
+            layoutTDDH_spnTrangThai.setSelection(2);
+            theoDoiDonHangs.clear();
+            theoDoiDonHangs.addAll(donHangHoanTien);
+            adapter.notifyDataSetChanged();
+        } else {
+            layoutTDDH_spnTrangThai.setSelection(0);
+            theoDoiDonHangs.clear();
+            theoDoiDonHangs.addAll(tatCa);
+            adapter.notifyDataSetChanged();
+        }
     }
 }
