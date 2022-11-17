@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,10 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.adapters.NhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.SanPhamRecyclerViewAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonline.item.ItemNhanVien;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.tools.SharePreferences;
 
@@ -42,6 +41,9 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.manhinh_quanly_sanpham_layout);
+        //search
+        timkiemSP = findViewById(R.id.layoutMHQLSP_swTimKiem);
+        timKiem();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLSP_rvDanhSachSanPham);
         adapter = new SanPhamRecyclerViewAdapter(this,R.layout.manhinh_quanly_sanpham_item, sanPhams);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -109,6 +111,36 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
                         ManHinhQuanLySanPhamActivity.this.startActivity(intent);
                     }
                 });
+            }
+        });
+    }
+    public void filterList(String newText) {
+        ArrayList<ItemSanPham> fiIteredList = new ArrayList<>();
+        for(ItemSanPham sanPham : sanPhams){
+            if(sanPham.getTenSanPham().toLowerCase().contains(newText.toLowerCase()) || sanPham.getMaSanPham().toLowerCase().contains(newText.toLowerCase())){
+                fiIteredList.add(sanPham);
+            }
+        }
+
+        if(fiIteredList.isEmpty()){
+            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList1(fiIteredList);
+        }
+    }
+
+    public void timKiem(){
+        timkiemSP.clearFocus();
+        timkiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
             }
         });
     }

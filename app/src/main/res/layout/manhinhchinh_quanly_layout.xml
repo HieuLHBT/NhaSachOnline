@@ -158,14 +158,13 @@
                     android:gravity="center|left"
                     android:text="Thống kê ngày:"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/textsize"
                     android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/layoutMHCQL_spnNgay"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8"
+                    android:layout_weight="1.6"
                     android:gravity="center|left"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textsize" />

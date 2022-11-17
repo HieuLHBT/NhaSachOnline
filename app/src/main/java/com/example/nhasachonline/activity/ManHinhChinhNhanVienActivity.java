@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,12 +27,16 @@ import com.example.nhasachonline.item.ItemManHinhChinhNhanVien;
 import com.example.nhasachonline.tools.SharePreferences;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.type.DateTime;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,9 +44,11 @@ import java.util.Date;
 public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
-    private String maNhanVien = "nv1";
+    private String maNhanVien = "nv2";
     private String ngay;
     private String thoiGian;
+    private String mocThoiGian = "12.00";
+
 
     private ManHinhChinhNhanVienRecyclerViewAdapter adapter;
     private ArrayList<ItemManHinhChinhNhanVien> itemManHinhChinhNhanViens = new ArrayList<>();
@@ -88,8 +93,10 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
 
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat sdfTime = new SimpleDateFormat("hh.mm");
+
         ngay = sdfDay.format(new Date());
         thoiGian = sdfTime.format(new Date());
+
         layoutMHCNV_txtNgay.setText(ngay);
 
         fireBase.hienThiManHinhChinhNhanVien(maNhanVien, nhanVien, this);
@@ -119,9 +126,9 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
         layoutMHCNV_btnQuanLySanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(ManHinhChinhNhanVienActivity.this, QuanLySanPhamNVActivity.class);
-                //intent.putExtra("maNhanVien", maNhanVien);
-                //ManHinhChinhNhanVienActivity.this.startActivity(intent);
+                Intent intent = new Intent(ManHinhChinhNhanVienActivity.this, QuanLySanPhamNVActivity.class);
+                intent.putExtra("maNhanVien", maNhanVien);
+                ManHinhChinhNhanVienActivity.this.startActivity(intent);
             }
         });
         layoutMHCNV_btnLichLamViec.setOnClickListener(new View.OnClickListener() {
@@ -143,9 +150,9 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
         layoutMHCNV_btnPhanHoiKhachHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(ManHinhChinhNhanVienActivity.this, PhanHoiBinhLuanActivity.class);
-                //intent.putExtra("maNhanVien", maNhanVien);
-                //ManHinhChinhNhanVienActivity.this.startActivity(intent);
+                Intent intent = new Intent(ManHinhChinhNhanVienActivity.this, PhanHoiYKienKhachHangActivity.class);
+                intent.putExtra("maNhanVien", maNhanVien);
+                ManHinhChinhNhanVienActivity.this.startActivity(intent);
             }
         });
     }

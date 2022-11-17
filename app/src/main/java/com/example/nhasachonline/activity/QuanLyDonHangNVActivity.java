@@ -1,13 +1,16 @@
 package com.example.nhasachonline.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +19,7 @@ import com.example.nhasachonline.R;
 import com.example.nhasachonline.adapters.ManHinhChinhNhanVienRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.QuanLyDonHangNVRecyclerViewAdapter;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonline.item.ItemManHinhChinhNhanVien;
 import com.example.nhasachonline.item.ItemQuanLyDonHangNV;
 import com.example.nhasachonline.tools.SharePreferences;
 
@@ -87,9 +91,9 @@ public class QuanLyDonHangNVActivity extends AppCompatActivity {
                 itemQLDH_NV_btnThongBaoHuy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Intent intent = new Intent(QuanLyDonHangNVActivity.this, ThongBaoHuyActivity.class);
-                        //intent.putExtra("maNhanVien", maNhanVien);
-                        //QuanLyDonHangNVActivity.this.startActivity(intent);
+                        Intent intent = new Intent(QuanLyDonHangNVActivity.this, ThongBaoHuyDonHangActivity.class);
+                        intent.putExtra("maDonHang", maDonHang);
+                        QuanLyDonHangNVActivity.this.startActivity(intent);
                     }
                 });
 
@@ -107,12 +111,56 @@ public class QuanLyDonHangNVActivity extends AppCompatActivity {
                 itemQLDH_NV_btnHuyDon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Intent intent = new Intent(QuanLyDonHangNVActivity.this, ChiTietDonHangNVActivity.class);
-                        //intent.putExtra("maNhanVien", maNhanVien);
-                        //QuanLyDonHangNVActivity.this.startActivity(intent);
+                        ArrayList<ItemQuanLyDonHangNV> mhqldh = new ArrayList<>();
+                        ThongBaoXacNhanHuyDonHang(mhqldh);
                     }
                 });
             }
         });
+        layoutQLDH_NV_spnTinhTrang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        fireBase.hienThiQuanLyDonHang(maNhanVien, itemQuanLyDonHangNVS, adapter, QuanLyDonHangNVActivity.this);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        fireBase.hienThiTrangThaiDaXacNhan(maNhanVien, itemQuanLyDonHangNVS, adapter, QuanLyDonHangNVActivity.this);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        fireBase.hienThiTrangThaiChuaXacNhan(maNhanVien, itemQuanLyDonHangNVS, adapter, QuanLyDonHangNVActivity.this);
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
+
+    public void ThongBaoXacNhanHuyDonHang(ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS) {
+        AlertDialog.Builder b = new AlertDialog.Builder(QuanLyDonHangNVActivity.this);
+        b.setTitle("Xác nhận huỷ đơn hàng");
+        b.setMessage("Bạn có muốn xác nhận huỷ đơn hàng " + maDonHang + " không ?");
+        b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+              fireBase.xoaDonHang(maDonHang, adapter);
+            }
+        });
+        b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog al = b.create();
+        al.show();
+    }
+
 }

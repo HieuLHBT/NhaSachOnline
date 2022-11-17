@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
+import com.example.nhasachonline.item.ItemNhanVien;
 import com.example.nhasachonline.item.ItemSanPham;
 
 import java.text.DecimalFormat;
@@ -23,10 +24,14 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     private ArrayList<ItemSanPham> sanPhams;
     private SanPhamRecyclerViewAdapter.OnItemClickListener onItemClickListener;
 
-    public SanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSanPham> nhanViens) {
+    public SanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSanPham> sanPhams) {
         this.context = context;
         this.resource = resource;
         this.sanPhams = sanPhams;
+    }
+    public void setFilteredList1(ArrayList<ItemSanPham> filteredList1){
+        this.sanPhams = filteredList1;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override
