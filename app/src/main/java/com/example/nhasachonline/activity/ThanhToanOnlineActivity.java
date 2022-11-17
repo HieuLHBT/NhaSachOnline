@@ -33,7 +33,7 @@ public class ThanhToanOnlineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thanhtoanonline_layout);
         maDonHang = sharePreferences.layMaDonHang(this);
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
         layoutTTTT_btnTroVe = findViewById(R.id.layoutThanhToanOnline_btnBack);
         layoutTTTT_tvTongTienThanhToan = findViewById(R.id.layoutTTTT_tvTienThanhToan);

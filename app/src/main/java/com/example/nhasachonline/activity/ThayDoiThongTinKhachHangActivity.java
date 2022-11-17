@@ -33,8 +33,7 @@ public class ThayDoiThongTinKhachHangActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thaydoithongtin_layout);
-        sharePreferences.setKhachHang1(this,maKhachHang);
-        maKhachHang = sharePreferences.getKhachHang1(this);
+        maKhachHang = "kh1";
 
         // Ánh xạ
         layoutCSTTKH_edtHoTen = findViewById(R.id.layoutCSTTKH_edtHoTen);
