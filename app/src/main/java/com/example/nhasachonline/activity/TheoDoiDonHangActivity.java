@@ -1,23 +1,21 @@
 package com.example.nhasachonline.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.adapters.GioHangRecyclerViewAdapter;
 import com.example.nhasachonline.adapters.TheoDoiDonHangRecyclerViewAdapter;
-import com.example.nhasachonline.data_model.DonHang;
-import com.example.nhasachonline.data_model.NhanVien;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.TheoDoiDonHang;
 import com.example.nhasachonline.tools.SharePreferences;
@@ -25,28 +23,34 @@ import com.example.nhasachonline.tools.SharePreferences;
 import java.util.ArrayList;
 
 public class TheoDoiDonHangActivity extends AppCompatActivity {
-    private SharePreferences sharePreferences = new SharePreferences();
-    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private Spinner layoutTDDH_spnTrangThai;
 
-    private String maKhachHang = "kh1";
-    private String maDonHang;
-    private String maNhanVien = "nv1";
-    private int selectedRow = -1;
+    private SharePreferences sharePreferences = new SharePreferences();
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+
+    private String maKhachHang;
 
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs = new ArrayList<>();
-    private ArrayList<DonHang> donHangsModel = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donHangCanXacNhan = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> tatCa = new ArrayList<>();
     private TheoDoiDonHangRecyclerViewAdapter adapter;
-
-    private NhanVien nhanVien = new NhanVien();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theodoidonhang_layout);
 
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
+        layoutTDDH_spnTrangThai = findViewById(R.id.layoutTDDH_spnTrangThai);
+
+        ArrayList<String> trangThai = new ArrayList<>();
+        trangThai.add("Tất cả đơn hàng");
+        trangThai.add("Đơn hàng cần xác nhận");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.theodoidonhang_spinner, trangThai);
+        layoutTDDH_spnTrangThai.setAdapter(arrayAdapter);
 
         adapter = new TheoDoiDonHangRecyclerViewAdapter(this, R.layout.theodoidonhang_item, theoDoiDonHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -54,22 +58,60 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        fireBase.hienThiTheoDoiDonHang(maNhanVien ,nhanVien, theoDoiDonHangs, this);
-
         adapter.setOnItemClickListener(new TheoDoiDonHangRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                Button itemTDDH_btnXemChiTiet = view.findViewById(R.id.itemTDDH_btnXemChiTiet);
-
-                itemTDDH_btnXemChiTiet.setOnClickListener(new View.OnClickListener() {
+                Button itemTDDH_btnChiTiet = view.findViewById(R.id.itemTDDH_btnChiTiet);
+                itemTDDH_btnChiTiet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Chuyển sang màn hình Xem Chi Tiết!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TheoDoiDonHangActivity.this, ChiTietTheoDoiDonHangActivity.class);
+                        intent.putExtra("maDonHang", theoDoiDonHangs.get(position).getMaDonHang());
+                        startActivity(intent);
                     }
                 });
             }
         });
-        recyclerView.setAdapter(adapter);
-//        fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
+
+//        layoutTDDH_spnTrangThai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                switch (position) {
+//                    case 0:
+//                        theoDoiDonHangs.clear();
+//                        theoDoiDonHangs.addAll(tatCa);
+//                        adapter.notifyDataSetChanged();
+//                        break;
+//                    case 1:
+//                        theoDoiDonHangs.clear();
+//                        theoDoiDonHangs.addAll(donHangCanXacNhan);
+//                        adapter.notifyDataSetChanged();
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//            }
+//        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fireBaseNhaSachOnline.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
+    }
+
+    public void donHangCanXacNhan() {
+        tatCa.clear();
+        donHangCanXacNhan.clear();
+        for (TheoDoiDonHang theoDoiDonHang : theoDoiDonHangs) {
+            if (theoDoiDonHang.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý") && theoDoiDonHang.getHinhThucThanhToan().equalsIgnoreCase("Online")) {
+                donHangCanXacNhan.add(theoDoiDonHang);
+            } else {
+                tatCa.add(theoDoiDonHang);
+            }
+        }
+        Log.d("test", theoDoiDonHangs.size() + "");
     }
 }

@@ -50,7 +50,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chitietsanpham_layout);
         maSanPham = getIntent().getStringExtra("maSanPham");
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
         anhSanPham = findViewById(R.id.CTSP_imgAnhSanPham);
         anhVPP = findViewById(R.id.CTVPP_imgAnhSanPham);

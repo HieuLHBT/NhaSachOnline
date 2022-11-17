@@ -54,7 +54,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_khachhang_layout);
         maSanPham = getIntent().getStringExtra("maSanPham");
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = "kh1";
 
 
         //search

@@ -1,193 +1,221 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.DangNhapActivity">
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="2.5"
+        android:orientation="horizontal">
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:paddingTop="40dp"
-            android:text="Phần mềm bán sách online"
+            android:paddingTop="@dimen/paddingtieude"
+            android:text="Phần mềm nhà sách online"
             android:textColor="@color/design_default_color_error"
-            android:textSize="40dp"
+            android:textSize="@dimen/tieude"
             android:textStyle="bold" />
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:paddingTop="20dp"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đăng Nhập"
-            android:textSize="30dp"
-            android:textColor="@color/black" />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingLeft="20dp"
-            android:layout_margin="5dp"
-            >
 
-            >
-            <RadioButton
-                android:id="@+id/layoutDN_rdbQuanLy"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Quản Lý"
-                />
-            <RadioButton
-                android:id="@+id/layoutDN_rdbNhanVien"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Nhân viên"
-                />
-            <RadioButton
-                android:id="@+id/layoutDN_rdbKhachHang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Khách hàng"
-                />
-        </RadioGroup>
-    </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.5"
-        >
-        <TextView
-            android:paddingLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tài khoản"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            />
-        <EditText
-            android:id="@+id/layoutDN_edtTaiKhoan"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/border"
+        android:layout_marginBottom="200dp"
+        android:layout_weight="8"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:drawablePadding="12dp"
-            android:textSize="20dp"
-            android:hint="Nhập tài khoản"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        >
-        <TextView
-            android:paddingLeft="13dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:textColor="@color/black"
-            android:text="Mật khẩu"
-            />
-        <EditText
-            android:id="@+id/layoutDN_edtNhapMatKhau"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/border"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="Đăng Nhập"
+                android:textColor="@color/black"
+                android:textSize="@dimen/tieudesize" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:drawablePadding="12dp"
-            android:textSize="20dp"
-            android:inputType="textPassword"
-            android:hint="Nhập mật khẩu"
-            />
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/layoutDN_rdbQuanLi"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Quản lý"
+                    android:textSize="@dimen/textthu" />
+
+                <RadioButton
+                    android:id="@+id/layoutDN_rdbNhanVien"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Nhân viên"
+                    android:textSize="@dimen/textthu" />
+
+                <RadioButton
+                    android:id="@+id/layoutDN_rdbKhachHang"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:text="Khách hàng"
+                    android:textSize="@dimen/textthu" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginRight="@dimen/marginleft"
+            android:layout_weight="0.6"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Tài khoản"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutDN_edtTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/le"
+                android:layout_weight="1.5"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:hint="Nhập tài khoản"
+                android:textSize="@dimen/textsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginRight="@dimen/marginleft"
+            android:layout_weight="0.6"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Mật khẩu"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutDN_edtNhapMatKhau"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/le"
+                android:layout_weight="1.5"
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:hint="Nhập mật khẩu"
+                android:inputType="textPassword"
+                android:textSize="@dimen/textsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Chưa có tài khoản?"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/layoutDN_btnDangKy"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Đăng ký"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/textsize" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/layoutDN_marginButton"
+            android:layout_marginRight="@dimen/layoutDN_marginButton"
+            android:layout_weight="0.75"
+
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/layoutDN_bntDangNhap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="Đăng nhập" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/layoutDN_cbNhoMatKHau"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="Lưu đăng nhập"
+                android:textSize="@dimen/textsize" />
+
+            <Button
+                android:id="@+id/layoutDN_btnQuenMatKhau"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Quên mật khẩu"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:gravity="center">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15dp"
-            android:textColor="@color/material_dynamic_neutral_variant40"
-            android:text="Chưa có tài khoản."
-            />
-        <Button
-            android:id="@+id/layoutDN_btnDangKy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?android:attr/borderlessButtonStyle"
-            android:textSize="18dp"
-            android:textColor="#11A9ED"
-            android:text="Đăng ký"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.75"
-        android:gravity="center">
-        <Button
-            android:id="@+id/layoutDN_bntDangNhap"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:text="Đăng nhập"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-        <CheckBox
-            android:id="@+id/layoutDN_cbNhoMatKHau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:textSize="20dp"
-            android:text="Nhớ mật khẩu"
-            />
-        <Button
-            android:id="@+id/layoutDN_btnQuenMatKhau"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="?android:attr/borderlessButtonStyle"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:textColor="#11A9ED"
-            android:text="Quên mật khẩu"
-            />
-    </LinearLayout>
+
 </LinearLayout>

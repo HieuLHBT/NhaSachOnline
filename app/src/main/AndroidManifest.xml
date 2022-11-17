@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -33,9 +35,9 @@
         <!--        <activity-->
         <!--            android:name=".activity.GioHangActivity"-->
         <!--            android:exported="true"></activity>-->
-        <!--        <activity-->
-        <!--            android:name=".activity.ThanhToanActivity"-->
-        <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.ThanhToanActivity"
+            android:exported="true"></activity>
         <!--        <activity-->
         <!--            android:name=".activity.MaGiamGiaActivity"-->
         <!--            android:exported="true"></activity>-->
@@ -45,21 +47,33 @@
         <!--        <activity-->
         <!--            android:name=".activity.BangChamCongActivity"-->
         <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.ChiTietDonDaNhanActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ChiTietDonDaGiaoActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ChiTietDonDaHuyActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.BangLuongActivity"
+            android:exported="true"></activity>
         <!--        <activity-->
-        <!--            android:name=".activity.ChiTietDonDaNhanActivity"-->
+        <!--            android:name=".activity.PhanHoiYKienKhachHangActivity"-->
         <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.TraLoiBinhLuanActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ManHinhChinhQuanLyActivity"
+            android:exported="true"></activity>
         <!--        <activity-->
-        <!--            android:name=".activity.ChiTietDonDaGiaoActivity"-->
+        <!--            android:name=".activity.TheoDoiDonHangActivity"-->
         <!--            android:exported="true"></activity>-->
-        <!--        <activity-->
-        <!--            android:name=".activity.ChiTietDonDaHuyActivity"-->
-        <!--            android:exported="true"></activity>-->
-        <!--        <activity-->
-        <!--            android:name=".activity.BangLuongActivity"-->
-        <!--            android:exported="true"></activity>-->
-        <!--        <activity-->
-        <!--            android:name=".activity.TraLoiBinhLuanActivity"-->
-        <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.ChiTietTheoDoiDonHangActivity"
+            android:exported="true"></activity>
 
         <!--        Tin        -->
         <activity
@@ -70,9 +84,6 @@
             android:exported="true"></activity>
         <activity
             android:name=".activity.QuanLySanPhamNVActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.DangKyActivity"
             android:exported="true"></activity>
         <activity
             android:name=".activity.ThongTinGiaoHangNVActivity"
