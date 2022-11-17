@@ -63,13 +63,6 @@
                 android:layout_weight="0.8"
                 android:layout_marginLeft="15dp"/>
 
-            <Button
-                android:id="@+id/layoutQLDH_NV_btnHienThi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.45"
-                android:text="Hiển thị"
-                />
         </LinearLayout>
 
     </LinearLayout>

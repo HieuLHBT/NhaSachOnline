@@ -20,6 +20,7 @@ import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.ItemChiTietDonHangNV;
 import com.example.nhasachonline.tools.SharePreferences;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ChiTietDonHangNVActivity extends AppCompatActivity {
@@ -28,6 +29,8 @@ public class ChiTietDonHangNVActivity extends AppCompatActivity {
 
     private ChiTietDonHangNVRecyclerViewAdapter adapter;
     private ArrayList<ItemChiTietDonHangNV> itemChiTietDonHangNVs = new ArrayList<>();
+
+    private DecimalFormat formatter = new DecimalFormat("#,###,###");
 
     private String maDonHang;
     private String maGiamGia = "gg2";
@@ -100,6 +103,7 @@ public class ChiTietDonHangNVActivity extends AppCompatActivity {
     public void hienThiDonHang(){
         layoutCTDH_NV_txtDiaChiNhanHang.setText(" " + donHang.getDiaChiGiao());
         layoutCTDH_NV_txtPhiVanChuyen.setText("  " + donHang.getPhiVanChuyen());
+
         layoutCTDH_NV_txtGiamGia.setText("  " + donHang.getMaGiamGia());
     }
 

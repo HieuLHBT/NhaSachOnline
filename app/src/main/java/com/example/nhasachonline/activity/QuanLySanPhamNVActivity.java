@@ -3,6 +3,7 @@ package com.example.nhasachonline.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -36,6 +37,7 @@ public class QuanLySanPhamNVActivity extends AppCompatActivity {
     private Button layoutQLSP_NV_btnTroVe;
 
     ArrayList<String> dataSanPham = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,24 +83,49 @@ public class QuanLySanPhamNVActivity extends AppCompatActivity {
             }
         });
 
-        fireBase.hienThiQuanLySanPham(itemQuanLySanPhamNVS, adapter, this);
+        layoutQLSP_NV_spnSanPham.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        fireBase.hienThiQuanLySanPham(itemQuanLySanPhamNVS, adapter, QuanLySanPhamNVActivity.this);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        fireBase.hienThiSach(itemQuanLySanPhamNVS, adapter, QuanLySanPhamNVActivity.this);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        fireBase.hienThiVanPhongPham(itemQuanLySanPhamNVS, adapter, QuanLySanPhamNVActivity.this);
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
     }
+
     public void filterList(String newText) {
         ArrayList<ItemQuanLySanPhamNV> fiIteredList = new ArrayList<>();
-        for(ItemQuanLySanPhamNV itemQuanLySanPhamNV : itemQuanLySanPhamNVS){
-            if(itemQuanLySanPhamNV.getTenSanPham().toLowerCase().contains(newText.toLowerCase())){
+        for (ItemQuanLySanPhamNV itemQuanLySanPhamNV : itemQuanLySanPhamNVS) {
+            if (itemQuanLySanPhamNV.getTenSanPham().toLowerCase().contains(newText.toLowerCase())) {
                 fiIteredList.add(itemQuanLySanPhamNV);
             }
         }
-        if(fiIteredList.isEmpty()){
-            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
-        }else {
+        if (fiIteredList.isEmpty()) {
+            Toast.makeText(this, "Không có dữ liệu", Toast.LENGTH_SHORT).show();
+        } else {
             adapter.setFilteredList(fiIteredList);
         }
     }
 
-    public void timKiem(){
+    public void timKiem() {
         timKiemSP.clearFocus();
         timKiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -112,5 +139,11 @@ public class QuanLySanPhamNVActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fireBase.hienThiQuanLySanPham(itemQuanLySanPhamNVS, adapter, this);
     }
 }
