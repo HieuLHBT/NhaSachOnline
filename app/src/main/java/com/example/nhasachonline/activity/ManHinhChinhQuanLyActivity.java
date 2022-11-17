@@ -4,6 +4,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -15,9 +17,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
+import com.example.nhasachonline.data_model.ChamCong;
 import com.example.nhasachonline.data_model.QuanLy;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.LichLamViec;
+import com.example.nhasachonline.item.ManHinhChinhQuanLy_ThongKeDoanhSo;
+import com.example.nhasachonline.item.ManHinhChinhQuanLy_ThongKeDon;
 import com.example.nhasachonline.tools.SharePreferences;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -64,9 +69,13 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
     private SharePreferences sharePreferences = new SharePreferences();
 
+    private ManHinhChinhQuanLy_ThongKeDon thongKeDon = new ManHinhChinhQuanLy_ThongKeDon();
     private String maQuanLy;
     private QuanLy quanLy = new QuanLy();
     private LocalDate duLieuNgayHienTai;
+    private String ngayHienThi;
+    private ArrayList<String> tuanHienTai = new ArrayList<>();
+    private ManHinhChinhQuanLy_ThongKeDoanhSo thongKeDoanhSo = new ManHinhChinhQuanLy_ThongKeDoanhSo();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -86,13 +95,14 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         layoutMHCQL_tvSoNguoiCa1 = findViewById(R.id.layoutMHCQL_tvSoNguoiCa1);
         layoutMHCQL_tvSoNguoiCa2 = findViewById(R.id.layoutMHCQL_tvSoNguoiCa2);
 
+        hienThiNgay();
+
         // Thiet lap PieChart
         layoutMHCQL_pcBieuDoDonHang.setEntryLabelTextSize(0);
         layoutMHCQL_pcBieuDoDonHang.setHoleRadius(35f);
         layoutMHCQL_pcBieuDoDonHang.setTransparentCircleRadius(40f);
         layoutMHCQL_pcBieuDoDonHang.setDrawEntryLabels(true);
         layoutMHCQL_pcBieuDoDonHang.setDrawHoleEnabled(true);
-        layoutMHCQL_pcBieuDoDonHang.setCenterText("THỐNG KÊ ĐƠN HÀNG");
         layoutMHCQL_pcBieuDoDonHang.setCenterTextSize(15);
         layoutMHCQL_pcBieuDoDonHang.getDescription().setEnabled(false);
         Legend legend = layoutMHCQL_pcBieuDoDonHang.getLegend();
@@ -116,7 +126,6 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         fireBaseNhaSachOnline.hienThiThongTinQuanLy(maQuanLy, quanLy, this);
-        hienThiNgay();
     }
 
     public void hienThiQuanLy() {
@@ -129,9 +138,9 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         try {
             File file = null;
             if (quanLy.getHinhQuanLy().contains("png")) {
-                file = File.createTempFile(quanLy.getHinhQuanLy().substring(0,quanLy.getHinhQuanLy().length()-4), "png");
+                file = File.createTempFile(quanLy.getHinhQuanLy().substring(0, quanLy.getHinhQuanLy().length() - 4), "png");
             } else if (quanLy.getHinhQuanLy().contains("jpg")) {
-                file = File.createTempFile(quanLy.getHinhQuanLy().substring(0,quanLy.getHinhQuanLy().length()-4), "jpg");
+                file = File.createTempFile(quanLy.getHinhQuanLy().substring(0, quanLy.getHinhQuanLy().length() - 4), "jpg");
             }
             final File fileHinh = file;
             storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -151,7 +160,6 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
     }
 
     public void hienThiNgay() {
-        ArrayList<String> tuanHienTai = new ArrayList<>();
         tuanHienTai.add("");
         tuanHienTai.add("");
         tuanHienTai.add("");
@@ -162,6 +170,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
 
         int thu = duLieuNgayHienTai.getDayOfWeek().getValue() - 1;
         DateTimeFormatter fm = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        ngayHienThi = duLieuNgayHienTai.format(fm);
         String ngay;
         switch (thu) {
             case 0:
@@ -279,18 +288,44 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tuanHienTai);
         layoutMHCQL_spnNgay.setAdapter(arrayAdapter);
+
+        for (int i = 0; i < tuanHienTai.size(); i++) {
+            if (tuanHienTai.get(i).equalsIgnoreCase(ngayHienThi)) {
+                layoutMHCQL_spnNgay.setSelection(i);
+                break;
+            }
+        }
+
+        layoutMHCQL_spnNgay.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ngayHienThi = tuanHienTai.get(position);
+                fireBaseNhaSachOnline.hienThiManHinhChinh(ngayHienThi, thongKeDon, ManHinhChinhQuanLyActivity.this);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        fireBaseNhaSachOnline.hienThiThongKeDoanhSo(tuanHienTai, thongKeDoanhSo, this);
     }
 
     public void thielapDuLieuPieChart() {
         ArrayList<PieEntry> entries = new ArrayList<>();
-        entries.add(new PieEntry(10, "Thành công"));
-        entries.add(new PieEntry(3, "Hủy"));
-        entries.add(new PieEntry(20, "Chờ xử lý"));
-
         ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.BLUE);
-        colors.add(Color.RED);
-        colors.add(Color.GRAY);
+        if (thongKeDon.getDonThanhCong() != 0) {
+            entries.add(new PieEntry(thongKeDon.getDonThanhCong(), "Thành công"));
+            colors.add(Color.BLUE);
+        }
+        if (thongKeDon.getDonDaHuy() != 0) {
+            entries.add(new PieEntry(thongKeDon.getDonDaHuy(), "Hủy"));
+            colors.add(Color.RED);
+        }
+        if (thongKeDon.getDonDangXyLy() != 0) {
+            entries.add(new PieEntry(thongKeDon.getDonDangXyLy(), "Chờ xử lý"));
+            colors.add(Color.GRAY);
+        }
 
         PieDataSet dataSet = new PieDataSet(entries, "THÔNG TIN ĐƠN");
         dataSet.setColors(colors);
@@ -309,23 +344,33 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         layoutMHCQL_pcBieuDoDonHang.setData(data);
         layoutMHCQL_pcBieuDoDonHang.invalidate();
         layoutMHCQL_pcBieuDoDonHang.animateY(1400, Easing.EaseInOutQuad);
+
+        if (entries.size() != 0) {
+            layoutMHCQL_pcBieuDoDonHang.setCenterText("THỐNG KÊ ĐƠN HÀNG");
+        } else {
+            layoutMHCQL_pcBieuDoDonHang.setCenterText("HIỆN TẠI KHÔNG CÓ ĐƠN HÀNG NÀO");
+        }
+
+
+        layoutMHCQL_tvSoNguoiCa1.setText(thongKeDon.getSoNguoiLamCa1() + " người");
+        layoutMHCQL_tvSoNguoiCa2.setText(thongKeDon.getSoNguoiLamCa2() + " người");
     }
 
     public void thielapDuLieuBarChart() {
         ArrayList<BarEntry> entries2 = new ArrayList<>();
-        entries2.add(new BarEntry(1, 4));
+        entries2.add(new BarEntry(1, thongKeDoanhSo.getThuHai()));
         ArrayList<BarEntry> entries3 = new ArrayList<>();
-        entries3.add(new BarEntry(2, 2));
+        entries3.add(new BarEntry(2, thongKeDoanhSo.getThuBa()));
         ArrayList<BarEntry> entries4 = new ArrayList<>();
-        entries4.add(new BarEntry(3, 3));
+        entries4.add(new BarEntry(3, thongKeDoanhSo.getThuTu()));
         ArrayList<BarEntry> entries5 = new ArrayList<>();
-        entries5.add(new BarEntry(4, 4));
+        entries5.add(new BarEntry(4, thongKeDoanhSo.getThuNam()));
         ArrayList<BarEntry> entries6 = new ArrayList<>();
-        entries6.add(new BarEntry(5, 5));
+        entries6.add(new BarEntry(5, thongKeDoanhSo.getThuSau()));
         ArrayList<BarEntry> entries7 = new ArrayList<>();
-        entries7.add(new BarEntry(6, 6));
+        entries7.add(new BarEntry(6, thongKeDoanhSo.getThuBay()));
         ArrayList<BarEntry> entriesCN = new ArrayList<>();
-        entriesCN.add(new BarEntry(7, 7));
+        entriesCN.add(new BarEntry(7, thongKeDoanhSo.getChuNhat()));
 
         List<IBarDataSet> bars = new ArrayList<IBarDataSet>();
         BarDataSet dataset2 = new BarDataSet(entries2, "Thứ 2");
@@ -353,8 +398,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         data.setValueFormatter(new ValueFormatter() {
             @Override
             public String getFormattedValue(float value) {
-                float f = Float.valueOf(super.getFormattedValue(value));
-                return (int) f + "";
+                return ((float) Math.round(value * 100) / 100) + "";
             }
         });
         com.github.mikephil.charting.components.XAxis xAxis = layoutMHCQL_bcBieuDoDoanhSo.getXAxis();
@@ -385,6 +429,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         data.setValueTextColor(Color.BLACK);
         layoutMHCQL_bcBieuDoDoanhSo.setData(data);
         layoutMHCQL_bcBieuDoDoanhSo.invalidate();
+        layoutMHCQL_bcBieuDoDoanhSo.animateY(1400, Easing.EaseInOutQuad);
     }
 
 }
