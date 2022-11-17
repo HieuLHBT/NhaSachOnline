@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,6 +38,9 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     private ArrayList<ItemNhanVien> nhanViens = new ArrayList<>();
     private NhanVienRecyclerViewAdapter adapter;
     private Spinner layout_spnNhanVien;
+    private TextView item_tvTroVe;
+    private TextView item_tvThemNhanVien;
+    private CardView itemMHQLNV_SuaNhanVien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +95,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new NhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                TextView item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);
+                item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);
                 item_tvTroVe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -99,21 +103,21 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     }
                 });
 
-                ImageButton item_btnThemNhanVien = view.findViewById(R.id.layoutMHQLNV_btnThemNhanVien);
-                item_btnThemNhanVien.setOnClickListener(new View.OnClickListener() {
+                item_tvThemNhanVien = view.findViewById(R.id.layoutMHQLNV_tvThemNhanVien);
+                item_tvThemNhanVien.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent1 = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                        startActivity(intent1);
+                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
+                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });
 
-                CardView itemMHQLNV = view.findViewById(R.id.itemMHQLNV);
-                itemMHQLNV.setOnClickListener(new View.OnClickListener() {
+                itemMHQLNV_SuaNhanVien = view.findViewById(R.id.itemMHQLNV);
+                itemMHQLNV_SuaNhanVien.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
-                        intent.putExtra("nguoiDung",nhanViens.get(position).getMaNhanVien());
+                        intent.putExtra(maNhanVien, nhanViens.get(position).getMaNhanVien());
                         ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });

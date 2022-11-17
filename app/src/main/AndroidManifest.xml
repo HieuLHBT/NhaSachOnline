@@ -91,19 +91,17 @@
         <activity
             android:name=".activity.ChiTietDonHangNVActivity"
             android:exported="true"></activity>
-        <activity
-            android:name=".activity.ManHinhChinhNhanVienActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.ManHinhChinhKhachHangActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.DangKyActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.QuenMatKhauActivity"
-            android:exported="true"></activity>
 
+        <!--        Tho        -->
+        <activity
+            android:name=".activity.ThemNhanVienActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThongTinKhachHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThanhToanOnlineActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

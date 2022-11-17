@@ -56,8 +56,8 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
         layoutTTGH_NV_btnTroVe = findViewById(R.id.layoutTTGH_NV_btnTroVe);
 
         //Gan du lieu
-        fireBase.hienThiKhachHang_TTGH(maKhachHang, maDonHang, khachHang, this);
-        fireBase.hienThiDonHang_TTGH(maDonHang, donHang, this);
+        fireBase.hienThiKhachHang_TTGH(maKhachHang, khachHang, this);
+        fireBase.hienThiDonHang_TTGH(maDonHang, maKhachHang, donHang, this);
         fireBase.hienThiTinhTrang_TTGH(maDonHang, trangThaiDonHang, this);
 
         layoutCTDH_NV_btnDinhViDonHang.setOnClickListener(new View.OnClickListener() {

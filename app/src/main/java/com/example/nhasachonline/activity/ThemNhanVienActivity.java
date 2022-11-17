@@ -94,7 +94,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         fireBase.themNhanVien(
                                "nv" + MHTNV_edtMaNhanVien.getText().toString(),
-                                MHTNV_edtMaNhanVien.getText() + ".png",
+                                "nhanvien" + MHTNV_edtMaNhanVien.getText() + ".png",
                                 MHTNV_edtTenNhanVien.getText().toString(),
                                 MHTNV_edtCMND.getText().toString(),
                                 MHTNV_edtDiaChi.getText().toString(),
@@ -118,7 +118,6 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                 });
                 AlertDialog al = b.create();
                 al.show();
-                Toast.makeText(ThemNhanVienActivity.this, "Thêm nhân viên thành công", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -221,4 +220,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                     });
         }
     }
+
+    //Kiem tra ma nhan vien
+
 }

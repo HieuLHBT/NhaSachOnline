@@ -79,7 +79,7 @@
             <TextView
                 android:id="@+id/CTSP_tvTenSanPham"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingRight="20sp"
                 android:text="Sách 1"
@@ -107,7 +107,7 @@
             <TextView
                 android:id="@+id/CTSP_tvTacGia"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Tác giả 1"
                 android:textColor="@color/black"
@@ -134,7 +134,7 @@
             <TextView
                 android:id="@+id/CTSP_tvTheLoai"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Tiêu thuyết"
                 android:textColor="@color/black"
@@ -152,7 +152,6 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:paddingLeft="10sp"
                 android:text="Ngày xuất bản: "
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -161,7 +160,7 @@
             <TextView
                 android:id="@+id/CTSP_tvngayXuatBan"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="2020"
                 android:textColor="@color/black"
@@ -188,7 +187,7 @@
             <TextView
                 android:id="@+id/CTSP_tvNhaXuatBan"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="NXB Văn Học Việt Nam"
                 android:textColor="@color/black"

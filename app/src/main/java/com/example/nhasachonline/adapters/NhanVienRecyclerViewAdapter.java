@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -128,7 +129,7 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
         TextView itemMHQLNV_tvTaiKhoanNhanVien;
         TextView itemMHQLNV_tvMatKhauNhanVien;
         ImageView itemMHQLNV_anhNhanVien;
-        Button itemMHQLNV_btnThemNhanVien;
+        TextView itemMHQLNV_tvThemNhanVien;
         View.OnClickListener onClickListener;
         CardView itemMHQLNV;
 
@@ -146,16 +147,15 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
             itemMHQLNV_tvMatKhauNhanVien = itemView.findViewById(R.id.itemMHQLNV_tvMatKhauNhanVien);
             itemMHQLNV_anhNhanVien = itemView.findViewById(R.id.itemMHQLNV_anhNhanVien);
             itemMHQLNV = itemView.findViewById(R.id.itemMHQLNV);
-            itemMHQLNV_btnThemNhanVien = itemView.findViewById(R.id.layoutMHQLNV_btnThemNhanVien);
+            itemMHQLNV_tvThemNhanVien = itemView.findViewById(R.id.layoutMHQLNV_tvThemNhanVien);
             itemMHQLNV = itemMHQLNV.findViewById(R.id.itemMHQLNV);
             itemMHQLNV_tvTroVe = itemView.findViewById(R.id.MHQLNV_tvTroVe);
 
             // Set event processing
-         //   itemMHQLNV.setOnClickListener(this);
-            itemMHQLNV_btnThemNhanVien.setOnClickListener(this);
-            itemMHQLNV_tvTroVe.setOnClickListener(this);
+          //  itemMHQLNV_tvThemNhanVien.setOnClickListener(this);
         }
 
+        @Override
         public void onClick(View view) {
             if (onClickListener != null) {
                 onClickListener.onClick(view);

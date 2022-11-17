@@ -63,15 +63,6 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.8" />
 
-            <Button
-                android:id="@+id/layoutQLSP_NV_btnHienThi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.55"
-                android:text="Hiển thị"
-                />
-
-
         </LinearLayout>
 
         <androidx.appcompat.widget.SearchView
