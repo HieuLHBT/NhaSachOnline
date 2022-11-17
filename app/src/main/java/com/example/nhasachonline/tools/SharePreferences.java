@@ -38,4 +38,16 @@ public class SharePreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         return sharedPreferences.getString("maNguoiDung", null);
     }
+
+    public void setKhachHang1(Context context, String maKhachHang) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("maNguoiDung", maKhachHang);
+        editor.commit();
+    }
+    public String getKhachHang1(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        return sharedPreferences.getString("maNguoiDung", null);
+    }
+
 }
