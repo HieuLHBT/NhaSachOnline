@@ -1,51 +1,67 @@
 package com.example.nhasachonline.activity;
 
-import static android.content.ContentValues.TAG;
-
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class QuenMatKhauActivity extends AppCompatActivity {
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        {
-            super.onCreate(savedInstanceState);
-            EditText layoutQMK_edtNhapTaiKhoan = findViewById(R.id.layoutQMK_edtNhapTaiKhoan);
-            EditText layoutQMK_edtNhapEmail = findViewById(R.id.layoutQMK_edtNhapEmail);
-            Button layoutQMK_btnLayLaiMK = findViewById(R.id.layoutQMK_btnLayLaiMK);
-            Button layoutQMK_btnQuayLai = findViewById(R.id.layoutQMK_btnQuayLai);
-            setContentView(R.layout.quenmatkhau_layout);
-            layoutQMK_btnLayLaiMK.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FirebaseAuth auth = FirebaseAuth.getInstance();
-                    String emailAddress = "snappro33@gmail.com";
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-                    auth.sendPasswordResetEmail(emailAddress)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "Email sent.");
-                                    }
-                                }
-                            });
+public class QuenMatKhauActivity extends AppCompatActivity {
+    EditText layoutQMK_edtNhapTaiKhoan, layoutQMK_edtNhapSDT;
+    Button layoutQMK_btnLayLaiMK, layoutQMK_btnQuayLai;
+    FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.quenmatkhau_layout);
+
+        layoutQMK_edtNhapTaiKhoan = findViewById(R.id.layoutQMK_edtNhapTaiKhoan);
+        layoutQMK_edtNhapSDT = findViewById(R.id.layoutQMK_edtNhapSDT);
+        layoutQMK_btnLayLaiMK = findViewById(R.id.layoutQMK_btnLayLaiMK);
+        layoutQMK_btnQuayLai = findViewById(R.id.layoutQMK_btnQuayLai);
+
+        layoutQMK_btnLayLaiMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (checkValidateField()) {
+                    fireBaseNhaSachOnline.guiYeuCauQuaSoDienThoai(layoutQMK_edtNhapTaiKhoan.getText().toString(), layoutQMK_edtNhapSDT.getText().toString(), QuenMatKhauActivity.this);
                 }
-            });
+            }
+        });
+
+        layoutQMK_btnQuayLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+    }
+
+    private boolean checkValidateField() {
+        //Tu 6 den 20 ky tu khong khoang trang va ky tu dac biet
+        Pattern patternAccount = Pattern.compile("^[A-Za-z][A-Za-z0-9]{5,20}$");
+        Matcher matcherAccount = patternAccount.matcher(layoutQMK_edtNhapTaiKhoan.getText().toString());
+
+        boolean boolAccount = matcherAccount.find();
+        boolean boolPhone = !layoutQMK_edtNhapSDT.getText().toString().isEmpty();
+        if (!boolAccount) {
+            layoutQMK_edtNhapTaiKhoan.setError("Tên đăng nhập từ 6 đến 20 ký tự, không khoảng trắng và ký tự đặc biệt");
         }
+        if (!boolPhone) {
+            layoutQMK_edtNhapSDT.setError("Vui lòng nhập số điện thoại");
+        }
+
+        return boolAccount && boolPhone;
     }
 }

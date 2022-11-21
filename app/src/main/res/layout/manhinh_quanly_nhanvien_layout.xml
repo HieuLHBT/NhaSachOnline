@@ -34,7 +34,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/layoutMHQLNV_btnThemNhanVien"
+            android:id="@+id/layoutMHQLNV_tvThemNhanVien"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"

@@ -2,8 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:weightSum="10">
+    tools:context=".activity.ThongTinKhachHangActivity">
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -21,235 +23,195 @@
             />
     </LinearLayout>
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:text="Họ tên:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvHoTen"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7.5"
-            android:text="Trương Đình Thọ"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
+        android:layout_weight="10"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Họ Tên:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/layoutTTKH_tvHoTen"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:gravity="center|left"
+                android:text="Trương Đình Thọ"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"></TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Email:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/layoutTTKH_tvEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center|left"
+                android:text="tho123@gmail.com"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Số điện thoại:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/layoutTTKH_tvSoDienThoai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:text="038904852"
+                android:inputType="number"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:text="Tên ngân hàng:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/layoutTTKH_tvTenNganHang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.4"
+                android:gravity="center|left"
+                android:text="Vietcombank"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="center|left"
+                android:text="Số TK ngân hàng:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/layoutTTKH_tvSTKNganHang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:gravity="center|left"
+                android:text="0382000711224"
+                android:inputType="number"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="1.2">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Địa chỉ:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/layoutTTKH_tvDiaChi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center|left"
+                android:layout_weight="3.8"
+                android:text="145 QL 13, p Hiệp Bình Chánh, TP Thủ Đức, TP HCM"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/layoutTTKH_btnDoiMatKhau"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/le"
+                android:text="Đổi mật khẩu"/>
+            <Button
+                android:id="@+id/layoutTTKH_btnThayDoiThongTin"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/le"
+                android:text="Thay đổi thông tin"/>
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:text="Giới tính:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvGioiTinh"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7.5"
-            android:text="Nam"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3.5"
-            android:text="Ngày sinh:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvNgaySinh"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6.5"
-            android:text="13/03/2000"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:text="Email:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7.5"
-            android:text="tho123@gmail.com"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:text="SDT:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvSDT"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7.5"
-            android:text="0399057145"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.5"
-            android:text="Tên Ngân hàng:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvTenNganHang"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5.5"
-            android:text="Vietcombank"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4.5"
-            android:text="STK ngân hàng:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvSTKNganHang"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5.5"
-            android:text="0381000700114"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2.5"
-            android:text="Địa chỉ:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <TextView
-            android:id="@+id/layoutTTCN_tvDiaChi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="7.5"
-            android:text="145 QL13, phường Hiệp Bình Chánh, TP Thủ Đức, TP Hồ Chí Minh"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginTop="20dp">
-        <Button
-            android:id="@+id/layoutTTCN_btnDoiMatKhau"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Đổi mật khẩu"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        >
-        <Button
-            android:id="@+id/layoutTTCN_btnTDTT"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Thay đổi thông tin"/>
-    </LinearLayout>
+
 </LinearLayout>

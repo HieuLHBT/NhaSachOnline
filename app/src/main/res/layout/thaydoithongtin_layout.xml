@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.ThayDoiThongTinKhachHangActivity"
+    android:orientation="vertical">
+    
     <LinearLayout
-        android:paddingTop="15dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:weightSum="10">
         <ImageButton
-            android:id="@+id/layoutDK_btnBack"
+            android:id="@+id/layoutCSTTKH_btnTroVe"
             android:layout_weight="1.5"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@color/black"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
@@ -30,6 +31,7 @@
             android:textColor="@color/design_default_color_error"
             />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -45,210 +47,181 @@
             android:textColor="@color/design_default_color_error"
             />
     </LinearLayout>
+    
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:text="Họ Tên:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7.5"
-            android:text="Trương Đình Thọ"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
+        android:layout_weight="10"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Họ Tên:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:id="@+id/layoutCSTTKH_edtHoTen"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </EditText>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Email:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:id="@+id/layoutCSTTKH_edtEmail"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Số điện thoại:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:id="@+id/layoutCSTTKH_edtSoDienThoai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:inputType="number"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:text="Tên ngân hàng:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:id="@+id/layoutCSTTKH_edtTenNganHang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.4"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="0.7">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:gravity="center|left"
+                android:text="Số TK ngân hàng:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:id="@+id/layoutCSTTKH_edtSTKNganHang"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:inputType="number"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_weight="1.5">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Địa chỉ:"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black"
+                />
+            <EditText
+                android:id="@+id/layoutCSTTKH_edtDiaChi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.8"
+                android:textSize="@dimen/textsize"
+                android:textColor="@color/black">
+            </EditText>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/layoutCSTTKH_btnLuu"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_margin="@dimen/le"
+                android:text="Lưu và thay đổi"/>
+        </LinearLayout>
     </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="Giới Tính:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:text="Nam"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="Ngày sinh:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7"
-            android:text="13/03/2000"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:text="Email:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7.5"
-            android:text="tho123@gmail.com"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:text="SDT:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7.5"
-            android:text="0399057145"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="Tên Ngân hàng:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="Vietcombank"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="STK ngân hàng:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="5"
-            android:text="0381000700114"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:weightSum="10">
-        <TextView
-            android:layout_marginTop="72dp"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2.5"
-            android:text="Địa chỉ:"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            />
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="7.5"
-            android:text="145 QL13, phường Hiệp Bình Chánh, TP Thủ Đức, TP Hồ Chí Minh"
-            android:textSize="25dp"
-            android:textColor="@color/black">
-        </EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center">
-        <Button
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:text="Lưu và thay đổi"/>
-    </LinearLayout>
+
+  
+
+
+
 </LinearLayout>

@@ -42,17 +42,22 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         final int pos = position;
         TheoDoiDonHang theoDoiDonHang = theoDoiDonHangs.get(pos);
         holder.itemTDDH_txtMaDonHang.setText(theoDoiDonHang.getMaDonHang());
-        holder.itemTDDH_txtTenNVGiaoHang.setText(theoDoiDonHang.getTenNVGiaoHang());
-        holder.itemTDDH_txtThoiGianDuKienGiao.setText(theoDoiDonHang.getThoiGianDuKienGiao());
-        holder.itemTDDH_txtThoiGianDat.setText(theoDoiDonHang.getThoiGianDat());
-       /* holder.itemTDDH_txtNgayDuKienGiao.setText(theoDoiDonHang.getNgayDuKienGiao());
-        holder.itemTDDH_txtThangDuKienGiao.setText(theoDoiDonHang.getThangDuKienGiao());
-        holder.itemTDDH_txtNamDuKienGiao.setText(theoDoiDonHang.getNamDuKienGiao());
-        holder.itemTDDH_txtNgayDat.setText(theoDoiDonHang.getNgayDat());
-        holder.itemTDDH_txtThangDat.setText(theoDoiDonHang.getThangDat());
-        holder.itemTDDH_txtNamDat.setText(theoDoiDonHang.getNamDat());*/
-        holder.itemTDDH_txtTongTienThanhToan.setText(formatter.format(theoDoiDonHang.getTongTienThanhToan()));
-        holder.itemTDDH_txtTrangThai.setText(theoDoiDonHang.getTrangThai());
+        holder.itemTDDH_tvNhanVienGiaoHang.setText(theoDoiDonHang.getTenNhanVien());
+        holder.itemTDDH_tvThoiGianGiao.setText(theoDoiDonHang.getNgayGiao());
+        holder.itemTDDH_tvThoiGianDatHang.setText(theoDoiDonHang.getNgayLap());
+        holder.itemTDDH_tvTongTienThanhToan.setText(formatter.format(theoDoiDonHang.getTongTien()) + " VNĐ");
+        holder.itemTDDH_tvTrangThaiDon.setText(theoDoiDonHang.getTrangThai());
+        holder.itemTDDH_tvHinhThucThanhToan.setText(theoDoiDonHang.getHinhThucThanhToan());
+
+        if (theoDoiDonHang.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý")) {
+            holder.itemTDDH_llHinhThuc.setVisibility(View.VISIBLE);
+            holder.itemTDDH_llDuKienGiao.setVisibility(View.GONE);
+            holder.itemTDDH_tvTrangThaiDon.setVisibility(View.GONE);
+        } else {
+            holder.itemTDDH_llHinhThuc.setVisibility(View.GONE);
+            holder.itemTDDH_llDuKienGiao.setVisibility(View.VISIBLE);
+            holder.itemTDDH_tvTrangThaiDon.setVisibility(View.VISIBLE);
+        }
 
         // Event processing
         holder.onClickListener = new View.OnClickListener() {
@@ -77,43 +82,32 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
         TextView itemTDDH_txtMaDonHang;
-        TextView itemTDDH_txtTenNVGiaoHang;
-        TextView itemTDDH_txtThoiGianDuKienGiao;
-        TextView itemTDDH_txtThoiGianDat;
-       /* TextView itemTDDH_txtNgayDuKienGiao;
-        TextView itemTDDH_txtThangDuKienGiao;
-        TextView itemTDDH_txtNamDuKienGiao;
-        TextView itemTDDH_txtNgayDat;
-        TextView itemTDDH_txtThangDat;
-        TextView itemTDDH_txtNamDat;*/
-        TextView itemTDDH_txtTongTienThanhToan;
-        TextView itemTDDH_txtTrangThai;
-        Button itemTDDH_btnXemChiTiet;
-        LinearLayout itemTDDH_llCardView;
-        CardView itemTDDH;
+        TextView itemTDDH_tvNhanVienGiaoHang;
+        TextView itemTDDH_tvThoiGianGiao;
+        TextView itemTDDH_tvThoiGianDatHang;
+        TextView itemTDDH_tvTongTienThanhToan;
+        TextView itemTDDH_tvTrangThaiDon;
+        TextView itemTDDH_tvHinhThucThanhToan;
+        Button itemTDDH_btnChiTiet;
         View.OnClickListener onClickListener;
+        LinearLayout itemTDDH_llDuKienGiao;
+        LinearLayout itemTDDH_llHinhThuc;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            itemTDDH_txtMaDonHang = itemView.findViewById(R.id.itemTDDH_txtMaDonHang);
-            itemTDDH_txtTenNVGiaoHang = itemView.findViewById(R.id.itemTDDH_txtTenNVGiaoHang);
-            itemTDDH_txtThoiGianDuKienGiao = itemView.findViewById(R.id.itemTDDH_txtThoiGianDuKienGiao);
-           /* itemTDDH_txtNgayDuKienGiao = itemView.findViewById(R.id.itemTDDH_txtNgayDuKienGiao);
-            itemTDDH_txtThangDuKienGiao = itemView.findViewById(R.id.itemTDDH_txtThangDuKienGiao);
-            itemTDDH_txtNamDuKienGiao = itemView.findViewById(R.id.itemTDDH_txtNamDuKienGiao);
-            itemTDDH_txtNgayDat = itemView.findViewById(R.id.itemTDDH_txtNgayDat);
-            itemTDDH_txtThangDat = itemView.findViewById(R.id.itemTDDH_txtThangDat);
-            itemTDDH_txtNamDat = itemView.findViewById(R.id.itemTDDH_txtNamDat);*/
-            itemTDDH_txtThoiGianDat = itemView.findViewById(R.id.itemTDDH_txtThoiGianDat);
-            itemTDDH_txtTongTienThanhToan = itemView.findViewById(R.id.itemTDDH_txtTongTienThanhToan);
-            itemTDDH_txtTrangThai = itemView.findViewById(R.id.itemTDDH_txtTrangThai);
-            itemTDDH_btnXemChiTiet = itemView.findViewById(R.id.itemTDDH_btnXemChiTiet);
-            itemTDDH_llCardView = itemView.findViewById(R.id.itemTDDH_llCardView);
-            itemTDDH = itemView.findViewById(R.id.itemTDDH);
+            itemTDDH_txtMaDonHang = itemView.findViewById(R.id.itemTDDH_tvMaDonHang);
+            itemTDDH_tvNhanVienGiaoHang = itemView.findViewById(R.id.itemTDDH_tvNhanVienGiaoHang);
+            itemTDDH_tvThoiGianGiao = itemView.findViewById(R.id.itemTDDH_tvThoiGianGiao);
+            itemTDDH_tvThoiGianDatHang = itemView.findViewById(R.id.itemTDDH_tvThoiGianDatHang);
+            itemTDDH_tvTongTienThanhToan = itemView.findViewById(R.id.itemTDDH_tvTongTienThanhToan);
+            itemTDDH_tvTrangThaiDon = itemView.findViewById(R.id.itemTDDH_tvTrangThaiDon);
+            itemTDDH_tvHinhThucThanhToan = itemView.findViewById(R.id.itemTDDH_tvHinhThucThanhToan);
+            itemTDDH_btnChiTiet = itemView.findViewById(R.id.itemTDDH_btnChiTiet);
+            itemTDDH_llDuKienGiao = itemView.findViewById(R.id.itemTDDH_llDuKienGiao);
+            itemTDDH_llHinhThuc = itemView.findViewById(R.id.itemTDDH_llHinhThuc);
 
             // Set event processing
-            itemTDDH.setOnClickListener(this);
-            itemTDDH_btnXemChiTiet.setOnClickListener(this);
+            itemTDDH_btnChiTiet.setOnClickListener(this);
         }
         @Override
         public void onClick(View view) {

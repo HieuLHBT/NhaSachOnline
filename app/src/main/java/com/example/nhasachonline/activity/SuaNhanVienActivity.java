@@ -87,7 +87,7 @@ public class SuaNhanVienActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         fireBase.suaNhanVien(SuaNhanVienActivity.this,
                                 "",
-                                MHSNV_edtMaNhanVien.getText() + ".png",
+                                "nhanvien" + MHSNV_edtMaNhanVien.getText() + ".png",
                                 MHSNV_edtTenNhanVien.getText().toString(),
                                 MHSNV_edtCMND.getText().toString(),
                                 MHSNV_edtDiaChi.getText().toString(),

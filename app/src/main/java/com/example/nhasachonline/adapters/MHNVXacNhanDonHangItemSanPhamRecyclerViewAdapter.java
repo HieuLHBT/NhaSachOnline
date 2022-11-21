@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
-import com.example.nhasachonline.item.ItemXacNhanDonHangNV;
+import com.example.nhasachonline.item.ItemXacNhanDonHangNVSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -25,40 +25,49 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+public class MHNVXacNhanDonHangItemSanPhamRecyclerViewAdapter extends RecyclerView.Adapter<MHNVXacNhanDonHangItemSanPhamRecyclerViewAdapter.MyViewHolder> {
 
-public class MHNVXacNhanDonHangItemRycyclerViewAdapter extends RecyclerView.Adapter<MHNVXacNhanDonHangItemRycyclerViewAdapter.MyViewHolder>{
     private Activity context;
     private int resource;
-    private ArrayList<ItemXacNhanDonHangNV> itemXacNhanDonHangs;
+    private ArrayList<ItemXacNhanDonHangNVSanPham> itemXacNhanDonHangSanPham;
 
-    public MHNVXacNhanDonHangItemRycyclerViewAdapter(Activity context, int resource, ArrayList<ItemXacNhanDonHangNV> itemXacNhanDonHangs) {
+    public MHNVXacNhanDonHangItemSanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemXacNhanDonHangNVSanPham> itemXacNhanDonHangSanPham) {
         this.context = context;
         this.resource = resource;
-        this.itemXacNhanDonHangs = itemXacNhanDonHangs;
+        this.itemXacNhanDonHangSanPham = itemXacNhanDonHangSanPham;
+
+    }
+
+    public void setItemXacNhanDonHangSanPham(ArrayList<ItemXacNhanDonHangNVSanPham> itemXacNhanDonHangSanPham) {
+        this.itemXacNhanDonHangSanPham = itemXacNhanDonHangSanPham;
+    }
+
+    public ArrayList<ItemXacNhanDonHangNVSanPham> getItemXacNhanDonHangSanPham() {
+        return itemXacNhanDonHangSanPham;
     }
 
     @NonNull
     @Override
-    public MHNVXacNhanDonHangItemRycyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MHNVXacNhanDonHangItemSanPhamRecyclerViewAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         CardView viewItem = (CardView) context.getLayoutInflater().inflate(viewType, parent, false);
-        return new MyViewHolder(viewItem);
+        return new MHNVXacNhanDonHangItemSanPhamRecyclerViewAdapter.MyViewHolder(viewItem);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MHNVXacNhanDonHangItemRycyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MHNVXacNhanDonHangItemSanPhamRecyclerViewAdapter.MyViewHolder holder, int position) {
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
-        ItemXacNhanDonHangNV itemXacNhanDonHangNV = itemXacNhanDonHangs.get(pos);
-        holder.itemMHNV_XNDH_tvTenSanPham.setText(itemXacNhanDonHangNV.getTenSanPham());
-        holder.itemMHNV_XNDH_tvGiaTien.setText(formatter.format(itemXacNhanDonHangNV.getDonGia()) + " VNĐ");
-        holder.itemMHNV_XNDH_tvSoLuong.setText(itemXacNhanDonHangNV.getSoLuong() + "");
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(itemXacNhanDonHangNV.getAnhSanPham());
+        ItemXacNhanDonHangNVSanPham itemXacNhanDonHangNVSanPham = itemXacNhanDonHangSanPham.get(pos);
+        holder.itemMHNV_XNDH_tvTenSanPham.setText(itemXacNhanDonHangNVSanPham.getTenSanPham());
+        holder.itemMHNV_XNDH_tvGiaTien.setText(formatter.format(itemXacNhanDonHangNVSanPham.getDonGia()) + " VNĐ");
+        holder.itemMHNV_XNDH_tvSoLuong.setText(itemXacNhanDonHangNVSanPham.getSoLuong() + "");
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(itemXacNhanDonHangNVSanPham.getAnhSanPham());
         try {
             File file = null;
-            if (itemXacNhanDonHangNV.getAnhSanPham().contains("png")) {
-                file = File.createTempFile(itemXacNhanDonHangNV.getAnhSanPham().substring(0, itemXacNhanDonHangNV.getAnhSanPham().length() - 4), "png");
-            } else if (itemXacNhanDonHangNV.getAnhSanPham().contains("jpg")) {
-                file = File.createTempFile(itemXacNhanDonHangNV.getAnhSanPham().substring(0, itemXacNhanDonHangNV.getAnhSanPham().length() - 4), "jpg");
+            if (itemXacNhanDonHangNVSanPham.getAnhSanPham().contains("png")) {
+                file = File.createTempFile(itemXacNhanDonHangNVSanPham.getAnhSanPham().substring(0, itemXacNhanDonHangNVSanPham.getAnhSanPham().length() - 4), "png");
+            } else if (itemXacNhanDonHangNVSanPham.getAnhSanPham().contains("jpg")) {
+                file = File.createTempFile(itemXacNhanDonHangNVSanPham.getAnhSanPham().substring(0, itemXacNhanDonHangNVSanPham.getAnhSanPham().length() - 4), "jpg");
             }
             final File fileHinh = file;
             storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
@@ -79,12 +88,7 @@ public class MHNVXacNhanDonHangItemRycyclerViewAdapter extends RecyclerView.Adap
 
     @Override
     public int getItemCount() {
-        return itemXacNhanDonHangs.size();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return resource;
+        return 0;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
@@ -101,6 +105,4 @@ public class MHNVXacNhanDonHangItemRycyclerViewAdapter extends RecyclerView.Adap
             itemMHNV_XNDH_tvAnhSanPham = itemView.findViewById(R.id.itemMHQLNV_anhSanPham);
         }
     }
-
-
 }
