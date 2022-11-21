@@ -35,7 +35,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/layoutMHQLNV_btnThemNhanVien"
+            android:id="@+id/layoutMHQLSP_btnThemSanPham"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
@@ -78,7 +78,7 @@
                 android:layout_weight="4.5"
                 />
             <Button
-
+                android:id="@+id/layoutMHQLSP_btnNhap"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="3.2"
                 android:layout_width="0dp"
@@ -94,30 +94,17 @@
             android:orientation="horizontal"
             android:padding="10dp"
             android:weightSum="10">
-            <Spinner
-                android:id="@+id/layoutMHQLSP_spSanPham"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="3"
-                />
+
             <androidx.appcompat.widget.SearchView
                 android:layout_weight="4"
                 android:id="@+id/layoutMHQLSP_swTimKiem"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:background="@drawable/search_view_bg"
                 app:iconifiedByDefault="false"
                 app:queryHint="Nhập tên sản phẩm " />
-            <Button
-                android:layout_margin="5dp"
-                android:layout_weight="3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Tìm Kiếm">
 
-            </Button>
 
         </LinearLayout>
 

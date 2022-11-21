@@ -95,7 +95,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
                     }
                 });
 
-                Button itemMHQLSP_btnThem = view.findViewById(R.id.itemMHQLSP_btnThem);
+                Button itemMHQLSP_btnThem = view.findViewById(R.id.layoutMHQLSP_btnThemSanPham);
                 itemMHQLSP_btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
