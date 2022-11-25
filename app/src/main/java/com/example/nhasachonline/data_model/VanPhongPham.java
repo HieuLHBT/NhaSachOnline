@@ -1,5 +1,7 @@
 package com.example.nhasachonline.data_model;
 
+import java.io.Serializable;
+
 public class VanPhongPham {
     private String maVanPhongPham;
     private String donVi;
@@ -10,6 +12,7 @@ public class VanPhongPham {
     private String soLuongKho;
     private String tenVanPhongPham;
     private String xuatXu;
+    private String soLuongDanhGia;
 
     public String getMaVanPhongPham() {
         return maVanPhongPham;
@@ -83,10 +86,24 @@ public class VanPhongPham {
         this.xuatXu = xuatXu;
     }
 
-    public VanPhongPham() {
+    public String getSoLuongDanhGia() {
+        return soLuongDanhGia;
     }
 
-    public VanPhongPham(String maVanPhongPham, String donVi, String giaTien, String hinhVanPhongPham, String khuyenMai, String nhaPhanPhoi, String soLuongKho, String tenVanPhongPham, String xuatXu) {
+    public int stringToInt(String value){
+        if(value == null){
+            return  0;
+        }
+        try {
+            return Integer.parseInt(value);
+        }catch (NullPointerException  e){
+            return  0;
+        }
+    }
+
+    public VanPhongPham() {
+    }
+    public VanPhongPham(String maVanPhongPham, String donVi, String giaTien, String hinhVanPhongPham, String khuyenMai, String nhaPhanPhoi, String soLuongKho, String tenVanPhongPham, String xuatXu, String soLuongDanhGia) {
         this.maVanPhongPham = maVanPhongPham;
         this.donVi = donVi;
         this.giaTien = giaTien;
@@ -96,5 +113,6 @@ public class VanPhongPham {
         this.soLuongKho = soLuongKho;
         this.tenVanPhongPham = tenVanPhongPham;
         this.xuatXu = xuatXu;
+        this.soLuongDanhGia = soLuongDanhGia;
     }
 }

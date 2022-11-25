@@ -1,6 +1,8 @@
 package com.example.nhasachonline.item;
 
-public class ItemSach {
+import java.io.Serializable;
+
+public class ItemSach implements Serializable {
     private String maSach;
     private String anhSach;
     private String tenSach;
@@ -12,6 +14,24 @@ public class ItemSach {
     private int soLuongKho;
     private int soLuongdanhGia;
     private int binhLuan;
+
+
+
+
+    public ItemSach(String maSach, String anhSach, String tenSach, String tacGia,
+                    String theLoai, String namSanXuat, String nhaXuatBan, int giaTien,
+                    int soLuongKho, int soLuongdanhGia) {
+        this.maSach = maSach;
+        this.anhSach = anhSach;
+        this.tenSach = tenSach;
+        this.tacGia = tacGia;
+        this.theLoai = theLoai;
+        this.namSanXuat = namSanXuat;
+        this.nhaXuatBan = nhaXuatBan;
+        this.giaTien = giaTien;
+        this.soLuongKho = soLuongKho;
+        this.soLuongdanhGia = soLuongdanhGia;
+    }
 
     public String getMaSach() {
         return maSach;
@@ -77,7 +97,7 @@ public class ItemSach {
         this.giaTien = giaTien;
     }
 
-    public int getsoLuongKho() {
+    public int getSoLuongKho() {
         return soLuongKho;
     }
 
@@ -98,23 +118,6 @@ public class ItemSach {
     }
 
     public void setBinhLuan(int binhLuan) {
-        this.binhLuan = binhLuan;
-    }
-
-    public ItemSach() {
-    }
-
-    public ItemSach(String maSach, String anhSach, String tenSach, String tacGia, String theLoai, String namSanXuat, String nhaXuatBan, int giaTien, int soLuongKho, int soLuongdanhGia, int binhLuan) {
-        this.maSach = maSach;
-        this.anhSach = anhSach;
-        this.tenSach = tenSach;
-        this.tacGia = tacGia;
-        this.theLoai = theLoai;
-        this.namSanXuat = namSanXuat;
-        this.nhaXuatBan = nhaXuatBan;
-        this.giaTien = giaTien;
-        this.soLuongKho = soLuongKho;
-        this.soLuongdanhGia = soLuongdanhGia;
         this.binhLuan = binhLuan;
     }
 }

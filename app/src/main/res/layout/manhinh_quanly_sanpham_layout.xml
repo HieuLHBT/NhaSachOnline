@@ -22,7 +22,9 @@
             android:paddingLeft="15dp"
             android:text="@string/tvtrove"
             android:textSize="50dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="onClick"
+            android:clickable="true"/>
 
         <TextView
             android:layout_width="0dp"
@@ -34,15 +36,27 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/layoutMHQLSP_btnThemSanPham"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="0.2"-->
+<!--            android:paddingLeft="15dp"-->
+<!--            android:text="+"-->
+<!--            android:textSize="50dp"-->
+<!--            android:textStyle="bold" />-->
         <TextView
             android:id="@+id/layoutMHQLSP_btnThemSanPham"
+            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:paddingLeft="15dp"
             android:text="+"
             android:textSize="50dp"
-            android:textStyle="bold" />
+            android:textAlignment="center"
+            android:onClick="onClick"
+            android:clickable="true">
+
+        </TextView>
 
     </LinearLayout>
     <LinearLayout

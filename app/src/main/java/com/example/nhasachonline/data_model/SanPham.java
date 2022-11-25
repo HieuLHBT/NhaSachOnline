@@ -1,8 +1,6 @@
-package com.example.nhasachonline.item;
+package com.example.nhasachonline.data_model;
 
-import java.io.Serializable;
-
-public class ItemSanPham implements Serializable {
+public class SanPham {
     private String maSanPham;
     private String tenSanPham;
     private String hinhSanPham;
@@ -19,7 +17,22 @@ public class ItemSanPham implements Serializable {
     private int soLuongDanhGia;
     private int binhLuan;
 
-    public ItemSanPham(String maSach, String tenSach, String theLoai, String tacGia, String nhaXuatBan, String ngayXuatBan, String giaTien, String soLuongKho, String hinhSach) {
+    public SanPham(String maSanPham, String tenSanPham, String hinhSanPham, String tacGia, String xuatXu, String theLoai, String namSanXuat, String nhaXuatBan, String nhaPhanPhoi, String donVi, int giaSanPham, int soLuong, int khuyenMai, int soLuongDanhGia, int binhLuan) {
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.hinhSanPham = hinhSanPham;
+        this.tacGia = tacGia;
+        this.xuatXu = xuatXu;
+        this.theLoai = theLoai;
+        this.namSanXuat = namSanXuat;
+        this.nhaXuatBan = nhaXuatBan;
+        this.nhaPhanPhoi = nhaPhanPhoi;
+        this.donVi = donVi;
+        this.giaSanPham = giaSanPham;
+        this.soLuong = soLuong;
+        this.khuyenMai = khuyenMai;
+        this.soLuongDanhGia = soLuongDanhGia;
+        this.binhLuan = binhLuan;
     }
 
     public String getMaSanPham() {
@@ -62,38 +75,6 @@ public class ItemSanPham implements Serializable {
         this.xuatXu = xuatXu;
     }
 
-    public int getGiaSanPham() {
-        return giaSanPham;
-    }
-
-    public void setGiaSanPham(int giaSanPham) {
-        this.giaSanPham = giaSanPham;
-    }
-
-    public int getSoLuong() {
-        return soLuong;
-    }
-
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
-    }
-
-    public int getSoLuongDanhGia() {
-        return soLuongDanhGia;
-    }
-
-    public void setSoLuongDanhGia(int soLuongDanhGia) {
-        this.soLuongDanhGia = soLuongDanhGia;
-    }
-
-    public int getBinhLuan() {
-        return binhLuan;
-    }
-
-    public void setBinhLuan(int binhLuan) {
-        this.binhLuan = binhLuan;
-    }
-
     public String getTheLoai() {
         return theLoai;
     }
@@ -134,6 +115,22 @@ public class ItemSanPham implements Serializable {
         this.donVi = donVi;
     }
 
+    public int getGiaSanPham() {
+        return giaSanPham;
+    }
+
+    public void setGiaSanPham(int giaSanPham) {
+        this.giaSanPham = giaSanPham;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
     public int getKhuyenMai() {
         return khuyenMai;
     }
@@ -142,23 +139,29 @@ public class ItemSanPham implements Serializable {
         this.khuyenMai = khuyenMai;
     }
 
-    public ItemSanPham() {
+    public int getSoLuongDanhGia() {
+        return soLuongDanhGia;
     }
 
-    public ItemSanPham(String maSanPham, String tenSanPham, String hinhSanPham, String tacGia, String xuatXu, String theLoai, String namSanXuat, String nhaXuatBan, String nhaPhanPhoi, String donVi, int giaSanPham, int khuyenMai, int soLuongDanhGia, int binhLuan) {
-        this.maSanPham = maSanPham;
-        this.tenSanPham = tenSanPham;
-        this.hinhSanPham = hinhSanPham;
-        this.tacGia = tacGia;
-        this.xuatXu = xuatXu;
-        this.theLoai = theLoai;
-        this.namSanXuat = namSanXuat;
-        this.nhaXuatBan = nhaXuatBan;
-        this.nhaPhanPhoi = nhaPhanPhoi;
-        this.donVi = donVi;
-        this.giaSanPham = giaSanPham;
-        this.khuyenMai = khuyenMai;
+    public void setSoLuongDanhGia(int soLuongDanhGia) {
         this.soLuongDanhGia = soLuongDanhGia;
+    }
+
+    public int getBinhLuan() {
+        return binhLuan;
+    }
+
+    public void setBinhLuan(int binhLuan) {
         this.binhLuan = binhLuan;
+    }
+    public int stringToInt(String value){
+        if(value == null){
+            return  0;
+        }
+        try {
+            return Integer.parseInt(value);
+        }catch (NullPointerException  e){
+            return  0;
+        }
     }
 }

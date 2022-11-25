@@ -1,5 +1,7 @@
 package com.example.nhasachonline.activity;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +23,7 @@ import com.example.nhasachonline.data_model.NhanVien;
 import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 
+import com.example.nhasachonline.item.ItemSach;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,11 +38,15 @@ import java.util.ArrayList;
 public class SuaSanPhamSachActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
-    ArrayList<ItemSanPham> sanPhams = new ArrayList<>();
+//    ArrayList<ItemSanPham> sanPhams = new ArrayList<>();
+
     EditText MHSSP_Sach_edtMaSach, MHSSP_Sach_edtTenSach, MHSSP_Sach_edtTheLoai, MHSSP_Sach_edtTacGia, MHSSP_Sach_edtNhaXuatBan
             , MHSSP_Sach_edtNgayXuatBan, MHSSP_Sach_edtGiaTien, MHSSP_Sach_edtSoLuongKho;
     ImageView MHSSP_Sach_imgHinhSach;
-    Button MHSSP_Sach_btnNhapMoi, MHSSP_Sach_btnSuaSach;
+    Button MHSSP_Sach_btnNhapMoi,
+            MHSSP_Sach_btnSuaSach;
+    TextView MHSSP_Sach_btnBack;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +56,24 @@ public class SuaSanPhamSachActivity extends AppCompatActivity {
         MHSSP_Sach_edtTheLoai = findViewById(R.id.MHSSP_Sach_edtTheLoai);
         MHSSP_Sach_edtTacGia = findViewById(R.id.MHSSP_Sach_edtTacGia);
         MHSSP_Sach_edtNhaXuatBan = findViewById(R.id.MHSSP_Sach_edtNhaXuatBan);
-        MHSSP_Sach_edtNgayXuatBan = findViewById(R.id.MHSSP_Sach_edtGiaTien);
+        MHSSP_Sach_edtNgayXuatBan = findViewById(R.id.MHSSP_Sach_edtNgayXuatBan);
         MHSSP_Sach_edtGiaTien = findViewById(R.id.MHSSP_Sach_edtGiaTien);
         MHSSP_Sach_edtSoLuongKho = findViewById(R.id.MHSSP_Sach_edtSoLuongKho);
         MHSSP_Sach_imgHinhSach = findViewById(R.id.MHSSP_Sach_imgHinhSP);
         MHSSP_Sach_btnNhapMoi = findViewById(R.id.MHSSP_Sach_btnNhapMoi);
         MHSSP_Sach_btnSuaSach = findViewById(R.id.MHSSP_Sach_btnSuaSach);
+        MHSSP_Sach_btnBack = findViewById(R.id.MHSSP_Sach_btnBack);
+        ItemSach sachItem = (ItemSach) getIntent().getSerializableExtra("sach");
+        if(sachItem!=null){
+            thongTinSanPham(sachItem);
+        }
+
+        MHSSP_Sach_btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         MHSSP_Sach_btnSuaSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +84,8 @@ public class SuaSanPhamSachActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         fireBase.suaSach(SuaSanPhamSachActivity.this,
-                                "",
+                                "" +
+                                        "",
                                 MHSSP_Sach_imgHinhSach.getResources().toString(),
                                 MHSSP_Sach_edtTenSach.getText().toString(),
                                 MHSSP_Sach_edtTheLoai.getText().toString(),
@@ -93,23 +114,28 @@ public class SuaSanPhamSachActivity extends AppCompatActivity {
             }
         });
     }
-    public void thongTinSanPham(Sach sach){
+    public void thongTinSanPham(ItemSach sach){
+
+        Log.d(TAG, "onDataChange:" + sach.getNamSanXuat());
+
         MHSSP_Sach_edtMaSach.setText(sach.getMaSach());
         MHSSP_Sach_edtTenSach.setText(sach.getTenSach());
         MHSSP_Sach_edtTheLoai.setText(sach.getTheLoai());
         MHSSP_Sach_edtTacGia.setText(sach.getTacGia());
         MHSSP_Sach_edtNhaXuatBan.setText(sach.getNhaXuatBan());
-        MHSSP_Sach_edtNgayXuatBan.setText(sach.getNgayXuatBan());
-        MHSSP_Sach_edtGiaTien.setText(sach.getGiaTien());
-        MHSSP_Sach_edtSoLuongKho.setText(sach.getSoLuongKho());
+        MHSSP_Sach_edtNgayXuatBan.setText(sach.getNamSanXuat());
+//        MHSSP_Sach_edtGiaTien.setText(sach.getGiaTien());
+//        MHSSP_Sach_edtSoLuongKho.setText(sach.getSoLuongKho());
+        MHSSP_Sach_edtGiaTien.setText(String.valueOf(sach.getGiaTien()));
+        MHSSP_Sach_edtSoLuongKho.setText(String.valueOf(sach.getSoLuongKho()));
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(sach.getHinhSach());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(sach.getAnhSach());
         try {
             File file = null;
-            if (sach.getHinhSach().contains("png")) {
-                file = File.createTempFile(sach.getHinhSach().substring(0,sach.getHinhSach().length()-4), "png");
-            } else if (sach.getHinhSach().contains("jpg")) {
-                file = File.createTempFile(sach.getHinhSach().substring(0,sach.getHinhSach().length()-4), "jpg");
+            if (sach.getAnhSach().contains("png")) {
+                file = File.createTempFile(sach.getAnhSach().substring(0,sach.getAnhSach().length()-4), "png");
+            } else if (sach.getAnhSach().contains("jpg")) {
+                file = File.createTempFile(sach.getAnhSach().substring(0,sach.getAnhSach().length()-4), "jpg");
             }
             final File fileHinh = file;
             ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
