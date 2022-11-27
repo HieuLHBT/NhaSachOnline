@@ -1,6 +1,8 @@
 package com.example.nhasachonline.item;
 
-public class ItemVanPhongPham {
+import java.io.Serializable;
+
+public class ItemVanPhongPham implements Serializable {
     private String maVanPhongPham;
     private String anhVanPhongPham;
     private String tenVanPhongPham;

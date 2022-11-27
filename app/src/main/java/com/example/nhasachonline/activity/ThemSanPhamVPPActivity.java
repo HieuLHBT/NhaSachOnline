@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,7 +42,7 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 71;
     private final int CAMERA_PIC_REQUEST = 1337;
     private String chonAnh = "Thư viện";
-
+    TextView MHTSP_VPP_btnBack;
     EditText MHTSP_VPP_edtMaVPP, MHTSP_VPP_edtTenVPP, MHTSP_VPP_edtNhaPhanPhoi, MHTSP_VPP_edtXuatXu
             , MHTSP_VPP_edtDonVi, MHTSP_VPP_edtGiaTien, MHTSP_VPP_edtSoLuongKho;
     ImageView MHTSP_VPP_imgHinhVPP;
@@ -65,7 +66,13 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
         MHTSP_VPP_imgHinhVPP = findViewById(R.id.MHTSP_VPP_imgHinhVPP);
         MHTTSP_VPP_btnNhapMoi = findViewById(R.id.MHTTSP_VPP_btnNhapMoi);
         MHTTSP_VPP_btnThemSanPham = findViewById(R.id.MHTTSP_VPP_btnThemSanPham);
-
+        MHTSP_VPP_btnBack = findViewById(R.id.MHTSP_VPP_btnBack);
+        MHTSP_VPP_btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         MHTTSP_VPP_btnThemSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +82,11 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String maVPP =  MHTSP_VPP_edtMaVPP.getText().toString();
+                        String hinhVPP = maVPP.replaceAll("vpp","vanphongpham");
                         fireBase.themSanPham_vpp(
-                                "vpp" + MHTSP_VPP_edtMaVPP.getText().toString(),
-                                MHTSP_VPP_edtMaVPP.getText() + ".png",
+                                maVPP,
+                                hinhVPP + ".png",
                                 MHTSP_VPP_edtTenVPP.getText().toString(),
                                 MHTSP_VPP_edtNhaPhanPhoi.getText().toString(),
                                 MHTSP_VPP_edtXuatXu.getText().toString(),
@@ -105,7 +114,7 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
                 });
                 AlertDialog al = b.create();
                 al.show();
-                Toast.makeText(ThemSanPhamVPPActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ThemSanPhamVPPActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
             }
         });
 

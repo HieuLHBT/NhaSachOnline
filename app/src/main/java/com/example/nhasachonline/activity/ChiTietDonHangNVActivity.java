@@ -103,7 +103,6 @@ public class ChiTietDonHangNVActivity extends AppCompatActivity {
     public void hienThiDonHang(){
         layoutCTDH_NV_txtDiaChiNhanHang.setText(" " + donHang.getDiaChiGiao());
         layoutCTDH_NV_txtPhiVanChuyen.setText("  " + donHang.getPhiVanChuyen());
-
         layoutCTDH_NV_txtGiamGia.setText("  " + donHang.getMaGiamGia());
     }
 

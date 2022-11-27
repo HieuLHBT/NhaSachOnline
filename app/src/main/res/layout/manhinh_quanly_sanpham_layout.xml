@@ -22,7 +22,9 @@
             android:paddingLeft="15dp"
             android:text="@string/tvtrove"
             android:textSize="50dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onClick="onClick"
+            android:clickable="true"/>
 
         <TextView
             android:layout_width="0dp"
@@ -34,15 +36,27 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/layoutMHQLSP_btnThemSanPham"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="0.2"-->
+<!--            android:paddingLeft="15dp"-->
+<!--            android:text="+"-->
+<!--            android:textSize="50dp"-->
+<!--            android:textStyle="bold" />-->
         <TextView
-            android:id="@+id/layoutMHQLNV_btnThemNhanVien"
+            android:id="@+id/layoutMHQLSP_btnThemSanPham"
+            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:paddingLeft="15dp"
             android:text="+"
             android:textSize="50dp"
-            android:textStyle="bold" />
+            android:textAlignment="center"
+            android:onClick="onClick"
+            android:clickable="true">
+
+        </TextView>
 
     </LinearLayout>
     <LinearLayout
@@ -53,7 +67,7 @@
         android:orientation="vertical"
         android:weightSum="10">
         <LinearLayout
-            android:layout_weight="4"
+            android:layout_weight="5"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="horizontal"
@@ -65,7 +79,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:text="Sản Phẩm:"
-                android:textSize="17dp"
+                android:textSize="16dp"
                 android:textAlignment="center"
                 android:textStyle="bold">
 
@@ -75,49 +89,37 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
-                android:layout_weight="4.5"
+                android:layout_weight="7.5"
                 />
-            <Button
+<!--            <Button-->
+<!--                android:id="@+id/layoutMHQLSP_btnNhap"-->
+<!--                android:layout_marginLeft="20dp"-->
+<!--                android:layout_marginRight="20dp"-->
+<!--                android:layout_weight="3.2"-->
+<!--                android:layout_width="0dp"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:text="Nhập">-->
 
-                android:layout_marginLeft="20dp"
-                android:layout_weight="3.2"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Nhập">
-
-            </Button>
+<!--            </Button>-->
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:orientation="horizontal"
-            android:padding="10dp"
+            android:padding="4dp"
             android:weightSum="10">
-            <Spinner
-                android:id="@+id/layoutMHQLSP_spSanPham"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="3"
-                />
+
             <androidx.appcompat.widget.SearchView
                 android:layout_weight="4"
                 android:id="@+id/layoutMHQLSP_swTimKiem"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:background="@drawable/search_view_bg"
                 app:iconifiedByDefault="false"
                 app:queryHint="Nhập tên sản phẩm " />
-            <Button
-                android:layout_margin="5dp"
-                android:layout_weight="3"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="Tìm Kiếm">
 
-            </Button>
 
         </LinearLayout>
 

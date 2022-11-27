@@ -1,5 +1,7 @@
 package com.example.nhasachonline.activity;
 
+import static android.service.controls.ControlsProviderService.TAG;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -8,10 +10,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import kotlin.text.Regex;
+
 public class ThemSanPhamSachActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private ArrayList<ItemSach> sachs = new ArrayList<>();
@@ -40,7 +46,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 71;
     private final int CAMERA_PIC_REQUEST = 1337;
     private String chonAnh = "Thư viện";
-
+    TextView MHTSP_Sach_btnBack;
     EditText MHTSP_Sach_edtMaSach, MHTSP_Sach_edtTenSach, MHTSP_Sach_edtTheLoai, MHTSP_Sach_edtTacGia
             , MHTSP_Sach_edtNhaXuatBan, MHTSP_Sach_edtNgayXuatBan, MHTSP_Sach_edtGiaTien, MHTSP_Sach_edtSoLuongKho;
     ImageView MHTSP_Sach_imgAnhSanPham;
@@ -48,6 +54,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: test");
         setContentView(R.layout.manhinh_themsanpham_sach_layout);
         FirebaseStorage storage;
         StorageReference storageReference;
@@ -65,7 +72,13 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
         MHTSP_Sach_imgAnhSanPham = findViewById(R.id.MHTSP_Sach_imgAnhSanPham);
         MHTSP_Sach_btnLamMoi = findViewById(R.id.MHTTSP_Sach_btnNhapMoi);
         MHTTSP_Sach_btnThemSanPham = findViewById(R.id.MHTTSP_Sach_btnThemSanPham);
-
+        MHTSP_Sach_btnBack = findViewById(R.id.MHTSP_Sach_btnBack);
+        MHTSP_Sach_btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         MHTTSP_Sach_btnThemSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,9 +88,12 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String maSach =  MHTSP_Sach_edtMaSach.getText().toString();
+                        String hinhSach = maSach.replaceAll("s","sach");
+
                         fireBase.themSanPham_Sach(
-                                "s" + MHTSP_Sach_edtMaSach.getText().toString(),
-                                MHTSP_Sach_edtMaSach.getText() + ".png",
+                                maSach,
+                                hinhSach + ".png",
                                 MHTSP_Sach_edtTenSach.getText().toString(),
                                 MHTSP_Sach_edtTheLoai.getText().toString(),
                                 MHTSP_Sach_edtTacGia.getText().toString(),
@@ -95,6 +111,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                         }
                         // Tai anh len storage
                         ghiAnh(uri, MHTSP_Sach_edtMaSach.getText().toString());
+                        finish();
                     };
                 });
 
@@ -106,7 +123,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                 });
                 AlertDialog al = b.create();
                 al.show();
-                Toast.makeText(ThemSanPhamSachActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ThemSanPhamSachActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -122,7 +139,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThemSanPhamSachActivity.this);
-                b.setTitle("THÊM HÌNH NHÂN VIÊN");
+                b.setTitle("Thêm Sản Phẩm");
                 String[] ca = {"Chọn từ thư viên", "Chụp ảnh"};
                 b.setSingleChoiceItems(ca, 0, new DialogInterface.OnClickListener() {
                     @Override
