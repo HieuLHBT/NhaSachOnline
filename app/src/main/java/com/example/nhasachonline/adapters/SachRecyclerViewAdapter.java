@@ -3,6 +3,8 @@ package com.example.nhasachonline.adapters;
 import static android.service.controls.ControlsProviderService.TAG;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -18,7 +20,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonline.R;
 import com.example.nhasachonline.activity.ManHinhQuanLySanPhamActivity;
+import com.example.nhasachonline.activity.NhapKhoSanPhamSachActivity;
 import com.example.nhasachonline.activity.SuaSanPhamSachActivity;
+import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.ItemSach;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,7 +42,7 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
     private int resource;
     private ArrayList<ItemSach> saches;
     private SachRecyclerViewAdapter.OnItemClickListener onItemClickListener;
-
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
     public SachRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSach> saches) {
         this.context = context;
         this.resource = resource;
@@ -61,6 +65,9 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
+        if(  pos > saches.stream().count()-1){
+            return;
+        }
         ItemSach sach = saches.get(pos);
 //        StorageReference mImageRef = FirebaseStorage.getInstance().getReference(sach.getAnhSach());
 //        ImageView imageView = holder.itemMHQLSP_anhSanPham;
@@ -74,6 +81,30 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
         holder.itemMHQLSP_tvNgayXuatBan.setText(sach.getNamSanXuat());
         holder.itemMHQLSP_tvGiaTien.setText(String.valueOf(sach.getGiaTien()));
         holder.itemMHQLSP_tvSoLuongKho.setText(String.valueOf(sach.getSoLuongKho()));
+        holder.itemMHQLSP_btnXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder arBuilder = new AlertDialog.Builder(context);
+                arBuilder.setMessage("Bạn Muốn Xoá Sản Phẩm Này Không ?");
+                arBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        fireBaseNhaSachOnline.xoaSach(sach.getMaSach());
+                        saches.remove(pos);
+                    }
+                });
+                arBuilder.show();
+                notifyDataSetChanged();
+            }
+        });
+        holder.itemMHQLSP_btnNhapKho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, NhapKhoSanPhamSachActivity.class);
+                intent.putExtra("sach",sach);
+                context.startActivity(intent);
+            }
+        });
         holder.itemMHQLSP_btnSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +115,7 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
                 context.startActivity(intent);
             }
         });
+
         loadImage(sach,holder);
 
         // Event processing
@@ -143,7 +175,7 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
         ImageView itemMHQLSP_anhSanPham;
         View.OnClickListener onClickListener;
         CardView itemMHQLSP;
-        Button itemMHQLSP_btnSua;
+        Button itemMHQLSP_btnSua,itemMHQLSP_btnXoa,itemMHQLSP_btnNhapKho;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
@@ -158,8 +190,8 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
             itemMHQLSP_anhSanPham = itemView.findViewById(R.id.itemMHQLSP_anhSanPham);
             itemMHQLSP = itemView.findViewById(R.id.itemMHQLSP1);
             itemMHQLSP_btnSua = itemView.findViewById(R.id.itemMHQLSP_btnSua);
-
-
+            itemMHQLSP_btnXoa = itemView.findViewById(R.id.itemMHQLSP_btnXoa);
+            itemMHQLSP_btnNhapKho = itemView.findViewById(R.id.itemMHQLSP_btnNhapKho);
             // Set event processing
 
         }

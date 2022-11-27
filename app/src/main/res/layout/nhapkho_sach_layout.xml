@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".activity.SuaSanPhamVPPActivity">
+    tools:context=".activity.NhapKhoSanPhamSachActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/MHSSP_VPP_btnBack"
+            android:id="@+id/MHNKSP_Sach_btnBack"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="Sửa Văn Phòng Phẩm"
+            android:text="THÊM SÁCH"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -43,22 +43,18 @@
         android:orientation="vertical"
         >
         <LinearLayout
-            android:id="@+id/layout_button"
-            android:orientation="horizontal"
-            android:layout_alignParentTop="true"
-            android:weightSum="2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:layout_weight="1.5"
+            >
 
             <ImageView
-                android:id="@+id/MHSSP_VPP_imgHinhSP"
+                android:id="@+id/MHNKSP_Sach_imgAnhSanPham"
                 android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginLeft="120dp"
-                android:src="@drawable/but"/>
-
-
-
+                android:layout_height="150dp"
+                android:src="@drawable/anhdemo"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -73,16 +69,17 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Mã VPP"
+                android:text="Mã Sách"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSSP_VPP_edtMaVPP"
+                android:id="@+id/MHNKSP_Sach_edtMaSach"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
+                android:hint="S001"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -100,45 +97,17 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Tên VPP"
+                android:text="Tên Sách"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSSP_VPP_edtTenVPP"
+                android:id="@+id/MHNKSP_Sach_edtTenSach"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
-
-                android:textSize="18dp"
-                android:textStyle="bold"  />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.4"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.5"
-                android:paddingLeft="20dp"
-                android:paddingTop="10dp"
-                android:text="Nhà Phân Phối"
-                android:textSize="18dp"
-                android:textStyle="bold" /> />
-
-            <EditText
-                android:id="@+id/MHSSP_VPP_edtNhanPhanPhoi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2.5"
-                android:background="@drawable/border"
-
+                android:hint="Conan"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -156,17 +125,45 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Xuất Xứ"
+                android:text="Thể Loại"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSSP_VPP_edtXuatXu"
+                android:id="@+id/MHNKSP_Sach_edtTheLoai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/border"
+                android:hint="Trinh Tham"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Tác Giả"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHNKSP_Sach_edtTacGia"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.8"
                 android:background="@drawable/border"
-
+                android:hint="Thọ"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -184,17 +181,17 @@
                 android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Đơn Vị"
+                android:text="Nhà Xuất Bản:"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSSP_VPP_edtDonVi"
+                android:id="@+id/MHNKSP_Sach_edtNhaXuatBan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.5"
                 android:background="@drawable/border"
-
+                android:hint="Kim Đồng"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -212,23 +209,21 @@
                 android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Giá Tiền"
+                android:text="Ngày Xuất Bản:"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSSP_VPP_edtGiaTien"
+                android:id="@+id/MHNKSP_Sach_edtNgayXuatBan"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2.5"
                 android:background="@drawable/border"
-
+                android:hint="11/11/2022"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -242,17 +237,46 @@
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Số Lượng Kho"
+                android:text="Giá Tiền:"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
-                android:id="@+id/MHSSP_VPP_edtSoLuongKho"
+                android:id="@+id/MHNKSP_Sach_edtGiaTien"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:background="@drawable/border"
+                android:hint="30000"
+                android:textSize="18dp"
+                android:textStyle="bold"  />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.4"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.6"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Số Lượng Kho:"
+                android:textSize="18dp"
+                android:textStyle="bold" /> />
+
+            <EditText
+                android:id="@+id/MHNKSP_Sach_edtSoLuongKho"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.4"
+                android:background="@drawable/border"
+                android:hint="150"
+                android:inputType="number"
                 android:textSize="18dp"
                 android:textStyle="bold"  />
 
@@ -272,19 +296,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/MHSSP_VPP_btnNhapMoi"
+            android:id="@+id/MHNKSP_Sach_btnNhapKho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="50dp"
             android:backgroundTint="#03A9F4"
-            android:text="Nhập mới" />
+            android:text="Nhập Kho" />
 
-        <Button
-            android:id="@+id/MHSSP_VPP_btnSuaSach"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#03A9F4"
-            android:text="sửa thông tin" />
 
     </LinearLayout>
 

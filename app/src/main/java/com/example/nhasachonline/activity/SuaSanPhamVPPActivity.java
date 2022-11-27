@@ -21,7 +21,9 @@ import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.data_model.VanPhongPham;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 
+import com.example.nhasachonline.item.ItemSach;
 import com.example.nhasachonline.item.ItemSanPham;
+import com.example.nhasachonline.item.ItemVanPhongPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -46,7 +48,7 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
         setContentView(R.layout.manhinh_suasanpham_vpp_layout);
         MHSSP_VPP_edtMaVPP = findViewById(R.id.MHSSP_VPP_edtMaVPP);
         MHSSP_VPP_edtTenVPP = findViewById(R.id.MHSSP_VPP_edtTenVPP);
-        MHSSP_VPP_edtNhanPhanPhoi = findViewById(R.id.MHSSP_VPP_edtXuatXu);
+        MHSSP_VPP_edtNhanPhanPhoi = findViewById(R.id.MHSSP_VPP_edtNhanPhanPhoi);
         MHSSP_VPP_edtXuatXu = findViewById(R.id.MHSSP_VPP_edtXuatXu);
         MHSSP_VPP_edtDonVi = findViewById(R.id.MHSSP_VPP_edtDonVi);
         MHSSP_VPP_edtGiaTien = findViewById(R.id.MHSSP_VPP_edtGiaTien);
@@ -54,6 +56,10 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
         MHSSP_VPP_imgHinhSP = findViewById(R.id.MHSSP_VPP_imgHinhSP);
         MHSSP_VPP_btnNhapMoi = findViewById(R.id.MHSSP_VPP_btnNhapMoi);
         MHSSP_VPP_btnSuaSach = findViewById(R.id.MHSSP_VPP_btnSuaSach);
+        ItemVanPhongPham vPPItem = (ItemVanPhongPham) getIntent().getSerializableExtra("vpp");
+        if(vPPItem!=null){
+            thongTinSanPhamVPP(vPPItem);
+        }
         MHSSP_VPP_btnSuaSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,9 +69,11 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String maVPP =  MHSSP_VPP_edtMaVPP.getText().toString();
+                        String hinhVPP = maVPP.replaceAll("vpp","vanphongpham");
                         fireBase.suaVPP(SuaSanPhamVPPActivity.this,
-                                "",
-                                MHSSP_VPP_imgHinhSP.getResources().toString(),
+                                maVPP,
+                                hinhVPP + ".png",
                                 MHSSP_VPP_edtTenVPP.getText().toString(),
                                 MHSSP_VPP_edtNhanPhanPhoi.getText().toString(),
                                 MHSSP_VPP_edtXuatXu.getText().toString(),
@@ -79,6 +87,7 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
                                 MHSSP_VPP_edtGiaTien.getTouchables().isEmpty() || MHSSP_VPP_edtSoLuongKho.getTouchables().isEmpty()){
                             Toast.makeText(SuaSanPhamVPPActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
+                        finish();
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
@@ -89,25 +98,26 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
                 });
                 AlertDialog al = b.create();
                 al.show();
+
             }
         });
     }
-    public void thongTinSanPhamVPP(VanPhongPham vanPhongPham){
+    public void thongTinSanPhamVPP(ItemVanPhongPham vanPhongPham){
         MHSSP_VPP_edtMaVPP.setText(vanPhongPham.getMaVanPhongPham());
         MHSSP_VPP_edtTenVPP.setText(vanPhongPham.getTenVanPhongPham());
         MHSSP_VPP_edtNhanPhanPhoi.setText(vanPhongPham.getNhaPhanPhoi());
         MHSSP_VPP_edtXuatXu.setText(vanPhongPham.getXuatXu());
         MHSSP_VPP_edtDonVi.setText(vanPhongPham.getDonVi());
-        MHSSP_VPP_edtGiaTien.setText(vanPhongPham.getGiaTien());
-        MHSSP_VPP_edtSoLuongKho.setText(vanPhongPham.getSoLuongKho());
+        MHSSP_VPP_edtGiaTien.setText(String.valueOf(vanPhongPham.getGiaTien()));
+        MHSSP_VPP_edtSoLuongKho.setText(String.valueOf(vanPhongPham.getSoLuongKho()));
 
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(vanPhongPham.getHinhVanPhongPham());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(vanPhongPham.getAnhVanPhongPham());
         try {
             File file = null;
-            if (vanPhongPham.getHinhVanPhongPham().contains("png")) {
-                file = File.createTempFile(vanPhongPham.getHinhVanPhongPham().substring(0,vanPhongPham.getHinhVanPhongPham().length()-4), "png");
-            } else if (vanPhongPham.getHinhVanPhongPham().contains("jpg")) {
-                file = File.createTempFile(vanPhongPham.getHinhVanPhongPham().substring(0,vanPhongPham.getHinhVanPhongPham().length()-4), "jpg");
+            if (vanPhongPham.getAnhVanPhongPham().contains("png")) {
+                file = File.createTempFile(vanPhongPham.getAnhVanPhongPham().substring(0,vanPhongPham.getAnhVanPhongPham().length()-4), "png");
+            } else if (vanPhongPham.getAnhVanPhongPham().contains("jpg")) {
+                file = File.createTempFile(vanPhongPham.getAnhVanPhongPham().substring(0,vanPhongPham.getAnhVanPhongPham().length()-4), "jpg");
             }
             final File fileHinh = file;
             ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {

@@ -5,6 +5,7 @@ import static android.service.controls.ControlsProviderService.TAG;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
@@ -50,17 +51,18 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
     private Spinner layoutMHQLSP_spLoaiSanPham;
     private RecyclerView layoutMHQLSP_rvDanhSachSanPham;
     private Button itemMHQLSP_btnXoa, itemMHQLSP_btnSua, itemMHQLSP_btnNhapKho;
+    private String loai = "Sách";
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        System.out.print("+++++++");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinh_quanly_sanpham_layout);
         timKiemSP = findViewById(R.id.layoutMHQLSP_swTimKiem);
-        layoutMHQLSP_spLoaiSanPham = findViewById(R.id.layoutMHQLSP_spLoaiSanPham);
+//        layoutMHQLSP_spLoaiSanPham = findViewById(R.id.layoutMHQLSP_spLoaiSanPham);
         timKiem();
-
+        layoutMHQLSP_spLoaiSanPham = findViewById(R.id.layoutMHQLSP_spLoaiSanPham);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLSP_rvDanhSachSanPham);
         adapter = new SachRecyclerViewAdapter(this,
                 R.layout.manhinh_quanly_sach_item, saches);
@@ -68,34 +70,9 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        mainAdapter = new MergeAdapter(adapter,adapter2);
-        recyclerView.setAdapter(mainAdapter);
-        loaiSP.add("Sách");
-        loaiSP.add("Văn Phòng Phẩm");
         //lọc
-        ArrayAdapter arrayAdapterLoaiSP = new ArrayAdapter(this,R.layout.loai_sp_spiner,loaiSP);
-        layoutMHQLSP_spLoaiSanPham.setAdapter(arrayAdapterLoaiSP);
-        layoutMHQLSP_spLoaiSanPham = findViewById(R.id.layoutMHQLSP_spLoaiSanPham);
-        layoutMHQLSP_spLoaiSanPham.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                ArrayList<ItemVanPhongPham> fiIteredList2 = new ArrayList<>();
-                for (ItemVanPhongPham vanPhongPham : vanPhongPhams) {
-
-                        fiIteredList2.add(vanPhongPham);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                ArrayList<ItemSach> fiIteredList = new ArrayList<>();
-                for (ItemSach sach : saches) {
-                    fiIteredList.add(sach);
-                }
-            }
-        });
 //        recyclerView.setAdapter(adapter2);
+        Loc(recyclerView);
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -131,9 +108,42 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
         layoutMHQLSP_btnThemSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: haha");
-                Intent intent = new Intent(ManHinhQuanLySanPhamActivity.this, ThemSanPhamSachActivity.class);
-                ManHinhQuanLySanPhamActivity.this.startActivity(intent);
+//                Log.d(TAG, "onClick: haha");
+//                Intent intent = new Intent(ManHinhQuanLySanPhamActivity.this, ThemSanPhamSachActivity.class);
+//                ManHinhQuanLySanPhamActivity.this.startActivity(intent);
+                AlertDialog.Builder b = new AlertDialog.Builder(ManHinhQuanLySanPhamActivity.this);
+                b.setTitle("Thêm Sản Phẩm");
+                String[] ca = {"Sách", "Văn Phòng Phẩm"};
+                b.setSingleChoiceItems(ca, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                loai = "Sách";
+                                break;
+                            case 1:
+                                loai = "Văn Phòng Phẩm";
+                                break;
+                        }
+                    }
+                });
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (loai.equalsIgnoreCase("Văn Phòng Phẩm")) {
+                            Intent intent = new Intent(ManHinhQuanLySanPhamActivity.this,ThemSanPhamVPPActivity.class);
+                            startActivity(intent);
+                        }else
+                        {
+                            Intent intent = new Intent(ManHinhQuanLySanPhamActivity.this,ThemSanPhamSachActivity.class);
+                            startActivity(intent);
+                        }
+                        loai = "Sách";
+                    }
+                });
+
+                AlertDialog al = b.create();
+                al.show();
             }
         });
         layoutMHQLSP_btnBack = findViewById(R.id. layoutMHQLSP_btnBack);
@@ -145,6 +155,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
                 });
 //        firebase.hienThiManHinhChinhQuanLyVPP(vanPhongPhams, adapter2, this);
         firebase.hienThiManHinhQuanLySanPham(vanPhongPhams,adapter2,saches,adapter,this);
+//        Log.d(TAG, "+++++: " + vanPhongPhams.toString());
 //        firebase.hienThiManHinhChinhQuanLySach( saches,adapter,this);
         adapter2.setOnItemClickListener(new VPPRecyclerViewAdapter.OnItemClickListener() {
             @Override
@@ -216,6 +227,44 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
             }
         });
     }
+    public void Loc(RecyclerView recyclerView) {
+        loaiSP.clear();
+        loaiSP.add("Tất cả");
+        loaiSP.add("Sách");
+        loaiSP.add("Văn Phòng Phẩm");
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this,R.layout.loai_sp_spiner,loaiSP);
+//        arrayAdapter.setDropDownViewResource(this, R.layout.);
+        layoutMHQLSP_spLoaiSanPham.setAdapter(arrayAdapter);
 
-//
+        loai = loaiSP.get(0);
+        layoutMHQLSP_spLoaiSanPham.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                loai = loaiSP.get(position);
+                Log.d(TAG, "onItemSelected: " + position);
+//                firebase.hienThiManHinhChinhQuanLyVPP(vanPhongPhams, adapter2, ManHinhQuanLySanPhamActivity.this);
+                switch (position){
+                    case 1:
+                        mainAdapter = new MergeAdapter(adapter);
+                        break;
+                    case 2:
+                        mainAdapter = new MergeAdapter(adapter2);
+                        break;
+                    default:
+                        mainAdapter = new MergeAdapter(adapter,adapter2);
+                }
+                recyclerView.setAdapter(mainAdapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d(TAG, "+++++++++++++");
+//                loai = loaiSP.get(0);
+//                firebase.hienThiManHinhChinhQuanLySach(saches, adapter, ManHinhQuanLySanPhamActivity.this);
+            }
+        });
+
+
+    }
+
 }

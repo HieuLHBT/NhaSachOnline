@@ -37,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import kotlin.text.Regex;
+
 public class ThemSanPhamSachActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private ArrayList<ItemSach> sachs = new ArrayList<>();
@@ -86,9 +88,12 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        String maSach =  MHTSP_Sach_edtMaSach.getText().toString();
+                        String hinhSach = maSach.replaceAll("s","sach");
+
                         fireBase.themSanPham_Sach(
-                                "s" + MHTSP_Sach_edtMaSach.getText().toString(),
-                                MHTSP_Sach_edtMaSach.getText() + ".png",
+                                maSach,
+                                hinhSach + ".png",
                                 MHTSP_Sach_edtTenSach.getText().toString(),
                                 MHTSP_Sach_edtTheLoai.getText().toString(),
                                 MHTSP_Sach_edtTacGia.getText().toString(),
@@ -106,6 +111,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                         }
                         // Tai anh len storage
                         ghiAnh(uri, MHTSP_Sach_edtMaSach.getText().toString());
+                        finish();
                     };
                 });
 
@@ -117,7 +123,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                 });
                 AlertDialog al = b.create();
                 al.show();
-                Toast.makeText(ThemSanPhamSachActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ThemSanPhamSachActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -133,7 +139,7 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThemSanPhamSachActivity.this);
-                b.setTitle("THÊM HÌNH NHÂN VIÊN");
+                b.setTitle("Thêm Sản Phẩm");
                 String[] ca = {"Chọn từ thư viên", "Chụp ảnh"};
                 b.setSingleChoiceItems(ca, 0, new DialogInterface.OnClickListener() {
                     @Override
