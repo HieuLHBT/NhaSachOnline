@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="THÊM SÁCH"
+            android:text="Nhập Kho"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -64,6 +64,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -81,7 +82,10 @@
                 android:background="@drawable/border"
                 android:hint="S001"
                 android:textSize="18dp"
-                android:textStyle="bold"  />
+                android:textStyle="bold"
+                android:inputType="none"
+                android:textIsSelectable="true"
+                android:editable="false"/>
 
         </LinearLayout>
 
@@ -92,9 +96,10 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
                 android:text="Tên Sách"
@@ -120,6 +125,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -148,6 +154,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -176,12 +183,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Nhà Xuất Bản:"
+                android:text="Nhà Xuất Bản"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -204,12 +212,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Ngày Xuất Bản:"
+                android:text="Ngày Xuất Bản"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -232,12 +241,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Giá Tiền:"
+                android:text="Giá Tiền"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -260,12 +270,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.6"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Số Lượng Kho:"
+                android:text="Số Lượng Kho"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 

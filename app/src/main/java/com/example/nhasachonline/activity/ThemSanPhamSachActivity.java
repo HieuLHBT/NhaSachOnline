@@ -24,11 +24,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonline.R;
+import com.example.nhasachonline.data_model.Sach;
 import com.example.nhasachonline.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonline.item.ItemSach;
 import com.example.nhasachonline.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -73,10 +79,37 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
         MHTSP_Sach_btnLamMoi = findViewById(R.id.MHTTSP_Sach_btnNhapMoi);
         MHTTSP_Sach_btnThemSanPham = findViewById(R.id.MHTTSP_Sach_btnThemSanPham);
         MHTSP_Sach_btnBack = findViewById(R.id.MHTSP_Sach_btnBack);
+        MHTSP_Sach_edtMaSach.setEnabled(false);
+        MHTSP_Sach_edtSoLuongKho.setEnabled(false);
+        MHTSP_Sach_edtSoLuongKho.setText("0");
         MHTSP_Sach_btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("SANPHAM");
+        nguoiDungDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nguoiDungDatabase.child("SACH").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        long count = snapshot.getChildrenCount() + 1;
+                        MHTSP_Sach_edtMaSach.setText("s" + count);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
         MHTTSP_Sach_btnThemSanPham.setOnClickListener(new View.OnClickListener() {
@@ -101,12 +134,13 @@ public class ThemSanPhamSachActivity extends AppCompatActivity {
                                 MHTSP_Sach_edtNgayXuatBan.getText().toString(),
                                 MHTSP_Sach_edtGiaTien.getText().toString(),
                                 MHTSP_Sach_edtSoLuongKho.getText().toString()
+
                         );
 
                         //Kiểm tra các trường bỏ trống
-                        if(MHTSP_Sach_edtMaSach.getTouchables().isEmpty() || MHTSP_Sach_edtTenSach.getTouchables().isEmpty() || MHTSP_Sach_edtTheLoai.getTouchables().isEmpty() ||
+                        if(  MHTSP_Sach_edtTenSach.getTouchables().isEmpty() || MHTSP_Sach_edtTheLoai.getTouchables().isEmpty() ||
                                 MHTSP_Sach_edtTacGia.getTouchables().isEmpty() || MHTSP_Sach_edtNhaXuatBan.getTouchables().isEmpty() || MHTSP_Sach_edtNgayXuatBan.getTouchables().isEmpty() ||
-                                MHTSP_Sach_edtGiaTien.getTouchables().isEmpty() || MHTSP_Sach_edtSoLuongKho.getTouchables().isEmpty() ){
+                                MHTSP_Sach_edtGiaTien.getTouchables().isEmpty() ){
                             Toast.makeText(ThemSanPhamSachActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
                         // Tai anh len storage

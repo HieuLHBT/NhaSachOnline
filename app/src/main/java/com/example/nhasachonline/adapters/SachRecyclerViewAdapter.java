@@ -89,6 +89,7 @@ public class SachRecyclerViewAdapter extends RecyclerView.Adapter<SachRecyclerVi
                 arBuilder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        //thay đỗi xoá chữ context trong firebase
                         fireBaseNhaSachOnline.xoaSach(sach.getMaSach());
                         saches.remove(pos);
                     }

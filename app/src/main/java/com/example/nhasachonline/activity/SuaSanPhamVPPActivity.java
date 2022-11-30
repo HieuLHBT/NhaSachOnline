@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
             , MHSSP_VPP_edtGiaTien, MHSSP_VPP_edtSoLuongKho;
     ImageView MHSSP_VPP_imgHinhSP;
     Button MHSSP_VPP_btnNhapMoi, MHSSP_VPP_btnSuaSach;
+    TextView MHSSP_VPP_btnBack;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,12 +56,19 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
         MHSSP_VPP_edtGiaTien = findViewById(R.id.MHSSP_VPP_edtGiaTien);
         MHSSP_VPP_edtSoLuongKho = findViewById(R.id.MHSSP_VPP_edtSoLuongKho);
         MHSSP_VPP_imgHinhSP = findViewById(R.id.MHSSP_VPP_imgHinhSP);
-        MHSSP_VPP_btnNhapMoi = findViewById(R.id.MHSSP_VPP_btnNhapMoi);
+//        MHSSP_VPP_btnNhapMoi = findViewById(R.id.MHSSP_VPP_btnNhapMoi);
         MHSSP_VPP_btnSuaSach = findViewById(R.id.MHSSP_VPP_btnSuaSach);
+        MHSSP_VPP_btnBack = findViewById(R.id.MHSSP_VPP_btnBack);
         ItemVanPhongPham vPPItem = (ItemVanPhongPham) getIntent().getSerializableExtra("vpp");
         if(vPPItem!=null){
             thongTinSanPhamVPP(vPPItem);
         }
+        MHSSP_VPP_btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         MHSSP_VPP_btnSuaSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +112,9 @@ public class SuaSanPhamVPPActivity extends AppCompatActivity {
         });
     }
     public void thongTinSanPhamVPP(ItemVanPhongPham vanPhongPham){
+        //disable edit
+        MHSSP_VPP_edtMaVPP.setEnabled(false);
+        MHSSP_VPP_edtSoLuongKho.setEnabled(false);
         MHSSP_VPP_edtMaVPP.setText(vanPhongPham.getMaVanPhongPham());
         MHSSP_VPP_edtTenVPP.setText(vanPhongPham.getTenVanPhongPham());
         MHSSP_VPP_edtNhanPhanPhoi.setText(vanPhongPham.getNhaPhanPhoi());

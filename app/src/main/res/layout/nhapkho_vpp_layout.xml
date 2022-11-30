@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="THÊM SÁCH"
+            android:text="Nhập Kho"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -62,12 +62,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Mã VPP:"
+                android:text="Mã VPP"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -90,12 +91,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Tên VPP:"
+                android:text="Tên VPP"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -118,12 +120,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Nhà Phân Phối:"
+                android:text="Nhà Phân Phối"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -146,12 +149,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Xuất Xứ:"
+                android:text="Xuất Xứ"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -174,12 +178,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Đơn Vị:"
+                android:text="Đơn Vị"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
@@ -202,16 +207,18 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Giá Tiền:"
+                android:text="Giá Tiền"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 
             <EditText
+
                 android:id="@+id/MHNKSP_VPP_edtGiaTien"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -232,12 +239,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:layout_margin="6dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.6"
                 android:paddingLeft="20dp"
                 android:paddingTop="10dp"
-                android:text="Số Lượng Kho:"
+                android:text="Số Lượng Kho"
                 android:textSize="18dp"
                 android:textStyle="bold" /> />
 

@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +28,11 @@ import com.example.nhasachonline.item.ItemSanPham;
 import com.example.nhasachonline.item.ItemVanPhongPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -55,7 +61,7 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
         StorageReference storageReference;
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
-
+//        MHTSP_VPP_edtMaVPP.setEnabled(false);
         MHTSP_VPP_edtMaVPP = findViewById(R.id.MHTSP_VPP_edtMaVPP);
         MHTSP_VPP_edtTenVPP = findViewById(R.id.MHTSP_VPP_edtTenVPP);
         MHTSP_VPP_edtNhaPhanPhoi = findViewById(R.id.MHTSP_VPP_edtNhaPhanPhoi);
@@ -67,6 +73,33 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
         MHTTSP_VPP_btnNhapMoi = findViewById(R.id.MHTTSP_VPP_btnNhapMoi);
         MHTTSP_VPP_btnThemSanPham = findViewById(R.id.MHTTSP_VPP_btnThemSanPham);
         MHTSP_VPP_btnBack = findViewById(R.id.MHTSP_VPP_btnBack);
+        MHTSP_VPP_edtSoLuongKho.setEnabled(false);
+        MHTSP_VPP_edtMaVPP.setEnabled(false);
+        MHTSP_VPP_edtSoLuongKho.setText("0");
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("SANPHAM");
+        nguoiDungDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nguoiDungDatabase.child("VANPHONGPHAM").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        long count = snapshot.getChildrenCount() + 1;
+                        MHTSP_VPP_edtMaVPP.setText("vpp" + count);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Log.d("onCancelled", "Lỗi!" + error.getMessage());
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         MHTSP_VPP_btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,9 +129,9 @@ public class ThemSanPhamVPPActivity extends AppCompatActivity {
                         );
 
                         //Kiểm tra các trường bỏ trống
-                        if(MHTSP_VPP_edtMaVPP.getTouchables().isEmpty() || MHTSP_VPP_edtTenVPP.getTouchables().isEmpty() || MHTSP_VPP_edtNhaPhanPhoi.getTouchables().isEmpty() ||
+                        if( MHTSP_VPP_edtTenVPP.getTouchables().isEmpty() || MHTSP_VPP_edtNhaPhanPhoi.getTouchables().isEmpty() ||
                                 MHTSP_VPP_edtXuatXu.getTouchables().isEmpty() || MHTSP_VPP_edtDonVi.getTouchables().isEmpty() ||
-                                MHTSP_VPP_edtGiaTien.getTouchables().isEmpty() || MHTSP_VPP_edtSoLuongKho.getTouchables().isEmpty() ){
+                                MHTSP_VPP_edtGiaTien.getTouchables().isEmpty() ){
                             Toast.makeText(ThemSanPhamVPPActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
                         // Tai anh len storage
