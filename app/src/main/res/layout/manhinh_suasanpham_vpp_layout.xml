@@ -271,13 +271,6 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/MHSSP_VPP_btnNhapMoi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            android:backgroundTint="#03A9F4"
-            android:text="Nhập mới" />
 
         <Button
             android:id="@+id/MHSSP_VPP_btnSuaSach"

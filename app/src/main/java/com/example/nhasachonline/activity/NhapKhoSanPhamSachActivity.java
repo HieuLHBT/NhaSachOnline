@@ -4,8 +4,10 @@ import static android.service.controls.ControlsProviderService.TAG;
 
 import android.content.DialogInterface;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -75,12 +77,11 @@ public class NhapKhoSanPhamSachActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        int sLkhoTong;
+                        sLkhoTong = Integer.parseInt(MHNKSP_Sach_edtSoLuongKho.getText().toString()) + sLCuKho;
                         String maSach =  MHNKSP_Sach_edtMaSach.getText().toString();
                         String hinhSach = maSach.replaceAll("s","sach");
-                        fireBase.suaSach(NhapKhoSanPhamSachActivity.this,
-//                                "" +
-//                                        "",
-//                                MHSSP_Sach_imgHinhSach.getResources().toString(),
+                        fireBase.NhapKho(NhapKhoSanPhamSachActivity.this,
                                 maSach,
                                 hinhSach + ".png",
                                 MHNKSP_Sach_edtTenSach.getText().toString(),
@@ -89,12 +90,11 @@ public class NhapKhoSanPhamSachActivity extends AppCompatActivity {
                                 MHNKSP_Sach_edtNhaXuatBan.getText().toString(),
                                 MHNKSP_Sach_edtNgayXuatBan.getText().toString(),
                                 MHNKSP_Sach_edtGiaTien.getText().toString(),
-                                MHNKSP_Sach_edtSoLuongKho.getText().toString()
+//                                MHNKSP_Sach_edtSoLuongKho.getText().toString()
+                                ""+sLkhoTong
                         );
                         //Kiểm tra các trường bỏ trống
-                        if(MHNKSP_Sach_edtMaSach.getTouchables().isEmpty() || MHNKSP_Sach_edtTenSach.getTouchables().isEmpty() || MHNKSP_Sach_edtTheLoai.getTouchables().isEmpty() ||
-                                MHNKSP_Sach_edtTacGia.getTouchables().isEmpty() || MHNKSP_Sach_edtNhaXuatBan.getTouchables().isEmpty() || MHNKSP_Sach_edtNgayXuatBan.getTouchables().isEmpty() ||
-                                MHNKSP_Sach_edtGiaTien.getTouchables().isEmpty() || MHNKSP_Sach_edtSoLuongKho.getTouchables().isEmpty()){
+                        if( MHNKSP_Sach_edtSoLuongKho.getTouchables().isEmpty()){
                             Toast.makeText(NhapKhoSanPhamSachActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
                         finish();
@@ -111,9 +111,18 @@ public class NhapKhoSanPhamSachActivity extends AppCompatActivity {
             }
         });
     }
+    private int sLCuKho = 0;
     public void thongTinSanPham(ItemSach sach){
 
         Log.d(TAG, "onDataChange:" + sach.getNamSanXuat());
+//      // mờ trường edit
+        MHNKSP_Sach_edtMaSach.setEnabled(false);
+        MHNKSP_Sach_edtTenSach.setEnabled(false);
+        MHNKSP_Sach_edtTheLoai.setEnabled(false);
+        MHNKSP_Sach_edtTacGia.setEnabled(false);
+        MHNKSP_Sach_edtNhaXuatBan.setEnabled(false);
+        MHNKSP_Sach_edtNgayXuatBan.setEnabled(false);
+        MHNKSP_Sach_edtGiaTien.setEnabled(false);
 
         MHNKSP_Sach_edtMaSach.setText(sach.getMaSach());
         MHNKSP_Sach_edtTenSach.setText(sach.getTenSach());
@@ -124,7 +133,9 @@ public class NhapKhoSanPhamSachActivity extends AppCompatActivity {
 //        MHSSP_Sach_edtGiaTien.setText(sach.getGiaTien());
 //        MHSSP_Sach_edtSoLuongKho.setText(sach.getSoLuongKho());
         MHNKSP_Sach_edtGiaTien.setText(String.valueOf(sach.getGiaTien()));
-        MHNKSP_Sach_edtSoLuongKho.setText(String.valueOf(sach.getSoLuongKho()));
+        MHNKSP_Sach_edtSoLuongKho.setText("0");
+        sLCuKho =sach.getSoLuongKho();
+
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(sach.getAnhSach());
         try {

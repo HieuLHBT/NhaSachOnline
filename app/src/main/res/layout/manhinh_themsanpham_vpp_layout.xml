@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1.5"
             android:gravity="center"
-            android:text="THÊM SÁCH"
+            android:text="Thêm VPP"
             android:textSize="25dp"
             android:textStyle="bold" />
 
@@ -271,10 +271,9 @@
             android:id="@+id/MHTTSP_VPP_btnNhapMoi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
             android:backgroundTint="#03A9F4"
-            android:text="Nhập mới" />
-
+            android:layout_marginRight="20dp"
+            android:text="Nhập mới"/>
         <Button
             android:id="@+id/MHTTSP_VPP_btnThemSanPham"
             android:layout_width="wrap_content"

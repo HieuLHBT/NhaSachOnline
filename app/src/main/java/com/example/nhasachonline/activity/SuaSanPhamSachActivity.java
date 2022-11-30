@@ -60,7 +60,7 @@ public class SuaSanPhamSachActivity extends AppCompatActivity {
         MHSSP_Sach_edtGiaTien = findViewById(R.id.MHSSP_Sach_edtGiaTien);
         MHSSP_Sach_edtSoLuongKho = findViewById(R.id.MHSSP_Sach_edtSoLuongKho);
         MHSSP_Sach_imgHinhSach = findViewById(R.id.MHSSP_Sach_imgHinhSP);
-        MHSSP_Sach_btnNhapMoi = findViewById(R.id.MHSSP_Sach_btnNhapMoi);
+//        MHSSP_Sach_btnNhapMoi = findViewById(R.id.MHSSP_Sach_btnNhapMoi);
         MHSSP_Sach_btnSuaSach = findViewById(R.id.MHSSP_Sach_btnSuaSach);
         MHSSP_Sach_btnBack = findViewById(R.id.MHSSP_Sach_btnBack);
         ItemSach sachItem = (ItemSach) getIntent().getSerializableExtra("sach");
@@ -122,7 +122,9 @@ public class SuaSanPhamSachActivity extends AppCompatActivity {
     public void thongTinSanPham(ItemSach sach){
 
         Log.d(TAG, "onDataChange:" + sach.getNamSanXuat());
-
+    // disable edit
+        MHSSP_Sach_edtMaSach.setEnabled(false);
+        MHSSP_Sach_edtSoLuongKho.setEnabled(false);
         MHSSP_Sach_edtMaSach.setText(sach.getMaSach());
         MHSSP_Sach_edtTenSach.setText(sach.getTenSach());
         MHSSP_Sach_edtTheLoai.setText(sach.getTheLoai());

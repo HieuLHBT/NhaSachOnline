@@ -46,6 +46,9 @@ public class NhapKhoSanPhamVPPActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nhapkho_vpp_layout);
+        //disable edti
+
+
         MHNKSP_VPP_edtMaVPP = findViewById(R.id.MHNKSP_VPP_edtMaVPP);
         MHNKSP_VPP_edtTenVPP = findViewById(R.id.MHNKSP_VPP_edtTenVPP);
         MHNKSP_VPP_edtNhaPhanPhoi = findViewById(R.id.MHNKSP_VPP_edtNhaPhanPhoi);
@@ -75,6 +78,8 @@ public class NhapKhoSanPhamVPPActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        int sLkhoTong;
+                        sLkhoTong = Integer.parseInt(MHNKSP_VPP_edtSoLuongKho.getText().toString()) + sLCuKho;
                         String maVPP =  MHNKSP_VPP_edtMaVPP.getText().toString();
                         String hinhVPP = maVPP.replaceAll("s","sach");
                         fireBase.suaVPP(NhapKhoSanPhamVPPActivity.this,
@@ -88,12 +93,11 @@ public class NhapKhoSanPhamVPPActivity extends AppCompatActivity {
                                 MHNKSP_VPP_edtXuatXu.getText().toString(),
                                 MHNKSP_VPP_edtDonVi.getText().toString(),
                                 MHNKSP_VPP_edtGiaTien.getText().toString(),
-                                MHNKSP_VPP_edtSoLuongKho.getText().toString()
+//                                MHNKSP_VPP_edtSoLuongKho.getText().toString()
+                                ""+sLkhoTong
                         );
                         //Kiểm tra các trường bỏ trống
-                        if(MHNKSP_VPP_edtMaVPP.getTouchables().isEmpty() || MHNKSP_VPP_edtTenVPP.getTouchables().isEmpty() || MHNKSP_VPP_edtNhaPhanPhoi.getTouchables().isEmpty() ||
-                                MHNKSP_VPP_edtXuatXu.getTouchables().isEmpty() || MHNKSP_VPP_edtDonVi.getTouchables().isEmpty() || MHNKSP_VPP_edtGiaTien.getTouchables().isEmpty() ||
-                                MHNKSP_VPP_edtSoLuongKho.getTouchables().isEmpty()){
+                        if(MHNKSP_VPP_edtSoLuongKho.getTouchables().isEmpty()){
                             Toast.makeText(NhapKhoSanPhamVPPActivity.this, "Điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
                         finish();
@@ -110,9 +114,16 @@ public class NhapKhoSanPhamVPPActivity extends AppCompatActivity {
             }
         });
     }
+    private int sLCuKho = 0;
     public void thongTinSanPham(ItemVanPhongPham vanPhongPham){
 
 //        Log.d(TAG, "onDataChange:" + vanPhongPham.getNamSanXuat());
+        MHNKSP_VPP_edtMaVPP.setEnabled(false);
+        MHNKSP_VPP_edtTenVPP.setEnabled(false);
+        MHNKSP_VPP_edtNhaPhanPhoi.setEnabled(false);
+        MHNKSP_VPP_edtXuatXu.setEnabled(false);
+        MHNKSP_VPP_edtDonVi.setEnabled(false);
+        MHNKSP_VPP_edtGiaTien.setEnabled(false);
 
         MHNKSP_VPP_edtMaVPP.setText(vanPhongPham.getMaVanPhongPham());
         MHNKSP_VPP_edtTenVPP.setText(vanPhongPham.getTenVanPhongPham());
@@ -122,7 +133,8 @@ public class NhapKhoSanPhamVPPActivity extends AppCompatActivity {
 //        MHSSP_Sach_edtGiaTien.setText(sach.getGiaTien());
 //        MHSSP_Sach_edtSoLuongKho.setText(sach.getSoLuongKho());
         MHNKSP_VPP_edtGiaTien.setText(String.valueOf(vanPhongPham.getGiaTien()));
-        MHNKSP_VPP_edtSoLuongKho.setText(String.valueOf(vanPhongPham.getSoLuongKho()));
+        MHNKSP_VPP_edtSoLuongKho.setText("0");
+        sLCuKho =vanPhongPham.getSoLuongKho();
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(vanPhongPham.getAnhVanPhongPham());
         try {
